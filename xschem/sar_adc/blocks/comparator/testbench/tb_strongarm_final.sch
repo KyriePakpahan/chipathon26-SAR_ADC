@@ -20,7 +20,7 @@ N 670 -340 730 -340 {lab=out_p}
 N 320 -340 340 -340 {lab=0}
 N 400 -340 490 -340 {lab=vin_n}
 C {title.sym} 160 -40 0 0 {name=l1 author="Berkah Saluyu"}
-C {strongarm_comp.sym} 510 -270 0 0 {name=x1}
+C {sar_adc/blocks/comparator/strongarm_comp.sym} 510 -270 0 0 {name=x1}
 C {gnd.sym} 670 -250 0 0 {name=l2 lab=0}
 C {vsource.sym} 670 -410 2 0 {name=vdd value=3.3 savecurrent=false}
 C {gnd.sym} 710 -450 0 0 {name=l3 lab=0}

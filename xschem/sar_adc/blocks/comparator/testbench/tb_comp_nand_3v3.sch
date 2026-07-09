@@ -6,7 +6,7 @@ S {}
 F {}
 E {}
 N 619 -160 619 -152 {lab=#net1}
-C {comp_nand_3v3.sym} 660 -190 0 0 {name=x1}
+C {sar_adc/blocks/comparator/comp_nand_3v3.sym} 660 -190 0 0 {name=x1}
 C {title.sym} 180 -40 0 0 {name=l1 author="Berkah Saluyu"}
 C {vsource.sym} 561 -288 0 0 {name=vdd value=3.3 savecurrent=false}
 C {vsource.sym} 543 -165 2 0 {name  = VA value = "pulse(0 3.3 5n 100p 100p 10n 20n)" savecurrent=false}

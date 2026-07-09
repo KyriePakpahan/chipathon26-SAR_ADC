@@ -48,5 +48,5 @@ C {lab_pin.sym} 670 -370 2 0 {name=p3 sig_type=std_logic lab=vdd}
 C {lab_pin.sym} 480 -360 1 0 {name=p4 sig_type=std_logic lab=vin_p}
 C {lab_pin.sym} 410 -340 3 0 {name=p5 sig_type=std_logic lab=vin_n}
 C {lab_pin.sym} 480 -320 3 0 {name=p6 sig_type=std_logic lab=rst_latch}
-C {strongarm_comp.sym} 510 -270 0 0 {name=x1}
+C {sar_adc/blocks/comparator/strongarm_comp.sym} 510 -270 0 0 {name=x1}
 C {lab_pin.sym} 730 -300 2 0 {name=p7 sig_type=std_logic lab=comp_done}

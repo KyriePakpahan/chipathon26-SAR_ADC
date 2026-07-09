@@ -219,4 +219,4 @@ sa=0 sb=0 sd=0
 model=nfet_03v3
 spiceprefix=X
 }
-C {inv_sh.sym} 240 -580 0 0 {name=xinv2}
+C {sar_adc/blocks/sample_hold/inv_sh.sym} 240 -580 0 0 {name=xinv2}

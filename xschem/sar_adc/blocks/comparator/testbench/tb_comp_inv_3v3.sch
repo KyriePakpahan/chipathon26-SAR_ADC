@@ -74,4 +74,4 @@ write tb_comp_inv_3v3.raw
 C {launcher.sym} 517.5 -170 0 0 {name=h1
 descr="Annotate OP"
 tclcommand="set show_hidden_texts 1; xschem annotate_op"}
-C {comp_inv_3v3.sym} 790 -440 0 0 {name=x1}
+C {sar_adc/blocks/comparator/comp_inv_3v3.sym} 790 -440 0 0 {name=x1}

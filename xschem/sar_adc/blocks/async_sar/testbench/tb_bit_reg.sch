@@ -9,7 +9,7 @@ N -280 190 -230 190 {lab=reset}
 N -330 170 -230 170 {lab=clk}
 N -370 150 -230 150 {lab=en}
 N -410 130 -230 130 {lab=comp_out}
-C {bit_reg.sym} -80 160 0 0 {name=x1}
+C {sar_adc/blocks/async_sar/bit_reg.sym} -80 160 0 0 {name=x1}
 C {vsource.sym} -200 340 0 0 {name=V1 value=5 savecurrent=false}
 C {gnd.sym} -200 370 0 0 {name=l1 lab=0}
 C {vdd.sym} -200 310 0 0 {name=l2 lab=VDD}

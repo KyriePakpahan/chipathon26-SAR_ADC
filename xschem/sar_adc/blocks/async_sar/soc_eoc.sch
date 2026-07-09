@@ -68,27 +68,27 @@ C {lab_wire.sym} -600 -120 0 0 {name=l22 sig_type=std_logic lab=rst}
 C {lab_wire.sym} -250 180 0 0 {name=l31 sig_type=std_logic lab=Q2_n}
 C {lab_wire.sym} -250 200 0 0 {name=l32 sig_type=std_logic lab=Q1_n}
 C {lab_wire.sym} -250 220 0 0 {name=l33 sig_type=std_logic lab=Q0_n}
-C {xschem/sar_adc/async_nand2.sym} -410 -120 0 0 {name=x5}
-C {xschem/sar_adc/dff_cell.sym} -40 -150 0 0 {name=x4}
+C {sar_adc/blocks/async_sar/async_nand2.sym} -410 -120 0 0 {name=x5}
+C {sar_adc/blocks/async_sar/dff_cell.sym} -40 -150 0 0 {name=x4}
 C {lab_wire.sym} -770 -210 2 0 {name=l23 sig_type=std_logic lab=rst}
 C {lab_wire.sym} -770 -170 2 0 {name=l37 sig_type=std_logic lab=clk}
 C {lab_wire.sym} -190 -150 0 0 {name=l38 sig_type=std_logic lab=clk}
-C {xschem/sar_adc/async_nand2.sym} -40 -230 2 0 {name=x6}
-C {xschem/sar_adc/dff_cell.sym} 360 -170 0 0 {name=x1}
-C {xschem/sar_adc/async_nand2.sym} 360 -260 2 0 {name=x7}
+C {sar_adc/blocks/async_sar/async_nand2.sym} -40 -230 2 0 {name=x6}
+C {sar_adc/blocks/async_sar/dff_cell.sym} 360 -170 0 0 {name=x1}
+C {sar_adc/blocks/async_sar/async_nand2.sym} 360 -260 2 0 {name=x7}
 C {lab_wire.sym} -220 -130 3 0 {name=l1 sig_type=std_logic lab=rst_n_int}
 C {lab_wire.sym} 170 -150 3 0 {name=l2 sig_type=std_logic lab=rst_n_int}
 C {opin.sym} 560 -340 3 0 {name=p_iter3 lab=iter_1
 }
-C {xschem/sar_adc/dff_cell.sym} 800 -190 0 0 {name=x8}
-C {xschem/sar_adc/async_nand2.sym} 800 -280 2 0 {name=x9}
+C {sar_adc/blocks/async_sar/dff_cell.sym} 800 -190 0 0 {name=x8}
+C {sar_adc/blocks/async_sar/async_nand2.sym} 800 -280 2 0 {name=x9}
 C {lab_wire.sym} 610 -170 3 0 {name=l3 sig_type=std_logic lab=rst_n_int}
 C {opin.sym} 990 -350 3 0 {name=p_iter4 lab=iter_2
 }
-C {xschem/sar_adc/async_nand3.sym} -40 80 0 0 {name=x2}
-C {xschem/sar_adc/async_nand2.sym} 310 60 0 0 {name=x3}
-C {xschem/sar_adc/async_nand3.sym} -40 200 0 0 {name=x10}
-C {xschem/sar_adc/async_nand2.sym} 310 180 0 0 {name=x11}
+C {sar_adc/blocks/async_sar/async_nand3.sym} -40 80 0 0 {name=x2}
+C {sar_adc/blocks/async_sar/async_nand2.sym} 310 60 0 0 {name=x3}
+C {sar_adc/blocks/async_sar/async_nand3.sym} -40 200 0 0 {name=x10}
+C {sar_adc/blocks/async_sar/async_nand2.sym} 310 180 0 0 {name=x11}
 C {lab_wire.sym} 630 -240 2 0 {name=l5 sig_type=std_logic lab=Q2_n}
 C {lab_wire.sym} 190 -220 2 0 {name=l6 sig_type=std_logic lab=Q1_n}
 C {lab_wire.sym} -210 -190 0 0 {name=l7 sig_type=std_logic lab=Q0_n}

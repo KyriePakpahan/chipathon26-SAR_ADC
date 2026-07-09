@@ -69,4 +69,4 @@ C {code_shown.sym} 30 -240 0 0 {name=s1 value=".param fnoicor=0
 .lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice typical
 .tran 0.01n 50n
 .save all"}
-C {xschem/sar_adc/shift_reg_8bit.sym} 280 10 0 0 {name=x1}
+C {sar_adc/blocks/async_sar/shift_reg_8bit.sym} 280 10 0 0 {name=x1}

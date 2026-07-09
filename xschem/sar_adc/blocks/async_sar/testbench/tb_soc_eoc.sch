@@ -20,7 +20,7 @@ N -30 140 160 140 {lab=clk}
 N -30 140 -30 180 {lab=clk}
 N -120 120 160 120 {lab=RST}
 N -120 120 -120 160 {lab=RST}
-C {xschem/sar_adc/soc_eoc.sym} 310 160 0 0 {name=x1}
+C {sar_adc/blocks/async_sar/soc_eoc.sym} 310 160 0 0 {name=x1}
 C {vsource.sym} -110 -130 0 0 {name=V1 value=5}
 C {vdd.sym} -110 -170 0 0 {name=l1 lab=VDD}
 C {gnd.sym} -110 -90 0 0 {name=l2 lab=0}

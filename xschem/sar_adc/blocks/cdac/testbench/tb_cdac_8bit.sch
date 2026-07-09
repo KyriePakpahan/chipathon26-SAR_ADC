@@ -74,4 +74,4 @@ C {gnd.sym} 790 -230 3 0 {name=l12 lab=0}
 C {vsource.sym} 760 -200 3 0 {name=V10 value=0 savecurrent=false}
 C {gnd.sym} 790 -200 3 0 {name=l13 lab=0}
 C {lab_pin.sym} 420 -460 2 0 {name=p12 sig_type=std_logic lab=vdac}
-C {cdac_8bit.sym} 180 -430 0 0 {name=x1}
+C {sar_adc/blocks/cdac/cdac_8bit.sym} 180 -430 0 0 {name=x1}

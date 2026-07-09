@@ -182,14 +182,14 @@ m=1
 value=1.28p
 footprint=1206
 device="ceramic capacitor"}
-C {cdac_switch_1b.sym} 2620 -290 0 0 {name=XSW0}
-C {cdac_switch_1b.sym} 2320 -290 0 0 {name=XSW1}
-C {cdac_switch_1b.sym} 2040 -290 0 0 {name=XSW2}
-C {cdac_switch_1b.sym} 1740 -290 0 0 {name=XSW3}
-C {cdac_switch_1b.sym} 1450 -290 0 0 {name=XSW4}
-C {cdac_switch_1b.sym} 1110 -290 0 0 {name=XSW5}
-C {cdac_switch_1b.sym} 770 -290 0 0 {name=XSW6}
-C {cdac_switch_1b.sym} 410 -290 0 0 {name=XSW7}
+C {sar_adc/blocks/cdac/cdac_switch_1b.sym} 2620 -290 0 0 {name=XSW0}
+C {sar_adc/blocks/cdac/cdac_switch_1b.sym} 2320 -290 0 0 {name=XSW1}
+C {sar_adc/blocks/cdac/cdac_switch_1b.sym} 2040 -290 0 0 {name=XSW2}
+C {sar_adc/blocks/cdac/cdac_switch_1b.sym} 1740 -290 0 0 {name=XSW3}
+C {sar_adc/blocks/cdac/cdac_switch_1b.sym} 1450 -290 0 0 {name=XSW4}
+C {sar_adc/blocks/cdac/cdac_switch_1b.sym} 1110 -290 0 0 {name=XSW5}
+C {sar_adc/blocks/cdac/cdac_switch_1b.sym} 770 -290 0 0 {name=XSW6}
+C {sar_adc/blocks/cdac/cdac_switch_1b.sym} 410 -290 0 0 {name=XSW7}
 C {lab_pin.sym} 2750 -400 2 0 {name=p24 sig_type=std_logic lab=bot0}
 C {lab_pin.sym} 2450 -400 2 0 {name=p25 sig_type=std_logic lab=bot1}
 C {lab_pin.sym} 2170 -400 2 0 {name=p26 sig_type=std_logic lab=bot2}

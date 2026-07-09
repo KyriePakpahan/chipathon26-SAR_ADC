@@ -73,4 +73,4 @@ C {lab_wire.sym} 1310 -450 0 0 {name=p2 sig_type=std_logic lab=out}
 C {launcher.sym} 770 -180 0 0 {name=h1
 descr="Annotate OP"
 tclcommand="set show_hidden_texts 1; xschem annotate_op"}
-C {inv_sh.sym} 1070 -520 0 0 {name=xinv1}
+C {sar_adc/blocks/sample_hold/inv_sh.sym} 1070 -520 0 0 {name=xinv1}

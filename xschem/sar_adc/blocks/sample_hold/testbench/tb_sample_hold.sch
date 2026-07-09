@@ -29,7 +29,7 @@ value=100f
 footprint=1206
 device="ceramic capacitor"}
 C {gnd.sym} 470 -320 0 0 {name=l5 lab=0}
-C {sample_hold.sym} 230 -340 0 0 {name=x1}
+C {sar_adc/blocks/sample_hold/sample_hold.sym} 290 -410 0 0 {name=x1}
 C {code_shown.sym} 10 -150 0 0 {name=MODELS
 only_toplevel=true
 value="
