@@ -29,4 +29,10 @@ C {code_shown.sym} -260 470 0 0 {name=s1 only_toplevel=false value=".param fnoic
 .param sw_stat_mismatch=0
 .lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice typical
 .tran 0.1n 500n
-.save all"}
+.save all
+
+.control
+run
+plot v(clk) v(en) v(reset) v(comp_out) v(bit_out)
+.endc
+"}

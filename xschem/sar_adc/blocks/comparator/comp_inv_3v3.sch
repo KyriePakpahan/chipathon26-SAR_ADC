@@ -39,7 +39,7 @@ spiceprefix=X
 }
 C {symbols/nfet_03v3.sym} 620 -280 0 0 {name=M1
 L=0.28u
-W=1.60u
+W=0.42u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
