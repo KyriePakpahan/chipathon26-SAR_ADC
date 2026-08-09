@@ -38,21 +38,21 @@ N 560 -400 690 -400 {lab=comp_out_n}
 N 560 -420 690 -420 {lab=comp_out_p}
 N 140 -430 170 -430 {lab=sample_en}
 C {title.sym} 160 -40 0 0 {name=l1 author="Berkah Saluyu"}
-C {ipin.sym} 80 -460 0 0 {name=p1 lab=vin
+C {ipin.sym} 80 -460 0 0 {name=p3 lab=vin
 }
-C {ipin.sym} 80 -270 0 0 {name=p2 lab=vref
+C {ipin.sym} 80 -270 0 0 {name=p6 lab=vref
 
 }
-C {iopin.sym} 460 -550 3 0 {name=p3 lab=vdd
+C {iopin.sym} 460 -550 3 0 {name=p1 lab=vdd
 }
-C {iopin.sym} 460 -120 1 0 {name=p4 lab=vss
+C {iopin.sym} 460 -120 1 0 {name=p7 lab=vss
 
 }
-C {ipin.sym} 90 -490 0 0 {name=p5 lab=start
+C {ipin.sym} 90 -490 0 0 {name=p2 lab=start
 
 }
-C {opin.sym} 1010 -320 0 0 {name=p6 lab=done}
-C {opin.sym} 1010 -420 0 0 {name=p7 lab=dout[7:0]
+C {opin.sym} 1010 -320 0 0 {name=p5 lab=done}
+C {opin.sym} 1010 -420 0 0 {name=p4 lab=dout[7:0]
 }
 C {sar_adc/blocks/comparator/strongarm_comp.sym} 400 -350 0 0 {name=x1}
 C {sar_adc/blocks/cdac/cdac_8bit.sym} 420 -220 0 0 {name=x2}

@@ -5,66 +5,53 @@ V {}
 S {}
 F {}
 E {}
-N 292 -413 382 -413 {lab=out_p}
-N 292 -393 382 -393 {lab=out_n}
-N 292 -433 310 -433 {lab=vdd}
-N 292 -353 314 -353 {lab=vss}
-N 2 -192 80 -192 {lab=out_p}
-N 2 -177 80 -177 {lab=out_n}
-N 103 -219 103 -240 {lab=vdd}
-N 103 -240 310 -240 {lab=vdd}
-N 310 -240 310 -433 {lab=vdd}
-N 104 -149 104 -120 {lab=vss}
-N 104 -120 314 -120 {lab=vss}
-N 314 -120 314 -353 {lab=vss}
-N 135 -183 135 -180.5 {lab=done_evt}
-N 135 -183 220 -183 {lab=done_evt}
-N 220 -183 220 -170 {lab=done_evt}
-N 180 -233 180 -250 {lab=vdd}
-N 180 -250 310 -250 {lab=vdd}
-N 180 -135.5 180 -120 {lab=vss}
-N 252.5 -183 252.5 -180.5 {lab=done_d1}
-N 297.5 -233 297.5 -250 {lab=vdd}
-N 297.5 -135.5 297.5 -120 {lab=vss}
-N 370 -183 399.5 -183 {lab=comp_done}
-N 145 -330 145 -350 {lab=vdd}
-N 145 -350 310 -350 {lab=vdd}
-N 145 -232.5 145 -210 {lab=vss}
-N 145 -210 314 -210 {lab=vss}
-N 112 -393 100 -393 {lab=rst_latch}
-N 100 -393 100 -277.5 {lab=rst_latch}
-N 217.5 -280 217.5 -480 {lab=rst_n}
-N 217.5 -480 350 -480 {lab=rst_n}
-N 350 -480 350 -160 {lab=rst_n}
-N 180 -160 350 -160 {lab=rst_n}
-N 180 -160 180 -140 {lab=rst_n}
-N 220 -140 220 -100 {lab=vss}
-N 220 -110 220 -100 {lab=vss}
-N 220 -100 314 -100 {lab=vss}
-C {title.sym} 160 -30 0 0 {name=l1 author="Berkah Saluyu"}
-C {sar_adc/blocks/comparator/strongarm_comp_core.sym} 132 -343 0 0 {name=x1}
-C {ipin.sym} 112 -433 0 0 {name=p1 lab=vin_p}
-C {ipin.sym} 112 -413 0 0 {name=p2 lab=vin_n}
-C {ipin.sym} 112 -393 0 0 {name=p3 lab=rst_latch}
-C {iopin.sym} 310 -433 0 0 {name=p4 lab=vdd}
-C {opin.sym} 382 -413 0 0 {name=p5 lab=out_p}
-C {opin.sym} 382 -393 0 0 {name=p6 lab=out_n}
-C {opin.sym} 399.5 -183 0 0 {name=p7 lab=comp_done}
-C {iopin.sym} 314 -353 0 0 {name=p8 lab=vss}
-C {sar_adc/blocks/comparator/comp_nand_3v3.sym} 77 -146 0 0 {name=x2}
-C {lab_wire.sym} 2 -192 0 0 {name=w1 lab=out_p}
-C {lab_wire.sym} 2 -177 0 0 {name=w2 lab=out_n}
-C {lab_wire.sym} 132.5 -185.5 0 0 {name=w3 lab=done_evt}
-C {lab_wire.sym} 252.5 -183 0 0 {name=w4 lab=done_d1}
-C {lab_wire.sym} 217.5 -280 0 0 {name=w5 lab=rst_n}
-C {lab_wire.sym} 100 -277.5 0 0 {name=w6 lab=rst_latch}
-C {lab_wire.sym} 200 -170 0 0 {name=p_drain_clamp lab=done_evt}
-C {lab_wire.sym} 170 -140 0 0 {name=p_gate_clamp lab=rst_n}
-C {lab_wire.sym} 200 -110 0 0 {name=p_source_clamp lab=vss}
-C {sar_adc/blocks/comparator/comp_inv_3v3.sym} 135 -233 0 0 {name=x3}
-C {sar_adc/blocks/comparator/comp_inv_3v3.sym} 252.5 -233 0 0 {name=x4}
-C {sar_adc/blocks/comparator/comp_inv_3v3.sym} 100 -330 0 0 {name=x_rst_inv}
-C {symbols/nfet_03v3.sym} 200 -140 0 0 {name=M_clamp
+N 50 -380 0 -380 {lab=vin_p}
+N 50 -360 0 -360 {lab=vin_n}
+N 50 -340 0 -340 {lab=rst_latch}
+N 350 -380 400 -380 {lab=vdd}
+N 350 -360 450 -360 {lab=out_n}
+N 350 -340 450 -340 {lab=out_p}
+N 350 -320 400 -320 {lab=vss}
+N 410 -360 410 -240 {lab=out_n}
+N 410 -240 480 -240 {lab=out_n}
+N 430 -340 430 -260 {lab=out_p}
+N 430 -260 480 -260 {lab=out_p}
+N 0 -340 0 -220 {lab=rst_latch}
+N 0 -220 80 -220 {lab=rst_latch}
+N 180 -220 220 -220 {lab=rst_n}
+N 220 -220 220 -140 {lab=rst_n}
+N 220 -140 250 -140 {lab=rst_n}
+N 570 -250 600 -250 {lab=done_evt}
+N 600 -250 600 -170 {lab=done_evt}
+N 290 -170 600 -170 {lab=done_evt}
+N 600 -250 640 -250 {lab=done_evt}
+N 740 -250 780 -250 {lab=done_d1}
+N 880 -250 920 -250 {lab=comp_done}
+N 290 -140 290 -110 {lab=vss}
+N 290 -110 290 -90 {lab=vss}
+N 120 -270 120 -290 {lab=vdd}
+N 120 -170 120 -150 {lab=vss}
+N 520 -290 520 -310 {lab=vdd}
+N 520 -210 520 -190 {lab=vss}
+N 680 -300 680 -320 {lab=vdd}
+N 680 -200 680 -180 {lab=vss}
+N 820 -300 820 -320 {lab=vdd}
+N 820 -200 820 -180 {lab=vss}
+C {title.sym} 160 50 0 0 {name=l1 author="Berkah Saluyu"}
+C {sar_adc/blocks/comparator/strongarm_comp_core.sym} 200 -350 0 0 {name=x1}
+C {ipin.sym} 0 -380 0 0 {name=p1 lab=vin_p}
+C {ipin.sym} 0 -360 0 0 {name=p2 lab=vin_n}
+C {ipin.sym} 0 -340 0 0 {name=p3 lab=rst_latch}
+C {iopin.sym} 400 -380 0 0 {name=p4 lab=vdd}
+C {opin.sym} 450 -340 0 0 {name=p5 lab=out_p}
+C {opin.sym} 450 -360 0 0 {name=p6 lab=out_n}
+C {opin.sym} 920 -250 0 0 {name=p7 lab=comp_done}
+C {iopin.sym} 400 -320 0 0 {name=p8 lab=vss}
+C {sar_adc/blocks/comparator/comp_inv_3v3.sym} 80 -270 0 0 {name=x_rst_inv}
+C {sar_adc/blocks/comparator/comp_nand_3v3.sym} 480 -210 0 0 {name=x2}
+C {sar_adc/blocks/comparator/comp_inv_3v3.sym} 640 -300 0 0 {name=x3}
+C {sar_adc/blocks/comparator/comp_inv_3v3.sym} 780 -300 0 0 {name=x4}
+C {symbols/nfet_03v3.sym} 270 -140 0 0 {name=M_clamp
 L=0.28u
 W=0.50u
 nf=1
@@ -78,12 +65,12 @@ sa=0 sb=0 sd=0
 model=nfet_03v3
 spiceprefix=X
 }
-C {vdd.sym} 180 -246.5 0 0 {name=v1 lab=vdd}
-C {gnd.sym} 180 -135.5 0 0 {name=g1 lab=vss}
-C {vdd.sym} 297.5 -248 0 0 {name=v2 lab=vdd}
-C {gnd.sym} 297.5 -135.5 0 0 {name=g2 lab=vss}
-C {vdd.sym} 145 -340 0 0 {name=v3 lab=vdd}
-C {gnd.sym} 145 -232.5 0 0 {name=g3 lab=vss}
-C {vdd.sym} 97 -219 0 0 {name=v4 lab=vdd}
-C {gnd.sym} 97 -149 0 0 {name=g4 lab=vss}
-C {gnd.sym} 200 -100 0 0 {name=l_gnd_c lab=0}
+C {vdd.sym} 120 -290 0 0 {name=v_inv1 lab=vdd}
+C {gnd.sym} 120 -150 0 0 {name=g_inv1 lab=vss}
+C {vdd.sym} 520 -310 0 0 {name=v_nand lab=vdd}
+C {gnd.sym} 520 -190 0 0 {name=g_nand lab=vss}
+C {vdd.sym} 680 -320 0 0 {name=v_inv2 lab=vdd}
+C {gnd.sym} 680 -180 0 0 {name=g_inv2 lab=vss}
+C {vdd.sym} 820 -320 0 0 {name=v_inv3 lab=vdd}
+C {gnd.sym} 820 -180 0 0 {name=g_inv3 lab=vss}
+C {gnd.sym} 290 -90 0 0 {name=g_clamp lab=vss}
