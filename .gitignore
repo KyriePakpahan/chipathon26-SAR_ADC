@@ -7,3 +7,8 @@ final/
 img/
 *.lyrdb
 .ipynb_checkpoints/
+*.raw
+*.val
+*.log
+*.spice
+*.out

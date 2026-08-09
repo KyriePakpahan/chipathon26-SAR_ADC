@@ -21,7 +21,7 @@ C {vdd.sym} 1170 -570 0 0 {name=l3 lab=VDD}
 C {gnd.sym} 820 -330 0 0 {name=l4 lab=0}
 C {gnd.sym} 920 -330 0 0 {name=l5 lab=0}
 C {gnd.sym} 1170 -340 0 0 {name=l6 lab=0}
-C {noconn.sym} 1330 -450 2 0 {name=l7}
+C {devices/noconn.sym} 1330 -450 2 0 {name=l7}
 C {lab_wire.sym} 1000 -450 0 0 {name=p1 sig_type=std_logic lab=in}
 C {devices/code_shown.sym} 10 -140 0 0 {name=MODELS only_toplevel=true
 format="tcleval( @value )"
@@ -70,7 +70,7 @@ write inv_sh_tb.raw
 .endc
 "}
 C {lab_wire.sym} 1310 -450 0 0 {name=p2 sig_type=std_logic lab=out}
-C {launcher.sym} 770 -180 0 0 {name=h1
+C {devices/launcher.sym} 770 -180 0 0 {name=h1
 descr="Annotate OP"
 tclcommand="set show_hidden_texts 1; xschem annotate_op"}
 C {sar_adc/blocks/sample_hold/inv_sh.sym} 1070 -520 0 0 {name=xinv1}

@@ -1,0 +1,9 @@
+set PDK_ROOT /foss/pdks
+set PDK gf180mcuD
+
+if { [file exists $PDK_ROOT/$PDK/libs.tech/xschem/xschemrc] } {
+    source $PDK_ROOT/$PDK/libs.tech/xschem/xschemrc
+}
+
+append XSCHEM_LIBRARY_PATH :/foss/designs/chipathon26-SAR_ADC/xschem
+append XSCHEM_LIBRARY_PATH :/foss/designs/chipathon26-SAR_ADC/xschem/sar_adc

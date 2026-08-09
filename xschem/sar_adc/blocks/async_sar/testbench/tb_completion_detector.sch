@@ -5,7 +5,7 @@ V {}
 S {}
 F {}
 E {}
-C {completion_detector.sym} 200 0 0 0 {name=x1}
+C {sar_adc/blocks/async_sar/completion_detector.sym} 200 0 0 0 {name=x1}
 C {vsource.sym} -100 -30 0 0 {name=V1 value=5}
 C {vdd.sym} -100 -70 0 0 {name=l1 lab=VDD}
 C {gnd.sym} -100 10 0 0 {name=l2 lab=0}

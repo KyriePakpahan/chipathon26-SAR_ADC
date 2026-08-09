@@ -5,30 +5,21 @@ V {}
 S {}
 F {}
 E {}
-N 450 -230 450 -210 {lab=vss}
-N 360 -260 410 -260 {lab=rst_latch}
+N 470 -230 470 -210 {lab=vss}
+N 360 -260 430 -260 {lab=rst_latch}
 N 450 -260 490 -260 {lab=vss}
 N 490 -260 490 -220 {lab=vss}
 N 450 -220 490 -220 {lab=vss}
 N 260 -370 290 -370 {lab=vin_p}
-N 500 -370 520 -370 {lab=vin_n}
-N 330 -340 330 -320 {lab=#net1}
-N 330 -320 450 -320 {lab=#net1}
-N 450 -320 450 -290 {lab=#net1}
-N 560 -340 560 -320 {lab=#net1}
-N 450 -320 560 -320 {lab=#net1}
-N 560 -370 600 -370 {lab=vss}
-N 330 -370 370 -370 {lab=vss}
+N 490 -370 520 -370 {lab=vin_n}
+N 330 -340 560 -340 {lab=#net1}
+N 470 -340 470 -290 {lab=#net1}
 N 330 -450 330 -400 {lab=#net2}
 N 560 -450 560 -400 {lab=#net3}
 N 330 -640 330 -510 {lab=out_p}
 N 560 -640 560 -510 {lab=out_n}
-N 370 -480 420 -480 {lab=out_n}
-N 420 -480 480 -530 {lab=out_n}
-N 480 -530 560 -530 {lab=out_n}
-N 480 -480 520 -480 {lab=out_p}
-N 420 -530 480 -480 {lab=out_p}
-N 330 -530 420 -530 {lab=out_p}
+N 290 -480 420 -480 {lab=out_n}
+N 480 -480 540 -480 {lab=out_p}
 N 330 -750 440 -750 {lab=vdd}
 N 330 -750 330 -700 {lab=vdd}
 N 440 -750 560 -750 {lab=vdd}
@@ -42,7 +33,7 @@ N 560 -710 630 -710 {lab=vdd}
 N 370 -670 410 -670 {lab=out_n}
 N 410 -670 480 -630 {lab=out_n}
 N 480 -630 560 -630 {lab=out_n}
-N 480 -670 520 -670 {lab=out_p}
+N 480 -480 520 -480 {lab=out_p}
 N 410 -630 480 -670 {lab=out_p}
 N 330 -630 410 -630 {lab=out_p}
 N 140 -750 330 -750 {lab=vdd}
@@ -61,8 +52,6 @@ N 750 -650 750 -630 {lab=out_n}
 N 560 -630 750 -630 {lab=out_n}
 N 60 -680 100 -680 {lab=rst_latch}
 N 790 -680 820 -680 {lab=rst_latch}
-N 260 -480 330 -480 {lab=vss}
-N 560 -480 600 -480 {lab=vss}
 N -20 -750 140 -750 {lab=vdd}
 N -20 -750 -20 -710 {lab=vdd}
 N -20 -680 40 -680 {lab=vdd}
@@ -98,9 +87,9 @@ C {iopin.sym} 450 -210 1 0 {name=p5 lab=vss
 C {opin.sym} 330 -580 0 0 {name=p6 lab=out_p
 }
 C {opin.sym} 560 -580 0 0 {name=p7 lab=out_n}
-C {symbols/nfet_03v3.sym} 430 -260 0 0 {name=Mtail
+C {symbols/nfet_03v3.sym} 450 -260 0 0 {name=Mtail
 L=0.28u
-W=0.22u
+W=0.50u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -112,10 +101,10 @@ sa=0 sb=0 sd=0
 model=nfet_03v3
 spiceprefix=X
 }
-C {lab_pin.sym} 380 -260 3 0 {name=p9 sig_type=std_logic lab=rst_latch}
+C {lab_wire.sym} 380 -260 3 0 {name=p9 sig_type=std_logic lab=rst_latch}
 C {symbols/nfet_03v3.sym} 310 -370 0 0 {name=M1
 L=0.28u
-W=0.22u
+W=0.40u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -129,7 +118,7 @@ spiceprefix=X
 }
 C {symbols/nfet_03v3.sym} 540 -370 0 0 {name=M2
 L=0.28u
-W=0.22u
+W=0.40u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -141,9 +130,7 @@ sa=0 sb=0 sd=0
 model=nfet_03v3
 spiceprefix=X
 }
-C {lab_pin.sym} 450 -220 0 0 {name=p11 sig_type=std_logic lab=vss}
-C {lab_pin.sym} 370 -370 2 0 {name=p10 sig_type=std_logic lab=vss}
-C {lab_pin.sym} 600 -370 2 0 {name=p12 sig_type=std_logic lab=vss}
+C {lab_wire.sym} 470 -220 0 0 {name=p11 sig_type=std_logic lab=vss}
 C {symbols/nfet_03v3.sym} 350 -480 0 1 {name=M3
 L=0.28u
 W=0.22u
@@ -202,7 +189,7 @@ spiceprefix=X
 }
 C {symbols/pfet_03v3.sym} 120 -680 0 0 {name=M7
 L=0.28u
-W=0.22u
+W=0.30u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -216,7 +203,7 @@ spiceprefix=X
 }
 C {symbols/pfet_03v3.sym} 770 -680 0 1 {name=M8
 L=0.28u
-W=0.22u
+W=0.30u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -228,11 +215,11 @@ sa=0 sb=0 sd=0
 model=pfet_03v3
 spiceprefix=X
 }
-C {lab_pin.sym} 60 -680 3 0 {name=p13 sig_type=std_logic lab=rst_latch}
-C {lab_pin.sym} 820 -680 3 0 {name=p14 sig_type=std_logic lab=rst_latch}
+C {lab_wire.sym} 60 -680 3 0 {name=p13 sig_type=std_logic lab=rst_latch}
+C {lab_wire.sym} 820 -680 3 0 {name=p14 sig_type=std_logic lab=rst_latch}
 C {symbols/pfet_03v3.sym} -40 -680 0 0 {name=M9
 L=0.28u
-W=0.22u
+W=0.30u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -246,7 +233,7 @@ spiceprefix=X
 }
 C {symbols/pfet_03v3.sym} 920 -680 0 1 {name=M10
 L=0.28u
-W=0.22u
+W=0.30u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -258,7 +245,5 @@ sa=0 sb=0 sd=0
 model=pfet_03v3
 spiceprefix=X
 }
-C {lab_pin.sym} 260 -480 0 0 {name=p15 sig_type=std_logic lab=vss}
-C {lab_pin.sym} 600 -480 2 0 {name=p16 sig_type=std_logic lab=vss}
-C {lab_pin.sym} -100 -680 3 0 {name=p17 sig_type=std_logic lab=rst_latch}
-C {lab_pin.sym} 970 -680 3 0 {name=p18 sig_type=std_logic lab=rst_latch}
+C {lab_wire.sym} -100 -680 3 0 {name=p17 sig_type=std_logic lab=rst_latch}
+C {lab_wire.sym} 970 -680 3 0 {name=p18 sig_type=std_logic lab=rst_latch}

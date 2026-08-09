@@ -26,8 +26,8 @@ B 5 167.5 -12.5 172.5 -7.5 {name=done dir=out}
 B 5 167.5 -112.5 172.5 -107.5 {name=dout[7:0] dir=out}
 B 5 -22.5 -132.5 -17.5 -127.5 {name=start dir=in}
 B 5 167.5 -92.5 172.5 -87.5 {name=dac_in[7:0] dir=out}
-B 5 -22.5 -112.5 -17.5 -107.5 {name=out_p dir=in}
-B 5 -22.5 -92.5 -17.5 -87.5 {name=out_n dir=in}
+B 5 -22.5 -112.5 -17.5 -107.5 {name=comp_out_p dir=in}
+B 5 -22.5 -92.5 -17.5 -87.5 {name=comp_out_n dir=in}
 B 5 167.5 -132.5 172.5 -127.5 {name=vdd dir=inout}
 B 5 -22.5 -72.5 -17.5 -67.5 {name=comp_done dir=in}
 B 5 167.5 -32.5 172.5 -27.5 {name=vss dir=inout}
@@ -40,8 +40,8 @@ T {done} 145 -14 0 1 0.2 0.2 {}
 T {dout[7:0]} 145 -114 0 1 0.2 0.2 {}
 T {start} 5 -134 0 0 0.2 0.2 {}
 T {dac_in[7:0]} 145 -94 0 1 0.2 0.2 {}
-T {out_p} 5 -114 0 0 0.2 0.2 {}
-T {out_n} 5 -94 0 0 0.2 0.2 {}
+T {comp_out_p} 5 -114 0 0 0.2 0.2 {}
+T {comp_out_n} 5 -94 0 0 0.2 0.2 {}
 T {vdd} 145 -134 0 1 0.2 0.2 {}
 T {comp_done} 5 -74 0 0 0.2 0.2 {}
 T {vss} 145 -34 0 1 0.2 0.2 {}

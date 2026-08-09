@@ -25,7 +25,7 @@ N 640 -220 690 -220 {lab=vss}
 C {title.sym} 180 -60 0 0 {name=l1 author="Afdhal Razaq"}
 C {symbols/pfet_03v3.sym} 620 -430 0 0 {name=M2
 L=0.28u
-W=2u
+W=0.80u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -39,7 +39,7 @@ spiceprefix=X
 }
 C {symbols/nfet_03v3.sym} 620 -280 0 0 {name=M1
 L=0.28u
-W=1u
+W=0.40u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -51,7 +51,7 @@ sa=0 sb=0 sd=0
 model=nfet_03v3
 spiceprefix=X
 }
-C {devices/ipin.sym} 490 -360 0 0 {name=p3 lab=vi}
-C {devices/opin.sym} 760 -360 0 0 {name=p4 lab=vo}
+C {devices/ipin.sym} 490 -360 0 0 {name=p2 lab=vi}
+C {devices/opin.sym} 760 -360 0 0 {name=p3 lab=vo}
 C {devices/iopin.sym} 640 -510 3 0 {name=p1 lab=vdd}
-C {devices/iopin.sym} 640 -200 1 0 {name=p2 lab=vss}
+C {devices/iopin.sym} 640 -200 1 0 {name=p4 lab=vss}
