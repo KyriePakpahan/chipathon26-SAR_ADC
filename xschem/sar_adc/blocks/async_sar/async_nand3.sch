@@ -134,9 +134,6 @@ C {ipin.sym} -740 -220 0 0 {name=p1 lab=input_A}
 C {ipin.sym} -740 -200 0 0 {name=p2 lab=input_B}
 C {ipin.sym} -740 -240 0 0 {name=p15 lab=input_C}
 C {opin.sym} -120 -180 0 0 {name=p9 lab=output}
-C {lab_wire.sym} -740 -240 2 0 {name=p13 sig_type=std_logic lab=input_C}
-C {lab_wire.sym} -740 -220 2 0 {name=p4 sig_type=std_logic lab=input_A}
-C {lab_wire.sym} -740 -200 2 0 {name=p5 sig_type=std_logic lab=input_B}
 C {lab_wire.sym} -560 -240 0 0 {name=p3 sig_type=std_logic lab=input_C}
 C {lab_wire.sym} -420 -240 0 0 {name=p7 sig_type=std_logic lab=input_A}
 C {lab_wire.sym} -260 -240 0 0 {name=p10 sig_type=std_logic lab=input_B}

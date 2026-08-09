@@ -96,5 +96,3 @@ C {lab_wire.sym} -80 40 0 0 {name=p7 sig_type=std_logic lab=input_A}
 C {lab_wire.sym} -80 130 0 0 {name=p8 sig_type=std_logic lab=input_B}
 C {lab_wire.sym} 0 -70 0 0 {name=p10 sig_type=std_logic lab=input_B}
 C {opin.sym} 140 -10 0 0 {name=p9 lab=output}
-C {lab_wire.sym} -260 -60 2 0 {name=p3 sig_type=std_logic lab=input_A}
-C {lab_wire.sym} -260 10 2 0 {name=p4 sig_type=std_logic lab=input_B}

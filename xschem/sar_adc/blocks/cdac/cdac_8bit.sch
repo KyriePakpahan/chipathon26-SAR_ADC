@@ -5,227 +5,116 @@ V {}
 S {}
 F {}
 E {}
-N 280 -410 370 -410 {lab=vdd}
-N 370 -410 740 -410 {lab=vdd}
-N 740 -410 1080 -410 {lab=vdd}
-N 1080 -410 1420 -410 {lab=vdd}
-N 1420 -410 1710 -410 {lab=vdd}
-N 1710 -410 2010 -410 {lab=vdd}
-N 2010 -410 2280 -410 {lab=vdd}
-N 2280 -410 2590 -410 {lab=vdd}
-N 600 -340 630 -340 {lab=vref}
-N 630 -480 630 -340 {lab=vref}
-N 280 -480 630 -480 {lab=vref}
-N 630 -480 1010 -480 {lab=vref}
-N 1010 -480 1010 -340 {lab=vref}
-N 960 -340 1010 -340 {lab=vref}
-N 1010 -480 1340 -480 {lab=vref}
-N 1340 -480 1340 -340 {lab=vref}
-N 1300 -340 1340 -340 {lab=vref}
-N 1340 -480 1660 -480 {lab=vref}
-N 1660 -480 1660 -340 {lab=vref}
-N 1640 -340 1660 -340 {lab=vref}
-N 1660 -480 1980 -480 {lab=vref}
-N 1980 -480 1980 -340 {lab=vref}
-N 1930 -340 1980 -340 {lab=vref}
-N 1980 -480 2260 -480 {lab=vref}
-N 2260 -480 2260 -340 {lab=vref}
-N 2230 -340 2260 -340 {lab=vref}
-N 2260 -480 2560 -480 {lab=vref}
-N 2560 -480 2560 -340 {lab=vref}
-N 2510 -340 2560 -340 {lab=vref}
-N 2560 -480 2860 -480 {lab=vref}
-N 2860 -480 2860 -340 {lab=vref}
-N 2810 -340 2860 -340 {lab=vref}
-N 280 -440 350 -440 {lab=vss}
-N 350 -440 710 -440 {lab=vss}
-N 710 -440 1070 -440 {lab=vss}
-N 1070 -440 1410 -440 {lab=vss}
-N 1410 -440 1690 -440 {lab=vss}
-N 1690 -440 1990 -440 {lab=vss}
-N 1990 -440 2270 -440 {lab=vss}
-N 2270 -440 2580 -440 {lab=vss}
-N 370 -720 370 -680 {lab=vdac}
-N 370 -720 710 -720 {lab=vdac}
-N 710 -720 710 -680 {lab=vdac}
-N 710 -720 1050 -720 {lab=vdac}
-N 1050 -720 1050 -680 {lab=vdac}
-N 1050 -720 1380 -720 {lab=vdac}
-N 1380 -720 1380 -680 {lab=vdac}
-N 1380 -720 1680 -720 {lab=vdac}
-N 1680 -720 1680 -680 {lab=vdac}
-N 1680 -720 1970 -720 {lab=vdac}
-N 1970 -720 1970 -680 {lab=vdac}
-N 1970 -720 2250 -720 {lab=vdac}
-N 2250 -720 2250 -680 {lab=vdac}
-N 2250 -720 2540 -720 {lab=vdac}
-N 2410 -400 2410 -390 {lab=bot1}
-N 2410 -400 2450 -400 {lab=bot1}
-N 2710 -400 2710 -390 {lab=bot0}
-N 2710 -400 2750 -400 {lab=bot0}
-N 2130 -400 2130 -390 {lab=bot2}
-N 2130 -400 2170 -400 {lab=bot2}
-N 1830 -400 1830 -390 {lab=bot3}
-N 1830 -400 1870 -400 {lab=bot3}
-N 1540 -400 1540 -390 {lab=bot4}
-N 1540 -400 1570 -400 {lab=bot4}
-N 1200 -400 1200 -390 {lab=bot5}
-N 1200 -400 1250 -400 {lab=bot5}
-N 860 -400 860 -390 {lab=bot6}
-N 860 -400 900 -400 {lab=bot6}
-N 500 -400 500 -390 {lab=bot7}
-N 500 -400 560 -400 {lab=bot7}
-N 2440 -620 2440 -590 {lab=bot0}
-N 2250 -620 2250 -590 {lab=bot1}
-N 1970 -620 1970 -590 {lab=bot2}
-N 1680 -620 1680 -590 {lab=bot3}
-N 1380 -620 1380 -590 {lab=bot4}
-N 1050 -620 1050 -590 {lab=bot5}
-N 710 -620 710 -590 {lab=bot6}
-N 370 -620 370 -590 {lab=bot7}
-N 330 -440 330 -330 {lab=vss}
-N 330 -330 390 -330 {lab=vss}
-N 700 -440 700 -330 {lab=vss}
-N 700 -330 750 -330 {lab=vss}
-N 1040 -440 1040 -330 {lab=vss}
-N 1040 -330 1090 -330 {lab=vss}
-N 1380 -440 1380 -330 {lab=vss}
-N 1380 -330 1430 -330 {lab=vss}
-N 1680 -440 1680 -330 {lab=vss}
-N 1680 -330 1720 -330 {lab=vss}
-N 1990 -440 1990 -330 {lab=vss}
-N 1990 -330 2020 -330 {lab=vss}
-N 2270 -440 2270 -330 {lab=vss}
-N 2270 -330 2300 -330 {lab=vss}
-N 2580 -330 2600 -330 {lab=vss}
-N 2580 -440 2580 -330 {lab=vss}
-N 350 -410 350 -360 {lab=vdd}
-N 350 -360 390 -360 {lab=vdd}
-N 720 -410 720 -360 {lab=vdd}
-N 720 -360 750 -360 {lab=vdd}
-N 1060 -410 1060 -360 {lab=vdd}
-N 1060 -360 1090 -360 {lab=vdd}
-N 1400 -410 1400 -360 {lab=vdd}
-N 1400 -360 1430 -360 {lab=vdd}
-N 1700 -410 1700 -360 {lab=vdd}
-N 1700 -360 1720 -360 {lab=vdd}
-N 2000 -410 2000 -360 {lab=vdd}
-N 2000 -360 2020 -360 {lab=vdd}
-N 2280 -410 2280 -360 {lab=vdd}
-N 2280 -360 2300 -360 {lab=vdd}
-N 2590 -410 2590 -360 {lab=vdd}
-N 2590 -360 2600 -360 {lab=vdd}
-N 2440 -720 2440 -680 {lab=vdac}
-N 2570 -720 2570 -680 {lab=vdac}
-N 2540 -720 2570 -720 {lab=vdac}
-N 2570 -720 2630 -720 {lab=vdac}
-N 2570 -620 2570 -590 {lab=vss}
-N 340 -310 390 -310 {lab=dac_in[7]}
-N 730 -310 750 -310 {lab=dac_in[6]}
-N 1060 -310 1090 -310 {lab=dac_in[5]}
-N 1410 -310 1430 -310 {lab=dac_in[4]}
-N 1700 -310 1700 -290 {lab=dac_in[3]}
-N 1700 -310 1720 -310 {lab=dac_in[3]}
-N 340 -310 340 -290 {lab=dac_in[7]}
-N 730 -310 730 -290 {lab=dac_in[6]}
-N 1060 -310 1060 -280 {lab=dac_in[5]}
-N 1410 -310 1410 -270 {lab=dac_in[4]}
-N 2000 -310 2020 -310 {lab=dac_in[2]}
-N 2000 -310 2000 -280 {lab=dac_in[2]}
-N 2280 -310 2300 -310 {lab=dac_in[1]}
-N 2280 -310 2280 -270 {lab=dac_in[1]}
-N 2580 -310 2600 -310 {lab=dac_in[0]}
-N 2580 -310 2580 -270 {lab=dac_in[0]}
-N 170 -650 210 -650 {lab=dac_in[7:0]}
-C {title.sym} 160 -40 0 0 {name=l1 author="Berkah Saluyu"}
-C {ipin.sym} 280 -480 0 0 {name=p2 lab=vref
-}
-C {iopin.sym} 280 -410 2 0 {name=p5 lab=vdd}
-C {iopin.sym} 280 -440 2 0 {name=p6 lab=vss}
-C {capa.sym} 2440 -650 0 0 {name=C0
-m=1
-value=0.001p
-footprint=1206
-device="ceramic capacitor"}
-C {capa.sym} 2250 -650 0 0 {name=C1
-m=1
-value=0.002p
-footprint=1206
-device="ceramic capacitor"}
-C {capa.sym} 1970 -650 0 0 {name=C2
-m=1
-value=0.004p
-footprint=1206
-device="ceramic capacitor"}
-C {capa.sym} 1680 -650 0 0 {name=C3
-m=1
-value=0.008p
-footprint=1206
-device="ceramic capacitor"}
-C {capa.sym} 1380 -650 0 0 {name=C4
-m=1
-value=0.016p
-footprint=1206
-device="ceramic capacitor"}
-C {capa.sym} 1050 -650 0 0 {name=C5
-m=1
-value=0.032p
-footprint=1206
-device="ceramic capacitor"}
-C {capa.sym} 710 -650 0 0 {name=C6
-m=1
-value=0.064p
-footprint=1206
-device="ceramic capacitor"}
-C {capa.sym} 370 -650 0 0 {name=C7
-m=1
-value=0.128p
-footprint=1206
-device="ceramic capacitor"}
-C {sar_adc/blocks/cdac/cdac_switch_1b.sym} 2620 -290 0 0 {name=XSW0}
-C {sar_adc/blocks/cdac/cdac_switch_1b.sym} 2320 -290 0 0 {name=XSW1}
-C {sar_adc/blocks/cdac/cdac_switch_1b.sym} 2040 -290 0 0 {name=XSW2}
-C {sar_adc/blocks/cdac/cdac_switch_1b.sym} 1740 -290 0 0 {name=XSW3}
-C {sar_adc/blocks/cdac/cdac_switch_1b.sym} 1450 -290 0 0 {name=XSW4}
-C {sar_adc/blocks/cdac/cdac_switch_1b.sym} 1110 -290 0 0 {name=XSW5}
-C {sar_adc/blocks/cdac/cdac_switch_1b.sym} 770 -290 0 0 {name=XSW6}
-C {sar_adc/blocks/cdac/cdac_switch_1b.sym} 410 -290 0 0 {name=XSW7}
-C {lab_pin.sym} 2750 -400 2 0 {name=p24 sig_type=std_logic lab=bot0}
-C {lab_pin.sym} 2450 -400 2 0 {name=p25 sig_type=std_logic lab=bot1}
-C {lab_pin.sym} 2170 -400 2 0 {name=p26 sig_type=std_logic lab=bot2}
-C {lab_pin.sym} 1870 -400 2 0 {name=p27 sig_type=std_logic lab=bot3}
-C {lab_pin.sym} 1570 -400 2 0 {name=p28 sig_type=std_logic lab=bot4}
-C {lab_pin.sym} 1250 -400 2 0 {name=p29 sig_type=std_logic lab=bot5}
-C {lab_pin.sym} 900 -400 2 0 {name=p30 sig_type=std_logic lab=bot6}
-C {lab_pin.sym} 560 -400 2 0 {name=p31 sig_type=std_logic lab=bot7}
-C {lab_pin.sym} 2440 -590 3 0 {name=p32 sig_type=std_logic lab=bot0}
-C {lab_pin.sym} 2250 -590 3 0 {name=p33 sig_type=std_logic lab=bot1}
-C {lab_pin.sym} 1970 -590 3 0 {name=p34 sig_type=std_logic lab=bot2}
-C {lab_pin.sym} 1380 -590 3 0 {name=p37 sig_type=std_logic lab=bot4}
-C {lab_pin.sym} 1050 -590 3 0 {name=p38 sig_type=std_logic lab=bot5}
-C {lab_pin.sym} 710 -590 3 0 {name=p39 sig_type=std_logic lab=bot6}
-C {lab_pin.sym} 370 -590 3 0 {name=p40 sig_type=std_logic lab=bot7}
-C {opin.sym} 2630 -720 0 0 {name=p41 lab=vdac}
-C {capa.sym} 2570 -650 0 0 {name=CDummy
-m=1
-value=0.001p
-footprint=1206
-device="ceramic capacitor"}
-C {lab_pin.sym} 2570 -590 3 0 {name=p8 sig_type=std_logic lab=vss}
-C {lab_pin.sym} 340 -290 3 0 {name=p3 sig_type=std_logic lab=dac_in[7]}
-C {lab_pin.sym} 730 -290 3 0 {name=p4 sig_type=std_logic lab=dac_in[6]}
-C {lab_pin.sym} 1060 -280 3 0 {name=p7 sig_type=std_logic lab=dac_in[5]}
-C {lab_pin.sym} 1410 -270 3 0 {name=p9 sig_type=std_logic lab=dac_in[4]}
-C {lab_pin.sym} 1700 -290 3 0 {name=p10 sig_type=std_logic lab=dac_in[3]}
-C {lab_pin.sym} 2000 -280 3 0 {name=p11 sig_type=std_logic lab=dac_in[2]}
-C {lab_pin.sym} 2280 -270 3 0 {name=p12 sig_type=std_logic lab=dac_in[1]}
-C {lab_pin.sym} 2580 -270 3 0 {name=p13 sig_type=std_logic lab=dac_in[0]}
-C {lab_pin.sym} 1680 -590 3 0 {name=p14 sig_type=std_logic lab=bot3}
-C {ipin.sym} 170 -650 0 0 {name=p46 lab=dac_in[7:0]}
-C {res.sym} 2700 -720 0 0 {name=Rdc
-value=100MEG
-m=1
-footprint=1206
-device=resistor}
-C {lab_pin.sym} 2700 -750 0 0 {name=pr1 sig_type=std_logic lab=vdac}
-C {lab_pin.sym} 2700 -690 2 0 {name=pr2 sig_type=std_logic lab=vss}
+N -800 -400 -650 -400 {lab=vref}
+N -800 -340 -650 -340 {lab=vdd}
+N -800 -280 -650 -280 {lab=vss}
+N -800 -220 -650 -220 {lab=dac_in[7:0]}
+N -800 -160 -650 -160 {lab=vdac}
+C {title.sym} 160 200 0 0 {name=l1 author="Berkah Saluyu"}
+C {ipin.sym} -800 -400 0 0 {name=p_vref lab=vref}
+C {lab_wire.sym} -650 -400 2 0 {name=l_vref lab=vref}
+C {iopin.sym} -800 -340 0 0 {name=p_vdd lab=vdd}
+C {lab_wire.sym} -650 -340 2 0 {name=l_vdd lab=vdd}
+C {iopin.sym} -800 -280 0 0 {name=p_vss lab=vss}
+C {lab_wire.sym} -650 -280 2 0 {name=l_vss lab=vss}
+C {ipin.sym} -800 -220 0 0 {name=p_dac_in lab=dac_in[7:0]}
+C {lab_wire.sym} -650 -220 2 0 {name=l_dac_in lab=dac_in[7:0]}
+C {opin.sym} -800 -160 0 0 {name=p_vdac lab=vdac}
+C {lab_wire.sym} -650 -160 2 0 {name=l_vdac lab=vdac}
+
+# Bit 0 (C0 = 0.0005p / 0.5fF)
+C {sar_adc/blocks/cdac/cdac_switch_1b.sym} -400 -50 0 0 {name=XSW0}
+C {lab_wire.sym} -550 -80 0 0 {name=l_sw_b0 lab=dac_in[0]}
+C {lab_wire.sym} -250 -80 2 0 {name=l_sw_vr0 lab=vref}
+C {lab_wire.sym} -250 -60 2 0 {name=l_sw_vd0 lab=vdd}
+C {lab_wire.sym} -250 -40 2 0 {name=l_sw_vs0 lab=vss}
+C {lab_wire.sym} -250 -20 2 0 {name=l_sw_bt0 lab=bot0}
+C {capa.sym} -400 -180 0 0 {name=C0 m=1 value=0.0005p}
+C {lab_wire.sym} -400 -210 0 0 {name=l_c0_top lab=vdac}
+C {lab_wire.sym} -400 -150 2 0 {name=l_c0_bot lab=bot0}
+
+# Bit 1 (C1 = 0.001p / 1.0fF)
+C {sar_adc/blocks/cdac/cdac_switch_1b.sym} 0 -50 0 0 {name=XSW1}
+C {lab_wire.sym} -150 -80 0 0 {name=l_sw_b1 lab=dac_in[1]}
+C {lab_wire.sym} 150 -80 2 0 {name=l_sw_vr1 lab=vref}
+C {lab_wire.sym} 150 -60 2 0 {name=l_sw_vd1 lab=vdd}
+C {lab_wire.sym} 150 -40 2 0 {name=l_sw_vs1 lab=vss}
+C {lab_wire.sym} 150 -20 2 0 {name=l_sw_bt1 lab=bot1}
+C {capa.sym} 0 -180 0 0 {name=C1 m=1 value=0.001p}
+C {lab_wire.sym} 0 -210 0 0 {name=l_c1_top lab=vdac}
+C {lab_wire.sym} 0 -150 2 0 {name=l_c1_bot lab=bot1}
+
+# Bit 2 (C2 = 0.002p / 2.0fF)
+C {sar_adc/blocks/cdac/cdac_switch_1b.sym} 400 -50 0 0 {name=XSW2}
+C {lab_wire.sym} 250 -80 0 0 {name=l_sw_b2 lab=dac_in[2]}
+C {lab_wire.sym} 550 -80 2 0 {name=l_sw_vr2 lab=vref}
+C {lab_wire.sym} 550 -60 2 0 {name=l_sw_vd2 lab=vdd}
+C {lab_wire.sym} 550 -40 2 0 {name=l_sw_vs2 lab=vss}
+C {lab_wire.sym} 550 -20 2 0 {name=l_sw_bt2 lab=bot2}
+C {capa.sym} 400 -180 0 0 {name=C2 m=1 value=0.002p}
+C {lab_wire.sym} 400 -210 0 0 {name=l_c2_top lab=vdac}
+C {lab_wire.sym} 400 -150 2 0 {name=l_c2_bot lab=bot2}
+
+# Bit 3 (C3 = 0.004p / 4.0fF)
+C {sar_adc/blocks/cdac/cdac_switch_1b.sym} 800 -50 0 0 {name=XSW3}
+C {lab_wire.sym} 650 -80 0 0 {name=l_sw_b3 lab=dac_in[3]}
+C {lab_wire.sym} 950 -80 2 0 {name=l_sw_vr3 lab=vref}
+C {lab_wire.sym} 950 -60 2 0 {name=l_sw_vd3 lab=vdd}
+C {lab_wire.sym} 950 -40 2 0 {name=l_sw_vs3 lab=vss}
+C {lab_wire.sym} 950 -20 2 0 {name=l_sw_bt3 lab=bot3}
+C {capa.sym} 800 -180 0 0 {name=C3 m=1 value=0.004p}
+C {lab_wire.sym} 800 -210 0 0 {name=l_c3_top lab=vdac}
+C {lab_wire.sym} 800 -150 2 0 {name=l_c3_bot lab=bot3}
+
+# Bit 4 (C4 = 0.008p / 8.0fF)
+C {sar_adc/blocks/cdac/cdac_switch_1b.sym} 1200 -50 0 0 {name=XSW4}
+C {lab_wire.sym} 1050 -80 0 0 {name=l_sw_b4 lab=dac_in[4]}
+C {lab_wire.sym} 1350 -80 2 0 {name=l_sw_vr4 lab=vref}
+C {lab_wire.sym} 1350 -60 2 0 {name=l_sw_vd4 lab=vdd}
+C {lab_wire.sym} 1350 -40 2 0 {name=l_sw_vs4 lab=vss}
+C {lab_wire.sym} 1350 -20 2 0 {name=l_sw_bt4 lab=bot4}
+C {capa.sym} 1200 -180 0 0 {name=C4 m=1 value=0.008p}
+C {lab_wire.sym} 1200 -210 0 0 {name=l_c4_top lab=vdac}
+C {lab_wire.sym} 1200 -150 2 0 {name=l_c4_bot lab=bot4}
+
+# Bit 5 (C5 = 0.016p / 16.0fF)
+C {sar_adc/blocks/cdac/cdac_switch_1b.sym} 1600 -50 0 0 {name=XSW5}
+C {lab_wire.sym} 1450 -80 0 0 {name=l_sw_b5 lab=dac_in[5]}
+C {lab_wire.sym} 1750 -80 2 0 {name=l_sw_vr5 lab=vref}
+C {lab_wire.sym} 1750 -60 2 0 {name=l_sw_vd5 lab=vdd}
+C {lab_wire.sym} 1750 -40 2 0 {name=l_sw_vs5 lab=vss}
+C {lab_wire.sym} 1750 -20 2 0 {name=l_sw_bt5 lab=bot5}
+C {capa.sym} 1600 -180 0 0 {name=C5 m=1 value=0.016p}
+C {lab_wire.sym} 1600 -210 0 0 {name=l_c5_top lab=vdac}
+C {lab_wire.sym} 1600 -150 2 0 {name=l_c5_bot lab=bot5}
+
+# Bit 6 (C6 = 0.032p / 32.0fF)
+C {sar_adc/blocks/cdac/cdac_switch_1b.sym} 2000 -50 0 0 {name=XSW6}
+C {lab_wire.sym} 1850 -80 0 0 {name=l_sw_b6 lab=dac_in[6]}
+C {lab_wire.sym} 2150 -80 2 0 {name=l_sw_vr6 lab=vref}
+C {lab_wire.sym} 2150 -60 2 0 {name=l_sw_vd6 lab=vdd}
+C {lab_wire.sym} 2150 -40 2 0 {name=l_sw_vs6 lab=vss}
+C {lab_wire.sym} 2150 -20 2 0 {name=l_sw_bt6 lab=bot6}
+C {capa.sym} 2000 -180 0 0 {name=C6 m=1 value=0.032p}
+C {lab_wire.sym} 2000 -210 0 0 {name=l_c6_top lab=vdac}
+C {lab_wire.sym} 2000 -150 2 0 {name=l_c6_bot lab=bot6}
+
+# Bit 7 (C7 = 0.064p / 64.0fF)
+C {sar_adc/blocks/cdac/cdac_switch_1b.sym} 2400 -50 0 0 {name=XSW7}
+C {lab_wire.sym} 2250 -80 0 0 {name=l_sw_b7 lab=dac_in[7]}
+C {lab_wire.sym} 2550 -80 2 0 {name=l_sw_vr7 lab=vref}
+C {lab_wire.sym} 2550 -60 2 0 {name=l_sw_vd7 lab=vdd}
+C {lab_wire.sym} 2550 -40 2 0 {name=l_sw_vs7 lab=vss}
+C {lab_wire.sym} 2550 -20 2 0 {name=l_sw_bt7 lab=bot7}
+C {capa.sym} 2400 -180 0 0 {name=C7 m=1 value=0.064p}
+C {lab_wire.sym} 2400 -210 0 0 {name=l_c7_top lab=vdac}
+C {lab_wire.sym} 2400 -150 2 0 {name=l_c7_bot lab=bot7}
+
+# Dummy Cap (0.5fF) & Bleed Resistor
+C {capa.sym} 2800 -180 0 0 {name=CDummy m=1 value=0.0005p}
+C {lab_wire.sym} 2800 -210 0 0 {name=l_cdum_top lab=vdac}
+C {lab_wire.sym} 2800 -150 2 0 {name=l_cdum_bot lab=vss}
+
+C {res.sym} 3000 -180 0 0 {name=Rdc value=100MEG}
+C {lab_wire.sym} 3000 -210 0 0 {name=l_rdc_top lab=vdac}
+C {lab_wire.sym} 3000 -150 2 0 {name=l_rdc_bot lab=vss}

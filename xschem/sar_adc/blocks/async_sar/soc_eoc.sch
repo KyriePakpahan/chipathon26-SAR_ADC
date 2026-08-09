@@ -70,8 +70,6 @@ C {lab_wire.sym} -250 200 0 0 {name=l32 sig_type=std_logic lab=Q1_n}
 C {lab_wire.sym} -250 220 0 0 {name=l33 sig_type=std_logic lab=Q0_n}
 C {sar_adc/blocks/async_sar/async_nand2.sym} -410 -120 0 0 {name=x5}
 C {sar_adc/blocks/async_sar/dff_cell.sym} -40 -150 0 0 {name=x4}
-C {lab_wire.sym} -770 -210 2 0 {name=l23 sig_type=std_logic lab=rst}
-C {lab_wire.sym} -770 -170 2 0 {name=l37 sig_type=std_logic lab=clk}
 C {lab_wire.sym} -190 -150 0 0 {name=l38 sig_type=std_logic lab=clk}
 C {sar_adc/blocks/async_sar/async_nand2.sym} -40 -230 2 0 {name=x6}
 C {sar_adc/blocks/async_sar/dff_cell.sym} 360 -170 0 0 {name=x1}
