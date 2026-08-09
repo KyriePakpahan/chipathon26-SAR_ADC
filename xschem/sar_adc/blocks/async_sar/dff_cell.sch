@@ -161,7 +161,7 @@ sa=0 sb=0 sd=0
 model=nfet_03v3
 spiceprefix=X
 }
-C {ipin.sym} -250 20 0 0 {name=p1 lab=clk
+C {ipin.sym} -250 20 0 0 {name=p2 lab=clk
 }
 C {vdd.sym} -120 -80 0 0 {name=l1 lab=VDD}
 C {gnd.sym} -120 120 0 0 {name=l2 lab=0}
@@ -194,7 +194,7 @@ model=nfet_03v3
 spiceprefix=X
 }
 C {lab_wire.sym} 300 300 0 0 {name=p2 sig_type=std_logic lab=clk}
-C {ipin.sym} 440 0 0 0 {name=p5 lab=D
+C {ipin.sym} 440 0 0 0 {name=p1 lab=D
 }
 C {lab_wire.sym} 530 410 0 0 {name=p6 sig_type=std_logic lab=M}
 C {symbols/pfet_03v3.sym} -260 330 0 0 {name=M5

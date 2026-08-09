@@ -16,13 +16,13 @@ L 4 140 -50 160 -50 {}
 L 4 -20 -50 0 -50 {}
 L 7 140 -90 160 -90 {}
 L 7 140 -10 160 -10 {}
-B 5 157.5 -92.5 162.5 -87.5 {name=vdd dir=inout}
 B 5 -22.5 -92.5 -17.5 -87.5 {name=vin_p dir=in}
-B 5 157.5 -72.5 162.5 -67.5 {name=out_p dir=out}
 B 5 -22.5 -72.5 -17.5 -67.5 {name=vin_n dir=in}
-B 5 157.5 -52.5 162.5 -47.5 {name=out_n dir=out}
 B 5 -22.5 -52.5 -17.5 -47.5 {name=rst_latch dir=in}
+B 5 157.5 -92.5 162.5 -87.5 {name=vdd dir=inout}
 B 5 157.5 -12.5 162.5 -7.5 {name=vss dir=inout}
+B 5 157.5 -72.5 162.5 -67.5 {name=out_p dir=out}
+B 5 157.5 -52.5 162.5 -47.5 {name=out_n dir=out}
 P 4 5 140 -100 0 -100 0 0 140 0 140 -100 {}
 T {@symname} 19 4 0 0 0.3 0.3 {}
 T {@name} 95 -112 0 0 0.2 0.2 {}

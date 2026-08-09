@@ -144,42 +144,42 @@ C {iopin.sym} 280 -410 2 0 {name=p5 lab=vdd}
 C {iopin.sym} 280 -440 2 0 {name=p6 lab=vss}
 C {capa.sym} 2440 -650 0 0 {name=C0
 m=1
-value=0.01p
+value=0.001p
 footprint=1206
 device="ceramic capacitor"}
 C {capa.sym} 2250 -650 0 0 {name=C1
 m=1
-value=0.02p
+value=0.002p
 footprint=1206
 device="ceramic capacitor"}
 C {capa.sym} 1970 -650 0 0 {name=C2
 m=1
-value=0.04p
+value=0.004p
 footprint=1206
 device="ceramic capacitor"}
 C {capa.sym} 1680 -650 0 0 {name=C3
 m=1
-value=0.08p
+value=0.008p
 footprint=1206
 device="ceramic capacitor"}
 C {capa.sym} 1380 -650 0 0 {name=C4
 m=1
-value=0.16p
+value=0.016p
 footprint=1206
 device="ceramic capacitor"}
 C {capa.sym} 1050 -650 0 0 {name=C5
 m=1
-value=0.32p
+value=0.032p
 footprint=1206
 device="ceramic capacitor"}
 C {capa.sym} 710 -650 0 0 {name=C6
 m=1
-value=0.64p
+value=0.064p
 footprint=1206
 device="ceramic capacitor"}
 C {capa.sym} 370 -650 0 0 {name=C7
 m=1
-value=1.28p
+value=0.128p
 footprint=1206
 device="ceramic capacitor"}
 C {sar_adc/blocks/cdac/cdac_switch_1b.sym} 2620 -290 0 0 {name=XSW0}
@@ -208,7 +208,7 @@ C {lab_pin.sym} 370 -590 3 0 {name=p40 sig_type=std_logic lab=bot7}
 C {opin.sym} 2630 -720 0 0 {name=p41 lab=vdac}
 C {capa.sym} 2570 -650 0 0 {name=CDummy
 m=1
-value=0.01p
+value=0.001p
 footprint=1206
 device="ceramic capacitor"}
 C {lab_pin.sym} 2570 -590 3 0 {name=p8 sig_type=std_logic lab=vss}
@@ -222,3 +222,10 @@ C {lab_pin.sym} 2280 -270 3 0 {name=p12 sig_type=std_logic lab=dac_in[1]}
 C {lab_pin.sym} 2580 -270 3 0 {name=p13 sig_type=std_logic lab=dac_in[0]}
 C {lab_pin.sym} 1680 -590 3 0 {name=p14 sig_type=std_logic lab=bot3}
 C {ipin.sym} 170 -650 0 0 {name=p46 lab=dac_in[7:0]}
+C {res.sym} 2700 -720 0 0 {name=Rdc
+value=100MEG
+m=1
+footprint=1206
+device=resistor}
+C {lab_pin.sym} 2700 -750 0 0 {name=pr1 sig_type=std_logic lab=vdac}
+C {lab_pin.sym} 2700 -690 2 0 {name=pr2 sig_type=std_logic lab=vss}

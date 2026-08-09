@@ -21,7 +21,7 @@ C {vdd.sym} 835 -467.5 0 0 {name=l3 lab=VDD}
 C {gnd.sym} 540 -257.5 0 0 {name=l4 lab=GND}
 C {gnd.sym} 690 -257.5 0 0 {name=l5 lab=GND}
 C {gnd.sym} 835 -312.5 0 0 {name=l6 lab=GND}
-C {noconn.sym} 947.5 -390 2 0 {name=l7}
+C {devices/noconn.sym} 947.5 -390 2 0 {name=l7}
 C {lab_wire.sym} 725 -387.5 0 0 {name=p1 sig_type=std_logic lab=in}
 C {lab_wire.sym} 935 -390 0 0 {name=p2 sig_type=std_logic lab=out
 }
@@ -71,7 +71,7 @@ setplot op1
 write tb_comp_inv_3v3.raw
 .endc
 "}
-C {launcher.sym} 517.5 -170 0 0 {name=h1
+C {devices/launcher.sym} 517.5 -170 0 0 {name=h1
 descr="Annotate OP"
 tclcommand="set show_hidden_texts 1; xschem annotate_op"}
 C {sar_adc/blocks/comparator/comp_inv_3v3.sym} 790 -440 0 0 {name=x1}

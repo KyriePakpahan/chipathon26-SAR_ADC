@@ -8,7 +8,7 @@ E {}
 N -1600 70 -1540 70 {lab=serial_in}
 N -1600 110 -1540 110 {lab=clk}
 N -1600 150 -1540 150 {lab=rst_n}
-N -1190 -60 -1190 -20 {lab=Q0}
+N -1190 -60 -1190 -20 {lab=Q0_b}
 N -790 -60 -790 -20 {lab=Q1}
 N -370 -60 -370 -20 {lab=Q2}
 N 30 -60 30 -20 {lab=Q3}
@@ -24,8 +24,8 @@ C {ipin.sym} -1600 110 0 0 {name=p10 lab=clk}
 C {lab_wire.sym} -1540 110 2 0 {name=p12 lab=clk}
 C {ipin.sym} -1600 150 0 0 {name=p11 lab=rst_n}
 C {lab_wire.sym} -1540 150 2 0 {name=p13 lab=rst_n}
-C {opin.sym} -1190 -60 3 0 {name=p_out_0 lab=Q0}
-C {lab_wire.sym} -1190 -40 2 0 {name=l_po_0 lab=Q0}
+C {opin.sym} -1190 -60 3 0 {name=p_out_0 lab=Q0_b}
+C {lab_wire.sym} -1190 -40 2 0 {name=l_po_0 lab=Q0_b}
 C {opin.sym} -790 -60 3 0 {name=p_out_1 lab=Q1}
 C {lab_wire.sym} -790 -60 2 0 {name=l_po_1 lab=Q1}
 C {opin.sym} -370 -60 3 0 {name=p_out_2 lab=Q2}
@@ -46,9 +46,9 @@ C {sar_adc/blocks/async_sar/dff_cell.sym} -1340 0 0 0 {name=x1}
 C {lab_wire.sym} -1490 -20 0 0 {name=l_d_0 lab=serial_in}
 C {lab_wire.sym} -1490 0 0 0 {name=l_clk_0 lab=clk}
 C {lab_wire.sym} -1490 20 0 0 {name=l_rst_0 lab=rst_n}
-C {lab_wire.sym} -1190 -60 2 0 {name=l_q_0 lab=Q0}
+C {lab_wire.sym} -1190 -60 2 0 {name=l_q_0 lab=Q0_b}
 C {sar_adc/blocks/async_sar/dff_cell.sym} -940 0 0 0 {name=x2}
-C {lab_wire.sym} -1090 -20 0 0 {name=l_d_1 lab=Q0}
+C {lab_wire.sym} -1090 -20 0 0 {name=l_d_1 lab=Q0_b}
 C {lab_wire.sym} -1090 0 0 0 {name=l_clk_1 lab=clk}
 C {lab_wire.sym} -1090 20 0 0 {name=l_rst_1 lab=rst_n}
 C {lab_wire.sym} -790 -20 2 0 {name=l_q_1 lab=Q1}
@@ -87,3 +87,20 @@ C {lab_wire.sym} 1750 -20 0 0 {name=l_d_8 lab=Q7}
 C {lab_wire.sym} 1750 0 0 0 {name=l_clk_8 lab=clk}
 C {lab_wire.sym} 1750 20 0 0 {name=l_rst_8 lab=rst_n}
 C {lab_wire.sym} 2050 -20 2 0 {name=l_q_8 lab=done}
+
+C {sar_adc/blocks/async_sar/async_inverter.sym} -1200 -120 0 0 {name=x_inv_q0}
+C {lab_wire.sym} -1350 -120 0 0 {name=l_iq0_in lab=Q0_b}
+C {lab_wire.sym} -1050 -120 2 0 {name=l_iq0_out lab=Q0}
+
+
+
+
+
+
+
+
+
+
+C {sar_adc/blocks/async_sar/async_inverter.sym} -1500 200 0 0 {name=x_inv_clk}
+C {lab_wire.sym} -1650 200 0 0 {name=l_iclk_in lab=clk}
+C {lab_wire.sym} -1350 200 2 0 {name=l_iclk_out lab=clk_n}

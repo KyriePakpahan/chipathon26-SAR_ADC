@@ -30,4 +30,4 @@ C {code_shown.sym} 100 -180 0 0 {name=s1 value=".param fnoicor=0
 .tran 0.01n 10n
 .save all"}
 C {sar_adc/blocks/async_sar/delay_line.sym} 200 0 0 0 {name=x1}
-C {parax_cap.sym} 470 40 0 0 {name=C1 gnd=0 value=10f m=1}
+C {capa.sym} 470 40 0 0 {name=C1 value=10f m=1}

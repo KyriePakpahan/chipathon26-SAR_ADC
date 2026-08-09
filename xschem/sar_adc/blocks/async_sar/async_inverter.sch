@@ -19,7 +19,7 @@ N -30 -30 0 -30 {lab=0}
 N -30 -110 30 -110 {lab=out}
 C {symbols/pfet_03v3.sym} -50 -170 0 0 {name=M5
 L=0.28u
-W=1.0u
+W=0.80u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -33,7 +33,7 @@ spiceprefix=X
 }
 C {symbols/nfet_03v3.sym} -50 -60 0 0 {name=M6
 L=0.28u
-W=0.50u
+W=0.40u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -47,7 +47,7 @@ spiceprefix=X
 }
 C {ipin.sym} -90 -110 0 0 {name=p1 lab=input
 }
-C {opin.sym} 30 -110 0 0 {name=p2 lab=output
+C {opin.sym} 30 -110 0 0 {name=p2 lab=out
 
 }
 C {vdd.sym} 0 -200 0 0 {name=l1 lab=VDD}
