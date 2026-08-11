@@ -1,0 +1,24 @@
+* Extracted by KLayout with GF180MCU LVS runset on : 11/08/2026 15:10
+
+.SUBCKT strongarm_comp_core
+X$1 SUB nfet
+X$2 SUB nfet$1
+X$3 SUB nfet$1
+X$4 SUB nfet$2
+X$5 SUB nfet$2
+.ENDS strongarm_comp_core
+
+.SUBCKT nfet$1 \$5
+M$1 \$2 \$3 \$1 \$5 nfet_03v3 L=0.28U W=0.42U AS=0.2646P AD=0.2646P PS=2.1U
++ PD=2.1U
+.ENDS nfet$1
+
+.SUBCKT nfet$2 \$6
+M$1 \$2 \$3 \$1 \$6 nfet_03v3 L=0.28U W=0.42U AS=0.2646P AD=0.2646P PS=2.1U
++ PD=2.1U
+.ENDS nfet$2
+
+.SUBCKT nfet \$5
+M$1 \$2 \$3 \$1 \$5 nfet_03v3 L=0.28U W=0.5U AS=0.305P AD=0.305P PS=2.22U
++ PD=2.22U
+.ENDS nfet
