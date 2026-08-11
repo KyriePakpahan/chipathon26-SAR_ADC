@@ -94,7 +94,7 @@ C {opin.sym} 330 -580 0 0 {name=p6 lab=out_p
 C {opin.sym} 560 -580 0 0 {name=p7 lab=out_n}
 C {symbols/nfet_03v3.sym} 450 -260 0 0 {name=Mtail
 L=0.28u
-W=0.50u
+W=2.0u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -109,7 +109,7 @@ spiceprefix=X
 C {lab_wire.sym} 380 -260 3 0 {name=p9 sig_type=std_logic lab=rst_latch}
 C {symbols/nfet_03v3.sym} 310 -370 0 0 {name=M1
 L=0.28u
-W=0.40u
+W=1.5u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -123,7 +123,7 @@ spiceprefix=X
 }
 C {symbols/nfet_03v3.sym} 540 -370 0 0 {name=M2
 L=0.28u
-W=0.40u
+W=1.5u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -137,7 +137,7 @@ spiceprefix=X
 }
 C {symbols/nfet_03v3.sym} 350 -480 0 1 {name=M3
 L=0.28u
-W=0.22u
+W=1.0u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -151,7 +151,7 @@ spiceprefix=X
 }
 C {symbols/nfet_03v3.sym} 540 -480 0 0 {name=M4
 L=0.28u
-W=0.22u
+W=1.0u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -165,7 +165,7 @@ spiceprefix=X
 }
 C {symbols/pfet_03v3.sym} 350 -670 0 1 {name=M5
 L=0.28u
-W=0.22u
+W=1.0u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -179,7 +179,7 @@ spiceprefix=X
 }
 C {symbols/pfet_03v3.sym} 540 -670 0 0 {name=M6
 L=0.28u
-W=0.22u
+W=1.0u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -193,7 +193,7 @@ spiceprefix=X
 }
 C {symbols/pfet_03v3.sym} 120 -680 0 0 {name=M7
 L=0.28u
-W=0.30u
+W=2.0u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -207,7 +207,7 @@ spiceprefix=X
 }
 C {symbols/pfet_03v3.sym} 770 -680 0 1 {name=M8
 L=0.28u
-W=0.30u
+W=2.0u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -223,7 +223,7 @@ C {lab_wire.sym} 60 -680 3 0 {name=p13 sig_type=std_logic lab=rst_latch}
 C {lab_wire.sym} 820 -680 3 0 {name=p14 sig_type=std_logic lab=rst_latch}
 C {symbols/pfet_03v3.sym} -40 -680 0 0 {name=M9
 L=0.28u
-W=0.30u
+W=2.0u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -237,7 +237,7 @@ spiceprefix=X
 }
 C {symbols/pfet_03v3.sym} 920 -680 0 1 {name=M10
 L=0.28u
-W=0.30u
+W=2.0u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"

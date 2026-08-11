@@ -11,7 +11,7 @@ N 1450 -380 1600 -380 {lab=done}
 N 1450 -320 1600 -320 {lab=dout[7:0]}
 N 1450 -260 1600 -260 {lab=dac_in[7:0]}
 N -1600 -400 -1450 -400 {lab=start}
-N -1600 -300 -1450 -300 {lab=comp_out_p}
+N -1600 -300 -1450 -300 {lab=comp_out_n}
 N -1600 -200 -1450 -200 {lab=comp_out_n}
 N -1600 -100 -1450 -100 {lab=vdd}
 N -1600 0 -1450 0 {lab=comp_done}
@@ -29,8 +29,8 @@ C {opin.sym} 1600 -260 0 0 {name=p5 lab=dac_in[7:0]}
 C {lab_wire.sym} 1450 -260 0 0 {name=l_p13_in lab=dac_in[7:0]}
 C {ipin.sym} -1600 -400 0 0 {name=p6 lab=start}
 C {lab_wire.sym} -1450 -400 2 0 {name=l_p12_out lab=start}
-C {ipin.sym} -1600 -300 0 0 {name=p7 lab=comp_out_p}
-C {lab_wire.sym} -1450 -300 2 0 {name=l_p21_out lab=comp_out_p}
+C {ipin.sym} -1600 -300 0 0 {name=p7 lab=comp_out_n}
+C {lab_wire.sym} -1450 -300 2 0 {name=l_p21_out lab=comp_out_n}
 C {ipin.sym} -1600 -200 0 0 {name=p8 lab=comp_out_n}
 C {lab_wire.sym} -1450 -200 2 0 {name=l_p22_out lab=comp_out_n}
 C {iopin.sym} -1600 -100 0 0 {name=p9 lab=vdd}
@@ -46,7 +46,7 @@ C {sar_adc/blocks/async_sar/async_inverter.sym} -1400 -500 0 0 {name=x_inv_se}
 C {lab_wire.sym} -1550 -500 0 0 {name=l_sein lab=rst_n}
 C {lab_wire.sym} -1250 -500 2 0 {name=l_seout lab=sample_en}
 C {sar_adc/blocks/async_sar/shift_reg_8bit.sym} -800 -200 0 0 {name=x_shift}
-C {lab_wire.sym} -950 -280 0 0 {name=l_sh_sin lab=start}
+C {lab_wire.sym} -950 -280 0 0 {name=l_sh_sin lab=q_n[7]}
 C {lab_wire.sym} -950 -260 0 0 {name=l_sh_clk lab=comp_done}
 C {lab_wire.sym} -950 -240 0 0 {name=l_sh_rst lab=rst_n}
 C {lab_wire.sym} -650 -280 2 0 {name=l_sh_q0 lab=q0}
@@ -58,9 +58,9 @@ C {lab_wire.sym} -650 -180 2 0 {name=l_sh_q5 lab=q5}
 C {lab_wire.sym} -650 -160 2 0 {name=l_sh_q6 lab=q6}
 C {lab_wire.sym} -650 -140 2 0 {name=l_sh_q7 lab=q7}
 C {lab_wire.sym} -650 -120 2 0 {name=l_sh_done lab=done}
-N -1050 300 -1050 300 {lab=comp_done_b1}
-N -750 300 -750 300 {lab=comp_done_b2}
-N -450 300 -450 300 {lab=comp_done_b3}
+N -1050 300 -1050 300 {lab=cd_buf1}
+N -750 300 -750 300 {lab=cd_buf2}
+N -450 300 -450 300 {lab=cd_buf3}
 C {sar_adc/blocks/async_sar/async_inverter.sym} -1200 300 0 0 {name=x_inv_cd_b1}
 C {lab_wire.sym} -1350 300 0 0 {name=l_cdb1_in lab=comp_done}
 C {sar_adc/blocks/async_sar/async_inverter.sym} -900 300 0 0 {name=x_inv_cd_b2}
@@ -77,49 +77,49 @@ C {lab_wire.sym} -250 0 2 0 {name=l_nor_out lab=nor_rst_out}
 C {sar_adc/blocks/async_sar/async_buf_strong.sym} -100 0 0 0 {name=x_buf_rst}
 C {lab_wire.sym} 50 0 2 0 {name=l_bufout lab=rst_latch}
 C {sar_adc/blocks/async_sar/bit_reg.sym} 0 -500 0 0 {name=x_bit_reg_0}
-C {lab_wire.sym} -150 -530 0 0 {name=l_br_co_0 lab=comp_out_p}
+C {lab_wire.sym} -150 -530 0 0 {name=l_br_co_0 lab=comp_out_n}
 C {lab_wire.sym} 150 -530 2 0 {name=l_br_bo_0 lab=dout[7]}
 C {lab_wire.sym} -150 -510 0 0 {name=l_br_en_0 lab=q0}
 C {lab_wire.sym} -150 -490 0 0 {name=l_br_rst_0 lab=rst_n}
 C {lab_wire.sym} -150 -470 0 0 {name=l_br_clk_0 lab=comp_done_reg}
 C {sar_adc/blocks/async_sar/bit_reg.sym} 0 -380 0 0 {name=x_bit_reg_1}
-C {lab_wire.sym} -150 -410 0 0 {name=l_br_co_1 lab=comp_out_p}
+C {lab_wire.sym} -150 -410 0 0 {name=l_br_co_1 lab=comp_out_n}
 C {lab_wire.sym} 150 -410 2 0 {name=l_br_bo_1 lab=dout[6]}
 C {lab_wire.sym} -150 -390 0 0 {name=l_br_en_1 lab=q1}
 C {lab_wire.sym} -150 -370 0 0 {name=l_br_rst_1 lab=rst_n}
 C {lab_wire.sym} -150 -350 0 0 {name=l_br_clk_1 lab=comp_done_reg}
 C {sar_adc/blocks/async_sar/bit_reg.sym} 0 -260 0 0 {name=x_bit_reg_2}
-C {lab_wire.sym} -150 -290 0 0 {name=l_br_co_2 lab=comp_out_p}
+C {lab_wire.sym} -150 -290 0 0 {name=l_br_co_2 lab=comp_out_n}
 C {lab_wire.sym} 150 -290 2 0 {name=l_br_bo_2 lab=dout[5]}
 C {lab_wire.sym} -150 -270 0 0 {name=l_br_en_2 lab=q2}
 C {lab_wire.sym} -150 -250 0 0 {name=l_br_rst_2 lab=rst_n}
 C {lab_wire.sym} -150 -230 0 0 {name=l_br_clk_2 lab=comp_done_reg}
 C {sar_adc/blocks/async_sar/bit_reg.sym} 0 -140 0 0 {name=x_bit_reg_3}
-C {lab_wire.sym} -150 -170 0 0 {name=l_br_co_3 lab=comp_out_p}
+C {lab_wire.sym} -150 -170 0 0 {name=l_br_co_3 lab=comp_out_n}
 C {lab_wire.sym} 150 -170 2 0 {name=l_br_bo_3 lab=dout[4]}
 C {lab_wire.sym} -150 -150 0 0 {name=l_br_en_3 lab=q3}
 C {lab_wire.sym} -150 -130 0 0 {name=l_br_rst_3 lab=rst_n}
 C {lab_wire.sym} -150 -110 0 0 {name=l_br_clk_3 lab=comp_done_reg}
 C {sar_adc/blocks/async_sar/bit_reg.sym} 0 -20 0 0 {name=x_bit_reg_4}
-C {lab_wire.sym} -150 -50 0 0 {name=l_br_co_4 lab=comp_out_p}
+C {lab_wire.sym} -150 -50 0 0 {name=l_br_co_4 lab=comp_out_n}
 C {lab_wire.sym} 150 -50 2 0 {name=l_br_bo_4 lab=dout[3]}
 C {lab_wire.sym} -150 -30 0 0 {name=l_br_en_4 lab=q4}
 C {lab_wire.sym} -150 -10 0 0 {name=l_br_rst_4 lab=rst_n}
 C {lab_wire.sym} -150 10 0 0 {name=l_br_clk_4 lab=comp_done_reg}
 C {sar_adc/blocks/async_sar/bit_reg.sym} 0 100 0 0 {name=x_bit_reg_5}
-C {lab_wire.sym} -150 70 0 0 {name=l_br_co_5 lab=comp_out_p}
+C {lab_wire.sym} -150 70 0 0 {name=l_br_co_5 lab=comp_out_n}
 C {lab_wire.sym} 150 70 2 0 {name=l_br_bo_5 lab=dout[2]}
 C {lab_wire.sym} -150 90 0 0 {name=l_br_en_5 lab=q5}
 C {lab_wire.sym} -150 110 0 0 {name=l_br_rst_5 lab=rst_n}
 C {lab_wire.sym} -150 130 0 0 {name=l_br_clk_5 lab=comp_done_reg}
 C {sar_adc/blocks/async_sar/bit_reg.sym} 0 220 0 0 {name=x_bit_reg_6}
-C {lab_wire.sym} -150 190 0 0 {name=l_br_co_6 lab=comp_out_p}
+C {lab_wire.sym} -150 190 0 0 {name=l_br_co_6 lab=comp_out_n}
 C {lab_wire.sym} 150 190 2 0 {name=l_br_bo_6 lab=dout[1]}
 C {lab_wire.sym} -150 210 0 0 {name=l_br_en_6 lab=q6}
 C {lab_wire.sym} -150 230 0 0 {name=l_br_rst_6 lab=rst_n}
 C {lab_wire.sym} -150 250 0 0 {name=l_br_clk_6 lab=comp_done_reg}
 C {sar_adc/blocks/async_sar/bit_reg.sym} 0 340 0 0 {name=x_bit_reg_7}
-C {lab_wire.sym} -150 310 0 0 {name=l_br_co_7 lab=comp_out_p}
+C {lab_wire.sym} -150 310 0 0 {name=l_br_co_7 lab=comp_out_n}
 C {lab_wire.sym} 150 310 2 0 {name=l_br_bo_7 lab=dout[0]}
 C {lab_wire.sym} -150 330 0 0 {name=l_br_en_7 lab=q7}
 C {lab_wire.sym} -150 350 0 0 {name=l_br_rst_7 lab=rst_n}

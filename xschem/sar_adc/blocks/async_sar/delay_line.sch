@@ -41,10 +41,10 @@ N -130 -170 -110 -170 {lab=#net3}
 N -70 -230 50 -230 {lab=out}
 N -700 -230 -620 -230 {lab=in}
 
-# Inverter 1: Fast Pull-Down (NMOS W=1.5u, L=0.28u), Slow Pull-Up (PMOS W=0.5u, L=2.0u)
+# Inverter 1: Fast Pull-Down (NMOS W=1.5u, L=0.50u), Slow Pull-Up (PMOS W=0.5u, L=0.50u)
 C {symbols/pfet_03v3.sym} -570 -290 0 0 {name=M1
-L=2.0u
-W=0.50u
+L=0.50u
+W=1.0u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -57,8 +57,8 @@ model=pfet_03v3
 spiceprefix=X
 }
 C {symbols/nfet_03v3.sym} -570 -170 0 0 {name=M5
-L=0.28u
-W=1.50u
+L=0.50u
+W=0.50u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -71,10 +71,10 @@ model=nfet_03v3
 spiceprefix=X
 }
 
-# Inverter 2: Fast Pull-Up (PMOS W=2.0u, L=0.28u), Slow Pull-Down (NMOS W=0.3u, L=2.0u)
+# Inverter 2: Fast Pull-Up (PMOS W=2.0u, L=0.50u), Slow Pull-Down (NMOS W=0.42u, L=0.50u)
 C {symbols/pfet_03v3.sym} -400 -290 0 0 {name=M2
-L=0.28u
-W=2.0u
+L=0.50u
+W=1.0u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -87,8 +87,8 @@ model=pfet_03v3
 spiceprefix=X
 }
 C {symbols/nfet_03v3.sym} -400 -170 0 0 {name=M6
-L=2.0u
-W=0.30u
+L=0.50u
+W=0.50u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -101,10 +101,10 @@ model=nfet_03v3
 spiceprefix=X
 }
 
-# Inverter 3: Fast Pull-Down (NMOS W=1.5u, L=0.28u), Slow Pull-Up (PMOS W=0.5u, L=2.0u)
+# Inverter 3: Fast Pull-Down (NMOS W=1.5u, L=0.50u), Slow Pull-Up (PMOS W=0.5u, L=0.50u)
 C {symbols/pfet_03v3.sym} -240 -290 0 0 {name=M3
-L=2.0u
-W=0.50u
+L=0.50u
+W=1.0u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -117,8 +117,8 @@ model=pfet_03v3
 spiceprefix=X
 }
 C {symbols/nfet_03v3.sym} -240 -170 0 0 {name=M7
-L=0.28u
-W=1.50u
+L=0.50u
+W=0.50u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -131,10 +131,10 @@ model=nfet_03v3
 spiceprefix=X
 }
 
-# Inverter 4: Fast Pull-Up (PMOS W=2.0u, L=0.28u), Slow Pull-Down (NMOS W=0.3u, L=2.0u)
+# Inverter 4: Fast Pull-Up (PMOS W=2.0u, L=0.50u), Slow Pull-Down (NMOS W=0.42u, L=0.50u)
 C {symbols/pfet_03v3.sym} -90 -290 0 0 {name=M4
-L=0.28u
-W=2.0u
+L=0.50u
+W=1.0u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -147,8 +147,8 @@ model=pfet_03v3
 spiceprefix=X
 }
 C {symbols/nfet_03v3.sym} -90 -170 0 0 {name=M8
-L=2.0u
-W=0.30u
+L=0.50u
+W=0.50u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"

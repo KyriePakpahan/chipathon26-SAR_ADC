@@ -23,10 +23,11 @@ N 220 -220 220 -140 {lab=rst_n}
 N 220 -140 250 -140 {lab=rst_n}
 N 570 -250 600 -250 {lab=done_evt}
 N 600 -250 600 -170 {lab=done_evt}
-N 290 -170 600 -170 {lab=done_evt}
+N 270 -170 600 -170 {lab=done_evt}
 N 600 -250 640 -250 {lab=done_evt}
 N 740 -250 780 -250 {lab=done_d1}
 N 880 -250 920 -250 {lab=comp_done}
+N 270 -110 290 -110 {lab=vss}
 N 290 -140 290 -110 {lab=vss}
 N 290 -110 290 -90 {lab=vss}
 N 120 -270 120 -290 {lab=vdd}
@@ -53,7 +54,7 @@ C {sar_adc/blocks/comparator/comp_inv_3v3.sym} 640 -300 0 0 {name=x3}
 C {sar_adc/blocks/comparator/comp_inv_3v3.sym} 780 -300 0 0 {name=x4}
 C {symbols/nfet_03v3.sym} 270 -140 0 0 {name=M_clamp
 L=0.28u
-W=0.50u
+W=2.0u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -65,12 +66,12 @@ sa=0 sb=0 sd=0
 model=nfet_03v3
 spiceprefix=X
 }
-C {vdd.sym} 120 -290 0 0 {name=v_inv1 lab=vdd}
-C {gnd.sym} 120 -150 0 0 {name=g_inv1 lab=vss}
-C {vdd.sym} 520 -310 0 0 {name=v_nand lab=vdd}
-C {gnd.sym} 520 -190 0 0 {name=g_nand lab=vss}
-C {vdd.sym} 680 -320 0 0 {name=v_inv2 lab=vdd}
-C {gnd.sym} 680 -180 0 0 {name=g_inv2 lab=vss}
-C {vdd.sym} 820 -320 0 0 {name=v_inv3 lab=vdd}
-C {gnd.sym} 820 -180 0 0 {name=g_inv3 lab=vss}
-C {gnd.sym} 290 -90 0 0 {name=g_clamp lab=vss}
+C {lab_wire.sym} 120 -290 3 0 {name=p9 sig_type=std_logic lab=vdd}
+C {lab_wire.sym} 120 -150 1 0 {name=p10 sig_type=std_logic lab=vss}
+C {lab_wire.sym} 520 -310 3 0 {name=p11 sig_type=std_logic lab=vdd}
+C {lab_wire.sym} 520 -190 1 0 {name=p12 sig_type=std_logic lab=vss}
+C {lab_wire.sym} 680 -320 3 0 {name=p13 sig_type=std_logic lab=vdd}
+C {lab_wire.sym} 680 -180 1 0 {name=p14 sig_type=std_logic lab=vss}
+C {lab_wire.sym} 820 -320 3 0 {name=p15 sig_type=std_logic lab=vdd}
+C {lab_wire.sym} 820 -180 1 0 {name=p16 sig_type=std_logic lab=vss}
+C {lab_wire.sym} 290 -90 1 0 {name=p17 sig_type=std_logic lab=vss}

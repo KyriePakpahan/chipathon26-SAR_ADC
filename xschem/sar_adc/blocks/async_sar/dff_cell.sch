@@ -161,8 +161,6 @@ sa=0 sb=0 sd=0
 model=nfet_03v3
 spiceprefix=X
 }
-C {ipin.sym} -250 20 0 0 {name=p2 lab=clk
-}
 C {vdd.sym} -120 -80 0 0 {name=l1 lab=VDD}
 C {gnd.sym} -120 120 0 0 {name=l2 lab=0}
 C {symbols/pfet_03v3.sym} 360 300 0 0 {name=M3
@@ -194,8 +192,6 @@ model=nfet_03v3
 spiceprefix=X
 }
 C {lab_wire.sym} 300 300 0 0 {name=p2 sig_type=std_logic lab=clk}
-C {ipin.sym} 440 0 0 0 {name=p1 lab=D
-}
 C {lab_wire.sym} 530 410 0 0 {name=p6 sig_type=std_logic lab=M}
 C {symbols/pfet_03v3.sym} -260 330 0 0 {name=M5
 L=0.28u
@@ -354,7 +350,6 @@ C {lab_wire.sym} -620 1110 2 0 {name=p13 sig_type=std_logic lab=Q_bar}
 C {lab_wire.sym} -940 1040 0 0 {name=p14 sig_type=std_logic lab=S}
 C {lab_wire.sym} -830 1150 0 0 {name=p15 sig_type=std_logic lab=S}
 C {lab_wire.sym} -860 1250 0 0 {name=p16 sig_type=std_logic lab=rst_n}
-C {ipin.sym} -700 1040 0 0 {name=p17 lab=rst_n}
 C {symbols/pfet_03v3.sym} -150 1100 0 0 {name=M15
 L=0.28u
 W=1.0u
@@ -385,7 +380,6 @@ spiceprefix=X
 }
 C {vdd.sym} -130 1050 0 0 {name=l11 lab=VDD}
 C {gnd.sym} -130 1250 0 0 {name=l12 lab=0}
-C {opin.sym} -100 1150 0 0 {name=p19 lab=Q}
 C {lab_wire.sym} -260 1150 0 0 {name=p18 sig_type=std_logic lab=Q_bar}
 C {symbols/pfet_03v3.sym} 180 1100 0 0 {name=M17
 L=2.0u
@@ -454,3 +448,11 @@ C {vdd.sym} 530 -100 0 0 {name=l15 lab=VDD}
 C {gnd.sym} 530 110 0 0 {name=l16 lab=0}
 C {lab_wire.sym} 580 0 2 0 {name=p22 sig_type=std_logic lab=D_int}
 C {lab_wire.sym} 540 220 0 0 {name=p23 sig_type=std_logic lab=D_int}
+C {ipin.sym} 440 0 0 0 {name=p1_d lab=D
+}
+C {ipin.sym} -250 20 0 0 {name=p2_clk lab=clk
+}
+C {ipin.sym} -700 1040 0 0 {name=p3_rst lab=rst_n
+}
+C {opin.sym} -100 1150 0 0 {name=p4_q lab=Q
+}
