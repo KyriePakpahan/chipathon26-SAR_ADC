@@ -1,4 +1,4 @@
-* Extracted by KLayout with GF180MCU LVS runset on : 11/08/2026 17:03
+* Extracted by KLayout with GF180MCU LVS runset on : 11/08/2026 17:09
 
 .SUBCKT async_nand2 input_A input_B output vdd vss
 M$1 vss input_B \$6 vss nfet_03v3 L=0.28U W=0.5U AS=0.305P AD=0.305P PS=2.22U

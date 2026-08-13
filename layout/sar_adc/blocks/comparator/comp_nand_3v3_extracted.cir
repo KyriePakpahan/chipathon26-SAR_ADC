@@ -1,4 +1,4 @@
-* Extracted by KLayout with GF180MCU LVS runset on : 11/08/2026 15:12
+* Extracted by KLayout with GF180MCU LVS runset on : 11/08/2026 17:17
 
 .SUBCKT comp_nand_3v3 a b y vdd vss
 X$1 a b y vdd vss async_nand2

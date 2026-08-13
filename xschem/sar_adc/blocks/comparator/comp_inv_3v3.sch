@@ -25,7 +25,7 @@ N 640 -220 690 -220 {lab=vss}
 C {title.sym} 180 -60 0 0 {name=l1 author="Afdhal Razaq"}
 C {symbols/pfet_03v3.sym} 620 -430 0 0 {name=M2
 L=0.28u
-W=3.20u
+W=0.80u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"

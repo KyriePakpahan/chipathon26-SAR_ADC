@@ -1,24 +1,26 @@
-* Extracted by KLayout with GF180MCU LVS runset on : 11/08/2026 15:10
+* Extracted by KLayout with GF180MCU LVS runset on : 13/08/2026 10:19
 
-.SUBCKT strongarm_comp_core
-X$1 SUB nfet
-X$2 SUB nfet$1
-X$3 SUB nfet$1
-X$4 SUB nfet$2
-X$5 SUB nfet$2
+.SUBCKT strongarm_comp_core vdd out_n out_p rst_latch vin_p vin_n vss
+M$1 vdd out_p out_n vdd pfet_03v3 L=0.28U W=0.42U AS=0.2822P AD=0.2822P
++ PS=2.18U PD=2.18U
+M$2 vdd rst_latch \$7 vdd pfet_03v3 L=0.28U W=0.42U AS=0.2822P AD=0.2822P
++ PS=2.18U PD=2.18U
+M$3 vdd rst_latch out_p vdd pfet_03v3 L=0.28U W=0.42U AS=0.2822P AD=0.2822P
++ PS=2.18U PD=2.18U
+M$4 vdd out_n out_p vdd pfet_03v3 L=0.28U W=0.42U AS=0.2822P AD=0.2822P
++ PS=2.18U PD=2.18U
+M$5 vdd rst_latch out_n vdd pfet_03v3 L=0.28U W=0.42U AS=0.2822P AD=0.2822P
++ PS=2.18U PD=2.18U
+M$6 vdd rst_latch \$6 vdd pfet_03v3 L=0.28U W=0.42U AS=0.2822P AD=0.2822P
++ PS=2.18U PD=2.18U
+M$7 \$7 out_p out_n vss nfet_03v3 L=0.28U W=0.42U AS=0.2646P AD=0.2646P PS=2.1U
++ PD=2.1U
+M$8 \$10 vin_n \$7 vss nfet_03v3 L=0.28U W=0.42U AS=0.2646P AD=0.2646P PS=2.1U
++ PD=2.1U
+M$9 \$6 out_n out_p vss nfet_03v3 L=0.28U W=0.42U AS=0.2646P AD=0.2646P PS=2.1U
++ PD=2.1U
+M$10 \$10 vin_p \$6 vss nfet_03v3 L=0.28U W=0.42U AS=0.2646P AD=0.2646P PS=2.1U
++ PD=2.1U
+M$11 vss rst_latch \$10 vss nfet_03v3 L=0.28U W=0.5U AS=0.305P AD=0.305P
++ PS=2.22U PD=2.22U
 .ENDS strongarm_comp_core
-
-.SUBCKT nfet$1 \$5
-M$1 \$2 \$3 \$1 \$5 nfet_03v3 L=0.28U W=0.42U AS=0.2646P AD=0.2646P PS=2.1U
-+ PD=2.1U
-.ENDS nfet$1
-
-.SUBCKT nfet$2 \$6
-M$1 \$2 \$3 \$1 \$6 nfet_03v3 L=0.28U W=0.42U AS=0.2646P AD=0.2646P PS=2.1U
-+ PD=2.1U
-.ENDS nfet$2
-
-.SUBCKT nfet \$5
-M$1 \$2 \$3 \$1 \$5 nfet_03v3 L=0.28U W=0.5U AS=0.305P AD=0.305P PS=2.22U
-+ PD=2.22U
-.ENDS nfet
