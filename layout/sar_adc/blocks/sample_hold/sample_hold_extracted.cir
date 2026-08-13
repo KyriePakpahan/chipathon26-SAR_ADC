@@ -1,0 +1,20 @@
+* Extracted by KLayout with GF180MCU LVS runset on : 12/08/2026 17:05
+
+.SUBCKT sample_hold sample_en vin vdd vhold vss
+X$5 vdd \$8 sample_en vss inv_sh
+M$1 vdd \$2 \$2 vdd pfet_03v3 L=0.28U W=2U AS=1.3P AD=1.3P PS=5.3U PD=5.3U
+M$2 \$2 \$8 \$2 vdd pfet_03v3 L=0.28U W=2U AS=1.3P AD=1.3P PS=5.3U PD=5.3U
+M$3 vhold \$2 vin vss nfet_03v3 L=0.28U W=5U AS=3.05P AD=3.05P PS=11.22U
++ PD=11.22U
+M$4 \$5 vdd \$2 vss nfet_03v3 L=0.28U W=2U AS=1.22P AD=1.22P PS=5.22U PD=5.22U
+M$5 vin sample_en \$6 vss nfet_03v3 L=0.28U W=2U AS=1.22P AD=1.22P PS=5.22U
++ PD=5.22U
+M$6 vss \$8 \$5 vss nfet_03v3 L=0.28U W=2U AS=1.22P AD=1.22P PS=5.22U PD=5.22U
+M$7 vss \$8 \$6 vss nfet_03v3 L=0.28U W=2U AS=1.22P AD=1.22P PS=5.22U PD=5.22U
+M$8 vhold \$8 vin vdd pfet_03v3 L=0.28U W=5U AS=3.25P AD=3.25P PS=11.3U PD=11.3U
+.ENDS sample_hold
+
+.SUBCKT inv_sh vdd vo vi vss
+M$1 vss vi vo vss nfet_03v3 L=0.28U W=1U AS=0.61P AD=0.61P PS=3.22U PD=3.22U
+M$2 vdd vi vo vdd pfet_03v3 L=0.28U W=2U AS=1.3P AD=1.3P PS=5.3U PD=5.3U
+.ENDS inv_sh
