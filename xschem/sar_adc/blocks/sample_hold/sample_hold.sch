@@ -26,9 +26,9 @@ N 770 -420 890 -420 {lab=#net1}
 N 770 -420 770 -370 {lab=#net1}
 N 770 -370 850 -370 {lab=#net1}
 N 700 -370 770 -370 {lab=#net1}
-N 700 -340 720 -340 {lab=VSS}
-N 850 -340 870 -340 {lab=VSS}
-N 700 -310 700 -300 {lab=VSS}
+N 700 -340 720 -340 {lab=vss}
+N 850 -340 870 -340 {lab=vss}
+N 700 -310 700 -300 {lab=vss}
 N 610 -490 610 -240 {lab=vin}
 N 610 -240 850 -240 {lab=vin}
 N 850 -310 850 -240 {lab=vin}
@@ -78,11 +78,7 @@ C {lab_pin.sym} 500 -510 2 0 {name=p6 sig_type=std_logic lab=clkb
 C {lab_pin.sym} 660 -690 1 0 {name=p7 sig_type=std_logic lab=vg}
 C {lab_pin.sym} 660 -530 0 0 {name=p8 sig_type=std_logic lab=clkb
 }
-C {capa.sym} 990 -420 3 0 {name=C1
-m=1
-value=100f
-footprint=1206
-device="ceramic capacitor"}
+
 C {lab_pin.sym} 1200 -500 0 0 {name=p20 sig_type=std_logic lab=vg}
 C {lab_pin.sym} 1180 -340 0 0 {name=p21 sig_type=std_logic lab=clkb
 }
@@ -90,11 +86,7 @@ C {lab_pin.sym} 1430 -420 2 0 {name=p22 sig_type=std_logic lab=vg}
 C {lab_pin.sym} 1610 -520 1 0 {name=p23 sig_type=std_logic lab=vg}
 C {lab_pin.sym} 1530 -360 0 0 {name=p25 sig_type=std_logic lab=clkb
 }
-C {capa.sym} 1010 -560 0 0 {name=C2
-m=1
-value=100f
-footprint=1206
-device="ceramic capacitor"}
+
 C {lab_pin.sym} 880 -660 2 0 {name=p9 sig_type=std_logic lab=vss}
 C {lab_pin.sym} 880 -560 2 0 {name=p10 sig_type=std_logic lab=vdd}
 C {lab_pin.sym} 720 -340 2 0 {name=p30 sig_type=std_logic lab=vss}
@@ -220,3 +212,15 @@ model=nfet_03v3
 spiceprefix=X
 }
 C {sar_adc/blocks/sample_hold/inv_sh.sym} 240 -580 0 0 {name=xinv2}
+C {symbols/cap_mim_2f0fF.sym} 1010 -560 0 0 {name=C1
+W=20um
+L=5um
+model=cap_mim_2f0fF
+spiceprefix=X
+m=1}
+C {symbols/cap_mim_2f0fF.sym} 990 -420 3 0 {name=C2
+W=10um
+L=25um
+model=cap_mim_2f0fF
+spiceprefix=X
+m=1}
