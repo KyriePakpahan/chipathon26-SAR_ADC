@@ -101,6 +101,19 @@ verification.
 └── README.md
 ```
 
+## Project Timeline
+
+| Week | Date | Milestone |
+|---|---|---|
+| Week 26 | June 26 | Analog Design Ideas |
+| Week 27 | July 3 | Schematic Review |
+| Week 28 | July 10 | Simulation Review (blocks) |
+| Week 29 | July 17 | Simulation Review (top) + Go/No-Go |
+| Week 33 | August 14 | Layout Review (blocks) |
+| Week 34 | August 21 | Layout Review (top) |
+| Week 35 | August 28 | Final Verification + Chip Review |
+| TBD | — | Final GDS Submission |
+
 ## License
 
 Apache-2.0, inherited from upstream. See `LICENSE` for the full text,
