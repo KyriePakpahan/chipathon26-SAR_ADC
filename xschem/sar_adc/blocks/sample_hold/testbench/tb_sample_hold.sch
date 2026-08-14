@@ -17,18 +17,18 @@ N 390 -440 490 -440 {lab=vhold}
 N 390 -420 410 -420 {lab=0}
 N 410 -420 410 -400 {lab=0}
 C {vsource.sym} 560 -390 0 0 {name=V1 value=3.3 savecurrent=false}
-C {gnd.sym} 560 -360 0 0 {name=l1 lab=0}
-C {gnd.sym} 410 -400 0 0 {name=l2 lab=0}
+C {lab_wire.sym} 560 -360 0 0 {name=l1 lab=VSS}
+C {lab_wire.sym} 410 -400 0 0 {name=l2 lab=VSS}
 C {vsource.sym} 100 -420 0 0 {name=V2 value="SINE(1.65 1.65 1Meg)" savecurrent=false}
-C {gnd.sym} 100 -390 0 0 {name=l3 lab=0}
+C {lab_wire.sym} 100 -390 0 0 {name=l3 lab=VSS}
 C {vsource.sym} 260 -250 0 0 {name=V3 value="PULSE(0 3.3 0 1n 1n 50n 100n)" savecurrent=false}
-C {gnd.sym} 260 -220 0 0 {name=l4 lab=0}
+C {lab_wire.sym} 260 -220 0 0 {name=l4 lab=VSS}
 C {capa.sym} 470 -350 0 0 {name=C1
 m=1
 value=100f
 footprint=1206
 device="ceramic capacitor"}
-C {gnd.sym} 470 -320 0 0 {name=l5 lab=0}
+C {lab_wire.sym} 470 -320 0 0 {name=l5 lab=VSS}
 C {sar_adc/blocks/sample_hold/sample_hold.sym} 290 -410 0 0 {name=x1}
 C {code_shown.sym} 10 -150 0 0 {name=MODELS
 only_toplevel=true
@@ -42,7 +42,9 @@ value="
 .control
   save all
   tran 1n 500n
-  plot v(vin) v(vhold) v(sample_en)
+  set filetype=ascii
+  write tb_sample_hold.raw
+  quit
 .endc
 "}
 C {lab_pin.sym} 200 -460 1 0 {name=p1 sig_type=std_logic lab=vin}

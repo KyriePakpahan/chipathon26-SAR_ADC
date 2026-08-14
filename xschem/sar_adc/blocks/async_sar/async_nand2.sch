@@ -23,14 +23,14 @@ N 40 -130 90 -130 {lab=VDD}
 N 90 -130 90 -70 {lab=VDD}
 N 80 -70 90 -70 {lab=VDD}
 N -120 -70 -60 -70 {lab=VDD}
-N -40 40 -10 40 {lab=0}
-N -40 160 -10 160 {lab=0}
-N -40 130 -10 130 {lab=0}
-N -10 130 -10 160 {lab=0}
-N 20 90 20 160 {lab=0}
-N -10 160 20 160 {lab=0}
-N -10 40 20 40 {lab=0}
-N 20 40 20 90 {lab=0}
+N -40 40 -10 40 {lab=VSS}
+N -40 160 -10 160 {lab=VSS}
+N -40 130 -10 130 {lab=VSS}
+N -10 130 -10 160 {lab=VSS}
+N 20 90 20 160 {lab=VSS}
+N -10 160 20 160 {lab=VSS}
+N -10 40 20 40 {lab=VSS}
+N 20 40 20 90 {lab=VSS}
 C {symbols/nfet_03v3.sym} -60 130 0 0 {name=M2
 L=0.28u
 W=0.50u
@@ -87,8 +87,8 @@ sa=0 sb=0 sd=0
 model=nfet_03v3
 spiceprefix=X
 }
-C {vdd.sym} -40 -160 0 0 {name=l2 lab=VDD}
-C {gnd.sym} 20 160 0 0 {name=l1 lab=0}
+C {lab_wire.sym} -40 -160 0 0 {name=l2 lab=VDD}
+C {lab_wire.sym} 20 160 0 0 {name=l1 lab=VSS}
 C {ipin.sym} -260 -60 0 0 {name=p1 lab=input_A}
 C {ipin.sym} -260 10 0 0 {name=p2 lab=input_B}
 C {lab_wire.sym} -160 -70 0 0 {name=p6 sig_type=std_logic lab=input_A}
@@ -96,3 +96,5 @@ C {lab_wire.sym} -80 40 0 0 {name=p7 sig_type=std_logic lab=input_A}
 C {lab_wire.sym} -80 130 0 0 {name=p8 sig_type=std_logic lab=input_B}
 C {lab_wire.sym} 0 -70 0 0 {name=p10 sig_type=std_logic lab=input_B}
 C {opin.sym} 140 -10 0 0 {name=p9 lab=output}
+C {lab_wire.sym} -260 -60 2 0 {name=p3 sig_type=std_logic lab=input_A}
+C {lab_wire.sym} -260 10 2 0 {name=p4 sig_type=std_logic lab=input_B}

@@ -26,14 +26,14 @@ N 430 50 450 50 {lab=Q6}
 N 430 70 450 70 {lab=Q7}
 N 430 90 450 90 {lab=done}
 C {vsource.sym} -200 -170 0 0 {name=V1 value=3.3}
-C {vdd.sym} -200 -210 0 0 {name=l1 lab=VDD}
-C {gnd.sym} -200 -130 0 0 {name=l2 lab=0}
+C {lab_wire.sym} -200 -210 0 0 {name=l1 lab=VDD}
+C {lab_wire.sym} -200 -130 0 0 {name=l2 lab=VSS}
 C {vsource.sym} -150 100 0 0 {name=V2 value="PULSE(0 3.3 2n 0.1n 0.1n 4n 12n)"}
-C {gnd.sym} -150 140 0 0 {name=l3 lab=0}
+C {lab_wire.sym} -150 140 0 0 {name=l3 lab=VSS}
 C {vsource.sym} -100 100 0 0 {name=V3 value="PULSE(0 3.3 1n 0.1n 0.1n 2.5n 5n)"}
-C {gnd.sym} -100 140 0 0 {name=l4 lab=0}
+C {lab_wire.sym} -100 140 0 0 {name=l4 lab=VSS}
 C {vsource.sym} -50 100 0 0 {name=V4 value="PWL(0 0 0.5n 0 0.6n 3.3)"}
-C {gnd.sym} -50 140 0 0 {name=l5 lab=0}
+C {lab_wire.sym} -50 140 0 0 {name=l5 lab=VSS}
 C {lab_wire.sym} 450 -70 0 0 {name=l17 lab=Q0}
 C {lab_wire.sym} 450 -50 0 0 {name=l18 lab=Q1}
 C {lab_wire.sym} 450 -30 0 0 {name=l19 lab=Q2}

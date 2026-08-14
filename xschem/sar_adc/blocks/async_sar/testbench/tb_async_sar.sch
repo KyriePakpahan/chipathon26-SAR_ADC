@@ -15,16 +15,16 @@ N -200 50 -200 70 {lab=out_n}
 N -200 130 -200 150 {lab=0}
 C {title.sym} -130 380 0 0 {name=l1 author="Berkah Saluyu"}
 C {vsource.sym} -110 -130 0 0 {name=V1 value=3.3}
-C {vdd.sym} -110 -170 0 0 {name=l1 lab=vdd}
-C {gnd.sym} -110 -90 0 0 {name=l2 lab=0}
+C {lab_wire.sym} -110 -170 0 0 {name=l1 lab=VDD}
+C {lab_wire.sym} -110 -90 0 0 {name=l2 lab=VSS}
 C {vsource.sym} -30 280 0 0 {name=V2 value="PULSE(0 3.3 0.1n 0.1n 0.1n 5n 1000n)"}
-C {gnd.sym} -30 320 0 0 {name=l3 lab=0}
+C {lab_wire.sym} -30 320 0 0 {name=l3 lab=VSS}
 C {lab_wire.sym} -30 180 0 0 {name=l5 lab=start}
 C {vsource.sym} -120 200 0 0 {name=V3 value=3.3}
-C {gnd.sym} -120 240 0 0 {name=l4 lab=0}
+C {lab_wire.sym} -120 240 0 0 {name=l4 lab=VSS}
 C {lab_wire.sym} -120 120 0 0 {name=l6 lab=out_p}
 C {lab_wire.sym} -200 50 0 0 {name=l_outn lab=out_n}
-C {gnd.sym} -200 150 0 0 {name=l_gnd_outn lab=0}
+C {lab_wire.sym} -200 150 0 0 {name=l_gnd_outn lab=VSS}
 C {sar_adc/blocks/async_sar/delay_line.sym} 40 50 0 0 {name=x_mock_comp}
 C {lab_wire.sym} -110 50 0 0 {name=l_mc_in lab=rst_latch}
 C {lab_wire.sym} 190 50 2 0 {name=l_mc_out lab=comp_done}
