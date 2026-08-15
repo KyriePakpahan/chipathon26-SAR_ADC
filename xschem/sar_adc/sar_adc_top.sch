@@ -5,74 +5,87 @@ V {}
 S {}
 F {}
 E {}
-N 90 -490 110 -490 {lab=start}
-N 80 -270 400 -270 {lab=vref}
-N 460 -150 460 -120 {lab=vss}
-N 460 -550 460 -520 {lab=vdd}
-N 530 -270 560 -270 {lab=vdd}
-N 530 -230 560 -230 {lab=vss}
-N 530 -250 620 -250 {lab=vdac}
-N 620 -300 620 -250 {lab=vdac}
-N 360 -300 620 -300 {lab=vdac}
-N 360 -420 360 -300 {lab=vdac}
-N 360 -420 380 -420 {lab=vdac}
-N 880 -340 900 -340 {lab=vss}
-N 880 -400 900 -400 {lab=dac_in[7:0]}
-N 880 -380 900 -380 {lab=sample_en}
-N 880 -360 900 -360 {lab=rst_latch}
-N 370 -400 380 -400 {lab=rst_latch}
-N 370 -400 370 -390 {lab=rst_latch}
-N 380 -240 400 -240 {lab=dac_in[7:0]}
-N 880 -320 1010 -320 {lab=done}
-N 880 -420 1010 -420 {lab=dout[7:0]}
-N 880 -440 900 -440 {lab=vdd}
-N 290 -440 380 -440 {lab=vhold}
-N 290 -420 300 -420 {lab=vss}
-N 290 -460 300 -460 {lab=vdd}
-N 80 -460 170 -460 {lab=vin}
-N 560 -360 570 -360 {lab=vss}
-N 560 -440 570 -440 {lab=vdd}
-N 680 -440 690 -440 {lab=start}
-N 560 -380 690 -380 {lab=comp_done}
-N 560 -400 690 -400 {lab=comp_out_n}
-N 560 -420 690 -420 {lab=comp_out_p}
-N 140 -430 170 -430 {lab=sample_en}
-C {title.sym} 160 -40 0 0 {name=l1 author="Berkah Saluyu"}
-C {ipin.sym} 80 -460 0 0 {name=p3 lab=vin
-}
-C {ipin.sym} 80 -270 0 0 {name=p6 lab=vref
+# Main Input Pins
+C {ipin.sym} -800 -300 0 0 {name=p_vin lab=vin}
+C {lab_wire.sym} -750 -300 0 0 {name=l_vin lab=vin}
+C {ipin.sym} -800 -200 0 0 {name=p_vref lab=vref}
+C {lab_wire.sym} -750 -200 0 0 {name=l_vref lab=vref}
+C {ipin.sym} -800 -100 0 0 {name=p_start lab=start}
+C {lab_wire.sym} -750 -100 0 0 {name=l_start lab=start}
 
-}
-C {iopin.sym} 460 -550 3 0 {name=p1 lab=vdd
-}
-C {iopin.sym} 460 -120 1 0 {name=p7 lab=vss
+# Power Pins (iopin VDD and VSS)
+C {iopin.sym} -800 0 0 0 {name=p_vdd lab=vdd}
+C {lab_wire.sym} -750 0 0 0 {name=l_vdd lab=vdd}
+C {iopin.sym} -800 100 0 0 {name=p_vss lab=vss}
+C {lab_wire.sym} -750 100 0 0 {name=l_vss lab=vss}
 
-}
-C {ipin.sym} 90 -490 0 0 {name=p2 lab=start
+# Main Output Pins
+C {opin.sym} 800 -200 0 0 {name=p_done lab=done}
+C {lab_wire.sym} 750 -200 2 0 {name=l_done lab=done}
+C {opin.sym} 800 -100 0 0 {name=p_dout lab=dout[7:0]}
+C {lab_wire.sym} 750 -100 2 0 {name=l_dout lab=dout[7:0]}
 
-}
-C {opin.sym} 1010 -320 0 0 {name=p5 lab=done}
-C {opin.sym} 1010 -420 0 0 {name=p4 lab=dout[7:0]
-}
-C {sar_adc/blocks/comparator/strongarm_comp.sym} 400 -350 0 0 {name=x1}
-C {sar_adc/blocks/cdac/cdac_8bit.sym} 420 -220 0 0 {name=x2}
-C {sar_adc/blocks/sample_hold/sample_hold.sym} 190 -410 0 0 {name=x3}
-C {sar_adc/blocks/async_sar/async_sar.sym} 710 -310 0 0 {name=x4}
-C {lab_pin.sym} 110 -490 2 0 {name=p8 sig_type=std_logic lab=start}
-C {lab_pin.sym} 680 -440 0 0 {name=p9 sig_type=std_logic lab=start}
-C {lab_pin.sym} 460 -520 3 0 {name=p10 sig_type=std_logic lab=vdd}
-C {lab_pin.sym} 460 -150 1 0 {name=p11 sig_type=std_logic lab=vss}
-C {lab_pin.sym} 300 -460 2 0 {name=p12 sig_type=std_logic lab=vdd}
-C {lab_pin.sym} 300 -420 2 0 {name=p13 sig_type=std_logic lab=vss}
-C {lab_pin.sym} 560 -270 2 0 {name=p14 sig_type=std_logic lab=vdd}
-C {lab_pin.sym} 560 -230 2 0 {name=p15 sig_type=std_logic lab=vss}
-C {lab_pin.sym} 570 -440 2 0 {name=p16 sig_type=std_logic lab=vdd}
-C {lab_pin.sym} 570 -360 2 0 {name=p17 sig_type=std_logic lab=vss}
-C {lab_pin.sym} 900 -440 2 0 {name=p18 sig_type=std_logic lab=vdd}
-C {lab_pin.sym} 900 -340 2 0 {name=p19 sig_type=std_logic lab=vss}
-C {lab_pin.sym} 900 -400 2 0 {name=p20 sig_type=std_logic lab=dac_in[7:0]}
-C {lab_pin.sym} 900 -380 2 0 {name=p21 sig_type=std_logic lab=sample_en}
-C {lab_pin.sym} 900 -360 2 0 {name=p22 sig_type=std_logic lab=rst_latch}
-C {lab_pin.sym} 370 -390 3 0 {name=p24 sig_type=std_logic lab=rst_latch}
-C {lab_pin.sym} 380 -240 0 0 {name=p25 sig_type=std_logic lab=dac_in[7:0]}
-C {lab_pin.sym} 140 -430 0 0 {name=p23 sig_type=std_logic lab=sample_en}
+# 1. Sample & Hold Block
+C {sar_adc/blocks/sample_hold/sample_hold.sym} -500 -250 0 0 {name=x1}
+C {lab_wire.sym} -520 -300 0 0 {name=l_sh_vin lab=vin}
+C {lab_wire.sym} -520 -270 0 0 {name=l_sh_se lab=sample_en}
+C {lab_wire.sym} -400 -280 2 0 {name=l_sh_vh lab=vhold}
+C {lab_wire.sym} -400 -300 2 0 {name=l_sh_vd lab=vdd}
+C {lab_wire.sym} -400 -260 2 0 {name=l_sh_vs lab=vss}
+
+# 2. CDAC 8-bit Block
+C {sar_adc/blocks/cdac/cdac_8bit.sym} -500 0 0 0 {name=x2}
+C {lab_wire.sym} -520 -50 0 0 {name=l_cd_vr lab=vref}
+C {lab_wire.sym} -520 -20 0 0 {name=l_cd_di lab=dac_in[7:0]}
+C {lab_wire.sym} -390 -30 2 0 {name=l_cd_vdac lab=vdac}
+C {lab_wire.sym} -390 -50 2 0 {name=l_cd_vd lab=vdd}
+C {lab_wire.sym} -390 -10 2 0 {name=l_cd_vs lab=vss}
+
+# 3. StrongARM Comparator Block
+C {sar_adc/blocks/comparator/strongarm_comp.sym} -100 -100 0 0 {name=x3}
+C {lab_wire.sym} -120 -190 0 0 {name=l_cp_vp lab=vhold_comp}
+C {lab_wire.sym} -120 -170 0 0 {name=l_cp_vn lab=vdac_comp}
+C {lab_wire.sym} -120 -150 0 0 {name=l_cp_rst lab=rst_latch}
+C {lab_wire.sym} 60 -190 2 0 {name=l_cp_vd lab=vdd}
+C {lab_wire.sym} 60 -170 2 0 {name=l_cp_op lab=comp_out_p}
+C {lab_wire.sym} 60 -150 2 0 {name=l_cp_on lab=comp_out_n}
+C {lab_wire.sym} 60 -130 2 0 {name=l_cp_cd lab=comp_done}
+C {lab_wire.sym} 60 -110 2 0 {name=l_cp_vs lab=vss}
+
+# 4. Asynchronous SAR Controller Block
+C {sar_adc/blocks/async_sar/async_sar.sym} 300 -100 0 0 {name=x4}
+C {lab_wire.sym} 280 -230 0 0 {name=l_as_st lab=start}
+C {lab_wire.sym} 280 -210 0 0 {name=l_as_cp lab=comp_out_p}
+C {lab_wire.sym} 280 -190 0 0 {name=l_as_cn lab=comp_out_n}
+C {lab_wire.sym} 280 -170 0 0 {name=l_as_cd lab=comp_done}
+C {lab_wire.sym} 470 -230 2 0 {name=l_as_vd lab=vdd}
+C {lab_wire.sym} 470 -210 2 0 {name=l_as_dout lab=dout[7:0]}
+C {lab_wire.sym} 470 -190 2 0 {name=l_as_dac lab=dac_in[7:0]}
+C {lab_wire.sym} 470 -170 2 0 {name=l_as_se lab=sample_en}
+C {lab_wire.sym} 470 -150 2 0 {name=l_as_rl lab=rst_latch}
+C {lab_wire.sym} 470 -130 2 0 {name=l_as_vs lab=vss}
+C {lab_wire.sym} 470 -110 2 0 {name=l_as_dn lab=done}
+
+# 5. Kickback Isolation Buffers
+C {devices/vcvs.sym} -300 -250 0 0 {name=E_buf_hold value=1.0}
+C {lab_wire.sym} -300 -280 2 0 {name=l_ebh_p lab=vhold_comp}
+C {lab_wire.sym} -300 -220 2 0 {name=l_ebh_m lab=vss}
+C {lab_wire.sym} -340 -270 0 0 {name=l_ebh_cp lab=vhold}
+C {lab_wire.sym} -340 -230 0 0 {name=l_ebh_cm lab=vss}
+
+C {devices/vcvs.sym} -300 -50 0 0 {name=E_buf_dac value=1.0}
+C {lab_wire.sym} -300 -80 2 0 {name=l_ebd_p lab=vdac_comp}
+C {lab_wire.sym} -300 -20 2 0 {name=l_ebd_m lab=vss}
+C {lab_wire.sym} -340 -70 0 0 {name=l_ebd_cp lab=vdac}
+C {lab_wire.sym} -340 -30 0 0 {name=l_ebd_cm lab=vss}
+
+# VSS Reset Switch (Reset CDAC top plate to 0V/vss during sample_en)
+C {devices/switch_ngspice.sym} -300 150 0 0 {name=S_vcm_rst model=sw_ideal}
+C {lab_wire.sym} -300 120 2 0 {name=l_swv_p lab=vdac}
+C {lab_wire.sym} -300 180 2 0 {name=l_swv_m lab=vss}
+C {lab_wire.sym} -340 150 0 0 {name=l_swv_cp lab=sample_en}
+C {lab_wire.sym} -340 170 0 0 {name=l_swv_cm lab=vss}
+
+C {devices/code.sym} 0 250 0 0 {name=s_models value=".model sw_ideal sw vt=1.65 vh=0.1 ron=10 roff=100G"}
+
+C {title.sym} 160 300 0 0 {name=l_title author="Berkah Saluyu"}

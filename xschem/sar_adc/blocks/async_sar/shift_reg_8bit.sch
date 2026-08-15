@@ -5,77 +5,115 @@ V {}
 S {}
 F {}
 E {}
-N -1600 70 -1540 70 {lab=serial_in}
-N -1600 110 -1540 110 {lab=clk}
-N -1600 150 -1540 150 {lab=rst_n}
-N -1190 -60 -1190 -20 {lab=Q0}
-N -790 -60 -790 -20 {lab=Q1}
-N -370 -60 -370 -20 {lab=Q2}
-N 30 -60 30 -20 {lab=Q3}
-N 440 -60 440 -20 {lab=Q4}
-N 840 -60 840 -20 {lab=Q5}
-N 1240 -60 1240 -20 {lab=Q6}
-N 1650 -60 1650 -20 {lab=Q7}
-N 2050 -60 2050 -20 {lab=done}
-C {title.sym} -1470 350 0 0 {name=l1 author="Berkah Saluyu"}
-C {ipin.sym} -1600 70 0 0 {name=p1 lab=serial_in}
-C {lab_wire.sym} -1540 70 2 0 {name=p1_lab lab=serial_in}
-C {ipin.sym} -1600 110 0 0 {name=p10 lab=clk}
-C {lab_wire.sym} -1540 110 2 0 {name=p12 lab=clk}
-C {ipin.sym} -1600 150 0 0 {name=p11 lab=rst_n}
-C {lab_wire.sym} -1540 150 2 0 {name=p13 lab=rst_n}
-C {opin.sym} -1190 -60 3 0 {name=p_out_0 lab=Q0}
-C {lab_wire.sym} -1190 -40 2 0 {name=l_po_0 lab=Q0}
-C {opin.sym} -790 -60 3 0 {name=p_out_1 lab=Q1}
-C {opin.sym} -370 -60 3 0 {name=p_out_2 lab=Q2}
-C {opin.sym} 30 -60 3 0 {name=p_out_3 lab=Q3}
-C {opin.sym} 440 -60 3 0 {name=p_out_4 lab=Q4}
-C {opin.sym} 840 -60 3 0 {name=p_out_5 lab=Q5}
-C {opin.sym} 1240 -60 3 0 {name=p_out_6 lab=Q6}
-C {opin.sym} 1650 -60 3 0 {name=p_out_7 lab=Q7}
-C {opin.sym} 2050 -60 3 0 {name=p_out_8 lab=done}
-C {sar_adc/blocks/async_sar/dff_cell.sym} -1340 0 0 0 {name=x1}
-C {lab_wire.sym} -1490 -20 0 0 {name=l_d_0 lab=serial_in}
-C {lab_wire.sym} -1490 0 0 0 {name=l_clk_0 lab=clk}
-C {lab_wire.sym} -1490 20 0 0 {name=l_rst_0 lab=rst_n}
-C {lab_wire.sym} -1190 -20 2 0 {name=l_q_0 lab=Q0}
-C {sar_adc/blocks/async_sar/dff_cell.sym} -940 0 0 0 {name=x2}
-C {lab_wire.sym} -1090 -20 0 0 {name=l_d_1 lab=Q0}
-C {lab_wire.sym} -1090 0 0 0 {name=l_clk_1 lab=clk}
-C {lab_wire.sym} -1090 20 0 0 {name=l_rst_1 lab=rst_n}
-C {lab_wire.sym} -790 -20 2 0 {name=l_q_1 lab=Q1}
-C {sar_adc/blocks/async_sar/dff_cell.sym} -520 0 0 0 {name=x3}
-C {lab_wire.sym} -670 -20 0 0 {name=l_d_2 lab=Q1}
-C {lab_wire.sym} -670 0 0 0 {name=l_clk_2 lab=clk}
-C {lab_wire.sym} -670 20 0 0 {name=l_rst_2 lab=rst_n}
-C {lab_wire.sym} -370 -20 2 0 {name=l_q_2 lab=Q2}
-C {sar_adc/blocks/async_sar/dff_cell.sym} -120 0 0 0 {name=x4}
-C {lab_wire.sym} -270 -20 0 0 {name=l_d_3 lab=Q2}
-C {lab_wire.sym} -270 0 0 0 {name=l_clk_3 lab=clk}
-C {lab_wire.sym} -270 20 0 0 {name=l_rst_3 lab=rst_n}
-C {lab_wire.sym} 30 -20 2 0 {name=l_q_3 lab=Q3}
-C {sar_adc/blocks/async_sar/dff_cell.sym} 290 0 0 0 {name=x5}
-C {lab_wire.sym} 140 -20 0 0 {name=l_d_4 lab=Q3}
-C {lab_wire.sym} 140 0 0 0 {name=l_clk_4 lab=clk}
-C {lab_wire.sym} 140 20 0 0 {name=l_rst_4 lab=rst_n}
-C {lab_wire.sym} 440 -20 2 0 {name=l_q_4 lab=Q4}
-C {sar_adc/blocks/async_sar/dff_cell.sym} 690 0 0 0 {name=x6}
-C {lab_wire.sym} 540 -20 0 0 {name=l_d_5 lab=Q4}
-C {lab_wire.sym} 540 0 0 0 {name=l_clk_5 lab=clk}
-C {lab_wire.sym} 540 20 0 0 {name=l_rst_5 lab=rst_n}
-C {lab_wire.sym} 840 -20 2 0 {name=l_q_5 lab=Q5}
-C {sar_adc/blocks/async_sar/dff_cell.sym} 1090 0 0 0 {name=x7}
-C {lab_wire.sym} 940 -20 0 0 {name=l_d_6 lab=Q5}
-C {lab_wire.sym} 940 0 0 0 {name=l_clk_6 lab=clk}
-C {lab_wire.sym} 940 20 0 0 {name=l_rst_6 lab=rst_n}
-C {lab_wire.sym} 1240 -20 2 0 {name=l_q_6 lab=Q6}
-C {sar_adc/blocks/async_sar/dff_cell.sym} 1500 0 0 0 {name=x8}
-C {lab_wire.sym} 1350 -20 0 0 {name=l_d_7 lab=Q6}
-C {lab_wire.sym} 1350 0 0 0 {name=l_clk_7 lab=clk}
-C {lab_wire.sym} 1350 20 0 0 {name=l_rst_7 lab=rst_n}
-C {lab_wire.sym} 1650 -20 2 0 {name=l_q_7 lab=Q7}
-C {sar_adc/blocks/async_sar/dff_cell.sym} 1900 0 0 0 {name=x9}
-C {lab_wire.sym} 1750 -20 0 0 {name=l_d_8 lab=Q7}
-C {lab_wire.sym} 1750 0 0 0 {name=l_clk_8 lab=clk}
-C {lab_wire.sym} 1750 20 0 0 {name=l_rst_8 lab=rst_n}
-C {lab_wire.sym} 2050 -20 2 0 {name=l_q_8 lab=done}
+# Main Input Pins
+C {ipin.sym} -1600 -100 0 0 {name=p_sin lab=serial_in}
+C {lab_wire.sym} -1550 -100 0 0 {name=l_sin lab=serial_in}
+C {ipin.sym} -1600 -50 0 0 {name=p_clk lab=clk}
+C {lab_wire.sym} -1550 -50 0 0 {name=l_clk lab=clk}
+C {ipin.sym} -1600 0 0 0 {name=p_rst lab=rst_n}
+C {lab_wire.sym} -1550 0 0 0 {name=l_rst lab=rst_n}
+
+# Output Pins
+C {opin.sym} -1150 -120 0 0 {name=p_q0 lab=Q0}
+C {lab_wire.sym} -1150 -120 0 0 {name=l_q0 lab=Q0}
+C {opin.sym} -800 -120 0 0 {name=p_q1 lab=Q1}
+C {lab_wire.sym} -800 -120 0 0 {name=l_q1 lab=Q1}
+C {opin.sym} -450 -120 0 0 {name=p_q2 lab=Q2}
+C {lab_wire.sym} -450 -120 0 0 {name=l_q2 lab=Q2}
+C {opin.sym} -100 -120 0 0 {name=p_q3 lab=Q3}
+C {lab_wire.sym} -100 -120 0 0 {name=l_q3 lab=Q3}
+C {opin.sym} 250 -120 0 0 {name=p_q4 lab=Q4}
+C {lab_wire.sym} 250 -120 0 0 {name=l_q4 lab=Q4}
+C {opin.sym} 600 -120 0 0 {name=p_q5 lab=Q5}
+C {lab_wire.sym} 600 -120 0 0 {name=l_q5 lab=Q5}
+C {opin.sym} 950 -120 0 0 {name=p_q6 lab=Q6}
+C {lab_wire.sym} 950 -120 0 0 {name=l_q6 lab=Q6}
+C {opin.sym} 1300 -120 0 0 {name=p_q7 lab=Q7}
+C {lab_wire.sym} 1300 -120 0 0 {name=l_q7 lab=Q7}
+C {opin.sym} 1650 -120 0 0 {name=p_done lab=done}
+C {lab_wire.sym} 1650 -120 0 0 {name=l_done lab=done}
+
+# Stage 0: DFF with Set (Preset to 1 on reset)
+C {sar_adc/blocks/async_sar/dff_cell_set.sym} -1300 0 0 0 {name=x1}
+N -1500 -20 -1450 -20 {lab=serial_in}
+C {lab_wire.sym} -1500 -20 0 0 {name=l_w_sin lab=serial_in}
+N -1500 0 -1450 0 {lab=clk}
+C {lab_wire.sym} -1500 0 0 0 {name=l_w_clk0 lab=clk}
+N -1500 20 -1450 20 {lab=rst_n}
+C {lab_wire.sym} -1500 20 0 0 {name=l_w_rst0 lab=rst_n}
+N -1150 -20 -1100 -20 {lab=Q0}
+N -1150 -120 -1150 -20 {lab=Q0}
+
+# Stage 1: DFF 1
+C {sar_adc/blocks/async_sar/dff_cell.sym} -950 0 0 0 {name=x2}
+N -1150 0 -1100 0 {lab=clk}
+C {lab_wire.sym} -1150 0 0 0 {name=l_w_clk1 lab=clk}
+N -1150 20 -1100 20 {lab=rst_n}
+C {lab_wire.sym} -1150 20 0 0 {name=l_w_rst1 lab=rst_n}
+N -800 -20 -750 -20 {lab=Q1}
+N -800 -120 -800 -20 {lab=Q1}
+
+# Stage 2: DFF 2
+C {sar_adc/blocks/async_sar/dff_cell.sym} -600 0 0 0 {name=x3}
+N -800 0 -750 0 {lab=clk}
+C {lab_wire.sym} -800 0 0 0 {name=l_w_clk2 lab=clk}
+N -800 20 -750 20 {lab=rst_n}
+C {lab_wire.sym} -800 20 0 0 {name=l_w_rst2 lab=rst_n}
+N -450 -20 -400 -20 {lab=Q2}
+N -450 -120 -450 -20 {lab=Q2}
+
+# Stage 3: DFF 3
+C {sar_adc/blocks/async_sar/dff_cell.sym} -250 0 0 0 {name=x4}
+N -450 0 -400 0 {lab=clk}
+C {lab_wire.sym} -450 0 0 0 {name=l_w_clk3 lab=clk}
+N -450 20 -400 20 {lab=rst_n}
+C {lab_wire.sym} -450 20 0 0 {name=l_w_rst3 lab=rst_n}
+N -100 -20 -50 -20 {lab=Q3}
+N -100 -120 -100 -20 {lab=Q3}
+
+# Stage 4: DFF 4
+C {sar_adc/blocks/async_sar/dff_cell.sym} 100 0 0 0 {name=x5}
+N -100 0 -50 0 {lab=clk}
+C {lab_wire.sym} -100 0 0 0 {name=l_w_clk4 lab=clk}
+N -100 20 -50 20 {lab=rst_n}
+C {lab_wire.sym} -100 20 0 0 {name=l_w_rst4 lab=rst_n}
+N 250 -20 300 -20 {lab=Q4}
+N 250 -120 250 -20 {lab=Q4}
+
+# Stage 5: DFF 5
+C {sar_adc/blocks/async_sar/dff_cell.sym} 450 0 0 0 {name=x6}
+N 250 0 300 0 {lab=clk}
+C {lab_wire.sym} 250 0 0 0 {name=l_w_clk5 lab=clk}
+N 250 20 300 20 {lab=rst_n}
+C {lab_wire.sym} 250 20 0 0 {name=l_w_rst5 lab=rst_n}
+N 600 -20 650 -20 {lab=Q5}
+N 600 -120 600 -20 {lab=Q5}
+
+# Stage 6: DFF 6
+C {sar_adc/blocks/async_sar/dff_cell.sym} 800 0 0 0 {name=x7}
+N 600 0 650 0 {lab=clk}
+C {lab_wire.sym} 600 0 0 0 {name=l_w_clk6 lab=clk}
+N 600 20 650 20 {lab=rst_n}
+C {lab_wire.sym} 600 20 0 0 {name=l_w_rst6 lab=rst_n}
+N 950 -20 1000 -20 {lab=Q6}
+N 950 -120 950 -20 {lab=Q6}
+
+# Stage 7: DFF 7
+C {sar_adc/blocks/async_sar/dff_cell.sym} 1150 0 0 0 {name=x8}
+N 950 0 1000 0 {lab=clk}
+C {lab_wire.sym} 950 0 0 0 {name=l_w_clk7 lab=clk}
+N 950 20 1000 20 {lab=rst_n}
+C {lab_wire.sym} 950 20 0 0 {name=l_w_rst7 lab=rst_n}
+N 1300 -20 1350 -20 {lab=Q7}
+N 1300 -120 1300 -20 {lab=Q7}
+
+# Stage 8: DFF Done
+C {sar_adc/blocks/async_sar/dff_cell.sym} 1500 0 0 0 {name=x9}
+N 1300 0 1350 0 {lab=clk}
+C {lab_wire.sym} 1300 0 0 0 {name=l_w_clk8 lab=clk}
+N 1300 20 1350 20 {lab=rst_n}
+C {lab_wire.sym} 1300 20 0 0 {name=l_w_rst8 lab=rst_n}
+N 1650 -20 1700 -20 {lab=done}
+N 1650 -120 1650 -20 {lab=done}
+
+C {title.sym} 160 200 0 0 {name=l_title author="Berkah Saluyu"}
