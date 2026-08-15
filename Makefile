@@ -81,4 +81,17 @@ sim-view: ## View simulation waveforms in GTKWave
 render-image: ## Render an image from the final layout (after copy-final)
 	mkdir -p img/
 	PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 scripts/lay2img.py final/gds/${TOP}.gds img/${TOP}.png --width 2048 --oversampling 4
-.PHONY: copy-final
+.PHONY: render-image
+
+drc: ## Run GF180MCU DRC on async_sar top-level layout
+	python3 scripts/run_drc.py --cell async_sar
+.PHONY: drc
+
+lvs: ## Run Netgen LVS on async_sar top-level layout using lvs_config.json
+	python3 scripts/run_lvs.py --cell async_sar
+.PHONY: lvs
+
+verify: ## Run comprehensive DRC and LVS verification suite across all cells
+	python3 scripts/verify_all.py
+.PHONY: verify
+

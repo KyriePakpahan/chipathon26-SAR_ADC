@@ -1,0 +1,8 @@
+* Testbench for Async SAR
+.control
+set filetype=ascii
+source tb_async_sar.spice
+run
+write tb_async_sar_ascii.raw
+quit
+.endc

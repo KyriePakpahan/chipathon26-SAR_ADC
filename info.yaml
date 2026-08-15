@@ -1,0 +1,142 @@
+# ==============================================================================
+# IEEE CASS CHIPATHON 2026: PROJECT SPECIFICATION & DESIGN MANIFEST
+# ==============================================================================
+# Project: Monolithic 8-bit 10 MS/s Asynchronous SAR ADC
+# Technology: GlobalFoundries GF180MCU (Variant D, 3.3V CMOS)
+# Target PDK: gf180mcuD
+# ==============================================================================
+
+project:
+  title: "8-Bit 10 MS/s Asynchronous SAR ADC"
+  name: "sar_adc_8bit_async"
+  version: "1.0.0"
+  description: "Monolithic 8-bit 10 MS/s Asynchronous SAR ADC with self-timed comparator completion detection, high-speed StrongARM comparator, capacitive DAC (CDAC), and optimized TSPC logic controller."
+  author: "A49 Berkah Saluyu Team"
+  affiliation: "Chipathon 2026 Participant"
+  license: "Apache-2.0"
+  repository: "https://github.com/KyriePakpahan/chipathon26-SAR_ADC"
+  pdk: "gf180mcuD"
+  supply_voltage: "3.3V"
+
+specifications:
+  architecture: "Asynchronous Charge-Redistribution SAR ADC"
+  resolution_bits: 8
+  sampling_rate: "10 MS/s"
+  conversion_period: "100 ns"
+  input_full_scale: "0.45V - 2.85V (2.4 Vpp differential swing)"
+  lsb_voltage: "12.89 mV"
+  target_enob: "> 7.0 bits"
+  target_sndr: "> 44.0 dB"
+  target_sfdr: "> 50.0 dB"
+  clock_scheme: "Self-Timed Asynchronous (No high-speed external clock required)"
+
+layout_blocks:
+  top_level:
+    name: "async_sar"
+    gds_path: "layout/async_sar.gds"
+    netlist_path: "cdl/async_sar.spice"
+    total_mosfets: 736
+    total_nets: 355
+    dimensions_um: "880.0 x 140.0"
+    drc_status: "PASS (0 violations, GF180MCU variant D)"
+    lvs_status: "PASS (Circuits match uniquely, Netgen 1.5.318)"
+
+  subcells:
+    - name: "shift_reg_8bit"
+      gds_path: "layout/shift_reg_8bit.gds"
+      netlist_path: "cdl/shift_reg_8bit.spice"
+      mosfets: 184
+      description: "8-Stage TSPC Shift Register Ring Counter"
+
+    - name: "bit_reg"
+      gds_path: "layout/bit_reg.gds"
+      netlist_path: "cdl/bit_reg.spice"
+      mosfets: 28
+      description: "Bit Register & Output SR Latch"
+
+    - name: "async_delay_chain"
+      gds_path: "layout/async_delay_chain.gds"
+      netlist_path: "cdl/async_delay_chain.spice"
+      mosfets: 42
+      description: "21-Inverter Delay Chain for Settle Timing"
+
+    - name: "async_start_delay"
+      gds_path: "layout/async_start_delay.gds"
+      netlist_path: "cdl/async_start_delay.spice"
+      mosfets: 90
+      description: "45-Inverter Start Pulse Shaper"
+
+    - name: "dff_cell"
+      gds_path: "layout/dff_cell.gds"
+      netlist_path: "cdl/dff_cell.spice"
+      mosfets: 20
+      description: "True Single-Phase Clocked DFF with Reset"
+
+    - name: "dff_cell_set"
+      gds_path: "layout/dff_cell_set.gds"
+      netlist_path: "cdl/dff_cell_set.spice"
+      mosfets: 24
+      description: "TSPC DFF with Asynchronous Preset (Stage 0)"
+
+    - name: "async_nor2"
+      gds_path: "layout/async_nor2.gds"
+      netlist_path: "cdl/async_nor2.spice"
+      mosfets: 10
+      description: "2-Input Inverted-NAND Structure NOR Gate"
+
+    - name: "async_nand2"
+      gds_path: "layout/async_nand2.gds"
+      netlist_path: "cdl/async_nand2.spice"
+      mosfets: 4
+      description: "Standard 2-Input CMOS NAND Gate"
+
+    - name: "async_inverter"
+      gds_path: "layout/async_inverter.gds"
+      netlist_path: "cdl/async_inverter.spice"
+      mosfets: 2
+      description: "Standard CMOS Inverter Buffer (1x)"
+
+pinout:
+  power:
+    - name: "vdd"
+      type: "power"
+      voltage: "3.3V"
+      description: "Main 3.3V Analog & Digital Supply Rail"
+    - name: "vss"
+      type: "ground"
+      voltage: "0.0V"
+      description: "Main Ground Reference Rail"
+
+  control_inputs:
+    - name: "start"
+      type: "input"
+      description: "Active-high conversion trigger and bottom-plate sampling control"
+    - name: "comp_done"
+      type: "input"
+      description: "Active-high comparator ready handshake from StrongARM completion detector"
+    - name: "comp_out_p"
+      type: "input"
+      description: "Positive comparison decision bit from comparator latch"
+
+  control_outputs:
+    - name: "sample_en"
+      type: "output"
+      description: "Sampling switch driver enable pulse"
+    - name: "rst_latch"
+      type: "output"
+      description: "Comparator reset & latch evaluation control signal"
+    - name: "done"
+      type: "output"
+      description: "Active-high End-of-Conversion (EOC) flag pulse"
+
+  digital_data:
+    - name: "dout[7:0]"
+      type: "output_bus"
+      width: 8
+      description: "8-bit registered digital output word (MSB: dout[7], LSB: dout[0])"
+
+  dac_controls:
+    - name: "dac_in[7:0]"
+      type: "output_bus"
+      width: 8
+      description: "8-bit CDAC capacitor bottom-plate control switching lines"
