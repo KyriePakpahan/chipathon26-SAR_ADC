@@ -1,0 +1,22 @@
+** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_buf_strong.sch
+**.subckt async_buf_strong in out
+*.ipin in
+*.opin out
+x1 in_b in async_inverter
+x2 out in_b async_inverter
+**.ends
+
+* expanding   symbol:  sar_adc/blocks/async_sar/async_inverter.sym # of pins=2
+** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_inverter.sym
+** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_inverter.sch
+.subckt async_inverter out input
+*.ipin input
+*.opin out
+XM5 out input VDD VDD pfet_03v3 L=0.28u W=0.80u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XM6 out input 0 0 nfet_03v3 L=0.28u W=0.42u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+.ends
+
+.GLOBAL VDD
+.end

@@ -1,0 +1,147 @@
+# ==============================================================================
+# CHIPATHON 2026: 8-BIT ASYNCHRONOUS SAR ADC DESIGN & OPTIMIZATION MANUAL
+# ==============================================================================
+# File: INSTRUCTION.MD (Memory Recall & Agent Handover Guide)
+# Target PDK: GlobalFoundries GF180MCU (gf180mcuD, 3.3V typical corner)
+# Primary Goal: Achieve ENOB > 7.0 bits (SNDR > 44 dB) on 8-bit Asynchronous SAR ADC
+# Sampling Rate: 10 MS/s (Period: 100 ns per cycle, 35 coherent conversion cycles)
+# Dynamic Input: Coherent Sine Wave (fin = 859.375 kHz, Amplitude = 1.20 V, Offset = 1.65 V)
+# ==============================================================================
+
+## 1. PROJECT CONTEXT & DESIGN SPECIFICATIONS
+
+The circuit under design is a monolithic 8-bit Asynchronous Successive Approximation Register (SAR) Analog-to-Digital Converter (ADC) designed in the open-source GF180MCU 180nm CMOS PDK.
+
+* **Resolution:** 8 Bits (256 quantization levels, LSB = 3.3V / 256 = 12.89 mV).
+* **Clocking Paradigm:** Asynchronous / Self-Timed (Internal clock generated via comparator completion detection `comp_done` triggering a shift-register ring).
+* **Sampling Rate:** 10 MS/s (100 ns per full 8-bit conversion cycle, 8 binary search steps per cycle + sampling phase).
+* **Test Protocol:** Coherent Dynamic Sine Wave Input:
+  * Number of coherent samples: $M = 35$ cycles ($t_{sim} = 3.5\,\mu\text{s}$).
+  * Input frequency: $f_{in} = \frac{J}{M} \cdot f_s = \frac{3}{35} \cdot 10\text{ MHz} = 859.375\text{ kHz}$.
+  * Input voltage: $V_{in}(t) = 1.65\text{V} + 1.20\text{V} \cdot \sin(2\pi \cdot 859375 \cdot t)$.
+  * Full input swing: $0.45\text{V}$ to $2.85\text{V}$.
+
+---
+
+## 2. EXECUTION ENVIRONMENT & DOCKER RULES
+
+* **Docker Image:** `hpretl/iic-osic-tools:chipathon26`
+* **Execution Constraint:** Always use the `--skip` flag as the first argument after the image name to bypass GUI initialization.
+* **Working Directory Inside Docker:** `/foss/designs/chipathon26-SAR_ADC/xschem/sar_adc`
+* **Host Directory:** `/home/kyrie/eda/designs/chipathon26-SAR_ADC/xschem/sar_adc`
+
+### Standard Simulation Execution Command:
+```bash
+docker run --rm -v /home/kyrie/eda/designs/chipathon26-SAR_ADC:/foss/designs/chipathon26-SAR_ADC \
+  hpretl/iic-osic-tools:chipathon26 --skip bash -c \
+  "cd /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc && ngspice -b tb_sar_adc_dynamic_fixed.spice"
+```
+
+---
+
+## 3. ARCHITECTURE & SIGNAL FLOW
+
+```
+[ Analog Input: Vin ] ---> [ Bootstrap Sampling Switch + Hold Cap (Vhold) ]
+                                 |
+                                 v
+[ CDAC 8-bit Array (Vdac) ] ---> [ High-Speed StrongARM Comparator ]
+                                        |
+                                        v
+                            [ Buffer-Isolated NOR SR Latch ] ---> [ comp_out_p / comp_out_n ]
+                                        |
+                                        v
+                            [ Completion Detector: comp_done ]
+                                        |
+                                        v
+                            [ Asynchronous Timing Logic & Shift Reg ] ---> [ Bit Regs dout[7..0] ]
+```
+
+1. **Sampling Phase (`sample_en = 1`):**
+   * Top-plate switch samples $V_{in}$ onto holding capacitor $V_{hold}$.
+   * CDAC is reset to common-mode mid-rail ($V_{cm} = 1.65\text{V}$).
+2. **Successive Approximation Steps (MSB Step 7 down to LSB Step 0):**
+   * Step 7: Shift register activates $Q_0$. DAC tests MSB ($V_{dac} = 1.65\text{V}$).
+   * Comparator fires $\to$ `comp_done` triggers.
+   * `comp_out_p` is latched into `dout[7]`.
+   * Shift register advances to $Q_1$. DAC updates $V_{dac}$ to next binary level.
+   * Asynchronous delay loop pulses `rst_latch` to precharge comparator, then releases it for the next bit decision.
+   * Repeated asynchronously for all 8 bits until `done` flag asserts.
+
+---
+
+## 4. ROOT-CAUSE ANALYSIS & FIXES IMPLEMENTED
+
+### Issue 1: Bit Register Glitch & MSB Dropping (DFF Instability)
+* **Root Cause:** Original `dff_cell` and `dff_cell_set` used weak long-channel feedback keepers ($L=2.4\,\mu\text{m}, W=0.22\,\mu\text{m}$). During asynchronous switching, clock feedthrough and charge sharing caused internal storage nodes to float and flip states (especially MSB Bit 7 dropping from 1 to 0).
+* **Fix Implemented:** Replaced all keepers with fully clocked tri-state feedback inverters ($W/L = 1.0\mu\text{m}/0.28\mu\text{m}$ PMOS, $0.5\mu\text{m}/0.28\mu\text{m}$ NMOS) forming true Master-Slave Transmission-Gate Flip-Flops.
+
+### Issue 2: Comparator Dynamic Return-to-Zero Output Glitches
+* **Root Cause:** Standard StrongARM precharges both outputs to VDD when `rst_latch = 0`. This dynamic precharge pulse raced into bit registers before digital logic could evaluate.
+* **Fix Implemented:** Implemented a Static SR Latch after the comparator core to convert dynamic precharge pulses into clean, continuous rail-to-rail static levels that hold valid comparison results throughout the precharge phase.
+
+### Issue 3: Asynchronous Clock Timing Race Condition
+* **Root Cause:** `comp_done` triggered `rst_latch` reset too quickly (< 200 ps setup time), resetting the comparator before the shift register and bit registers could sample the result.
+* **Fix Implemented:** Added calibrated delay buffers (`delay_line_slow` and buffer chains) on the `comp_done` $\to$ `net2` path to guarantee $> 1.0\text{ ns}$ setup margin for bit registers.
+
+### Issue 4: SR Latch Back-Driving & Memory Hysteresis
+* **Root Cause:** Directly connecting a cross-coupled SR latch to the StrongARM regenerator nodes caused the previous step's latch output (0V) to turn ON the latch PMOS, injecting current backwards into the comparator's internal nodes during the next comparison phase, biasing the decision.
+* **Fix Implemented:** Placed inverter buffers (`x_inv_buf_p` and `x_inv_buf_n`) between the StrongARM core and the NOR SR latch. This completely isolates the sensitive differential latching nodes from the output load and eliminates all inter-step memory/hysteresis.
+
+### Issue 5: Comparator Transistor Sizing & Node Reset
+* **Root Cause:** Intermediate nodes `net_p` and `net_n` lacked balanced precharge, and tail switch resistance caused common-mode degeneration.
+* **Fix Implemented:** 
+  * Sized tail transistor to $W = 32\,\mu\text{m}$ ($L = 0.28\,\mu\text{m}, \text{nf}=4$).
+  * Sized differential input pair to $W = 16\,\mu\text{m}$ ($L = 0.28\,\mu\text{m}, \text{nf}=2$).
+  * Cross-coupled regenerative pair sized to $W = 6\,\mu\text{m}$.
+  * Dedicated precharge switches `XM_rst_np` and `XM_rst_nn` reset intermediate nodes cleanly to VDD during precharge.
+
+---
+
+## 5. KEY FILES & DIRECTORY STRUCTURE
+
+* **Testbench & Netlist:**
+  * `/home/kyrie/eda/designs/chipathon26-SAR_ADC/xschem/sar_adc/tb_sar_adc_dynamic_fixed.spice` (Main verified SPICE testbench).
+* **Subcircuits & Schematics (Xschem):**
+  * `/home/kyrie/eda/designs/chipathon26-SAR_ADC/xschem/sar_adc/sar_adc_top.sch` (Top-level ADC schematic).
+  * `/home/kyrie/eda/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_sar.sch` (Asynchronous control logic).
+  * `/home/kyrie/eda/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/dff/dff_cell.sch` (Master-slave DFF schematic).
+  * `/home/kyrie/eda/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/dff/dff_cell_set.sch` (DFF with asynchronous set).
+  * `/home/kyrie/eda/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/comparator/strongarm_comp_pmos.sch` (Comparator block).
+  * `/home/kyrie/eda/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/cdac/cdac_8bit.sch` (8-bit binary-weighted CDAC).
+* **Analysis & Verification Scripts:**
+  * `test_all_35_cycles.py` (Extracts sampled digital codes vs ideal codes for all 35 cycles and calculates average error).
+  * `compute_enob_35.py` (Performs sine fit, computes Signal Power, Noise Power, SNDR, and ENOB across the 35 coherent samples).
+
+---
+
+## 6. VERIFICATION SCRIPTS REFERENCE
+
+### Running the 35-Cycle Extraction Script:
+```bash
+python3 test_all_35_cycles.py
+```
+*Expected Output Structure:*
+* Cycle number (0 to 34)
+* Sample timestamp ($t = 0.08\,\mu\text{s}, 0.18\,\mu\text{s}, \dots, 3.48\,\mu\text{s}$)
+* Input voltage $V_{in}$, Sampled voltage $V_{hold}$, Final DAC voltage $V_{dac}$
+* 8-bit digital output string `dout[7..0]`
+* Reconstructed Code vs Ideal Code and Error (in LSBs).
+
+### Computing SNDR & ENOB:
+```bash
+python3 compute_enob_35.py
+```
+*Formula Used:*
+$$\text{SNDR (dB)} = 10 \cdot \log_{10}\left(\frac{P_{signal}}{P_{noise}}\right)$$
+$$\text{ENOB} = \frac{\text{SNDR} - 1.76}{6.02}$$
+
+---
+
+## 7. OPERATIONAL INSTRUCTIONS FOR AGENTS
+
+When resuming work or performing next steps:
+1. **Always Verify Testbench Integrity:** Before running simulations, check that `tb_sar_adc_dynamic_fixed.spice` contains the updated `dff_cell`, `comp_core_nmos`, and buffer-isolated NOR SR latch.
+2. **Execute Full Transient Simulation:** Use the Docker command shown in Section 2 with transient duration `tran 0.1n 3.5u`.
+3. **Validate Code Linearity & ENOB:** Run `test_all_35_cycles.py` and `compute_enob_35.py` to ensure all 35 cycles track the coherent sine wave with low average error.
+4. **Schematic Backporting:** Ensure all netlist-level improvements (`tb_sar_adc_dynamic_fixed.spice`) are mapped back into their respective `.sch` schematic files in Xschem (`dff_cell.sch`, `async_sar.sch`, `strongarm_comp_pmos.sch`).

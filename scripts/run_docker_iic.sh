@@ -18,7 +18,7 @@
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-IMAGE="${IIC_IMAGE:-hpretl/iic-osic-tools:latest}"
+IMAGE="${IIC_IMAGE:-hpretl/iic-osic-tools:chipathon26}"
 
 if ! command -v docker >/dev/null 2>&1; then
     echo "docker not found in PATH" >&2

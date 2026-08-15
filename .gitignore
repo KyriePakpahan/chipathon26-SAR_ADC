@@ -1,14 +1,28 @@
+# Temporary simulation data and intermediate runs
+agent_runs/
+reports/
 runs/
-__pycache__/
-gf180mcu/
-gf180_drc.lyrdb
 sim_build/
 final/
 img/
-*.lyrdb
+__pycache__/
 .ipynb_checkpoints/
+gf180mcu/
+
+# Temporary and scratch directories
+scripts/scratch/
+scripts/suite*
+scripts/lvs_*
+scripts/drc_*
+scripts/test_lvs*
+scripts/test_xschem*
+
+# Temporary and log files
 *.raw
-*.val
 *.log
-*.spice
-*.out
+*.val
+*.bak
+*~
+*.lyrdb
+gf180_drc.lyrdb
+layout/backups/

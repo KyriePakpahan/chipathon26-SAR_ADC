@@ -1,0 +1,51 @@
+** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/cdac/cdac_8bit.sch
+**.subckt cdac_8bit vref vdd vss dac_in[7],dac_in[6],dac_in[5],dac_in[4],dac_in[3],dac_in[2],dac_in[1],dac_in[0] vdac
+*.ipin vref
+*.iopin vdd
+*.iopin vss
+*.ipin dac_in[7],dac_in[6],dac_in[5],dac_in[4],dac_in[3],dac_in[2],dac_in[1],dac_in[0]
+*.opin vdac
+XSW0 vref vdd vss bot0 dac_in[0] cdac_switch_1b
+C0 vdac bot0 2f
+XSW1 vref vdd vss bot1 dac_in[1] cdac_switch_1b
+C1 vdac bot1 4f
+XSW2 vref vdd vss bot2 dac_in[2] cdac_switch_1b
+C2 vdac bot2 8f
+XSW3 vref vdd vss bot3 dac_in[3] cdac_switch_1b
+C3 vdac bot3 16f
+XSW4 vref vdd vss bot4 dac_in[4] cdac_switch_1b
+C4 vdac bot4 32f
+XSW5 vref vdd vss bot5 dac_in[5] cdac_switch_1b
+C5 vdac bot5 64f
+XSW6 vref vdd vss bot6 dac_in[6] cdac_switch_1b
+C6 vdac bot6 128f
+XSW7 vref vdd vss bot7 dac_in[7] cdac_switch_1b
+C7 vdac bot7 256f
+CDummy vdac vss 2f
+R_dc vdac vss 100G
+**.ends
+
+* expanding   symbol:  sar_adc/blocks/cdac/cdac_switch_1b.sym # of pins=5
+** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/cdac/cdac_switch_1b.sym
+** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/cdac/cdac_switch_1b.sch
+.subckt cdac_switch_1b vref vdd vss bot bit
+*.iopin vdd
+*.iopin vss
+*.iopin vref
+*.ipin bit
+*.iopin bot
+XM1 bit_b bit vdd vdd pfet_03v3 L=0.28u W=1u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XM2 bit_b bit vss vss nfet_03v3 L=0.28u W=0.5u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XM3 bot bit_b vref vdd pfet_03v3 L=0.28u W=4u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XM4 vref bit bot vss nfet_03v3 L=0.28u W=2u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XM5 bot bit vss vdd pfet_03v3 L=0.28u W=4u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XM6 vss bit_b bot vss nfet_03v3 L=0.28u W=2u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+.ends
+
+.end
