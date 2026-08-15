@@ -26,7 +26,7 @@
   "LVS_VERILOG_FILES": [
     ""
   ],
-  "LAYOUT_FILE": "$UPRJ_ROOT/gds/$TOP_LAYOUT.gds",
+  "LAYOUT_FILE": "$UPRJ_ROOT/layout/$TOP_LAYOUT.gds",
   "project_name": "sar_adc_8bit_async",
   "pdk": "gf180mcuD",
   "variant": "D",
