@@ -1,6 +1,6 @@
 # 8-Bit 10 MS/s Asynchronous SAR ADC
 
-**IEEE CASS / SSCS Chipathon 2026 — Track A**  
+**IEEE SSCS Chipathon 2026 — Track A**  
 **Team A49 — Berkah Saluyu**
 
 [![DRC Status](https://img.shields.io/badge/DRC-PASS%20(0%20errors)-brightgreen)](docs/VERIFICATION.md)
