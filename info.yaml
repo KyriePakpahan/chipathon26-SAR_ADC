@@ -1,20 +1,23 @@
-# ==============================================================================
-# IEEE CASS CHIPATHON 2026: PROJECT SPECIFICATION & DESIGN MANIFEST
-# ==============================================================================
-# Project: Monolithic 8-bit 10 MS/s Asynchronous SAR ADC
-# Technology: GlobalFoundries GF180MCU (Variant D, 3.3V CMOS)
-# Target PDK: gf180mcuD
-# ==============================================================================
+# ----- ------ ----- ----- ------ ----- ----- ------ -----
+# Chipathon 2026: Project configuration
+# LICENSE: Apache License Version 2.0
+# http://www.apache.org/licenses/
+# ----- ------ ----- ----- ------ ----- ----- ------ -----
 
+# data will be pulled from main branch of the repo.
+# please be sure that the main branch contains the data you want to submit.
+
+# ======================================================
+# Project metadata (used for documentation / review)
+# ======================================================
 project:
-  title: "8-Bit 10 MS/s Asynchronous SAR ADC"
-  name: "sar_adc_8bit_async"
-  version: "1.0.0"
+  title: "8-bit Asynchronous SAR ADC for Power Efficiency"
+  team: "A49 Berkah Saluyu"
+  discord: ""
   description: "Monolithic 8-bit 10 MS/s Asynchronous SAR ADC with self-timed comparator completion detection, high-speed StrongARM comparator, capacitive DAC (CDAC), and optimized TSPC logic controller."
-  author: "A49 Berkah Saluyu Team"
-  affiliation: "Chipathon 2026 Participant"
+  lvs_config: "lvs_config.json"
   license: "Apache-2.0"
-  repository: "https://github.com/KyriePakpahan/chipathon26-SAR_ADC"
+  repository: "https://github.com/arazax/chipathon26-SAR_ADC"
   pdk: "gf180mcuD"
   supply_voltage: "3.3V"
 
