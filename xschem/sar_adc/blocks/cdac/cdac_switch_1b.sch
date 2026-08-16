@@ -5,43 +5,35 @@ V {}
 S {}
 F {}
 E {}
-# Port wires
 N -150 -300 -50 -300 {lab=bit}
 N -150 -240 -50 -240 {lab=vref}
 N -150 -180 -50 -180 {lab=vdd}
 N -150 -120 -50 -120 {lab=vss}
 N -150 -60 -50 -60 {lab=bot}
-
-# Inverter (M1, M2)
-N 30 -200 0 -200 {lab=bit}
-N 30 -100 0 -100 {lab=bit}
-N 70 -230 70 -250 {lab=vdd}
+N 0 -200 30 -200 {lab=bit}
+N 0 -100 30 -100 {lab=bit}
+N 70 -250 70 -230 {lab=vdd}
 N 70 -200 100 -200 {lab=vdd}
 N 70 -170 70 -130 {lab=bit_b}
 N 70 -150 110 -150 {lab=bit_b}
 N 70 -70 70 -50 {lab=vss}
 N 70 -100 100 -100 {lab=vss}
-
-# Vref Switch (M3 pfet at (250, -200), M4 nfet at (350, -200))
 N 270 -230 370 -230 {lab=vref}
 N 200 -230 270 -230 {lab=vref}
-N 230 -200 200 -200 {lab=bit_b}
+N 200 -200 230 -200 {lab=bit_b}
 N 270 -200 290 -200 {lab=vdd}
-N 330 -200 300 -200 {lab=bit}
+N 300 -200 330 -200 {lab=bit}
 N 370 -200 390 -200 {lab=vss}
 N 270 -170 370 -170 {lab=bot}
 N 370 -170 410 -170 {lab=bot}
-
-# Vss Switch (M5 pfet at (250, -50), M6 nfet at (350, -50))
 N 270 -80 370 -80 {lab=vss}
 N 200 -80 270 -80 {lab=vss}
-N 230 -50 200 -50 {lab=bit}
+N 200 -50 230 -50 {lab=bit}
 N 270 -50 290 -50 {lab=vdd}
-N 330 -50 300 -50 {lab=bit_b}
+N 300 -50 330 -50 {lab=bit_b}
 N 370 -50 390 -50 {lab=vss}
 N 270 -20 370 -20 {lab=bot}
 N 370 -20 410 -20 {lab=bot}
-
 C {title.sym} 160 100 0 0 {name=l1 author="Berkah Saluyu"}
 C {ipin.sym} -150 -300 0 0 {name=p_bit lab=bit}
 C {lab_wire.sym} -50 -300 2 0 {name=l_bit lab=bit}
@@ -53,8 +45,6 @@ C {iopin.sym} -150 -120 0 0 {name=p_vss lab=vss}
 C {lab_wire.sym} -50 -120 2 0 {name=l_vss lab=vss}
 C {iopin.sym} -150 -60 0 0 {name=p_bot lab=bot}
 C {lab_wire.sym} -50 -60 2 0 {name=l_bot lab=bot}
-
-# M1, M2 (Inverter: Wp=0.8u, Wn=0.4u)
 C {symbols/pfet_03v3.sym} 50 -200 0 0 {name=M1
 L=0.28u
 W=0.8u
@@ -71,7 +61,7 @@ spiceprefix=X
 }
 C {symbols/nfet_03v3.sym} 50 -100 0 0 {name=M2
 L=0.28u
-W=0.4u
+W=0.42u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
@@ -90,8 +80,6 @@ C {lab_wire.sym} 100 -200 2 0 {name=l_inv_vdd2 lab=vdd}
 C {lab_wire.sym} 110 -150 2 0 {name=l_inv_out lab=bit_b}
 C {lab_wire.sym} 70 -50 0 0 {name=l_inv_vss1 lab=vss}
 C {lab_wire.sym} 100 -100 2 0 {name=l_inv_vss2 lab=vss}
-
-# M3, M4 (Vref Switch: Wp=2.0u, Wn=1.0u)
 C {symbols/pfet_03v3.sym} 250 -200 0 0 {name=M3
 L=0.28u
 W=2.0u
@@ -126,8 +114,6 @@ C {lab_wire.sym} 290 -200 2 0 {name=l_vr_b1 lab=vdd}
 C {lab_wire.sym} 300 -200 0 0 {name=l_vr_g2 lab=bit}
 C {lab_wire.sym} 390 -200 2 0 {name=l_vr_b2 lab=vss}
 C {lab_wire.sym} 410 -170 2 0 {name=l_vr_out lab=bot}
-
-# M5, M6 (Vss Switch: Wp=2.0u, Wn=1.0u)
 C {symbols/pfet_03v3.sym} 250 -50 0 0 {name=M5
 L=0.28u
 W=2.0u
