@@ -64,7 +64,7 @@ layout_blocks:
     - name: "cdac_8bit"
       gds_path: "layout/sar_adc/blocks/cdac/cdac_8bit.gds"
       schematic_path: "xschem/sar_adc/blocks/cdac/cdac_8bit.sch"
-      status: "UNDER_DEVELOPMENT (In Progress by Team Member)"
+      status: "COMPLETED (Block Layout Ready)"
       description: "8-bit Charge-Redistribution Binary-Weighted Capacitor DAC Array"
 
   async_logic_subcells:

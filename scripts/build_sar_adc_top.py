@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Top-Level Layout Generator for SAR ADC (sar_adc_top.gds)
-Assembles the constituent blocks (async_sar, strongarm_comp, sample_hold, and CDAC placeholder)
+Assembles all 4 major constituent blocks (async_sar, strongarm_comp, sample_hold, and cdac_8bit)
 into a unified top-level cell 'sar_adc_top'.
 """
 
@@ -19,6 +19,7 @@ def main():
     async_sar_gds = os.path.join(sar_adc_blocks, "async_sar", "async_sar.gds")
     comp_gds = os.path.join(sar_adc_blocks, "comparator", "strongarm_comp.gds")
     sh_gds = os.path.join(sar_adc_blocks, "sample_hold", "sample_hold.gds")
+    cdac_gds = os.path.join(sar_adc_blocks, "cdac", "cdac_8bit.gds")
 
     top_layout = pya.Layout()
     top_layout.dbu = 0.001  # 1 nm
@@ -26,8 +27,6 @@ def main():
     top_cell = top_layout.create_cell("sar_adc_top")
 
     # Layer mapping for GF180MCU
-    # Metal1 (34/0), Metal2 (36/0), Metal3 (42/0), Metal4 (46/0), Metal5 (81/0)
-    # Pin / Label layers (e.g. Metal1 label 34/10, Metal2 label 36/10, etc.)
     m1_layer = top_layout.layer(34, 0)
     m1_lbl = top_layout.layer(34, 10)
     m2_layer = top_layout.layer(36, 0)
@@ -66,14 +65,22 @@ def main():
         top_cell.insert(pya.CellInstArray(sh_cell.cell_index(), pya.Trans(pya.Point(200000, 160000))))
         print(f"[INFO] Loaded and placed '{sh_src_cell.name}' at (200 um, 160 um)")
 
-    # 4. CDAC placeholder cell
-    cdac_cell = top_layout.create_cell("cdac_8bit")
-    # Draw placeholder boundary on metal1
-    cdac_box = pya.Box(0, 0, 300000, 150000) # 300 x 150 um
-    cdac_cell.shapes(m1_layer).insert(cdac_box)
-    cdac_cell.shapes(m1_lbl).insert(pya.Text("CDAC_8BIT_PLACEHOLDER", pya.Trans(pya.Point(50000, 75000))))
-    top_cell.insert(pya.CellInstArray(cdac_cell.cell_index(), pya.Trans(pya.Point(450000, 160000))))
-    print(f"[INFO] Created CDAC placeholder cell 'cdac_8bit' at (450 um, 160 um)")
+    # 4. Load and place CDAC
+    if os.path.exists(cdac_gds):
+        lay_cdac = pya.Layout()
+        lay_cdac.read(cdac_gds)
+        cdac_src_cell = lay_cdac.top_cell()
+        cdac_cell = top_layout.create_cell(cdac_src_cell.name)
+        cdac_cell.copy_tree(cdac_src_cell)
+        top_cell.insert(pya.CellInstArray(cdac_cell.cell_index(), pya.Trans(pya.Point(450000, 160000))))
+        print(f"[INFO] Loaded and placed '{cdac_src_cell.name}' from '{cdac_gds}' at (450 um, 160 um)")
+    else:
+        cdac_cell = top_layout.create_cell("cdac_8bit")
+        cdac_box = pya.Box(0, 0, 300000, 150000)
+        cdac_cell.shapes(m1_layer).insert(cdac_box)
+        cdac_cell.shapes(m1_lbl).insert(pya.Text("CDAC_8BIT_PLACEHOLDER", pya.Trans(pya.Point(50000, 75000))))
+        top_cell.insert(pya.CellInstArray(cdac_cell.cell_index(), pya.Trans(pya.Point(450000, 160000))))
+        print(f"[INFO] Created CDAC placeholder cell 'cdac_8bit' at (450 um, 160 um)")
 
     # 5. Add Top-Level Pin Labels
     pins = [
