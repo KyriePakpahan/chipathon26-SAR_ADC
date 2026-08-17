@@ -1,0 +1,11 @@
+* Extracted by KLayout with GF180MCU LVS runset on : 14/08/2026 21:16
+
+.SUBCKT cdac_switch_1b bit_b vref vdd bit bot vss
+M$1 bot bit_b vss vss nfet_03v3 L=0.28U W=1U AS=0.61P AD=0.61P PS=3.22U PD=3.22U
+M$2 bot bit vref vss nfet_03v3 L=0.28U W=1U AS=0.61P AD=0.61P PS=3.22U PD=3.22U
+M$3 vref bit_b bot vdd pfet_03v3 L=0.28U W=2U AS=1.3P AD=1.3P PS=5.3U PD=5.3U
+M$4 vss bit bot vdd pfet_03v3 L=0.28U W=2U AS=1.3P AD=1.3P PS=5.3U PD=5.3U
+M$5 vss bit bit_b vss nfet_03v3 L=0.28U W=0.42U AS=0.2646P AD=0.2646P PS=2.1U
++ PD=2.1U
+M$6 vdd bit bit_b vdd pfet_03v3 L=0.28U W=0.8U AS=0.52P AD=0.52P PS=2.9U PD=2.9U
+.ENDS cdac_switch_1b

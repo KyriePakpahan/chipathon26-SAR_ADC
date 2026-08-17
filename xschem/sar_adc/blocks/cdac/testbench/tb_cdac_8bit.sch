@@ -44,11 +44,18 @@ C {lab_pin.sym} 690 -290 0 0 {name=p8 sig_type=std_logic lab=dac_in[3]}
 C {lab_pin.sym} 690 -260 0 0 {name=p9 sig_type=std_logic lab=dac_in[2]}
 C {lab_pin.sym} 690 -230 0 0 {name=p10 sig_type=std_logic lab=dac_in[1]}
 C {lab_pin.sym} 690 -200 0 0 {name=p11 sig_type=std_logic lab=dac_in[0]}
-C {code_shown.sym} 10 -150 0 0 {name=MODELS
+C {code_shown.sym} 650 -750 0 0 {name=MODELS
 only_toplevel=true
 value="
 .include /foss/pdks/gf180mcuD/libs.tech/ngspice/design.ngspice
 .lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice typical
+.lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice cap_mim
+.lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice res_typical
+
+.param mim_corner_2p0fF=1.0
+.param mim_corner_2p0ff=1.0
+.param mc_c_cox_2p0ff=0
+.param mc_c_cox_2p0fF=0
 "}
 C {code_shown.sym} 10 -680 0 0 {name=SIMULATION
 only_toplevel=true
