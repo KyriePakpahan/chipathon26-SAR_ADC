@@ -10,6 +10,20 @@ import json
 import argparse
 import subprocess
 
+def find_gds_path(proj_root, cell_name):
+    candidate_paths = [
+        os.path.join(proj_root, "layout", "sar_adc", "blocks", "async_sar", f"{cell_name}.gds"),
+        os.path.join(proj_root, "layout", "sar_adc", "blocks", "comparator", f"{cell_name}.gds"),
+        os.path.join(proj_root, "layout", "sar_adc", "blocks", "sample_hold", f"{cell_name}.gds"),
+        os.path.join(proj_root, "layout", "sar_adc", "blocks", "cdac", f"{cell_name}.gds"),
+        os.path.join(proj_root, "layout", "sar_adc", f"{cell_name}.gds"),
+        os.path.join(proj_root, "layout", f"{cell_name}.gds"),
+    ]
+    for p in candidate_paths:
+        if os.path.exists(p):
+            return p
+    return None
+
 def main():
     parser = argparse.ArgumentParser(description="Run GF180MCU DRC using PDK deck")
     parser.add_argument("--cell", default="async_sar", help="Cell name to run DRC on (default: async_sar)")
@@ -21,12 +35,10 @@ def main():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     proj_root = os.path.dirname(script_dir) if os.path.basename(script_dir) == "scripts" else script_dir
 
-    gds_path = args.gds
-    if not gds_path:
-        gds_path = os.path.join(proj_root, "layout", f"{args.cell}.gds")
+    gds_path = args.gds or find_gds_path(proj_root, args.cell)
 
-    if not os.path.exists(gds_path):
-        print(f"[ERROR] Layout GDS '{gds_path}' does not exist!")
+    if not gds_path or not os.path.exists(gds_path):
+        print(f"[ERROR] Layout GDS for cell '{args.cell}' not found!")
         sys.exit(1)
 
     run_dir = args.run_dir or os.path.join(proj_root, "reports", f"drc_{args.cell}")

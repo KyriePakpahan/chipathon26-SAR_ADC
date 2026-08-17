@@ -3,7 +3,7 @@
   "INCLUDE_CONFIGS": [
     "$LVS_ROOT/tech/$PDK/lvs_config.base.json"
   ],
-  "TOP_SOURCE": "sar_adc_top",
+  "TOP_SOURCE": "async_sar",
   "TOP_LAYOUT": "$TOP_SOURCE",
   "EXTRACT_FLATGLOB": [
     ""
@@ -21,79 +21,10 @@
     ""
   ],
   "LVS_SPICE_FILES": [
-    ""
+    "$UPRJ_ROOT/cdl/async_sar.spice"
   ],
   "LVS_VERILOG_FILES": [
     ""
   ],
-  "LAYOUT_FILE": "$UPRJ_ROOT/layout/$TOP_LAYOUT.gds",
-  "project_name": "sar_adc_8bit_async",
-  "pdk": "gf180mcuD",
-  "variant": "D",
-  "lvs_setup_file": "/foss/pdks/gf180mcuD/libs.tech/netgen/gf180mcuD_setup.tcl",
-  "klayout_lvs_deck": "/foss/pdks/gf180mcuD/libs.tech/klayout/tech/lvs/run_lvs.py",
-  "klayout_drc_deck": "/foss/pdks/gf180mcuD/libs.tech/klayout/tech/drc/run_drc.py",
-  "power_nets": [
-    "VDD",
-    "vdd"
-  ],
-  "ground_nets": [
-    "VSS",
-    "vss"
-  ],
-  "extract_top_lvl_pins": true,
-  "top_level": {
-    "cell_name": "async_sar",
-    "layout_path": "layout/async_sar.gds",
-    "netlist_path": "cdl/async_sar.spice",
-    "expected_devices": 736,
-    "expected_nets": 355
-  },
-  "subcells": [
-    {
-      "cell_name": "async_inverter",
-      "layout_path": "layout/async_inverter.gds",
-      "netlist_path": "cdl/async_inverter.spice"
-    },
-    {
-      "cell_name": "async_nand2",
-      "layout_path": "layout/async_nand2.gds",
-      "netlist_path": "cdl/async_nand2.spice"
-    },
-    {
-      "cell_name": "async_nor2",
-      "layout_path": "layout/async_nor2.gds",
-      "netlist_path": "cdl/async_nor2.spice"
-    },
-    {
-      "cell_name": "dff_cell",
-      "layout_path": "layout/dff_cell.gds",
-      "netlist_path": "cdl/dff_cell.spice"
-    },
-    {
-      "cell_name": "dff_cell_set",
-      "layout_path": "layout/dff_cell_set.gds",
-      "netlist_path": "cdl/dff_cell_set.spice"
-    },
-    {
-      "cell_name": "shift_reg_8bit",
-      "layout_path": "layout/shift_reg_8bit.gds",
-      "netlist_path": "cdl/shift_reg_8bit.spice"
-    },
-    {
-      "cell_name": "bit_reg",
-      "layout_path": "layout/bit_reg.gds",
-      "netlist_path": "cdl/bit_reg.spice"
-    },
-    {
-      "cell_name": "async_delay_chain",
-      "layout_path": "layout/async_delay_chain.gds",
-      "netlist_path": "cdl/async_delay_chain.spice"
-    },
-    {
-      "cell_name": "async_start_delay",
-      "layout_path": "layout/async_start_delay.gds",
-      "netlist_path": "cdl/async_start_delay.spice"
-    }
-  ]
+  "LAYOUT_FILE": "$UPRJ_ROOT/layout/sar_adc/blocks/async_sar/$TOP_LAYOUT.gds"
 }
