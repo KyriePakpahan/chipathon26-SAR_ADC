@@ -1,0 +1,12 @@
+* ==============================================================================
+* Monolithic 8-bit Asynchronous SAR ADC Top-Level CDL / Golden Netlist
+* PDK: GF180MCU (3.3V)
+* ==============================================================================
+.include async_sar.spice
+
+.subckt sar_adc_top vin vref start vdd vss done dout[7] dout[6] dout[5] dout[4] dout[3] dout[2] dout[1] dout[0]
+x1 vin sample_en vhold vdd vss sample_hold
+x2 vref vdd vss dac_in[7] dac_in[6] dac_in[5] dac_in[4] dac_in[3] dac_in[2] dac_in[1] dac_in[0] vdac cdac_8bit
+x3 vhold vdac rst_latch vdd comp_out_p comp_out_n comp_done vss strongarm_comp
+x4 start comp_out_p comp_out_n comp_done vdd vss sample_en rst_latch done dout[7] dout[6] dout[5] dout[4] dout[3] dout[2] dout[1] dout[0] dac_in[7] dac_in[6] dac_in[5] dac_in[4] dac_in[3] dac_in[2] dac_in[1] dac_in[0] async_sar
+.ends
