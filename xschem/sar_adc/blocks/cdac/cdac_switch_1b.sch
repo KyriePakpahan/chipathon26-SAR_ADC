@@ -37,13 +37,13 @@ N 370 -20 410 -20 {lab=bot}
 C {title.sym} 160 100 0 0 {name=l1 author="Berkah Saluyu"}
 C {ipin.sym} -150 -300 0 0 {name=p_bit lab=bit}
 C {lab_wire.sym} -50 -300 2 0 {name=l_bit lab=bit}
-C {iopin.sym} -150 -240 0 0 {name=p_vref lab=vref}
+C {iopin.sym} -150 -240 2 0 {name=p_vref lab=vref}
 C {lab_wire.sym} -50 -240 2 0 {name=l_vref lab=vref}
-C {iopin.sym} -150 -180 0 0 {name=p_vdd lab=vdd}
+C {iopin.sym} -150 -180 2 0 {name=p_vdd lab=vdd}
 C {lab_wire.sym} -50 -180 2 0 {name=l_vdd lab=vdd}
-C {iopin.sym} -150 -120 0 0 {name=p_vss lab=vss}
+C {iopin.sym} -150 -120 2 0 {name=p_vss lab=vss}
 C {lab_wire.sym} -50 -120 2 0 {name=l_vss lab=vss}
-C {iopin.sym} -150 -60 0 0 {name=p_bot lab=bot}
+C {iopin.sym} -150 -60 2 0 {name=p_bot lab=bot}
 C {lab_wire.sym} -50 -60 2 0 {name=l_bot lab=bot}
 C {symbols/pfet_03v3.sym} 50 -200 0 0 {name=M1
 L=0.28u
