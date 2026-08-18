@@ -1,0 +1,32 @@
+* Extracted by KLayout with GF180MCU LVS runset on : 17/08/2026 17:02
+
+.SUBCKT cdac_8bit dac_in[6] vref vdd dac_in[5] dac_in[4] dac_in[3] vdac
++ dac_in[7] dac_in[2] dac_in[1] dac_in[0] vss
+X$1 vref vdd dac_in[6] \$9 vss cdac_switch_1b
+X$2 vref vdd dac_in[7] \$14 vss cdac_switch_1b
+X$3 vref vdd dac_in[0] \$36 vss cdac_switch_1b
+X$4 vref vdd dac_in[1] \$31 vss cdac_switch_1b
+X$5 vref vdd dac_in[3] \$24 vss cdac_switch_1b
+X$6 vref vdd dac_in[2] \$27 vss cdac_switch_1b
+X$7 vref vdd dac_in[4] \$12 vss cdac_switch_1b
+X$8 vref vdd dac_in[5] \$7 vss cdac_switch_1b
+C$1 vdac \$7 2e-13 cap_mim_2f0fF A=100P P=80U
+C$5 vdac \$9 1e-13 cap_mim_2f0fF A=50P P=40U
+C$7 vdac \$12 4e-13 cap_mim_2f0fF A=200P P=160U
+C$15 vdac \$14 5e-14 cap_mim_2f0fF A=25P P=20U
+C$16 vdac \$36 6.4e-12 cap_mim_2f0fF A=3200P P=2560U
+C$17 vdac vss 5e-14 cap_mim_2f0fF A=25P P=20U
+C$18 vdac \$24 8e-13 cap_mim_2f0fF A=400P P=320U
+C$34 vdac \$27 1.6e-12 cap_mim_2f0fF A=800P P=640U
+C$66 vdac \$31 3.2e-12 cap_mim_2f0fF A=1600P P=1280U
+.ENDS cdac_8bit
+
+.SUBCKT cdac_switch_1b vref vdd bit bot vss
+M$1 bot bit_b vss vss nfet_03v3 L=0.28U W=1U AS=0.61P AD=0.61P PS=3.22U PD=3.22U
+M$2 bot bit vref vss nfet_03v3 L=0.28U W=1U AS=0.61P AD=0.61P PS=3.22U PD=3.22U
+M$3 vref bit_b bot vdd pfet_03v3 L=0.28U W=2U AS=1.3P AD=1.3P PS=5.3U PD=5.3U
+M$4 vss bit bot vdd pfet_03v3 L=0.28U W=2U AS=1.3P AD=1.3P PS=5.3U PD=5.3U
+M$5 vss bit bit_b vss nfet_03v3 L=0.28U W=0.42U AS=0.2646P AD=0.2646P PS=2.1U
++ PD=2.1U
+M$6 vdd bit bit_b vdd pfet_03v3 L=0.28U W=0.8U AS=0.52P AD=0.52P PS=2.9U PD=2.9U
+.ENDS cdac_switch_1b
