@@ -6,13 +6,27 @@ Runs official GF180MCU PDK DRC (variant D) on specified layout or top-level.
 
 import os
 import sys
-import json
 import argparse
 import subprocess
+import glob
+
+def find_gds_path(proj_root, cell_name):
+    candidate_paths = [
+        os.path.join(proj_root, "layout", "sar_adc", "blocks", "async_sar", f"{cell_name}.gds"),
+        os.path.join(proj_root, "layout", "sar_adc", "blocks", "comparator", f"{cell_name}.gds"),
+        os.path.join(proj_root, "layout", "sar_adc", "blocks", "sample_hold", f"{cell_name}.gds"),
+        os.path.join(proj_root, "layout", "sar_adc", "blocks", "cdac", f"{cell_name}.gds"),
+        os.path.join(proj_root, "layout", "sar_adc", f"{cell_name}.gds"),
+        os.path.join(proj_root, "layout", f"{cell_name}.gds"),
+    ]
+    for p in candidate_paths:
+        if os.path.exists(p):
+            return p
+    return None
 
 def main():
     parser = argparse.ArgumentParser(description="Run GF180MCU DRC using PDK deck")
-    parser.add_argument("--cell", default="async_sar", help="Cell name to run DRC on (default: async_sar)")
+    parser.add_argument("--cell", default="sar_adc_top", help="Cell name to run DRC on (default: sar_adc_top)")
     parser.add_argument("--gds", default=None, help="Explicit GDS path (optional)")
     parser.add_argument("--config", default="lvs_config.json", help="Path to lvs_config.json")
     parser.add_argument("--run_dir", default=None, help="Directory to store DRC run outputs")
@@ -21,16 +35,21 @@ def main():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     proj_root = os.path.dirname(script_dir) if os.path.basename(script_dir) == "scripts" else script_dir
 
-    gds_path = args.gds
-    if not gds_path:
-        gds_path = os.path.join(proj_root, "layout", f"{args.cell}.gds")
+    gds_path = args.gds or find_gds_path(proj_root, args.cell)
 
-    if not os.path.exists(gds_path):
-        print(f"[ERROR] Layout GDS '{gds_path}' does not exist!")
+    if not gds_path or not os.path.exists(gds_path):
+        print(f"[ERROR] Layout GDS for cell '{args.cell}' not found!")
         sys.exit(1)
 
     run_dir = args.run_dir or os.path.join(proj_root, "reports", f"drc_{args.cell}")
     os.makedirs(run_dir, exist_ok=True)
+
+    # Clean old logs in run_dir before starting
+    for old_log in glob.glob(os.path.join(run_dir, "drc_run_*.log")):
+        try:
+            os.remove(old_log)
+        except OSError:
+            pass
 
     drc_deck = "/foss/pdks/gf180mcuD/libs.tech/klayout/tech/drc/run_drc.py"
     variant = "D"
@@ -54,17 +73,18 @@ def main():
     drc_clean = False
     log_path = None
     if os.path.exists(run_dir):
-        for fname in os.listdir(run_dir):
-            if fname.startswith("drc_run_") and fname.endswith(".log"):
-                log_path = os.path.join(run_dir, fname)
-                with open(log_path) as f:
-                    txt = f.read()
-                    if "Klayout DRC run is clean. GDS has no DRC violations." in txt:
-                        drc_clean = True
-                        break
+        logs = sorted(glob.glob(os.path.join(run_dir, "drc_run_*.log")), key=os.path.getmtime)
+        if logs:
+            log_path = logs[-1]
+            with open(log_path) as f:
+                txt = f.read()
+                if "Klayout DRC run is clean. GDS has no DRC violations." in txt:
+                    drc_clean = True
+                elif "Violated rules are :" in txt:
+                    drc_clean = False
 
     print("=" * 80)
-    if drc_clean:
+    if drc_clean and res_drc.returncode == 0:
         print(f"RESULT: [PASS] - Cell '{args.cell}' HAS 0 DRC VIOLATIONS (CLEAN)!")
         print("=" * 80)
         sys.exit(0)
@@ -72,6 +92,10 @@ def main():
         print(f"RESULT: [FAIL] - DRC Violations detected for '{args.cell}'!")
         if log_path:
             print(f"See log file: {log_path}")
+            with open(log_path) as f:
+                for line in f:
+                    if "Violated rules" in line or "ERROR" in line:
+                        print(f"  -> {line.strip()}")
         print("=" * 80)
         sys.exit(1)
 

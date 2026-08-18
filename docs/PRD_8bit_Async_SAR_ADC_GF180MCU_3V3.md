@@ -71,14 +71,14 @@ Among the source designs, **Gaikwad (180 nm, 3 V)** is the closest electrical/no
 
 | Metric | Target (GF180MCU, 3.3 V) | Literature reference (cross-node/voltage) |
 |---|---|---|
-| INL | Not specified — flag for design decision | 0.73–0.9 LSB (90 nm) · < 1 LSB (180 nm, Bekal) |
-| DNL | Not specified — flag for design decision | 0.84–0.9 LSB (90 nm) · < 1 LSB (180 nm, Bekal) |
-| ENOB | Not specified — flag for design decision | 7.77 bit (90 nm) · 7.53 bit (180 nm, Bekal) · 7.35 bit @ 20 MS/s (45 nm) · 7.2 bit post-layout (180 nm, Xiong) |
-| SNR | Not specified — flag for design decision | 46 dB (45 nm) · ~65 dB implied (90 nm) |
-| SNDR | Not specified — flag for design decision | 46.7 dB (90 nm) · 46.0 dB SINAD (45 nm) · 45.16 dB near Nyquist (180 nm, Xiong) |
-| THD | Not specified — flag for design decision | Not directly given; SFDR reported instead: 61.8 dB (90 nm) · 57.29 dB (180 nm, Xiong) |
-| Latency | Not specified — flag for design decision | Not explicitly quantified in sources (set by internal delay-cap charging) |
-| Area | Not specified — flag for design decision | 228×240 µm (core 90×228 µm) (90 nm) · 0.045 mm² / 280×160 µm² (180 nm, Xiong) |
+| INL | < 1.0 LSB | 0.73–0.9 LSB (90 nm) · < 1 LSB (180 nm, Bekal) |
+| DNL | < 1.0 LSB | 0.84–0.9 LSB (90 nm) · < 1 LSB (180 nm, Bekal) |
+| ENOB | > 7.5 bit | 7.77 bit (90 nm) · 7.53 bit (180 nm, Bekal) · 7.35 bit @ 20 MS/s (45 nm) · 7.2 bit post-layout (180 nm, Xiong) |
+| SNR | > 48.0 dB | 46 dB (45 nm) · ~65 dB implied (90 nm) |
+| SNDR | > 47.0 dB | 46.7 dB (90 nm) · 46.0 dB SINAD (45 nm) · 45.16 dB near Nyquist (180 nm, Xiong) |
+| THD | < -50.0 dB | Not directly given; SFDR reported instead: 61.8 dB (90 nm) · 57.29 dB (180 nm, Xiong) |
+| Latency | < 100 ns (1 clock cycle) | Not explicitly quantified in sources (set by internal delay-cap charging) |
+| Area | < 0.05 mm² | 228×240 µm (core 90×228 µm) (90 nm) · 0.045 mm² / 280×160 µm² (180 nm, Xiong) |
 | Power (active/standby) | < 1 mW | See Power Budget above |
 
 ## 5. Interfaces
@@ -132,6 +132,9 @@ Among the source designs, **Gaikwad (180 nm, 3 V)** is the closest electrical/no
 - Target (GF180MCU, 3.3 V):
   - Sampling Rate: 20 - 50 MS/s
   - Power: < 1 mW
+  - ENOB: > 7.5 bit
+  - SNDR: > 47.0 dB
+  - INL / DNL: < 1.0 LSB
 - Literature sanity-check range (180 nm designs only; supply differs from 3.3 V target in all cases, so treat as rough order-of-magnitude bounds, not pass/fail thresholds):
   - ENOB: 7.2–7.53 bit
   - SNDR: ~45.2–46.7 dB (mixed across nodes; 180 nm value is 45.16 dB)

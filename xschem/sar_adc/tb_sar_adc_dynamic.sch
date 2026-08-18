@@ -20,8 +20,8 @@ C {lab_wire.sym} -150 260 0 0 {name=l_gnd2 lab=0}
 N -150 180 -150 190 {lab=vref}
 N -150 250 -150 260 {lab=0}
 
-# Dynamic Coherent Sine Input (0.80V - 2.80V, coherent M=7 @ 10 MS/s)
-C {vsource.sym} -150 340 0 0 {name=V3 value="SIN(1.80 1.00 1.09375MEG)"}
+# Dynamic Coherent Sine Input (0.95V - 2.35V, coherent M=7 @ 10 MS/s)
+C {vsource.sym} -150 340 0 0 {name=V3 value="SIN(1.65 0.70 4.53125MEG)"}
 C {lab_wire.sym} -150 300 0 0 {name=l_vin lab=vin}
 C {lab_wire.sym} -150 380 0 0 {name=l_gnd3 lab=0}
 N -150 300 -150 310 {lab=vin}

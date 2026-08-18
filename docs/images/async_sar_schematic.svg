@@ -1,0 +1,188 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="700" version="1.1">
+<style type="text/css">
+.l0{
+  fill: #000000;
+  stroke: #000000;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-width: 0.24;
+}
+.l1{
+  fill: #00ddff;
+  stroke: #00ddff;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-width: 0.24;
+}
+.l2{
+  fill: #4f4f4f; fill-opacity: 0.2;
+  stroke: #4f4f4f;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-width: 0.24;
+}
+.l3{
+  fill: #cccccc; fill-opacity: 0.5;
+  stroke: #cccccc;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-width: 0.24;
+}
+.l4{
+  fill: #88dd00;
+  stroke: #88dd00;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-width: 0.24;
+}
+.l5{
+  fill: #bb2200;
+  stroke: #bb2200;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-width: 0.24;
+}
+.l6{
+  fill: #00aaff; fill-opacity: 0.5;
+  stroke: #00aaff;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-width: 0.24;
+}
+.l7{
+  fill: #ff0000; fill-opacity: 0.5;
+  stroke: #ff0000;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-width: 0.24;
+}
+.l8{
+  fill: #ffff00; fill-opacity: 0.5;
+  stroke: #ffff00;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-width: 0.24;
+}
+.l9{
+  fill: #ffffff; fill-opacity: 0.5;
+  stroke: #ffffff;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-width: 0.24;
+}
+.l10{
+  fill: #ff00ff;
+  stroke: #ff00ff;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-width: 0.24;
+}
+.l11{
+  fill: #00ff00; fill-opacity: 0.5;
+  stroke: #00ff00;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-width: 0.24;
+}
+.l12{
+  fill: #0044ff; fill-opacity: 0.5;
+  stroke: #0044ff;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-width: 0.24;
+}
+.l13{
+  fill: #aaaa00; fill-opacity: 0.5;
+  stroke: #aaaa00;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-width: 0.24;
+}
+.l14{
+  fill: #aaccaa; fill-opacity: 0.2;
+  stroke: #aaccaa;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-width: 0.24;
+}
+.l15{
+  fill: #ff7777; fill-opacity: 0.5;
+  stroke: #ff7777;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-width: 0.24;
+}
+.l16{
+  fill: #bfff81; fill-opacity: 0.5;
+  stroke: #bfff81;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-width: 0.24;
+}
+.l17{
+  fill: #00ffcc; fill-opacity: 0.2;
+  stroke: #00ffcc;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-width: 0.24;
+}
+.l18{
+  fill: #ce0097; fill-opacity: 0.5;
+  stroke: #ce0097;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-width: 0.24;
+}
+.l19{
+  fill: #d2d46b; fill-opacity: 0.2;
+  stroke: #d2d46b;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-width: 0.24;
+}
+.l20{
+  fill: #ef6158; fill-opacity: 0.2;
+  stroke: #ef6158;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-width: 0.24;
+}
+.l21{
+  fill: #fdb200; fill-opacity: 0.2;
+  stroke: #fdb200;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-width: 0.24;
+}
+text {font-family: Sans-Serif;}
+</style>
+<rect class="l0" x="0" y="0" width="1000" height="700"/>
+<path class="l4" d="M0 50L10 50"/>
+<path class="l4" d="M110 0L130 0"/>
+<path class="l4" style="fill:none;" d="M390 -60L130 -60L130 20L390 20L390 -60"/>
+<path class="l4" style="fill:none;" d="M790 -50L530 -50L530 10L790 10L790 -50"/>
+<path class="l5" d="M7.5 27.5L12.5 27.5L12.5 32.5L7.5 32.5L7.5 27.5z"/>
+<path class="l5" d="M7.5 47.5L12.5 47.5L12.5 52.5L7.5 52.5L7.5 47.5z"/>
+<path class="l5" d="M7.5 67.5L12.5 67.5L12.5 72.5L7.5 72.5L7.5 67.5z"/>
+<path class="l5" d="M8.75 28.75L11.25 28.75L11.25 31.25L8.75 31.25L8.75 28.75z"/>
+<path class="l5" d="M8.75 48.75L11.25 48.75L11.25 51.25L8.75 51.25L8.75 48.75z"/>
+<path class="l5" d="M8.75 68.75L11.25 68.75L11.25 71.25L8.75 71.25L8.75 68.75z"/>
+<path class="l5" d="M107.5 -2L112.5 -2L112.5 2.5L107.5 2.5L107.5 -2z"/>
+<path class="l5" d="M108.75 -1.25L111.25 -1.25L111.25 1.25L108.75 1.25L108.75 -1.25z"/>
+<path class="l5" d="M807.5 -2L812.5 -2L812.5 2.5L807.5 2.5L807.5 -2z"/>
+<path class="l5" d="M808.75 -1.25L811.25 -1.25L811.25 1.25L808.75 1.25L808.75 -1.25z"/>
+<path class="l6" d="M0 230L280 230"/>
+<path class="l7" d="M0 30L10 30"/>
+<path class="l7" d="M0 70L10 70"/>
+<path class="l7" d="M790 0L810 0"/>
+<text fill="#cccccc"  xml:space="preserve" font-size="10.4" transform="translate(-5, 17.4432)" >x_nand_ctrl</text>
+<text fill="#00ddff"  xml:space="preserve" font-size="14.04" transform="translate(12.5, 43.9983)" >vdd</text>
+<text fill="#00ddff"  xml:space="preserve" font-size="14.04" transform="translate(12.5, 63.9983)" >gate_ctrl</text>
+<text fill="#00ddff"  xml:space="preserve" font-size="14.04" transform="translate(12.5, 83.9983)" >vss</text>
+<text fill="#cccccc"  xml:space="preserve" font-size="10.4" transform="translate(135, 5.4432)" >B</text>
+<text fill="#00ddff"  xml:space="preserve" font-size="14.04" transform="translate(43.5, -4.60556)" >gate_ctrl</text>
+<text fill="#cccccc"  xml:space="preserve" font-size="10.4" transform="translate(769, 5.4432)" >vss</text>
+<text fill="#00ddff"  xml:space="preserve" font-size="14.04" transform="translate(812.5, 13.9983)" >vss</text>
+<text fill="#cccccc"  xml:space="preserve" font-size="20.8" transform="translate(-505, 253.886)" >         xschem/sar_adc/blocks/async_sar/async_sar.sch</text>
+<text fill="#cccccc"  xml:space="preserve" font-size="20.8" transform="translate(54, 223.886)" >2026-08-18  11:01:18</text>
+</svg>

@@ -1,0 +1,28 @@
+* ==============================================================================
+* Golden CDL Netlist: Bootstrap Sample & Hold Circuit
+* PDK: GF180MCU (3.3V)
+* ==============================================================================
+
+.subckt inv_sh vo vi vdd vss
+M1 vo vi vdd vdd pfet_03v3 L=0.28u W=2.0u
+M2 vo vi vss vss nfet_03v3 L=0.28u W=1.0u
+.ends
+
+.subckt sample_hold vin sample_en vhold vdd vss
+Xinv vo sample_en vdd vss inv_sh
+
+* Bootstrap and Main Sampling Switches
+M1 vin vg vhold vss nfet_03v3 L=0.28u W=5.0u
+M2 vin vo vhold vdd pfet_03v3 L=0.28u W=5.0u
+
+M3 net1 vo vss vss nfet_03v3 L=0.28u W=2.0u
+M4 net1 sample_en vin vss nfet_03v3 L=0.28u W=2.0u
+
+M5 vg vg vdd vdd pfet_03v3 L=0.28u W=2.0u
+M6 vg vo vg vdd pfet_03v3 L=0.28u W=2.0u
+M7 vg vdd net2 vss nfet_03v3 L=0.28u W=2.0u
+M8 net2 vo vss vss nfet_03v3 L=0.28u W=2.0u
+
+* Sampling Capacitor (P1=bottom_plate=vss, P2=top_plate=vhold)
+C1 vss vhold 4e-13 cap_mim_2f0fF
+.ends

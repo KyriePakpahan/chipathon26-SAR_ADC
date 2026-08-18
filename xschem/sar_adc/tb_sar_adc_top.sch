@@ -51,7 +51,7 @@ C {netlist_at_end.sym} 100 50 0 0 {name=s1 value=".param fnoicor=0
 .GLOBAL vdd vss
 V_VSS vss 0 0
 .options method=gear reltol=1e-3 vntol=1e-4 abstol=1e-12
-.save v(vin) v(done) v(dout[7]) v(dout[6]) v(dout[5]) v(dout[4]) v(dout[3]) v(dout[2]) v(dout[1]) v(dout[0]) v(x1.vdac) v(x1.vhold) v(start)
+.save all
 .control
 set filetype=ascii
 tran 0.1n 100n

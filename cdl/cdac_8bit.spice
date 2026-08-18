@@ -1,0 +1,38 @@
+* ==============================================================================
+* Golden CDL Netlist: 8-Bit Capacitive DAC (CDAC) Array
+* PDK: GF180MCU (3.3V)
+* ==============================================================================
+
+.subckt cdac_switch_1b vref vdd vss bit bot
+* Inverter for complementary control
+M1 vdd bit bit_b vdd pfet_03v3 L=0.28u W=0.8u
+M2 vss bit bit_b vss nfet_03v3 L=0.28u W=0.42u
+
+* Transmission gate to vref (Active when bit=1)
+M3 bot bit vref vss nfet_03v3 L=0.28u W=1.0u
+M4 vref bit_b bot vdd pfet_03v3 L=0.28u W=2.0u
+
+* Transmission gate to vss (Active when bit=0)
+M5 bot bit_b vss vss nfet_03v3 L=0.28u W=1.0u
+M6 vss bit bot vdd pfet_03v3 L=0.28u W=2.0u
+.ends
+
+.subckt cdac_8bit vref vdd vss dac_in[7] dac_in[6] dac_in[5] dac_in[4] dac_in[3] dac_in[2] dac_in[1] dac_in[0] vdac
+Xsw0 vref vdd vss dac_in[0] bot0 cdac_switch_1b
+Xsw1 vref vdd vss dac_in[1] bot1 cdac_switch_1b
+Xsw2 vref vdd vss dac_in[2] bot2 cdac_switch_1b
+Xsw3 vref vdd vss dac_in[3] bot3 cdac_switch_1b
+Xsw4 vref vdd vss dac_in[4] bot4 cdac_switch_1b
+Xsw5 vref vdd vss dac_in[5] bot5 cdac_switch_1b
+Xsw6 vref vdd vss dac_in[6] bot6 cdac_switch_1b
+Xsw7 vref vdd vss dac_in[7] bot7 cdac_switch_1b
+
+C0 bot0 vdac 2e-15 cap_mim_2f0fF
+C1 bot1 vdac 2e-15 cap_mim_2f0fF
+C2 bot2 vdac 2e-15 cap_mim_2f0fF
+C3 bot3 vdac 2e-15 cap_mim_2f0fF
+C4 bot4 vdac 2e-15 cap_mim_2f0fF
+C5 bot5 vdac 2e-15 cap_mim_2f0fF
+C6 bot6 vdac 2e-15 cap_mim_2f0fF
+C7 bot7 vdac 2e-15 cap_mim_2f0fF
+.ends

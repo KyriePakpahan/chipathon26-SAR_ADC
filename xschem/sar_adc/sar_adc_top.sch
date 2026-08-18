@@ -35,11 +35,11 @@ C {lab_wire.sym} -400 -260 2 0 {name=l_sh_vs lab=vss}
 
 # 2. CDAC 8-bit Block
 C {sar_adc/blocks/cdac/cdac_8bit.sym} -500 0 0 0 {name=x2}
-C {lab_wire.sym} -520 -50 0 0 {name=l_cd_vr lab=vref}
-C {lab_wire.sym} -520 -20 0 0 {name=l_cd_di lab=dac_in[7:0]}
-C {lab_wire.sym} -390 -30 2 0 {name=l_cd_vdac lab=vdac}
-C {lab_wire.sym} -390 -50 2 0 {name=l_cd_vd lab=vdd}
-C {lab_wire.sym} -390 -10 2 0 {name=l_cd_vs lab=vss}
+C {lab_wire.sym} -650 -20 0 0 {name=l_cd_vr lab=vref}
+C {lab_wire.sym} -650 0 0 0 {name=l_cd_di lab=dac_in[7:0]}
+C {lab_wire.sym} -350 -20 2 0 {name=l_cd_vdac lab=vdac}
+C {lab_wire.sym} -350 0 2 0 {name=l_cd_vd lab=vdd}
+C {lab_wire.sym} -350 20 2 0 {name=l_cd_vs lab=vss}
 
 # 3. StrongARM Comparator Block
 C {sar_adc/blocks/comparator/strongarm_comp.sym} -100 -100 0 0 {name=x3}

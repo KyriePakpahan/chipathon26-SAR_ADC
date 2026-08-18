@@ -1,0 +1,23 @@
+* ==============================================================================
+* Monolithic 8-bit 10 MS/s Asynchronous SAR ADC Top-Level CDL Netlist
+* Technology: GlobalFoundries GF180MCU (Variant D, 3.3V)
+* ==============================================================================
+
+.include async_sar.spice
+.include strongarm_comp.spice
+.include sample_hold.spice
+.include cdac_8bit.spice
+
+.subckt sar_adc_top vin vref start vdd vss done dout[7] dout[6] dout[5] dout[4] dout[3] dout[2] dout[1] dout[0]
+* 1. Bootstrap Sample-and-Hold Block
+xsh vin sample_en vhold vdd vss sample_hold
+
+* 2. 8-Bit Capacitive DAC Array
+xcdac vref vdd vss dac_in[7] dac_in[6] dac_in[5] dac_in[4] dac_in[3] dac_in[2] dac_in[1] dac_in[0] vdac cdac_8bit
+
+* 3. High-Speed Dynamic StrongARM Comparator with Completion Detector
+xcomp rst_latch comp_out_p comp_out_n vdd comp_done vhold vdac vss strongarm_comp
+
+* 4. Asynchronous SAR Logic Controller
+xsar start comp_out_p comp_done vdd vss sample_en rst_latch done dout[7] dout[6] dout[5] dout[4] dout[3] dout[2] dout[1] dout[0] dac_in[7] dac_in[6] dac_in[5] dac_in[4] dac_in[3] dac_in[2] dac_in[1] dac_in[0] async_sar
+.ends

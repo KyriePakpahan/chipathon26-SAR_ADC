@@ -1,23 +1,33 @@
 #!/usr/bin/env python3
 """
 Comprehensive Verification Suite: All Cells DRC & LVS Runner
-Runs official GF180MCU DRC and Netgen LVS across all 10 layout blocks.
+Runs official GF180MCU DRC and Netgen LVS across all layout blocks and top-level.
 """
 
 import os
 import sys
-import json
 import subprocess
+
+ALL_CELLS = [
+    "sar_adc_top",
+    "async_sar",
+    "strongarm_comp",
+    "sample_hold",
+    "cdac_8bit",
+    "async_inverter",
+    "async_nand2",
+    "async_nor2",
+    "dff_cell",
+    "dff_cell_set",
+    "shift_reg_8bit",
+    "bit_reg",
+    "async_delay_chain",
+    "async_start_delay"
+]
 
 def main():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     proj_root = os.path.dirname(script_dir) if os.path.basename(script_dir) == "scripts" else script_dir
-
-    config_path = os.path.join(proj_root, "lvs_config.json")
-    with open(config_path) as f:
-        config = json.load(f)
-
-    all_cells = [config["top_level"]["cell_name"]] + [s["cell_name"] for s in config.get("subcells", [])]
 
     print("=" * 80)
     print("CHIPATHON 2026: COMPREHENSIVE DRC & LVS VERIFICATION SUITE")
@@ -26,7 +36,7 @@ def main():
     results = []
     overall_pass = True
 
-    for cell in all_cells:
+    for cell in ALL_CELLS:
         print(f">> Verifying [{cell}]...")
         # 1. DRC
         drc_proc = subprocess.run(
