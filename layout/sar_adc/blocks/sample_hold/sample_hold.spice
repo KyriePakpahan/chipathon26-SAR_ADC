@@ -1,0 +1,25 @@
+** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/sample_hold/sample_hold.sch
+.subckt sample_hold vdd vin vhold sample_en vss
+*.PININFO vin:I sample_en:I vhold:O vdd:B vss:B
+M1 vin vg vhold vss nfet_03v3 L=0.28u W=5u nf=1
+M2 vin clkb vhold vdd pfet_03v3 L=0.28u W=5u nf=1
+M3 net1 clkb vss vss nfet_03v3 L=0.28u W=2u nf=1
+M4 net1 sample_en vin vss nfet_03v3 L=0.28u W=2u nf=1
+M5 vg vg vdd vdd pfet_03v3 L=0.28u W=2u nf=1
+M6 vg clkb vg vdd pfet_03v3 L=0.28u W=2u nf=1
+M7 vg vdd net2 vss nfet_03v3 L=0.28u W=2u nf=1
+M8 net2 clkb vss vss nfet_03v3 L=0.28u W=2u nf=1
+xinv2 vdd clkb sample_en vss inv_sh
+XC1 vhold vss cap_mim_2f0fF c_width=20um c_length=5um
+XC2 net1 vg cap_mim_2f0fF c_width=10um c_length=25um
+.ends
+
+* expanding   symbol:  sar_adc/blocks/sample_hold/inv_sh.sym # of pins=4
+** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/sample_hold/inv_sh.sym
+** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/sample_hold/inv_sh.sch
+.subckt inv_sh vdd vo vi vss
+*.PININFO vdd:B vi:I vo:O vss:B
+M1 vo vi vss vss nfet_03v3 L=0.28u W=1u nf=1
+M2 vo vi vdd vdd pfet_03v3 L=0.28u W=2u nf=1
+.ends
+

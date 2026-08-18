@@ -1,0 +1,6 @@
+** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/sample_hold/inv_sh.sch
+.subckt inv_sh vdd vo vi vss
+*.PININFO vdd:B vi:I vo:O vss:B
+M1 vo vi vss vss nfet_03v3 L=0.28u W=1u nf=1
+M2 vo vi vdd vdd pfet_03v3 L=0.28u W=2u nf=1
+.ends
