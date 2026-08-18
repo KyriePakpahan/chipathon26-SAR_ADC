@@ -1,15 +1,19 @@
 #!/usr/bin/env python3
 """
 Comprehensive Verification Suite: All Cells DRC & LVS Runner
-Runs official GF180MCU DRC and Netgen LVS across all 10 layout blocks.
+Runs official GF180MCU DRC and Netgen LVS across all layout blocks and top-level.
 """
 
 import os
 import sys
 import subprocess
 
-ASYNC_SAR_CELLS = [
+ALL_CELLS = [
+    "sar_adc_top",
     "async_sar",
+    "strongarm_comp",
+    "sample_hold",
+    "cdac_8bit",
     "async_inverter",
     "async_nand2",
     "async_nor2",
@@ -32,7 +36,7 @@ def main():
     results = []
     overall_pass = True
 
-    for cell in ASYNC_SAR_CELLS:
+    for cell in ALL_CELLS:
         print(f">> Verifying [{cell}]...")
         # 1. DRC
         drc_proc = subprocess.run(
