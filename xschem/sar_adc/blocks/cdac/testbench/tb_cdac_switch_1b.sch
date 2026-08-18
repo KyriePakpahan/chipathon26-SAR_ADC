@@ -7,8 +7,7 @@ F {}
 E {}
 N 150 -30 180 -30 {lab=vref}
 N 150 -10 180 -10 {lab=vdd}
-N 150 10 180 10 {lab=vss}
-N 150 30 180 30 {lab=bot}
+N 150 10 180 10 {lab=0}
 N -180 -30 -150 -30 {lab=bit}
 N -250 -200 -250 -190 {lab=vdd}
 N -250 -130 -250 -120 {lab=0}
@@ -16,8 +15,10 @@ N -170 -200 -170 -190 {lab=vref}
 N -170 -130 -170 -120 {lab=0}
 N -90 -200 -90 -190 {lab=bit}
 N -90 -130 -90 -120 {lab=0}
-N 220 30 220 50 {lab=bot}
+N 220 30 220 50 {lab=#net1}
 N 220 110 220 130 {lab=0}
+N 150 30 160 30 {lab=bot}
+N 160 30 160 40 {lab=bot}
 C {title.sym} 160 200 0 0 {name=l1 author="Berkah Saluyu"}
 C {sar_adc/blocks/cdac/cdac_switch_1b.sym} 0 0 0 0 {name=x1}
 C {vsource.sym} -250 -160 0 0 {name=Vvdd value=3.3}
