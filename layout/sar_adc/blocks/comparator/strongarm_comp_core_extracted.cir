@@ -1,4 +1,4 @@
-* Extracted by KLayout with GF180MCU LVS runset on : 13/08/2026 10:19
+* Extracted by KLayout with GF180MCU LVS runset on : 18/08/2026 13:21
 
 .SUBCKT strongarm_comp_core vdd out_n out_p rst_latch vin_p vin_n vss
 M$1 vdd out_p out_n vdd pfet_03v3 L=0.28U W=0.42U AS=0.2822P AD=0.2822P
