@@ -1,86 +1,92 @@
 ** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/cdac/testbench/tb_cdac_8bit.sch
 **.subckt tb_cdac_8bit
-V1 vref 0 3.3
-V2 vdd 0 3.3
-R1 vdac 0 1G
-V3 dac_in[7] 0 PULSE(0 3.3 0 1n 1n 2u 4u)
-V4 dac_in[6] 0 0
-V5 dac_in[5] 0 0
-V6 dac_in[4] 0 0
-V7 dac_in[3] 0 0
-V8 dac_in[2] 0 0
-V9 dac_in[1] 0 0
-V10 dac_in[0] 0 0
-x1 vref vdd 0 dac_in[7] dac_in[6] dac_in[5] dac_in[4] dac_in[3] dac_in[2] dac_in[1] dac_in[0] vdac cdac_8bit
+V_VDD net1 net2 3.3
+V_VREF net3 net4 3.3
+V_VSS net5 net6 0
+V_D7 net7 net8 PULSE(0 3.3 0 1n 1n 2u 4u)
+V_D6 net9 net10 0
+V_D5 net11 net12 0
+V_D4 net13 net14 0
+V_D3 net15 net16 0
+V_D2 net17 net18 0
+V_D1 net19 net20 0
+V_D0 net21 net22 0
+x1 vref dac_in[7] dac_in[6] dac_in[5] dac_in[4] dac_in[3] dac_in[2] dac_in[1] dac_in[0] vdac vdd vss cdac_8bit
+R_load net23 net24 1G
 **** begin user architecture code
 
 
 .include /foss/pdks/gf180mcuD/libs.tech/ngspice/design.ngspice
 .lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice typical
-
-
-
-
+.lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice mimcap_typical
+.lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice cap_mim
+.lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice res_typical
 .control
-  tran 10n 10u
-  wrdata cdac_out.txt vdac x1.bot7 x1.bot6
-  plot x1.bot7 x1.bot6
+tran 10n 10u
+set filetype=ascii
+write tb_cdac_8bit.raw
+quit
 .endc
-
 
 **** end user architecture code
 **.ends
 
-* expanding   symbol:  sar_adc/blocks/cdac/cdac_8bit.sym # of pins=5
+* expanding   symbol:  sar_adc/blocks/cdac/cdac_8bit.sym # of pins=12
 ** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/cdac/cdac_8bit.sym
 ** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/cdac/cdac_8bit.sch
-.subckt cdac_8bit vref vdd vss dac_in[7] dac_in[6] dac_in[5] dac_in[4] dac_in[3] dac_in[2] dac_in[1] dac_in[0] vdac
+.subckt cdac_8bit vref dac_in[7] dac_in[6] dac_in[5] dac_in[4] dac_in[3] dac_in[2] dac_in[1] dac_in[0] vdac vdd vss
 *.ipin vref
+*.ipin dac_in[7]
+*.ipin dac_in[6]
+*.ipin dac_in[5]
+*.ipin dac_in[4]
+*.ipin dac_in[3]
+*.ipin dac_in[2]
+*.ipin dac_in[1]
+*.ipin dac_in[0]
+*.opin vdac
 *.iopin vdd
 *.iopin vss
-*.ipin dac_in[7],dac_in[6],dac_in[5],dac_in[4],dac_in[3],dac_in[2],dac_in[1],dac_in[0]
-*.opin vdac
-XSW0 vref vdd vss bot0 dac_in[0] cdac_switch_1b
-C0 vdac bot0 0.0005p
-XSW1 vref vdd vss bot1 dac_in[1] cdac_switch_1b
-C1 vdac bot1 0.001p
-XSW2 vref vdd vss bot2 dac_in[2] cdac_switch_1b
-C2 vdac bot2 0.002p
-XSW3 vref vdd vss bot3 dac_in[3] cdac_switch_1b
-C3 vdac bot3 0.004p
-XSW4 vref vdd vss bot4 dac_in[4] cdac_switch_1b
-C4 vdac bot4 0.008p
-XSW5 vref vdd vss bot5 dac_in[5] cdac_switch_1b
-C5 vdac bot5 0.016p
-XSW6 vref vdd vss bot6 dac_in[6] cdac_switch_1b
-C6 vdac bot6 0.032p
-XSW7 vref vdd vss bot7 dac_in[7] cdac_switch_1b
-C7 vdac bot7 0.064p
-CDummy vdac vss 0.0005p
-Rdc vdac vss 100MEG
+XSW0 dac_in[0] vref vdd vss bot0 cdac_switch_1b
+XC0 vdac bot0 cap_mim_2f0fF c_width=5e-6 c_length=5e-6
+XSW1 dac_in[1] vref vdd vss bot1 cdac_switch_1b
+XC1 vdac bot1 cap_mim_2f0fF c_width=5e-6 c_length=5e-6 m=2
+XSW2 dac_in[2] vref vdd vss bot2 cdac_switch_1b
+XC2 vdac bot2 cap_mim_2f0fF c_width=5e-6 c_length=5e-6 m=4
+XSW3 dac_in[3] vref vdd vss bot3 cdac_switch_1b
+XC3 vdac bot3 cap_mim_2f0fF c_width=5e-6 c_length=5e-6 m=8
+XSW4 dac_in[4] vref vdd vss bot4 cdac_switch_1b
+XC4 vdac bot4 cap_mim_2f0fF c_width=5e-6 c_length=5e-6 m=16
+XSW5 dac_in[5] vref vdd vss bot5 cdac_switch_1b
+XC5 vdac bot5 cap_mim_2f0fF c_width=5e-6 c_length=5e-6 m=32
+XSW6 dac_in[6] vref vdd vss bot6 cdac_switch_1b
+XC6 vdac bot6 cap_mim_2f0fF c_width=5e-6 c_length=5e-6 m=64
+XSW7 dac_in[7] vref vdd vss bot7 cdac_switch_1b
+XC7 vdac bot7 cap_mim_2f0fF c_width=5e-6 c_length=5e-6 m=128
+XC8 vdac vss cap_mim_2f0fF c_width=5e-6 c_length=5e-6
 .ends
 
 
 * expanding   symbol:  sar_adc/blocks/cdac/cdac_switch_1b.sym # of pins=5
 ** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/cdac/cdac_switch_1b.sym
 ** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/cdac/cdac_switch_1b.sch
-.subckt cdac_switch_1b vref vdd vss bot bit
+.subckt cdac_switch_1b bit vref vdd vss bot
 *.ipin bit
 *.iopin vref
 *.iopin vdd
 *.iopin vss
 *.iopin bot
-XM1 bit_b bit vdd vdd pfet_03v3 L=0.28u W=0.8u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
+XM1 bit_b bit vdd vdd pfet_03v3 L=0.28u W=4.0u nf=2 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
 + ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM2 bit_b bit vss vss nfet_03v3 L=0.28u W=0.4u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
+XM2 bit_b bit vss vss nfet_03v3 L=0.28u W=2.0u nf=2 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
 + ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM3 bot bit_b vref vdd pfet_03v3 L=0.28u W=2.0u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
+XM3 bot bit_b vref vdd pfet_03v3 L=0.28u W=4.0u nf=2 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
 + ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM4 vref bit bot vss nfet_03v3 L=0.28u W=1.0u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
+XM4 bot bit vref vss nfet_03v3 L=0.28u W=2.0u nf=2 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
 + ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM5 bot bit vss vdd pfet_03v3 L=0.28u W=2.0u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
+XM5 bot bit vss vdd pfet_03v3 L=0.28u W=4.0u nf=2 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
 + ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM6 vss bit_b bot vss nfet_03v3 L=0.28u W=1.0u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
+XM6 bot bit_b vss vss nfet_03v3 L=0.28u W=2.0u nf=2 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
 + ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
 .ends
 
