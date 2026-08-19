@@ -6,14 +6,14 @@ S {}
 F {}
 E {}
 C {vsource.sym} -400 -200 0 0 {name=V_VDD value=3.3}
-C {lab_wire.sym} -400 -240 0 0 {name=l_vdd lab=vdd}
-C {lab_wire.sym} -400 -160 0 0 {name=l_gnd1 lab=0}
+C {lab_wire.sym} -400 -230 0 0 {name=l_vdd lab=vdd}
+C {lab_wire.sym} -400 -170 2 0 {name=l_gnd1 lab=0}
 C {vsource.sym} -400 -80 0 0 {name=V_VREF value=3.3}
-C {lab_wire.sym} -400 -120 0 0 {name=l_vref lab=vref}
-C {lab_wire.sym} -400 -40 0 0 {name=l_gnd2 lab=0}
+C {lab_wire.sym} -400 -110 0 0 {name=l_vref lab=vref}
+C {lab_wire.sym} -400 -50 2 0 {name=l_gnd2 lab=0}
 C {vsource.sym} -400 40 0 0 {name=V_BIT value="pulse(0 3.3 1n 0.1n 0.1n 5n 10n)"}
-C {lab_wire.sym} -400 0 0 0 {name=l_bit lab=bit}
-C {lab_wire.sym} -400 80 0 0 {name=l_gnd3 lab=0}
+C {lab_wire.sym} -400 10 0 0 {name=l_bit lab=bit}
+C {lab_wire.sym} -400 70 2 0 {name=l_gnd3 lab=0}
 C {sar_adc/blocks/cdac/cdac_switch_1b.sym} 0 0 0 0 {name=x1}
 C {lab_wire.sym} -150 -30 0 0 {name=l_dut_b lab=bit}
 C {lab_wire.sym} 150 -30 2 0 {name=l_dut_vr lab=vref}
