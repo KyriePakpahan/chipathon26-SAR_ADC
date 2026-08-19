@@ -1,32 +1,33 @@
 ** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/comparator/comp_xor_fast.sch
-**.subckt comp_xor_fast vdd a b y vss
+**.subckt comp_xor_fast a b y vdd vss
 *.ipin a
 *.ipin b
+*.opin y
 *.iopin vdd
 *.iopin vss
-*.opin y
-x1 a b nab async_nand2
-x2 a nab a_nab async_nand2
-x3 b nab b_nab async_nand2
-x4 a_nab b_nab y async_nand2
+x1 vdd vss a nab b async_nand2
+x2 vdd vss a a_nab nab async_nand2
+x3 vdd vss b b_nab nab async_nand2
+x4 vdd vss a_nab y b_nab async_nand2
 **.ends
 
-* expanding   symbol:  sar_adc/blocks/async_sar/async_nand2.sym # of pins=3
+* expanding   symbol:  sar_adc/blocks/async_sar/async_nand2.sym # of pins=5
 ** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_nand2.sym
 ** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_nand2.sch
-.subckt async_nand2 input_A input_B output
+.subckt async_nand2 vdd vss input_A output input_B
 *.ipin input_A
 *.ipin input_B
 *.opin output
-XM2 net1 input_B 0 0 nfet_03v3 L=0.28u W=0.50u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
+*.iopin vdd
+*.iopin vss
+XM2 net1 input_B vss vss nfet_03v3 L=0.28u W=0.50u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
 + ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM3 output input_A VDD VDD pfet_03v3 L=0.28u W=1.0u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
+XM3 output input_A vdd vdd pfet_03v3 L=0.28u W=1.0u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
 + ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM1 output input_B VDD VDD pfet_03v3 L=0.28u W=1.0u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
+XM1 output input_B vdd vdd pfet_03v3 L=0.28u W=1.0u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
 + ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM4 output input_A net1 0 nfet_03v3 L=0.28u W=0.50u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
+XM4 output input_A net1 vss nfet_03v3 L=0.28u W=0.50u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
 + ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
 .ends
 
-.GLOBAL VDD
 .end

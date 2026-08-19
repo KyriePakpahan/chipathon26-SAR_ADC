@@ -25,19 +25,75 @@ def generate_clean_lvs_spice(cell_name, sch_path, spice_out):
         '-o', os.path.dirname(spice_out), sch_path
     ], capture_output=True)
     
-    # Read generated spice and ensure .subckt header is clean
     if os.path.exists(spice_out):
         with open(spice_out, 'r') as f:
             content = f.read()
         
-        # Replace **.subckt with .subckt
-        content = re.sub(r'^\*\*\.subckt\s+', '.subckt ', content, flags=re.MULTILINE)
-        content = re.sub(r'^\*\*\.ends', f'.ends {cell_name}', content, flags=re.MULTILINE)
-        
-        # For top block async_sar, ensure all 24 pins are listed on .subckt line
         if cell_name == "async_sar":
-            pin_line = ".subckt async_sar start comp_out_p comp_done vdd vss sample_en rst_latch done dout[7] dout[6] dout[5] dout[4] dout[3] dout[2] dout[1] dout[0] dac_in[7] dac_in[6] dac_in[5] dac_in[4] dac_in[3] dac_in[2] dac_in[1] dac_in[0]"
-            content = re.sub(r'^\.subckt async_sar.*?(?=\n\*\.|\n[xXmM])', pin_line, content, flags=re.DOTALL)
+            # Normalize and flatten async_sar so KLayout GUI and Netgen see full 736 MOSFET connectivity
+            content = re.sub(r'\n\+\s*', ' ', content)
+            subckts = {}
+            cur_subckt = None
+            cur_lines = []
+            top_lines = []
+            
+            for line in content.splitlines():
+                line_s = line.strip()
+                if not line_s or line_s.startswith('*'):
+                    continue
+                if line_s.lower().startswith('.subckt'):
+                    parts = line_s.split()
+                    cur_subckt = parts[1]
+                    ports = parts[2:]
+                    cur_lines = [ports]
+                elif line_s.lower().startswith('.ends'):
+                    if cur_subckt:
+                        subckts[cur_subckt] = cur_lines
+                        cur_subckt = None
+                elif cur_subckt:
+                    cur_lines.append(line_s)
+                else:
+                    top_lines.append(line_s)
+                    
+            top_pins = ['sample_en', 'done', 'vdd', 'dout[1]', 'dout[3]', 'dout[4]', 'dout[6]', 'dout[7]',
+                        'comp_out_p', 'dout[0]', 'dout[2]', 'dout[5]', 'rst_latch', 'comp_done', 'start',
+                        'dac_in[0]', 'dac_in[1]', 'dac_in[2]', 'dac_in[3]', 'dac_in[4]', 'dac_in[5]', 'dac_in[6]', 'dac_in[7]', 'vss']
+            
+            subckts['async_sar'] = [top_pins] + top_lines
+            
+            def expand_cell(cname, port_map, prefix=''):
+                formal_ports = subckts[cname][0]
+                lines = subckts[cname][1:]
+                mapping = dict(zip(formal_ports, port_map))
+                mapping['VDD'] = 'vdd'
+                mapping['vdd'] = 'vdd'
+                mapping['VSS'] = 'vss'
+                mapping['vss'] = 'vss'
+                flat_devs = []
+                for l in lines:
+                    p = l.split()
+                    inst = prefix + p[0]
+                    if p[0].startswith(('XM', 'xm', 'M', 'm')) and p[5].startswith(('pfet_', 'nfet_')):
+                        clean_name = 'M_' + inst.lstrip('xXmM_')
+                        d = mapping.get(p[1], prefix + p[1])
+                        g = mapping.get(p[2], prefix + p[2])
+                        s = mapping.get(p[3], prefix + p[3])
+                        b = mapping.get(p[4], prefix + p[4])
+                        model = p[5]
+                        rest = ' '.join(p[6:])
+                        flat_devs.append(f'{clean_name} {d} {g} {s} {b} {model} {rest}')
+                    elif p[0].startswith(('X', 'x')):
+                        subtype = p[-1]
+                        actual_sub_ports = [mapping.get(net, prefix + net) for net in p[1:-1]]
+                        flat_devs.extend(expand_cell(subtype, actual_sub_ports, prefix=inst + '_'))
+                return flat_devs
+                
+            flat_mos = expand_cell('async_sar', top_pins)
+            content = f'.subckt async_sar ' + ' '.join(top_pins) + '\n' + '\n'.join(flat_mos) + '\n.ends async_sar\n'
+        else:
+            # Replace **.subckt with .subckt
+            content = re.sub(r'^\*\*\.subckt\s+', '.subckt ', content, flags=re.MULTILINE)
+            content = re.sub(r'^\*\*\.ends', f'.ends {cell_name}', content, flags=re.MULTILINE)
         
         with open(spice_out, 'w') as f:
             f.write(content)

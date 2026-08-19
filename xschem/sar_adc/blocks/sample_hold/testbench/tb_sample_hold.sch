@@ -5,50 +5,33 @@ V {}
 S {}
 F {}
 E {}
-N 490 -440 490 -380 {lab=vhold}
-N 470 -380 490 -380 {lab=vhold}
-N 100 -460 270 -460 {lab=vin}
-N 100 -460 100 -450 {lab=vin}
-N 260 -430 270 -430 {lab=sample_en}
-N 260 -430 260 -280 {lab=sample_en}
-N 560 -460 560 -420 {lab=vdd}
-N 390 -460 560 -460 {lab=vdd}
-N 390 -440 490 -440 {lab=vhold}
-N 390 -420 410 -420 {lab=0}
-N 410 -420 410 -400 {lab=0}
-C {vsource.sym} 560 -390 0 0 {name=V1 value=3.3 savecurrent=false}
-C {lab_wire.sym} 560 -360 0 0 {name=l1 lab=VSS}
-C {lab_wire.sym} 410 -400 0 0 {name=l2 lab=VSS}
-C {vsource.sym} 100 -420 0 0 {name=V2 value="SINE(1.65 1.65 1Meg)" savecurrent=false}
-C {lab_wire.sym} 100 -390 0 0 {name=l3 lab=VSS}
-C {vsource.sym} 260 -250 0 0 {name=V3 value="PULSE(0 3.3 0 1n 1n 50n 100n)" savecurrent=false}
-C {lab_wire.sym} 260 -220 0 0 {name=l4 lab=VSS}
-C {capa.sym} 470 -350 0 0 {name=C1
-m=1
-value=100f
-footprint=1206
-device="ceramic capacitor"}
-C {lab_wire.sym} 470 -320 0 0 {name=l5 lab=VSS}
-C {sar_adc/blocks/sample_hold/sample_hold.sym} 290 -410 0 0 {name=x1}
-C {code_shown.sym} 10 -150 0 0 {name=MODELS
-only_toplevel=true
-value="
+C {vsource.sym} -400 -200 0 0 {name=V_VDD value=3.3}
+C {lab_wire.sym} -400 -230 0 0 {name=l_vdd lab=vdd}
+C {lab_wire.sym} -400 -170 0 0 {name=l_gnd1 lab=0}
+C {vsource.sym} -400 -80 0 0 {name=V_VIN value="SINE(1.65 1.5 1Meg)"}
+C {lab_wire.sym} -400 -110 0 0 {name=l_vin lab=vin}
+C {lab_wire.sym} -400 -50 0 0 {name=l_gnd2 lab=0}
+C {vsource.sym} -400 40 0 0 {name=V_SE value="PULSE(0 3.3 0 1n 1n 50n 100n)"}
+C {lab_wire.sym} -400 10 0 0 {name=l_se lab=sample_en}
+C {lab_wire.sym} -400 70 0 0 {name=l_gnd3 lab=0}
+C {sar_adc/blocks/sample_hold/sample_hold.sym} 0 0 0 0 {name=x1}
+C {lab_wire.sym} -20 -50 0 0 {name=l_sh_vin lab=vin}
+C {lab_wire.sym} -20 -20 0 0 {name=l_sh_se lab=sample_en}
+C {lab_wire.sym} 100 -50 2 0 {name=l_sh_vd lab=vdd}
+C {lab_wire.sym} 100 -30 2 0 {name=l_sh_vh lab=vhold}
+C {lab_wire.sym} 100 -10 2 0 {name=l_sh_vs lab=0}
+C {code_shown.sym} 250 -150 0 0 {name=MODELS value="
+.param fnoicor=0
+.param sw_stat_mismatch=0
 .include /foss/pdks/gf180mcuD/libs.tech/ngspice/design.ngspice
 .lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice typical
-"}
-C {code_shown.sym} 10 -670 0 0 {name=SIMULATION
-only_toplevel=true
-value="
+.lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice mimcap_typical
+.lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice cap_mim
 .control
-  save all
-  tran 1n 500n
-  set filetype=ascii
-  write tb_sample_hold.raw
-  quit
-.endc
-"}
-C {lab_pin.sym} 200 -460 1 0 {name=p1 sig_type=std_logic lab=vin}
-C {lab_pin.sym} 260 -360 2 0 {name=p2 sig_type=std_logic lab=sample_en}
-C {lab_pin.sym} 500 -460 1 0 {name=p3 sig_type=std_logic lab=vdd}
-C {lab_pin.sym} 490 -410 2 0 {name=p4 sig_type=std_logic lab=vhold}
-C {title.sym} 160 -40 0 0 {name=l6 author="Berkah Saluyu"}
+save v(vin) v(sample_en) v(vhold)
+tran 0.1n 500n
+set filetype=ascii
+write tb_sample_hold.raw
+quit
+.endc"}
+C {title.sym} 0 250 0 0 {name=l_title author="Berkah Saluyu"}

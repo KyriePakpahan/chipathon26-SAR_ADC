@@ -1,5 +1,5 @@
 ** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/comparator/strongarm_comp.sch
-**.subckt strongarm_comp vin_p vin_n rst_latch vdd out_p out_n comp_done vss
+**.subckt strongarm_comp vin_p vin_n rst_latch vdd vss out_p out_n comp_done
 *.ipin vin_p
 *.ipin vin_n
 *.ipin rst_latch
@@ -8,15 +8,10 @@
 *.opin out_p
 *.opin out_n
 *.opin comp_done
-x_nmos_core vin_p vin_n rst_latch vdd vss n_raw_p n_raw_n strongarm_comp_core
-x_pmos_core vin_p vin_n rst_latch vdd vss p_raw_p p_raw_n strongarm_comp_pmos_core
-x_and_p n_raw_p p_raw_p raw_out_p vdd vss comp_and2_fast
-x_and_n n_raw_n p_raw_n raw_out_n vdd vss comp_and2_fast
-x_inv_buf_p vdd raw_out_p buf_raw_p vss comp_inv_3v3
-x_inv_buf_n vdd raw_out_n buf_raw_n vss comp_inv_3v3
-x_done_xor buf_raw_p buf_raw_n comp_done vdd vss comp_xor_fast
-x_inv_out_p vdd buf_raw_p out_p vss comp_inv_3v3
-x_inv_out_n vdd buf_raw_n out_n vss comp_inv_3v3
+x_core vin_p vin_n rst_latch vdd vss raw_p raw_n strongarm_comp_core
+x_inv_p raw_p out_p vdd vss comp_inv_3v3
+x_inv_n raw_n out_n vdd vss comp_inv_3v3
+x_done_xor out_p out_n comp_done vdd vss comp_xor_fast
 **.ends
 
 * expanding   symbol:  sar_adc/blocks/comparator/strongarm_comp_core.sym # of pins=7
@@ -30,92 +25,42 @@ x_inv_out_n vdd buf_raw_n out_n vss comp_inv_3v3
 *.iopin vss
 *.opin out_p
 *.opin out_n
-XMtail net1 rst_latch vss vss nfet_03v3 L=0.28u W=0.50u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
+XMtail net_tail rst_latch vss vss nfet_03v3 L=0.28u W=8.00u nf=2 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u'
++ pd='2*int((nf+1)/2) * (W/nf + 0.18u)' ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XM1 fn_p vin_p net_tail vss nfet_03v3 L=0.28u W=6.00u nf=2 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
 + ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM1 net2 vin_p net1 vss nfet_03v3 L=0.28u W=0.42u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
+XM2 fn_n vin_n net_tail vss nfet_03v3 L=0.28u W=6.00u nf=2 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
 + ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM2 net3 vin_n net1 vss nfet_03v3 L=0.28u W=0.42u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
+XM3 out_p out_n fn_p vss nfet_03v3 L=0.28u W=3.50u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
 + ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM3 out_p out_n net2 vss nfet_03v3 L=0.28u W=0.42u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
+XM4 out_n out_p fn_n vss nfet_03v3 L=0.28u W=3.50u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
 + ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM4 out_n out_p net3 vss nfet_03v3 L=0.28u W=0.42u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
+XM5 out_p out_n vdd vdd pfet_03v3 L=0.28u W=4.20u nf=2 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
 + ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM5 out_p out_n vdd vdd pfet_03v3 L=0.28u W=0.42u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
+XM6 out_n out_p vdd vdd pfet_03v3 L=0.28u W=4.20u nf=2 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
 + ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM6 out_n out_p vdd vdd pfet_03v3 L=0.28u W=0.42u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
+XM7 out_p rst_latch vdd vdd pfet_03v3 L=0.28u W=2.00u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
 + ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM7 out_p rst_latch vdd vdd pfet_03v3 L=0.28u W=0.42u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
+XM8 out_n rst_latch vdd vdd pfet_03v3 L=0.28u W=2.00u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
 + ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM8 out_n rst_latch vdd vdd pfet_03v3 L=0.28u W=0.42u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
+XM9 fn_p rst_latch vdd vdd pfet_03v3 L=0.28u W=2.00u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
 + ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM9 net2 rst_latch vdd vdd pfet_03v3 L=0.28u W=0.42u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
+XM10 fn_n rst_latch vdd vdd pfet_03v3 L=0.28u W=2.00u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
 + ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM10 net3 rst_latch vdd vdd pfet_03v3 L=0.28u W=0.42u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-.ends
-
-
-* expanding   symbol:  sar_adc/blocks/comparator/strongarm_comp_pmos_core.sym # of pins=7
-** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/comparator/strongarm_comp_pmos_core.sym
-** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/comparator/strongarm_comp_pmos_core.sch
-.subckt strongarm_comp_pmos_core vin_p vin_n rst_latch vdd vss out_p out_n
-*.ipin vin_p
-*.ipin vin_n
-*.ipin rst_latch
-*.iopin vdd
-*.iopin vss
-*.opin out_p
-*.opin out_n
-XMtail net2 rst_latch vss net5 nfet_03v3 L=0.28u W=0.22u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM1 net3 vin_p net2 net6 nfet_03v3 L=0.28u W=0.22u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM2 net4 vin_n net2 net7 nfet_03v3 L=0.28u W=0.22u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM3 out_p net8 net3 net9 nfet_03v3 L=0.28u W=0.22u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM4 out_n net10 net4 net11 nfet_03v3 L=0.28u W=0.22u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM5 out_p out_n vdd vdd pfet_03v3 L=0.28u W=0.22u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM6 out_n net12 vdd vdd pfet_03v3 L=0.28u W=0.22u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM7 net13 net14 net15 net16 pfet_03v3 L=0.28u W=0.22u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM8 net17 net18 net19 net20 pfet_03v3 L=0.28u W=0.22u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM9 net21 net22 net23 net24 pfet_03v3 L=0.28u W=0.22u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM10 net25 net26 net27 net28 pfet_03v3 L=0.28u W=0.22u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-.ends
-
-
-* expanding   symbol:  sar_adc/blocks/comparator/comp_and2_fast.sym # of pins=5
-** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/comparator/comp_and2_fast.sym
-** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/comparator/comp_and2_fast.sch
-.subckt comp_and2_fast a b y vdd vss
-*.ipin a
-*.ipin b
-*.opin y
-*.iopin vdd
-*.iopin vss
-x1 net2 a net1 net3 net4 async_nand2
-x2 net1 y async_inverter
 .ends
 
 
 * expanding   symbol:  sar_adc/blocks/comparator/comp_inv_3v3.sym # of pins=4
 ** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/comparator/comp_inv_3v3.sym
 ** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/comparator/comp_inv_3v3.sch
-.subckt comp_inv_3v3 vdd vi vo vss
+.subckt comp_inv_3v3 vi vo vdd vss
 *.ipin vi
 *.opin vo
 *.iopin vdd
 *.iopin vss
-XM2 vo vi vdd vdd pfet_03v3 L=0.28u W=0.80u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
+XM2 vo vi vdd vdd pfet_03v3 L=0.28u W=4.00u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
 + ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM1 vo vi vss vss nfet_03v3 L=0.28u W=0.42u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
+XM1 vo vi vss vss nfet_03v3 L=0.28u W=1.60u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
 + ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
 .ends
 
@@ -129,17 +74,17 @@ XM1 vo vi vss vss nfet_03v3 L=0.28u W=0.42u nf=1 ad='int((nf+1)/2) * W/nf * 0.18
 *.opin y
 *.iopin vdd
 *.iopin vss
-x1 net1 net2 net3 net4 net5 async_nand2
-x2 net6 net7 net8 net9 net10 async_nand2
-x3 net11 net12 net13 net14 net15 async_nand2
-x4 net16 net17 net18 net19 net20 async_nand2
+x1 vdd vss a nab b async_nand2
+x2 vdd vss a a_nab nab async_nand2
+x3 vdd vss b b_nab nab async_nand2
+x4 vdd vss a_nab y b_nab async_nand2
 .ends
 
 
 * expanding   symbol:  sar_adc/blocks/async_sar/async_nand2.sym # of pins=5
 ** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_nand2.sym
 ** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_nand2.sch
-.subckt async_nand2 vdd input_A output input_B vss
+.subckt async_nand2 vdd vss input_A output input_B
 *.ipin input_A
 *.ipin input_B
 *.opin output
@@ -152,19 +97,6 @@ XM3 output input_A vdd vdd pfet_03v3 L=0.28u W=1.0u nf=1 ad='int((nf+1)/2) * W/n
 XM1 output input_B vdd vdd pfet_03v3 L=0.28u W=1.0u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
 + ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
 XM4 output input_A net1 vss nfet_03v3 L=0.28u W=0.50u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-.ends
-
-
-* expanding   symbol:  sar_adc/blocks/async_sar/async_inverter.sym # of pins=2
-** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_inverter.sym
-** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_inverter.sch
-.subckt async_inverter input out
-*.ipin input
-*.opin out
-XM5 out input VDD VDD pfet_03v3 L=0.28u W=0.80u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM6 out input VSS VSS nfet_03v3 L=0.28u W=0.42u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
 + ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
 .ends
 
