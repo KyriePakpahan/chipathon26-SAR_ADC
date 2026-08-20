@@ -1,0 +1,8 @@
+** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/cdac/cdac_switch_1b.sch
+.subckt cdac_switch_1b bit vref vdd vss bot
+*.PININFO bit:I vref:B vdd:B vss:B bot:B
+M1 bit_b bit vdd vdd pfet_03v3 L=0.28u W=16.0u nf=4
+M2 bit_b bit vss vss nfet_03v3 L=0.28u W=8.0u nf=2
+M3 bot bit_b vref vdd pfet_03v3 L=0.28u W=32.0u nf=8
+M6 bot bit_b vss vss nfet_03v3 L=0.28u W=24.0u nf=6
+.ends
