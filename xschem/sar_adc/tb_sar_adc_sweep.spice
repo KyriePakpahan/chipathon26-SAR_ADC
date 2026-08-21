@@ -1,0 +1,38 @@
+* Multi-point Linearity Testbench for 8-bit SAR ADC Top
+.param fnoicor=0
+.param sw_stat_mismatch=0
+.lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice typical
+.lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice mimcap_typical
+.lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice cap_mim
+
+.include ../../xschem/sar_adc/sar_adc_top.spice
+
+V_vdd vdd 0 3.3
+V_vref vref 0 3.3
+V_vss vss 0 0.0
+V_vin vin 0 1.65
+V_start start 0 PULSE(0 3.3 0.1n 0.1n 0.1n 5n 1000n)
+
+X1 vin vref start vdd vss done d7 d6 d5 d4 d3 d2 d1 d0 sar_adc_top
+
+.options method=gear reltol=1e-3 vntol=1e-4 abstol=1e-12
+.control
+set filetype=ascii
+
+foreach vin_val 0.4125 0.825 1.65 2.475
+  alter V_vin = $vin_val
+  tran 0.1n 80n
+  let v_d7 = v(d7)[length(v(d7))-1] > 1.65 ? 1 : 0
+  let v_d6 = v(d6)[length(v(d6))-1] > 1.65 ? 1 : 0
+  let v_d5 = v(d5)[length(v(d5))-1] > 1.65 ? 1 : 0
+  let v_d4 = v(d4)[length(v(d4))-1] > 1.65 ? 1 : 0
+  let v_d3 = v(d3)[length(v(d3))-1] > 1.65 ? 1 : 0
+  let v_d2 = v(d2)[length(v(d2))-1] > 1.65 ? 1 : 0
+  let v_d1 = v(d1)[length(v(d1))-1] > 1.65 ? 1 : 0
+  let v_d0 = v(d0)[length(v(d0))-1] > 1.65 ? 1 : 0
+  let code = v_d7*128 + v_d6*64 + v_d5*32 + v_d4*16 + v_d3*8 + v_d2*4 + v_d1*2 + v_d0
+  echo "INPUT VIN = $vin_val V | ADC CODE = $&code / 255"
+end
+quit
+.endc
+.end

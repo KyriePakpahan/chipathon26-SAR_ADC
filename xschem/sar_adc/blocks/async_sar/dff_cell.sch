@@ -20,9 +20,9 @@ N -200 70 -160 70 {lab=clk}
 N -250 20 -200 20 {lab=clk}
 N -120 0 -120 40 {lab=clk_n}
 N -120 -80 -120 -60 {lab=vdd}
-N -120 100 -120 120 {lab=VSS}
+N -120 100 -120 120 {lab=vss}
 N -120 -60 -120 -30 {lab=vdd}
-N -120 70 -120 100 {lab=VSS}
+N -120 70 -120 100 {lab=vss}
 N -120 20 -90 20 {lab=clk_n}
 N 300 300 340 300 {lab=clk_n}
 N 630 300 660 300 {lab=clk}
@@ -64,7 +64,7 @@ N -10 440 -10 470 {lab=vss}
 N 380 300 440 300 {lab=vdd}
 N 380 380 470 380 {lab=M}
 N 380 250 470 250 {lab=D_int}
-N 700 300 760 300 {lab=VSS}
+N 700 300 760 300 {lab=vss}
 N -350 790 -310 790 {lab=clk}
 N -20 790 10 790 {lab=clk_n}
 N -270 740 -270 760 {lab=M_bar}
@@ -166,7 +166,7 @@ model=nfet_03v3
 spiceprefix=X
 }
 C {lab_wire.sym} -120 -80 0 0 {name=l1 lab=vdd}
-C {lab_wire.sym} -120 120 0 0 {name=l2 lab=VSS}
+C {lab_wire.sym} -120 120 0 0 {name=l2 lab=vss}
 C {symbols/pfet_03v3.sym} 360 300 0 0 {name=M3
 L=0.28u
 W=1.0u
@@ -260,7 +260,7 @@ spiceprefix=X
 C {lab_wire.sym} -140 380 0 0 {name=p8 sig_type=std_logic lab=M_bar}
 C {lab_wire.sym} 440 300 1 0 {name=l5 lab=vdd
 }
-C {lab_wire.sym} 760 300 1 0 {name=l6 lab=VSS}
+C {lab_wire.sym} 760 300 1 0 {name=l6 lab=vss}
 C {symbols/pfet_03v3.sym} -290 790 0 0 {name=M9
 L=0.28u
 W=1.0u

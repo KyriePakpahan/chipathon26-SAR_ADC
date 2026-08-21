@@ -1,0 +1,13 @@
+* Extracted by KLayout
+
+* cell async_inverter
+.SUBCKT async_inverter
+* net 1 vdd
+* net 2 input
+* net 3 out
+* net 4 vss
+* device instance $1 r0 *1 1.45,3.45 pfet_03v3
+M$1 3 2 1 1 pfet_03v3 L=0.28U W=0.8U AS=0.408P AD=0.408P PS=2.62U PD=2.62U
+* device instance $2 r0 *1 1.45,1.15 nfet_03v3
+M$2 3 2 4 4 nfet_03v3 L=0.28U W=0.42U AS=0.2142P AD=0.2142P PS=1.86U PD=1.86U
+.ENDS async_inverter

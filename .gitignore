@@ -9,6 +9,9 @@ __pycache__/
 .ipynb_checkpoints/
 gf180mcu/
 
+# LVS extracted and temporary report files
+lvs/reports/
+
 # Temporary and scratch directories
 scripts/scratch/
 scripts/suite*
@@ -17,12 +20,24 @@ scripts/drc_*
 scripts/test_lvs*
 scripts/test_xschem*
 
-# Temporary and log files
+# Python physical layout generators and local verification scripts (excluded per design policy)
+scripts/build_*.py
+scripts/verify_prd_metrics.py
+scripts/analyze_dynamic_raw.py
+
+# Temporary, image, and log files
 *.raw
 *.log
 *.val
 *.bak
 *~
 *.lyrdb
+*.ext
+*.png
 gf180_drc.lyrdb
 layout/backups/
+
+# LVS intermediate files and backups
+*.lvsdb
+*_extracted.cir
+backups/
