@@ -1,0 +1,39 @@
+** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_delay_chain.sch
+.subckt async_delay_chain vdd vss in out
+*.ipin in
+*.iopin vdd
+*.iopin vss
+*.opin out
+x1 vdd in net1 vss async_inverter
+x2 vdd net1 net2 vss async_inverter
+x3 vdd net2 net3 vss async_inverter
+x4 vdd net3 net4 vss async_inverter
+x5 vdd net4 net5 vss async_inverter
+x6 vdd net5 net6 vss async_inverter
+x7 vdd net6 net7 vss async_inverter
+x8 vdd net7 net8 vss async_inverter
+x9 vdd net8 net9 vss async_inverter
+x10 vdd net9 net10 vss async_inverter
+x11 vdd net10 net11 vss async_inverter
+x12 vdd net11 net12 vss async_inverter
+x13 vdd net12 net13 vss async_inverter
+x14 vdd net13 net14 vss async_inverter
+x15 vdd net14 net15 vss async_inverter
+x16 vdd net15 out vss async_inverter
+.ends async_delay_chain
+
+* expanding   symbol:  sar_adc/blocks/async_sar/async_inverter.sym # of pins=4
+** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_inverter.sym
+** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_inverter.sch
+.subckt async_inverter vdd input out vss
+*.ipin input
+*.opin out
+*.iopin vdd
+*.iopin vss
+XM5 out input vdd vdd pfet_03v3 L=0.28u W=0.80u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XM6 out input vss vss nfet_03v3 L=0.28u W=0.42u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+.ends
+
+.end

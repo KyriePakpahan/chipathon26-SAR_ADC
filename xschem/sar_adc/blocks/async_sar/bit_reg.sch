@@ -7,7 +7,6 @@ F {}
 E {}
 C {ipin.sym} -950 -200 0 0 {name=p_co lab=comp_out}
 C {ipin.sym} -950 -160 0 0 {name=p_en lab=en}
-C {ipin.sym} -950 -120 0 0 {name=p_clk lab=clk}
 C {ipin.sym} -950 -80 0 0 {name=p_rst lab=rst_n}
 C {opin.sym} 870 -210 0 0 {name=p_bo lab=bit_out}
 C {iopin.sym} -230 -290 0 0 {name=p1 lab=vdd}

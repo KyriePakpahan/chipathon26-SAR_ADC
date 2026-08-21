@@ -1,0 +1,34 @@
+** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/cdac/cdac_8bit.sch
+.subckt cdac_8bit vref dac_in[7] dac_in[6] dac_in[5] dac_in[4] dac_in[3] dac_in[2] dac_in[1] dac_in[0] vdac vdd vss
+*.PININFO vref:I dac_in[7]:I dac_in[6]:I dac_in[5]:I dac_in[4]:I dac_in[3]:I dac_in[2]:I dac_in[1]:I dac_in[0]:I vdac:O vdd:B
+*+ vss:B
+X0 dac_in[0] vref vdd vss bot0 cdac_switch_1b
+XC0 vdac bot0 cap_mim_2f0fF c_width=5e-6 c_length=5e-6
+X1 dac_in[1] vref vdd vss bot1 cdac_switch_1b
+XC1 vdac bot1 cap_mim_2f0fF c_width=5e-6 c_length=5e-6 m=2
+X2 dac_in[2] vref vdd vss bot2 cdac_switch_1b
+XC2 vdac bot2 cap_mim_2f0fF c_width=5e-6 c_length=5e-6 m=4
+X3 dac_in[3] vref vdd vss bot3 cdac_switch_1b
+XC3 vdac bot3 cap_mim_2f0fF c_width=5e-6 c_length=5e-6 m=8
+X4 dac_in[4] vref vdd vss bot4 cdac_switch_1b
+XC4 vdac bot4 cap_mim_2f0fF c_width=5e-6 c_length=5e-6 m=16
+X5 dac_in[5] vref vdd vss bot5 cdac_switch_1b
+XC5 vdac bot5 cap_mim_2f0fF c_width=5e-6 c_length=5e-6 m=32
+X6 dac_in[6] vref vdd vss bot6 cdac_switch_1b
+XC6 vdac bot6 cap_mim_2f0fF c_width=5e-6 c_length=5e-6 m=64
+X7 dac_in[7] vref vdd vss bot7 cdac_switch_1b
+XC7 vdac bot7 cap_mim_2f0fF c_width=5e-6 c_length=5e-6 m=128
+XC8 vdac vss cap_mim_2f0fF c_width=5e-6 c_length=5e-6
+.ends
+
+* expanding   symbol:  sar_adc/blocks/cdac/cdac_switch_1b.sym # of pins=5
+** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/cdac/cdac_switch_1b.sym
+** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/cdac/cdac_switch_1b.sch
+.subckt cdac_switch_1b bit vref vdd vss bot
+*.PININFO bit:I vref:B vdd:B vss:B bot:B
+M1 bit_b bit vdd vdd pfet_03v3 L=0.28u W=16.0u nf=4
+M2 bit_b bit vss vss nfet_03v3 L=0.28u W=8.0u nf=2
+M3 bot bit_b vref vdd pfet_03v3 L=0.28u W=32.0u nf=8
+M6 bot bit_b vss vss nfet_03v3 L=0.28u W=24.0u nf=6
+.ends
+

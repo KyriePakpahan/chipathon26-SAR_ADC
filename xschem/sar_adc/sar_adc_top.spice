@@ -1,81 +1,27 @@
-** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/sar_adc_top.sch
-**.subckt sar_adc_top vin vref start vdd vss done dout[7] dout[6] dout[5] dout[4] dout[3] dout[2] dout[1] dout[0]
-*.ipin vin
-*.ipin vref
-*.ipin start
-*.iopin vdd
-*.iopin vss
-*.opin done
-*.opin dout[7]
-*.opin dout[6]
-*.opin dout[5]
-*.opin dout[4]
-*.opin dout[3]
-*.opin dout[2]
-*.opin dout[1]
-*.opin dout[0]
-x1 vin sample_en vhold vdd vss sample_hold
-x2 vref dac_in[7] dac_in[6] dac_in[5] dac_in[4] dac_in[3] dac_in[2] dac_in[1] dac_in[0] vdac vdd vss cdac_8bit
-x3 vhold_comp vdac_comp rst_latch vdd vss comp_out_p comp_out_n comp_done strongarm_comp
-x4 sample_en rst_latch done start comp_out_p dout[7] dout[6] dout[5] comp_done dout[4] dout[3] dout[2] dout[1] vdd dout[0] vss
-+ dac_in[7] dac_in[6] dac_in[5] dac_in[4] dac_in[3] dac_in[2] dac_in[1] dac_in[0] async_sar
-E_buf_hold vhold_comp vss vhold vss 1.0
-E_buf_dac vdac_comp vss vdac vss 1.0
-S_vcm_rst vdac vss sample_en vss sw_ideal
-**** begin user architecture code
+** Complete Monolithic 8-bit Asynchronous SAR ADC Top Netlist (sar_adc_top.spice)
 
-.model sw_ideal sw vt=1.65 vh=0.1 ron=10 roff=100G
-
-**** end user architecture code
-**.ends
-
-* expanding   symbol:  sar_adc/blocks/sample_hold/sample_hold.sym # of pins=5
-** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/sample_hold/sample_hold.sym
-** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/sample_hold/sample_hold.sch
-.subckt sample_hold vin sample_en vhold vdd vss
-*.ipin vin
-*.ipin sample_en
-*.opin vhold
-*.iopin vdd
-*.iopin vss
-x_inv vdd clkb sample_en vss inv_sh
-XC1 net1 vg cap_mim_2f0fF c_width=10e-6 c_length=25e-6
-XM4 vin sample_en net1 vss nfet_03v3 L=0.28u W=2.00u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM3 vss clkb net1 vss nfet_03v3 L=0.28u W=2.00u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM5 vg vg vdd vdd pfet_03v3 L=0.28u W=2.00u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM6 vg clkb vg vdd pfet_03v3 L=0.28u W=2.00u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM7 net2 vdd vg vss nfet_03v3 L=0.28u W=2.00u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM8 vss clkb net2 vss nfet_03v3 L=0.28u W=2.00u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM1 vhold vg vin vss nfet_03v3 L=0.28u W=5.00u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM2 vin clkb vhold vdd pfet_03v3 L=0.28u W=5.00u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XC2 vhold vss cap_mim_2f0fF c_width=20e-6 c_length=5e-6
+* 1. Sample & Hold Subcircuit
+.subckt inv_sh vdd vo vi vss
+XM1 vo vi vss vss nfet_03v3 L=0.28u W=1u nf=1
+XM2 vo vi vdd vdd pfet_03v3 L=0.28u W=2u nf=1
 .ends
 
+.subckt sample_hold vin sample_en vhold vdd vss
+x_inv vdd clkb sample_en vss inv_sh
+XM1 vhold sample_en vin vss nfet_03v3 L=0.28u W=4.00u nf=2
+XM2 vin clkb vhold vdd pfet_03v3 L=0.28u W=8.00u nf=2
+XC2 vhold vss cap_mim_2f0fF c_width=15e-6 c_length=10e-6
+.ends
 
-* expanding   symbol:  sar_adc/blocks/cdac/cdac_8bit.sym # of pins=12
-** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/cdac/cdac_8bit.sym
-** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/cdac/cdac_8bit.sch
+* 2. CDAC 8-Bit Subcircuit
+.subckt cdac_switch_1b bit_in vref vdd vss bot
+XM_inv_p bit_b bit_in vdd vdd pfet_03v3 L=0.28u W=2.0u nf=1
+XM_inv_n bit_b bit_in vss vss nfet_03v3 L=0.28u W=1.0u nf=1
+XM_vref bot bit_b vref vdd pfet_03v3 L=0.28u W=6.0u nf=2
+XM_gnd  bot bit_in vss vss nfet_03v3 L=0.28u W=3.0u nf=2
+.ends
+
 .subckt cdac_8bit vref dac_in[7] dac_in[6] dac_in[5] dac_in[4] dac_in[3] dac_in[2] dac_in[1] dac_in[0] vdac vdd vss
-*.ipin vref
-*.ipin dac_in[7]
-*.ipin dac_in[6]
-*.ipin dac_in[5]
-*.ipin dac_in[4]
-*.ipin dac_in[3]
-*.ipin dac_in[2]
-*.ipin dac_in[1]
-*.ipin dac_in[0]
-*.opin vdac
-*.iopin vdd
-*.iopin vss
 XSW0 dac_in[0] vref vdd vss bot0 cdac_switch_1b
 XC0 vdac bot0 cap_mim_2f0fF c_width=5e-6 c_length=5e-6
 XSW1 dac_in[1] vref vdd vss bot1 cdac_switch_1b
@@ -92,345 +38,112 @@ XSW6 dac_in[6] vref vdd vss bot6 cdac_switch_1b
 XC6 vdac bot6 cap_mim_2f0fF c_width=5e-6 c_length=5e-6 m=64
 XSW7 dac_in[7] vref vdd vss bot7 cdac_switch_1b
 XC7 vdac bot7 cap_mim_2f0fF c_width=5e-6 c_length=5e-6 m=128
-XC8 vdac vss cap_mim_2f0fF c_width=5e-6 c_length=5e-6
 .ends
 
+* 3. StrongArm Dynamic Comparator Subcircuit
+.subckt comp_inv_3v3 vi vo vdd vss
+XM1 vo vi vdd vdd pfet_03v3 L=0.28u W=1.0u nf=1
+XM2 vo vi vss vss nfet_03v3 L=0.28u W=0.5u nf=1
+.ends
 
-* expanding   symbol:  sar_adc/blocks/comparator/strongarm_comp.sym # of pins=8
-** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/comparator/strongarm_comp.sym
-** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/comparator/strongarm_comp.sch
+.subckt comp_nand_3v3 a b out vdd vss
+XM1 out a vdd vdd pfet_03v3 L=0.28u W=1.0u nf=1
+XM2 out b vdd vdd pfet_03v3 L=0.28u W=1.0u nf=1
+XM3 out a mid vss nfet_03v3 L=0.28u W=1.0u nf=1
+XM4 mid b vss vss nfet_03v3 L=0.28u W=1.0u nf=1
+.ends
+
+.subckt comp_xor_fast a b out vdd vss
+x1 a b nab vdd vss comp_nand_3v3
+x2 a nab a_nab vdd vss comp_nand_3v3
+x3 b nab b_nab vdd vss comp_nand_3v3
+x4 a_nab b_nab out vdd vss comp_nand_3v3
+.ends
+
+.subckt strongarm_comp_core vin_p vin_n rst_latch vdd vss out_p out_n
+XM_tail tail rst_latch vss vss nfet_03v3 L=0.28u W=4.0u nf=2
+XM_in_p dn vin_p tail vss nfet_03v3 L=0.28u W=4.0u nf=2
+XM_in_n dp vin_n tail vss nfet_03v3 L=0.28u W=4.0u nf=2
+XM_cross_n out_n out_p dn vss nfet_03v3 L=0.28u W=2.0u nf=1
+XM_cross_p out_p out_n dp vss nfet_03v3 L=0.28u W=2.0u nf=1
+XM_latch_n out_n out_p vdd vdd pfet_03v3 L=0.28u W=2.0u nf=1
+XM_latch_p out_p out_n vdd vdd pfet_03v3 L=0.28u W=2.0u nf=1
+XM_rst_n out_n rst_latch vdd vdd pfet_03v3 L=0.28u W=1.0u nf=1
+XM_rst_p out_p rst_latch vdd vdd pfet_03v3 L=0.28u W=1.0u nf=1
+XM_rst_dn dn rst_latch vdd vdd pfet_03v3 L=0.28u W=1.0u nf=1
+XM_rst_dp dp rst_latch vdd vdd pfet_03v3 L=0.28u W=1.0u nf=1
+.ends
+
 .subckt strongarm_comp vin_p vin_n rst_latch vdd vss out_p out_n comp_done
-*.ipin vin_p
-*.ipin vin_n
-*.ipin rst_latch
-*.iopin vdd
-*.iopin vss
-*.opin out_p
-*.opin out_n
-*.opin comp_done
 x_core vin_p vin_n rst_latch vdd vss raw_p raw_n strongarm_comp_core
 x_inv_p raw_p out_p vdd vss comp_inv_3v3
 x_inv_n raw_n out_n vdd vss comp_inv_3v3
 x_done_xor out_p out_n comp_done vdd vss comp_xor_fast
 .ends
 
-
-* expanding   symbol:  sar_adc/blocks/async_sar/async_sar.sym # of pins=24
-** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_sar.sym
-** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_sar.sch
-.subckt async_sar sample_en rst_latch done start comp_out_p dout[7] dout[6] dout[5] comp_done dout[4] dout[3] dout[2] dout[1] vdd
-+ dout[0] vss dac_in[7] dac_in[6] dac_in[5] dac_in[4] dac_in[3] dac_in[2] dac_in[1] dac_in[0]
-*.ipin start
-*.ipin comp_out_p
-*.ipin comp_done
-*.iopin vdd
-*.iopin vss
-*.opin sample_en
-*.opin rst_latch
-*.opin done
-*.opin dout[7]
-*.opin dout[6]
-*.opin dout[5]
-*.opin dout[4]
-*.opin dout[3]
-*.opin dout[2]
-*.opin dout[1]
-*.opin dout[0]
-*.opin dac_in[7]
-*.opin dac_in[6]
-*.opin dac_in[5]
-*.opin dac_in[4]
-*.opin dac_in[3]
-*.opin dac_in[2]
-*.opin dac_in[1]
-*.opin dac_in[0]
-x_inv_srclk vdd comp_done comp_done_b vss async_inverter
-x_sr8 vdd vss Q0 Q1 Q2 Q3 Q4 Q5 Q6 Q7 sr_done vss comp_done_b rst_n_int shift_reg_8bit
-x_inv_se1 vdd start start_inv vss async_inverter
-x_inv_se2 vdd start_inv sample_en vss async_inverter
-x_inv_rst vdd start rst_n_int vss async_inverter
-x_bit7 vdd vss dout[7] comp_out_p Q0 comp_done rst_n_int bit_reg
-x_nor_dq7 vdd vss dout[7] dac_n7 Q0 async_nor2
-x_nor_st7 vdd vss dac_n7 dac_in[7] start async_nor2
-x_bit6 vdd vss dout[6] comp_out_p Q1 comp_done rst_n_int bit_reg
-x_nor_dq6 vdd vss dout[6] dac_n6 Q1 async_nor2
-x_nor_st6 vdd vss dac_n6 dac_in[6] start async_nor2
-x_bit5 vdd vss dout[5] comp_out_p Q2 comp_done rst_n_int bit_reg
-x_nor_dq5 vdd vss dout[5] dac_n5 Q2 async_nor2
-x_nor_st5 vdd vss dac_n5 dac_in[5] start async_nor2
-x_bit4 vdd vss dout[4] comp_out_p Q3 comp_done rst_n_int bit_reg
-x_nor_dq4 vdd vss dout[4] dac_n4 Q3 async_nor2
-x_nor_st4 vdd vss dac_n4 dac_in[4] start async_nor2
-x_bit3 vdd vss dout[3] comp_out_p Q4 comp_done rst_n_int bit_reg
-x_nor_dq3 vdd vss dout[3] dac_n3 Q4 async_nor2
-x_nor_st3 vdd vss dac_n3 dac_in[3] start async_nor2
-x_bit2 vdd vss dout[2] comp_out_p Q5 comp_done rst_n_int bit_reg
-x_nor_dq2 vdd vss dout[2] dac_n2 Q5 async_nor2
-x_nor_st2 vdd vss dac_n2 dac_in[2] start async_nor2
-x_bit1 vdd vss dout[1] comp_out_p Q6 comp_done rst_n_int bit_reg
-x_nor_dq1 vdd vss dout[1] dac_n1 Q6 async_nor2
-x_nor_st1 vdd vss dac_n1 dac_in[1] start async_nor2
-x_bit0 vdd vss dout[0] comp_out_p Q7 comp_done rst_n_int bit_reg
-x_nor_dq0 vdd vss dout[0] dac_n0 Q7 async_nor2
-x_nor_st0 vdd vss dac_n0 dac_in[0] start async_nor2
-x_inv_cd vdd comp_done comp_done_inv vss async_inverter
-x_del vdd vss comp_done comp_done_delayed_n async_delay_chain
-x_nand_settle vdd vss comp_done_inv gate_settle comp_done_delayed_n async_nand2
-x_start_del vdd vss start start_n async_start_delay
-x_inv_dn vdd done done_n vss async_inverter
-x_nand_ctrl vdd vss start_n gate_ctrl done_n async_nand2
-x_nor_rstl vdd vss gate_settle rst_latch gate_ctrl async_nor2
-x_nand_done vdd vss Q7 done_nand comp_done async_nand2
-x_inv_done vdd done_nand done vss async_inverter
-.ends
-
-
-* expanding   symbol:  sar_adc/blocks/sample_hold/inv_sh.sym # of pins=4
-** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/sample_hold/inv_sh.sym
-** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/sample_hold/inv_sh.sch
-.subckt inv_sh vdd vo vi vss
-*.iopin vdd
-*.opin vo
-*.ipin vi
-*.iopin vss
-XM2 vo vi vdd vdd pfet_03v3 L=0.28u W=2.00u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM1 vo vi vss vss nfet_03v3 L=0.28u W=1.00u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-.ends
-
-
-* expanding   symbol:  sar_adc/blocks/cdac/cdac_switch_1b.sym # of pins=5
-** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/cdac/cdac_switch_1b.sym
-** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/cdac/cdac_switch_1b.sch
-.subckt cdac_switch_1b bit vref vdd vss bot
-*.ipin bit
-*.iopin vref
-*.iopin vdd
-*.iopin vss
-*.iopin bot
-XM1 bit_b bit vdd vdd pfet_03v3 L=0.28u W=4.0u nf=2 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM2 bit_b bit vss vss nfet_03v3 L=0.28u W=2.0u nf=2 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM3 bot bit_b vref vdd pfet_03v3 L=0.28u W=4.0u nf=2 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM4 bot bit vref vss nfet_03v3 L=0.28u W=2.0u nf=2 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM5 bot bit vss vdd pfet_03v3 L=0.28u W=4.0u nf=2 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM6 bot bit_b vss vss nfet_03v3 L=0.28u W=2.0u nf=2 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-.ends
-
-
-* expanding   symbol:  sar_adc/blocks/comparator/strongarm_comp_core.sym # of pins=7
-** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/comparator/strongarm_comp_core.sym
-** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/comparator/strongarm_comp_core.sch
-.subckt strongarm_comp_core vin_p vin_n rst_latch vdd vss out_p out_n
-*.ipin vin_p
-*.ipin vin_n
-*.ipin rst_latch
-*.iopin vdd
-*.iopin vss
-*.opin out_p
-*.opin out_n
-XMtail net_tail rst_latch vss vss nfet_03v3 L=0.28u W=6.00u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u'
-+ pd='2*int((nf+1)/2) * (W/nf + 0.18u)' ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM1 fn_p vin_p net_tail vss nfet_03v3 L=0.28u W=4.20u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM2 fn_n vin_n net_tail vss nfet_03v3 L=0.28u W=4.20u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM3 out_p out_n fn_p vss nfet_03v3 L=0.28u W=2.80u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM4 out_n out_p fn_n vss nfet_03v3 L=0.28u W=2.80u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM5 out_p out_n vdd vdd pfet_03v3 L=0.28u W=3.50u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM6 out_n out_p vdd vdd pfet_03v3 L=0.28u W=3.50u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM7 out_p rst_latch vdd vdd pfet_03v3 L=0.28u W=1.40u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM8 out_n rst_latch vdd vdd pfet_03v3 L=0.28u W=1.40u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM9 fn_p rst_latch vdd vdd pfet_03v3 L=0.28u W=1.40u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM10 fn_n rst_latch vdd vdd pfet_03v3 L=0.28u W=1.40u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-.ends
-
-
-* expanding   symbol:  sar_adc/blocks/comparator/comp_inv_3v3.sym # of pins=4
-** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/comparator/comp_inv_3v3.sym
-** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/comparator/comp_inv_3v3.sch
-.subckt comp_inv_3v3 vi vo vdd vss
-*.ipin vi
-*.opin vo
-*.iopin vdd
-*.iopin vss
-XM2 vo vi vdd vdd pfet_03v3 L=0.28u W=0.80u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM1 vo vi vss vss nfet_03v3 L=0.28u W=0.42u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-.ends
-
-
-* expanding   symbol:  sar_adc/blocks/comparator/comp_xor_fast.sym # of pins=5
-** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/comparator/comp_xor_fast.sym
-** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/comparator/comp_xor_fast.sch
-.subckt comp_xor_fast a b y vdd vss
-*.ipin a
-*.ipin b
-*.opin y
-*.iopin vdd
-*.iopin vss
-x1 vdd vss a nab b async_nand2
-x2 vdd vss a a_nab nab async_nand2
-x3 vdd vss b b_nab nab async_nand2
-x4 vdd vss a_nab y b_nab async_nand2
-.ends
-
-
-* expanding   symbol:  sar_adc/blocks/async_sar/async_inverter.sym # of pins=4
-** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_inverter.sym
-** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_inverter.sch
+* 4. Asynchronous SAR Logic Subcircuit
 .subckt async_inverter vdd input out vss
-*.ipin input
-*.opin out
-*.iopin vdd
-*.iopin vss
-XM5 out input vdd vdd pfet_03v3 L=0.28u W=0.80u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM6 out input vss vss nfet_03v3 L=0.28u W=0.42u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XM5 out input vdd vdd pfet_03v3 L=0.28u W=0.80u nf=1
+XM6 out input vss vss nfet_03v3 L=0.28u W=0.42u nf=1
 .ends
 
+.subckt async_nor2 a b out vdd vss
+XM1 mid a vdd vdd pfet_03v3 L=0.28u W=0.80u nf=1
+XM2 out b mid vdd pfet_03v3 L=0.28u W=0.80u nf=1
+XM3 out a vss vss nfet_03v3 L=0.28u W=0.42u nf=1
+XM4 out b vss vss nfet_03v3 L=0.28u W=0.42u nf=1
+.ends
 
-* expanding   symbol:  sar_adc/blocks/async_sar/shift_reg_8bit.sym # of pins=14
-** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/shift_reg_8bit.sym
-** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/shift_reg_8bit.sch
+.subckt async_nand2 a b out vdd vss
+XM1 out a vdd vdd pfet_03v3 L=0.28u W=0.80u nf=1
+XM2 out b vdd vdd pfet_03v3 L=0.28u W=0.80u nf=1
+XM3 out a mid vss nfet_03v3 L=0.28u W=0.42u nf=1
+XM4 mid b vss vss nfet_03v3 L=0.28u W=0.42u nf=1
+.ends
+
+.subckt dff_cell vdd vss clk d q q_bar rst_n
+XM1 clk_n clk vdd vdd pfet_03v3 L=0.28u W=1.0u nf=1
+XM2 clk_n clk vss vss nfet_03v3 L=0.28u W=0.50u nf=1
+XM3 M clk_n D_int vdd pfet_03v3 L=0.28u W=1.0u nf=1
+XM4 D_int clk M vss nfet_03v3 L=0.28u W=0.50u nf=1
+XM5 M_bar M vdd vdd pfet_03v3 L=0.28u W=1.0u nf=1
+XM6 M_bar M vss vss nfet_03v3 L=0.28u W=0.50u nf=1
+XM7 M M_bar vdd vdd pfet_03v3 L=2.0u W=0.42u nf=1
+XM8 M M_bar vss vss nfet_03v3 L=2.4u W=0.42u nf=1
+XM9 S clk M_bar vdd pfet_03v3 L=0.28u W=1.0u nf=1
+XM10 M_bar clk_n S vss nfet_03v3 L=0.28u W=0.50u nf=1
+XM11 Q_bar S vdd vdd pfet_03v3 L=0.28u W=1.0u nf=1
+XM12 Q_bar rst_n vdd vdd pfet_03v3 L=0.28u W=1.0u nf=1
+XM13 Q_bar S net1 vss nfet_03v3 L=0.28u W=0.50u nf=1
+XM14 net1 rst_n vss vss nfet_03v3 L=0.28u W=0.50u nf=1
+XM15 Q Q_bar vdd vdd pfet_03v3 L=0.28u W=1.0u nf=1
+XM16 Q Q_bar vss vss nfet_03v3 L=0.28u W=0.50u nf=1
+XM17 S Q_bar vdd vdd pfet_03v3 L=2.0u W=0.42u nf=1
+XM18 S Q_bar vss vss nfet_03v3 L=2.4u W=0.42u nf=1
+XM19 D_int d vdd vdd pfet_03v3 L=0.28u W=1.0u nf=1
+XM20 D_int d vss vss nfet_03v3 L=0.28u W=0.50u nf=1
+.ends
+
 .subckt shift_reg_8bit vdd vss Q0 Q1 Q2 Q3 Q4 Q5 Q6 Q7 done serial_in clk rst_n
-*.ipin serial_in
-*.ipin clk
-*.ipin rst_n
-*.opin Q0
-*.opin Q1
-*.opin Q2
-*.opin Q3
-*.opin Q4
-*.opin Q5
-*.opin Q6
-*.opin Q7
-*.opin done
-*.iopin vdd
-*.iopin vss
-x1 vdd vss Q0 serial_in clk rst_n dff_cell_set
-x2 Q0 clk vdd vss rst_n Q1 dff_cell
-x3 Q1 clk vdd vss rst_n Q2 dff_cell
-x4 Q2 clk vdd vss rst_n Q3 dff_cell
-x5 Q3 clk vdd vss rst_n Q4 dff_cell
-x6 Q4 clk vdd vss rst_n Q5 dff_cell
-x7 Q5 clk vdd vss rst_n Q6 dff_cell
-x8 Q6 clk vdd vss rst_n Q7 dff_cell
-x9 Q7 clk vdd vss rst_n done dff_cell
+x1 vdd vss clk serial_in Q0 net1 rst_n dff_cell
+x2 vdd vss clk Q0 Q1 net2 rst_n dff_cell
+x3 vdd vss clk Q1 Q2 net3 rst_n dff_cell
+x4 vdd vss clk Q2 Q3 net4 rst_n dff_cell
+x5 vdd vss clk Q3 Q4 net5 rst_n dff_cell
+x6 vdd vss clk Q4 Q5 net6 rst_n dff_cell
+x7 vdd vss clk Q5 Q6 net7 rst_n dff_cell
+x8 vdd vss clk Q6 Q7 net8 rst_n dff_cell
+x9 vdd vss clk Q7 done net9 rst_n dff_cell
 .ends
 
-
-* expanding   symbol:  sar_adc/blocks/async_sar/bit_reg.sym # of pins=7
-** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/bit_reg.sym
-** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/bit_reg.sch
-.subckt bit_reg vdd vss bit_out comp_out en clk rst_n
-*.ipin comp_out
-*.ipin en
-*.ipin clk
-*.ipin rst_n
-*.opin bit_out
-*.iopin vdd
-*.iopin vss
-x_nand_set vdd vss comp_out set_n en async_nand2
-x_inv_set vdd set_n set vss async_inverter
-x_inv_rst vdd rst_n rst vss async_inverter
-x_nor_q vdd vss rst bit_out bit_out_bar async_nor2
-x_nor_qb vdd vss set bit_out_bar bit_out async_nor2
+.subckt bit_reg vdd vss clk_sample clk_latch comp_out dout rst_n
+x1 vdd clk_sample net1 vss async_inverter
+x2 vdd clk_latch net2 vss async_inverter
+x3 net1 net2 clk_gated vdd vss async_nand2
+x4 vdd vss clk_gated comp_out dout q_bar rst_n dff_cell
 .ends
 
-
-* expanding   symbol:  sar_adc/blocks/async_sar/async_nor2.sym # of pins=5
-** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_nor2.sym
-** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_nor2.sch
-.subckt async_nor2 vdd vss A Y B
-*.ipin A
-*.ipin B
-*.opin Y
-*.iopin vdd
-*.iopin vss
-x1 vdd A A_b vss async_inverter
-x2 vdd B B_b vss async_inverter
-x3 vdd net1 A_b vss B_b async_nand2
-x4 vdd net1 Y vss async_inverter
-.ends
-
-
-* expanding   symbol:  sar_adc/blocks/async_sar/async_delay_chain.sym # of pins=4
-** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_delay_chain.sym
-** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_delay_chain.sch
-.subckt async_delay_chain vdd vss in out
-*.ipin in
-*.opin out
-*.iopin vdd
-*.iopin vss
-x1 vdd in net1 vss async_inverter
-x2 vdd net1 net2 vss async_inverter
-x3 vdd net2 net3 vss async_inverter
-x4 vdd net3 net4 vss async_inverter
-x5 vdd net4 net5 vss async_inverter
-x6 vdd net5 net6 vss async_inverter
-x7 vdd net6 net7 vss async_inverter
-x8 vdd net7 net8 vss async_inverter
-x9 vdd net8 net9 vss async_inverter
-x10 vdd net9 net10 vss async_inverter
-x11 vdd net10 net11 vss async_inverter
-x12 vdd net11 net12 vss async_inverter
-x13 vdd net12 net13 vss async_inverter
-x14 vdd net13 net14 vss async_inverter
-x15 vdd net14 net15 vss async_inverter
-x16 vdd net15 net16 vss async_inverter
-x17 vdd net16 net17 vss async_inverter
-x18 vdd net17 net18 vss async_inverter
-x19 vdd net18 net19 vss async_inverter
-x20 vdd net19 net20 vss async_inverter
-x21 vdd net20 out vss async_inverter
-.ends
-
-
-* expanding   symbol:  sar_adc/blocks/async_sar/async_nand2.sym # of pins=5
-** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_nand2.sym
-** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_nand2.sch
-.subckt async_nand2 vdd vss input_A output input_B
-*.ipin input_A
-*.ipin input_B
-*.opin output
-*.iopin vdd
-*.iopin vss
-XM2 net1 input_B vss vss nfet_03v3 L=0.28u W=0.50u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM3 output input_A vdd vdd pfet_03v3 L=0.28u W=1.0u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM1 output input_B vdd vdd pfet_03v3 L=0.28u W=1.0u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM4 output input_A net1 vss nfet_03v3 L=0.28u W=0.50u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-.ends
-
-
-* expanding   symbol:  sar_adc/blocks/async_sar/async_start_delay.sym # of pins=4
-** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_start_delay.sym
-** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_start_delay.sch
 .subckt async_start_delay vdd vss in out
-*.ipin in
-*.iopin vdd
-*.iopin vss
-*.opin out
 x1 vdd in net1 vss async_inverter
 x2 vdd net1 net2 vss async_inverter
 x3 vdd net2 net3 vss async_inverter
@@ -478,73 +191,71 @@ x44 vdd net43 net44 vss async_inverter
 x45 vdd net44 out vss async_inverter
 .ends
 
-
-* expanding   symbol:  sar_adc/blocks/async_sar/dff_cell_set.sym # of pins=6
-** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/dff_cell_set.sym
-** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/dff_cell_set.sch
-.subckt dff_cell_set vdd vss Q D clk rst_n
-*.ipin D
-*.ipin clk
-*.ipin rst_n
-*.opin Q
-*.iopin vdd
-*.iopin vss
-x_inv_d vdd D D_b vdd async_inverter
-x_dff D_b clk vdd vss rst_n net1 dff_cell
-x_inv_q vdd net1 Q vss async_inverter
+.subckt async_pulse_settle vdd vss in out
+x1 vdd in net1 vss async_inverter
+x2 vdd net1 net2 vss async_inverter
+x3 vdd net2 net3 vss async_inverter
+x4 vdd net3 net4 vss async_inverter
+x5 vdd net4 net5 vss async_inverter
+x6 vdd net5 net6 vss async_inverter
+x7 vdd net6 net7 vss async_inverter
+x8 vdd net7 in_delayed_n vss async_inverter
+x_nor_pulse in in_delayed_n out vdd vss async_nor2
 .ends
 
+.subckt async_sar sample_en rst_latch done dout[7] dout[6] dout[5] dout[4] dout[3] dout[2] dout[1] dout[0] dac_in[7] dac_in[6] dac_in[5] dac_in[4] dac_in[3] dac_in[2] dac_in[1] dac_in[0] start comp_out_p comp_out_n vdd comp_done vss
+x_inv_se vdd start sample_en vss async_inverter
+x_inv_cd vdd comp_done comp_done_b vss async_inverter
+x_sr8 vdd vss Q0 Q1 Q2 Q3 Q4 Q5 Q6 Q7 sr_done vdd comp_done_b sample_en shift_reg_8bit
 
-* expanding   symbol:  sar_adc/blocks/async_sar/dff_cell.sym # of pins=6
-** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/dff_cell.sym
-** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/dff_cell.sch
-.subckt dff_cell D clk vdd vss rst_n Q
-*.ipin D
-*.ipin clk
-*.ipin rst_n
-*.opin Q
-*.iopin vdd
-*.iopin vss
-XM1 clk_n clk vdd vdd pfet_03v3 L=0.28u W=1.0u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM2 clk_n clk VSS VSS nfet_03v3 L=0.28u W=0.50u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM3 M clk_n D_int vdd pfet_03v3 L=0.28u W=1.0u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM4 D_int clk M VSS nfet_03v3 L=0.28u W=0.50u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM5 M_bar M vdd vdd pfet_03v3 L=0.28u W=1.0u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM6 M_bar M vss vss nfet_03v3 L=0.28u W=0.50u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM7 M M_bar vdd vdd pfet_03v3 L=2.0u W=0.42u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM8 M M_bar vss vss nfet_03v3 L=2.4u W=0.42u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM9 S clk M_bar vdd pfet_03v3 L=0.28u W=1.0u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM10 M_bar clk_n S vss nfet_03v3 L=0.28u W=0.50u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM11 Q_bar S vdd vdd pfet_03v3 L=0.28u W=1.0u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM12 Q_bar rst_n vdd vdd pfet_03v3 L=0.28u W=1.0u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM13 Q_bar S net1 vss nfet_03v3 L=0.28u W=0.50u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM14 net1 rst_n vss vss nfet_03v3 L=0.28u W=0.50u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM15 Q Q_bar vdd vdd pfet_03v3 L=0.28u W=1.0u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM16 Q Q_bar vss vss nfet_03v3 L=0.28u W=0.50u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM17 S Q_bar vdd vdd pfet_03v3 L=2.0u W=0.42u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM18 S Q_bar vss vss nfet_03v3 L=2.4u W=0.42u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM19 D_int D vdd vdd pfet_03v3 L=0.28u W=1.0u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM20 D_int D vss vss nfet_03v3 L=0.28u W=0.50u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
-+ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+x_bit_reg_0 vdd vss Q0 comp_done comp_out_p dout[7] sample_en bit_reg
+x_bit_reg_1 vdd vss Q1 comp_done comp_out_p dout[6] sample_en bit_reg
+x_bit_reg_2 vdd vss Q2 comp_done comp_out_p dout[5] sample_en bit_reg
+x_bit_reg_3 vdd vss Q3 comp_done comp_out_p dout[4] sample_en bit_reg
+x_bit_reg_4 vdd vss Q4 comp_done comp_out_p dout[3] sample_en bit_reg
+x_bit_reg_5 vdd vss Q5 comp_done comp_out_p dout[2] sample_en bit_reg
+x_bit_reg_6 vdd vss Q6 comp_done comp_out_p dout[1] sample_en bit_reg
+x_bit_reg_7 vdd vss Q7 comp_done comp_out_p dout[0] sample_en bit_reg
+
+x_inv_d0 vdd dout[0] dout_n[0] vss async_inverter
+x_inv_d1 vdd dout[1] dout_n[1] vss async_inverter
+x_inv_d2 vdd dout[2] dout_n[2] vss async_inverter
+x_inv_d3 vdd dout[3] dout_n[3] vss async_inverter
+x_inv_d4 vdd dout[4] dout_n[4] vss async_inverter
+x_inv_d5 vdd dout[5] dout_n[5] vss async_inverter
+x_inv_d6 vdd dout[6] dout_n[6] vss async_inverter
+x_inv_d7 vdd dout[7] dout_n[7] vss async_inverter
+
+x_inv_q0 vdd Q0 q_n[0] vss async_inverter
+x_inv_q1 vdd Q1 q_n[1] vss async_inverter
+x_inv_q2 vdd Q2 q_n[2] vss async_inverter
+x_inv_q3 vdd Q3 q_n[3] vss async_inverter
+x_inv_q4 vdd Q4 q_n[4] vss async_inverter
+x_inv_q5 vdd Q5 q_n[5] vss async_inverter
+x_inv_q6 vdd Q6 q_n[6] vss async_inverter
+
+x_nand_dac_7 dout_n[7] sample_en dac_in[7] vdd vss async_nand2
+x_nand_dac_6 dout_n[6] q_n[0] dac_in[6] vdd vss async_nand2
+x_nand_dac_5 dout_n[5] q_n[1] dac_in[5] vdd vss async_nand2
+x_nand_dac_4 dout_n[4] q_n[2] dac_in[4] vdd vss async_nand2
+x_nand_dac_3 dout_n[3] q_n[3] dac_in[3] vdd vss async_nand2
+x_nand_dac_2 dout_n[2] q_n[4] dac_in[2] vdd vss async_nand2
+x_nand_dac_1 dout_n[1] q_n[5] dac_in[1] vdd vss async_nand2
+x_nand_dac_0 dout_n[0] q_n[6] dac_in[0] vdd vss async_nand2
+
+x_psettle vdd vss comp_done gate_settle async_pulse_settle
+x_start_del vdd vss start start_n async_start_delay
+x_inv_dn vdd done done_n vss async_inverter
+x_nand_ctrl start_n done_n gate_ctrl vdd vss async_nand2
+x_nor_rstl gate_settle gate_ctrl rst_latch vdd vss async_nor2
+x_nand_done Q7 comp_done done_nand vdd vss async_nand2
+x_inv_done vdd done_nand done vss async_inverter
 .ends
 
-.end
+* 5. Top Circuit: sar_adc_top
+.subckt sar_adc_top vin vref start vdd vss done d7 d6 d5 d4 d3 d2 d1 d0
+x_sh vin sample_en vhold vdd vss sample_hold
+x_cdac vref dac_in[7] dac_in[6] dac_in[5] dac_in[4] dac_in[3] dac_in[2] dac_in[1] dac_in[0] vdac vdd vss cdac_8bit
+x_comp vhold vdac rst_latch vdd vss comp_out_p comp_out_n comp_done strongarm_comp
+x_sar sample_en rst_latch done d7 d6 d5 d4 d3 d2 d1 d0 dac_in[7] dac_in[6] dac_in[5] dac_in[4] dac_in[3] dac_in[2] dac_in[1] dac_in[0] start comp_out_p comp_out_n vdd comp_done vss async_sar
+.ends

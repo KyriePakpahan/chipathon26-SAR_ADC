@@ -1,0 +1,5 @@
+.subckt async_inverter OUT INPUT VDD VSS
+M5 OUT INPUT VDD VDD pfet_03v3 L=0.28u W=1.0u
+M6 OUT INPUT VSS VSS nfet_03v3 L=0.28u W=0.50u
+.ends async_inverter
+.end

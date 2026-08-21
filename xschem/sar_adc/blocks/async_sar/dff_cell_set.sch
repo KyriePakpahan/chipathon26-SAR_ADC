@@ -22,7 +22,7 @@ C {title.sym} -500 110 0 0 {name=l_title author="Berkah Saluyu"}
 C {lab_wire.sym} -190 -210 2 0 {name=l_x7 lab=vdd}
 C {lab_wire.sym} 150 -120 2 0 {name=l_x1 lab=vdd}
 C {lab_wire.sym} 450 -80 2 0 {name=l_x2 lab=vdd}
-C {lab_wire.sym} -190 -170 2 0 {name=l_x3 lab=vdd}
+C {lab_wire.sym} -190 -170 2 0 {name=l_x3 lab=vss}
 C {lab_wire.sym} 150 -100 2 0 {name=l_x4 lab=vss}
 C {lab_wire.sym} 450 -40 2 0 {name=l_x5 lab=vss
 }

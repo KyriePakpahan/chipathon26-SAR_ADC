@@ -1,0 +1,158 @@
+** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_start_delay.sch
+.subckt async_start_delay vdd vss in out
+*.ipin in
+*.iopin vdd
+*.iopin vss
+*.opin out
+x1 vdd in net1 vss async_inverter
+x2 vdd net1 net2 vss async_inverter
+x3 vdd net2 net3 vss async_inverter
+x4 vdd net3 net4 vss async_inverter
+x5 vdd net4 net5 vss async_inverter
+x6 vdd net5 net6 vss async_inverter
+x7 vdd net6 net7 vss async_inverter
+x8 vdd net7 net8 vss async_inverter
+x9 vdd net8 net9 vss async_inverter
+x10 vdd net9 net10 vss async_inverter
+x11 vdd net10 net11 vss async_inverter
+x12 vdd net11 net12 vss async_inverter
+x13 vdd net12 net13 vss async_inverter
+x14 vdd net13 net14 vss async_inverter
+x15 vdd net14 net15 vss async_inverter
+x16 vdd net15 net16 vss async_inverter
+x17 vdd net16 net17 vss async_inverter
+x18 vdd net17 net18 vss async_inverter
+x19 vdd net18 net19 vss async_inverter
+x20 vdd net19 net20 vss async_inverter
+x21 vdd net20 net21 vss async_inverter
+x22 vdd net21 net22 vss async_inverter
+x23 vdd net22 net23 vss async_inverter
+x24 vdd net23 net24 vss async_inverter
+x25 vdd net24 net25 vss async_inverter
+x26 vdd net25 net26 vss async_inverter
+x27 vdd net26 net27 vss async_inverter
+x28 vdd net27 net28 vss async_inverter
+x29 vdd net28 net29 vss async_inverter
+x30 vdd net29 net30 vss async_inverter
+x31 vdd net30 net31 vss async_inverter
+x32 vdd net31 net32 vss async_inverter
+x33 vdd net32 net33 vss async_inverter
+x34 vdd net33 net34 vss async_inverter
+x35 vdd net34 net35 vss async_inverter
+x36 vdd net35 net36 vss async_inverter
+x37 vdd net36 net37 vss async_inverter
+x38 vdd net37 net38 vss async_inverter
+x39 vdd net38 net39 vss async_inverter
+x40 vdd net39 net40 vss async_inverter
+x41 vdd net40 net41 vss async_inverter
+x42 vdd net41 net42 vss async_inverter
+x43 vdd net42 net43 vss async_inverter
+x44 vdd net43 net44 vss async_inverter
+x45 vdd net44 net45 vss async_inverter
+x46 vdd net45 net46 vss async_inverter
+x47 vdd net46 net47 vss async_inverter
+x48 vdd net47 net48 vss async_inverter
+x49 vdd net48 net49 vss async_inverter
+x50 vdd net49 net50 vss async_inverter
+x51 vdd net50 net51 vss async_inverter
+x52 vdd net51 net52 vss async_inverter
+x53 vdd net52 net53 vss async_inverter
+x54 vdd net53 net54 vss async_inverter
+x55 vdd net54 net55 vss async_inverter
+x56 vdd net55 net56 vss async_inverter
+x57 vdd net56 net57 vss async_inverter
+x58 vdd net57 net58 vss async_inverter
+x59 vdd net58 net59 vss async_inverter
+x60 vdd net59 net60 vss async_inverter
+x61 vdd net60 net61 vss async_inverter
+x62 vdd net61 net62 vss async_inverter
+x63 vdd net62 net63 vss async_inverter
+x64 vdd net63 net64 vss async_inverter
+x65 vdd net64 net65 vss async_inverter
+x66 vdd net65 net66 vss async_inverter
+x67 vdd net66 net67 vss async_inverter
+x68 vdd net67 net68 vss async_inverter
+x69 vdd net68 net69 vss async_inverter
+x70 vdd net69 net70 vss async_inverter
+x71 vdd net70 net71 vss async_inverter
+x72 vdd net71 net72 vss async_inverter
+x73 vdd net72 net73 vss async_inverter
+x74 vdd net73 net74 vss async_inverter
+x75 vdd net74 net75 vss async_inverter
+x76 vdd net75 net76 vss async_inverter
+x77 vdd net76 net77 vss async_inverter
+x78 vdd net77 net78 vss async_inverter
+x79 vdd net78 net79 vss async_inverter
+x80 vdd net79 net80 vss async_inverter
+x81 vdd net80 net81 vss async_inverter
+x82 vdd net81 net82 vss async_inverter
+x83 vdd net82 net83 vss async_inverter
+x84 vdd net83 net84 vss async_inverter
+x85 vdd net84 net85 vss async_inverter
+x86 vdd net85 net86 vss async_inverter
+x87 vdd net86 net87 vss async_inverter
+x88 vdd net87 net88 vss async_inverter
+x89 vdd net88 net89 vss async_inverter
+x90 vdd net89 net90 vss async_inverter
+x91 vdd net90 net91 vss async_inverter
+x92 vdd net91 net92 vss async_inverter
+x93 vdd net92 net93 vss async_inverter
+x94 vdd net93 net94 vss async_inverter
+x95 vdd net94 net95 vss async_inverter
+x96 vdd net95 net96 vss async_inverter
+x97 vdd net96 net97 vss async_inverter
+x98 vdd net97 net98 vss async_inverter
+x99 vdd net98 net99 vss async_inverter
+x100 vdd net99 net100 vss async_inverter
+x101 vdd net100 net101 vss async_inverter
+x102 vdd net101 net102 vss async_inverter
+x103 vdd net102 net103 vss async_inverter
+x104 vdd net103 net104 vss async_inverter
+x105 vdd net104 net105 vss async_inverter
+x106 vdd net105 net106 vss async_inverter
+x107 vdd net106 net107 vss async_inverter
+x108 vdd net107 net108 vss async_inverter
+x109 vdd net108 net109 vss async_inverter
+x110 vdd net109 net110 vss async_inverter
+x111 vdd net110 net111 vss async_inverter
+x112 vdd net111 net112 vss async_inverter
+x113 vdd net112 net113 vss async_inverter
+x114 vdd net113 net114 vss async_inverter
+x115 vdd net114 net115 vss async_inverter
+x116 vdd net115 net116 vss async_inverter
+x117 vdd net116 net117 vss async_inverter
+x118 vdd net117 net118 vss async_inverter
+x119 vdd net118 net119 vss async_inverter
+x120 vdd net119 net120 vss async_inverter
+x121 vdd net120 net121 vss async_inverter
+x122 vdd net121 net122 vss async_inverter
+x123 vdd net122 net123 vss async_inverter
+x124 vdd net123 net124 vss async_inverter
+x125 vdd net124 net125 vss async_inverter
+x126 vdd net125 net126 vss async_inverter
+x127 vdd net126 net127 vss async_inverter
+x128 vdd net127 net128 vss async_inverter
+x129 vdd net128 net129 vss async_inverter
+x130 vdd net129 net130 vss async_inverter
+x131 vdd net130 net131 vss async_inverter
+x132 vdd net131 net132 vss async_inverter
+x133 vdd net132 net133 vss async_inverter
+x134 vdd net133 net134 vss async_inverter
+x135 vdd net134 out vss async_inverter
+.ends async_start_delay
+
+* expanding   symbol:  sar_adc/blocks/async_sar/async_inverter.sym # of pins=4
+** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_inverter.sym
+** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_inverter.sch
+.subckt async_inverter vdd input out vss
+*.ipin input
+*.opin out
+*.iopin vdd
+*.iopin vss
+XM5 out input vdd vdd pfet_03v3 L=0.28u W=0.80u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XM6 out input vss vss nfet_03v3 L=0.28u W=0.42u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+.ends
+
+.end

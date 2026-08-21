@@ -1,0 +1,15 @@
+** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/comparator/strongarm_comp_core.sch
+.subckt strongarm_comp_core vin_p vin_n rst_latch vdd vss out_p out_n
+*.PININFO vin_p:I vin_n:I rst_latch:I vdd:B vss:B out_p:O out_n:O
+Mtail vss rst_latch net1 vss nfet_03v3 L=0.28u W=6.00u nf=1
+M1 net1 vin_p net2 vss nfet_03v3 L=0.28u W=4.20u nf=1
+M2 net1 vin_n net3 vss nfet_03v3 L=0.28u W=4.20u nf=1
+M3 net2 out_n out_p vss nfet_03v3 L=0.28u W=2.00u nf=1
+M4 net3 out_p out_n vss nfet_03v3 L=0.28u W=2.00u nf=1
+M5 out_p out_n vdd vdd pfet_03v3 L=0.28u W=3.00u nf=1
+M6 out_n out_p vdd vdd pfet_03v3 L=0.28u W=3.00u nf=1
+M7 out_p rst_latch vdd vdd pfet_03v3 L=0.28u W=1.00u nf=1
+M8 out_n rst_latch vdd vdd pfet_03v3 L=0.28u W=1.00u nf=1
+M9 net2 rst_latch vdd vdd pfet_03v3 L=0.28u W=1.00u nf=1
+M10 net3 rst_latch vdd vdd pfet_03v3 L=0.28u W=1.00u nf=1
+.ends

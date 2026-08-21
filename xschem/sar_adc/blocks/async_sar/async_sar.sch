@@ -67,7 +67,6 @@ C {lab_wire.sym} -700 390 2 0 {name=l_ir_vss lab=vss}
 C {sar_adc/blocks/async_sar/bit_reg.sym} 0 630 0 0 {name=x_bit0}
 C {lab_wire.sym} -150 600 0 0 {name=l_br0_co lab=comp_out_p}
 C {lab_wire.sym} -150 620 0 0 {name=l_br0_en lab=Q7}
-C {lab_wire.sym} -150 640 0 0 {name=l_br0_clk lab=comp_done}
 C {lab_wire.sym} -150 660 0 0 {name=l_br0_rst lab=rst_n_int}
 C {lab_wire.sym} 150 600 2 0 {name=l_br0_vdd lab=vdd}
 C {lab_wire.sym} 150 620 2 0 {name=l_br0_vss lab=vss}
@@ -87,7 +86,6 @@ C {lab_wire.sym} 1100 650 2 0 {name=l_nst0_vss lab=vss}
 C {sar_adc/blocks/async_sar/bit_reg.sym} 0 450 0 0 {name=x_bit1}
 C {lab_wire.sym} -150 420 0 0 {name=l_br1_co lab=comp_out_p}
 C {lab_wire.sym} -150 440 0 0 {name=l_br1_en lab=Q6}
-C {lab_wire.sym} -150 460 0 0 {name=l_br1_clk lab=comp_done}
 C {lab_wire.sym} -150 480 0 0 {name=l_br1_rst lab=rst_n_int}
 C {lab_wire.sym} 150 420 2 0 {name=l_br1_vdd lab=vdd}
 C {lab_wire.sym} 150 440 2 0 {name=l_br1_vss lab=vss}
@@ -107,7 +105,6 @@ C {lab_wire.sym} 1100 470 2 0 {name=l_nst1_vss lab=vss}
 C {sar_adc/blocks/async_sar/bit_reg.sym} 0 270 0 0 {name=x_bit2}
 C {lab_wire.sym} -150 240 0 0 {name=l_br2_co lab=comp_out_p}
 C {lab_wire.sym} -150 260 0 0 {name=l_br2_en lab=Q5}
-C {lab_wire.sym} -150 280 0 0 {name=l_br2_clk lab=comp_done}
 C {lab_wire.sym} -150 300 0 0 {name=l_br2_rst lab=rst_n_int}
 C {lab_wire.sym} 150 240 2 0 {name=l_br2_vdd lab=vdd}
 C {lab_wire.sym} 150 260 2 0 {name=l_br2_vss lab=vss}
@@ -127,7 +124,6 @@ C {lab_wire.sym} 1100 290 2 0 {name=l_nst2_vss lab=vss}
 C {sar_adc/blocks/async_sar/bit_reg.sym} 0 90 0 0 {name=x_bit3}
 C {lab_wire.sym} -150 60 0 0 {name=l_br3_co lab=comp_out_p}
 C {lab_wire.sym} -150 80 0 0 {name=l_br3_en lab=Q4}
-C {lab_wire.sym} -150 100 0 0 {name=l_br3_clk lab=comp_done}
 C {lab_wire.sym} -150 120 0 0 {name=l_br3_rst lab=rst_n_int}
 C {lab_wire.sym} 150 60 2 0 {name=l_br3_vdd lab=vdd}
 C {lab_wire.sym} 150 80 2 0 {name=l_br3_vss lab=vss}
@@ -147,7 +143,6 @@ C {lab_wire.sym} 1100 110 2 0 {name=l_nst3_vss lab=vss}
 C {sar_adc/blocks/async_sar/bit_reg.sym} 0 -90 0 0 {name=x_bit4}
 C {lab_wire.sym} -150 -120 0 0 {name=l_br4_co lab=comp_out_p}
 C {lab_wire.sym} -150 -100 0 0 {name=l_br4_en lab=Q3}
-C {lab_wire.sym} -150 -80 0 0 {name=l_br4_clk lab=comp_done}
 C {lab_wire.sym} -150 -60 0 0 {name=l_br4_rst lab=rst_n_int}
 C {lab_wire.sym} 150 -120 2 0 {name=l_br4_vdd lab=vdd}
 C {lab_wire.sym} 150 -100 2 0 {name=l_br4_vss lab=vss}
@@ -167,7 +162,6 @@ C {lab_wire.sym} 1100 -70 2 0 {name=l_nst4_vss lab=vss}
 C {sar_adc/blocks/async_sar/bit_reg.sym} 0 -270 0 0 {name=x_bit5}
 C {lab_wire.sym} -150 -300 0 0 {name=l_br5_co lab=comp_out_p}
 C {lab_wire.sym} -150 -280 0 0 {name=l_br5_en lab=Q2}
-C {lab_wire.sym} -150 -260 0 0 {name=l_br5_clk lab=comp_done}
 C {lab_wire.sym} -150 -240 0 0 {name=l_br5_rst lab=rst_n_int}
 C {lab_wire.sym} 150 -300 2 0 {name=l_br5_vdd lab=vdd}
 C {lab_wire.sym} 150 -280 2 0 {name=l_br5_vss lab=vss}
@@ -187,7 +181,6 @@ C {lab_wire.sym} 1100 -250 2 0 {name=l_nst5_vss lab=vss}
 C {sar_adc/blocks/async_sar/bit_reg.sym} 0 -450 0 0 {name=x_bit6}
 C {lab_wire.sym} -150 -480 0 0 {name=l_br6_co lab=comp_out_p}
 C {lab_wire.sym} -150 -460 0 0 {name=l_br6_en lab=Q1}
-C {lab_wire.sym} -150 -440 0 0 {name=l_br6_clk lab=comp_done}
 C {lab_wire.sym} -150 -420 0 0 {name=l_br6_rst lab=rst_n_int}
 C {lab_wire.sym} 150 -480 2 0 {name=l_br6_vdd lab=vdd}
 C {lab_wire.sym} 150 -460 2 0 {name=l_br6_vss lab=vss}
@@ -207,7 +200,6 @@ C {lab_wire.sym} 1100 -430 2 0 {name=l_nst6_vss lab=vss}
 C {sar_adc/blocks/async_sar/bit_reg.sym} 0 -630 0 0 {name=x_bit7}
 C {lab_wire.sym} -150 -660 0 0 {name=l_br7_co lab=comp_out_p}
 C {lab_wire.sym} -150 -640 0 0 {name=l_br7_en lab=Q0}
-C {lab_wire.sym} -150 -620 0 0 {name=l_br7_clk lab=comp_done}
 C {lab_wire.sym} -150 -600 0 0 {name=l_br7_rst lab=rst_n_int}
 C {lab_wire.sym} 150 -660 2 0 {name=l_br7_vdd lab=vdd}
 C {lab_wire.sym} 150 -640 2 0 {name=l_br7_vss lab=vss}

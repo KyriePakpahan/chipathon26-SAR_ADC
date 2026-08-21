@@ -1,0 +1,46 @@
+* Fully Verified Schematic Simulation for 8-bit SAR ADC Top
+
+.param fnoicor=0
+.param sw_stat_mismatch=0
+.lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice typical
+.lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice mimcap_typical
+.lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice cap_mim
+
+.include ../../xschem/sar_adc/blocks/sample_hold/sample_hold.spice
+.include ../../xschem/sar_adc/blocks/cdac/cdac_8bit.spice
+.include ../../xschem/sar_adc/blocks/comparator/strongarm_comp.spice
+.include ../../xschem/sar_adc/blocks/async_sar/async_sar.spice
+
+.subckt sar_adc_top vin vref start vdd vss done dout[7] dout[6] dout[5] dout[4] dout[3] dout[2] dout[1] dout[0]
+x1 vin sample_en vhold vdd vss sample_hold
+x2 vref dac_in[7] dac_in[6] dac_in[5] dac_in[4] dac_in[3] dac_in[2] dac_in[1] dac_in[0] vdac vdd vss cdac_8bit
+x3 vhold vdac rst_latch vdd vss comp_out_p comp_out_n comp_done strongarm_comp
+x4 start comp_out_p comp_done vdd vss sample_en rst_latch done dout[7] dout[6] dout[5] dout[4] dout[3] dout[2] dout[1] dout[0] dac_in[7] dac_in[6] dac_in[5] dac_in[4] dac_in[3] dac_in[2] dac_in[1] dac_in[0] async_sar
+.ends
+
+V1 vdd 0 3.3
+V2 vref 0 3.3
+V3 vin 0 1.65
+V4 start 0 PULSE(3.3 0 5n 0.1n 0.1n 95n 100n)
+V_vss vss 0 0
+
+x1 vin vref start vdd vss done dout[7] dout[6] dout[5] dout[4] dout[3] dout[2] dout[1] dout[0] sar_adc_top
+
+.options method=gear reltol=1e-3 vntol=1e-4 abstol=1e-12
+.control
+set filetype=ascii
+tran 0.1n 60n
+echo "=== SIMULATION RESULTS FOR VIN = 1.65 V ==="
+let v_d7 = v(dout[7])[length(v(dout[7]))-1]
+let v_d6 = v(dout[6])[length(v(dout[6]))-1]
+let v_d5 = v(dout[5])[length(v(dout[5]))-1]
+let v_d4 = v(dout[4])[length(v(dout[4]))-1]
+let v_d3 = v(dout[3])[length(v(dout[3]))-1]
+let v_d2 = v(dout[2])[length(v(dout[2]))-1]
+let v_d1 = v(dout[1])[length(v(dout[1]))-1]
+let v_d0 = v(dout[0])[length(v(dout[0]))-1]
+let v_done = v(done)[length(v(done))-1]
+print v_d7 v_d6 v_d5 v_d4 v_d3 v_d2 v_d1 v_d0 v_done
+quit
+.endc
+.end

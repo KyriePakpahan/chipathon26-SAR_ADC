@@ -1,0 +1,107 @@
+** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_pulse_settle.sch
+.subckt async_pulse_settle vdd vss in out
+*.ipin in
+*.iopin vdd
+*.iopin vss
+*.opin out
+x1 vdd in net1 vss async_inverter
+x2 vdd net1 net2 vss async_inverter
+x3 vdd net2 net3 vss async_inverter
+x4 vdd net3 net4 vss async_inverter
+x5 vdd net4 net5 vss async_inverter
+x6 vdd net5 net6 vss async_inverter
+x7 vdd net6 net7 vss async_inverter
+x8 vdd net7 net8 vss async_inverter
+x9 vdd net8 net9 vss async_inverter
+x10 vdd net9 net10 vss async_inverter
+x11 vdd net10 net11 vss async_inverter
+x12 vdd net11 net12 vss async_inverter
+x13 vdd net12 net13 vss async_inverter
+x14 vdd net13 net14 vss async_inverter
+x15 vdd net14 net15 vss async_inverter
+x16 vdd net15 net16 vss async_inverter
+x17 vdd net16 net17 vss async_inverter
+x18 vdd net17 net18 vss async_inverter
+x19 vdd net18 net19 vss async_inverter
+x20 vdd net19 net20 vss async_inverter
+x21 vdd net20 net21 vss async_inverter
+x22 vdd net21 net22 vss async_inverter
+x23 vdd net22 net23 vss async_inverter
+x24 vdd net23 net24 vss async_inverter
+x25 vdd net24 net25 vss async_inverter
+x26 vdd net25 net26 vss async_inverter
+x27 vdd net26 net27 vss async_inverter
+x28 vdd net27 net28 vss async_inverter
+x29 vdd net28 net29 vss async_inverter
+x30 vdd net29 net30 vss async_inverter
+x31 vdd net30 net31 vss async_inverter
+x32 vdd net31 net32 vss async_inverter
+x33 vdd net32 net33 vss async_inverter
+x34 vdd net33 net34 vss async_inverter
+x35 vdd net34 net35 vss async_inverter
+x36 vdd net35 net36 vss async_inverter
+x37 vdd net36 net37 vss async_inverter
+x38 vdd net37 net38 vss async_inverter
+x39 vdd net38 net39 vss async_inverter
+x40 vdd net39 net40 vss async_inverter
+x_nor1 in net6 nor1_out vdd vss async_nor2
+x_nor2 net12 net20 nor2_out vdd vss async_nor2
+x_nand1 vdd vss nor1_out or_1_4 nor2_out async_nand2
+x_nor3 net26 net32 nor3_out vdd vss async_nor2
+x_nor4 net38 net40 nor4_out vdd vss async_nor2
+x_nand2 vdd vss nor3_out or_5_7 nor4_out async_nand2
+x_nor_tot or_1_4 or_5_7 nor_tot_out vdd vss async_nor2
+x_inv_tot vdd nor_tot_out out vss async_inverter
+.ends
+
+* expanding   symbol:  sar_adc/blocks/async_sar/async_inverter.sym # of pins=4
+** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_inverter.sym
+** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_inverter.sch
+.subckt async_inverter vdd input out vss
+*.ipin input
+*.opin out
+*.iopin vdd
+*.iopin vss
+XM5 out input vdd vdd pfet_03v3 L=0.28u W=0.80u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XM6 out input vss vss nfet_03v3 L=0.28u W=0.42u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+.ends
+
+
+* expanding   symbol:  sar_adc/blocks/async_sar/async_nor2.sym # of pins=5
+** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_nor2.sym
+** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_nor2.sch
+.subckt async_nor2 A B Y vdd vss
+*.ipin A
+*.ipin B
+*.opin Y
+*.iopin vdd
+*.iopin vss
+x1 vdd A A_b vss async_inverter
+x2 vdd B B_b vss async_inverter
+x3 vdd vss A_b net1 B_b async_nand2
+x4 vdd net1 Y vss async_inverter
+.ends
+
+
+* expanding   symbol:  sar_adc/blocks/async_sar/async_nand2.sym # of pins=5
+** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_nand2.sym
+** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/async_nand2.sch
+.subckt async_nand2 vdd vss input_A output input_B
+*.ipin input_A
+*.ipin input_B
+*.opin output
+*.iopin vdd
+*.iopin vss
+XM2 net1 input_B vss vss nfet_03v3 L=0.28u W=0.50u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XM3 output input_A vdd vdd pfet_03v3 L=0.28u W=1.0u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XM1 output input_B vdd vdd pfet_03v3 L=0.28u W=1.0u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XM4 output input_A net1 vss nfet_03v3 L=0.28u W=0.50u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+.ends
+
+.end

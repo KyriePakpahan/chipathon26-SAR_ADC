@@ -1,0 +1,28 @@
+* Testbench for Post-Layout PEX SAR ADC (tb_sar_adc_top_pex.spice)
+
+.param fnoicor=0
+.param sw_stat_mismatch=0
+.lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice typical
+.lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice mimcap_typical
+.lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice cap_mim
+
+.include ../../netlist/sar_adc_top_pex.spice
+
+V_avdd avdd 0 3.3
+V_avss avss 0 0.0
+V_dvdd dvdd 0 3.3
+V_dvss dvss 0 0.0
+V_vref vref 0 3.3
+V_vin  vin_p 0 1.65
+V_start start 0 PULSE(3.3 0 5n 0.1n 0.1n 95n 100n)
+
+X1 start done d0 d1 d2 d3 d4 d5 d6 d7 vin_p vref avdd avss dvdd dvss sar_adc_top
+
+.options method=gear reltol=1e-3 vntol=1e-4 abstol=1e-12
+.control
+set filetype=ascii
+tran 0.1n 30n
+print v(start) v(x1.xasync_sar_0.sample_en) v(x1.xasync_sar_0.comp_done) v(x1.xasync_sar_0.rst_latch) v(done) at 0n 4n 5.5n 6n 8n 10n 15n 20n 25n
+quit
+.endc
+.end

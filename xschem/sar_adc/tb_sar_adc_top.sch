@@ -28,37 +28,36 @@ C {lab_wire.sym} -50 310 0 0 {name=l_p_start lab=start}
 C {lab_wire.sym} 100 180 0 0 {name=l_p_vdd lab=vdd}
 C {lab_wire.sym} 100 420 0 0 {name=l_p_vss lab=VSS}
 C {lab_wire.sym} 250 230 2 0 {name=l_p_done lab=done}
-C {lab_wire.sym} 250 250 2 0 {name=l_p_do7 lab=dout[7]}
-C {lab_wire.sym} 250 270 2 0 {name=l_p_do6 lab=dout[6]}
-C {lab_wire.sym} 250 290 2 0 {name=l_p_do5 lab=dout[5]}
-C {lab_wire.sym} 250 310 2 0 {name=l_p_do4 lab=dout[4]}
-C {lab_wire.sym} 250 330 2 0 {name=l_p_do3 lab=dout[3]}
-C {lab_wire.sym} 250 350 2 0 {name=l_p_do2 lab=dout[2]}
-C {lab_wire.sym} 250 370 2 0 {name=l_p_do1 lab=dout[1]}
-C {lab_wire.sym} 250 390 2 0 {name=l_p_do0 lab=dout[0]}
-C {netlist_at_end.sym} 100 50 0 0 {name=s1 value="
+C {lab_wire.sym} 250 250 2 0 {name=l_p_do7 lab=dout7}
+C {lab_wire.sym} 250 270 2 0 {name=l_p_do6 lab=dout6}
+C {lab_wire.sym} 250 290 2 0 {name=l_p_do5 lab=dout5}
+C {lab_wire.sym} 250 310 2 0 {name=l_p_do4 lab=dout4}
+C {lab_wire.sym} 250 330 2 0 {name=l_p_do3 lab=dout3}
+C {lab_wire.sym} 250 350 2 0 {name=l_p_do2 lab=dout2}
+C {lab_wire.sym} 250 370 2 0 {name=l_p_do1 lab=dout1}
+C {lab_wire.sym} 250 390 2 0 {name=l_p_do0 lab=dout0}
+C {netlist_at_end.sym} 520 -80 0 0 {name=s1 value="
 .param fnoicor=0
 .param sw_stat_mismatch=0
 .lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice typical
 .lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice mimcap_typical
 .lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice cap_mim
 C_Ldone done 0 10f
-C_L0 dout[0] 0 10f
-C_L1 dout[1] 0 10f
-C_L2 dout[2] 0 10f
-C_L3 dout[3] 0 10f
-C_L4 dout[4] 0 10f
-C_L5 dout[5] 0 10f
-C_L6 dout[6] 0 10f
-C_L7 dout[7] 0 10f
+C_L0 dout0 0 10f
+C_L1 dout1 0 10f
+C_L2 dout2 0 10f
+C_L3 dout3 0 10f
+C_L4 dout4 0 10f
+C_L5 dout5 0 10f
+C_L6 dout6 0 10f
+C_L7 dout7 0 10f
 .GLOBAL vdd vss
 V_VSS vss 0 0
 .options method=gear reltol=1e-3 vntol=1e-4 abstol=1e-12
 .control
 save all
-set filetype=ascii
 tran 0.1n 100n
-write tb_sar_adc_top.raw
-quit
+plot v(vin_p) v(vin_n) v(start) v(done)
+plot v(dout7)+28 v(dout6)+24 v(dout5)+20 v(dout4)+16 v(dout3)+12 v(dout2)+8 v(dout1)+4 v(dout0)
 .endc"}
 C {title.sym} 100 600 0 0 {name=l_title author="Berkah Saluyu"}

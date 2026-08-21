@@ -1,26 +1,26 @@
-* Extracted by KLayout with GF180MCU LVS runset on : 18/08/2026 13:21
+* Extracted by KLayout with GF180MCU LVS runset on : 19/08/2026 18:47
 
-.SUBCKT strongarm_comp_core vdd out_n out_p rst_latch vin_p vin_n vss
-M$1 vdd out_p out_n vdd pfet_03v3 L=0.28U W=0.42U AS=0.2822P AD=0.2822P
-+ PS=2.18U PD=2.18U
-M$2 vdd rst_latch \$7 vdd pfet_03v3 L=0.28U W=0.42U AS=0.2822P AD=0.2822P
-+ PS=2.18U PD=2.18U
-M$3 vdd rst_latch out_p vdd pfet_03v3 L=0.28U W=0.42U AS=0.2822P AD=0.2822P
-+ PS=2.18U PD=2.18U
-M$4 vdd out_n out_p vdd pfet_03v3 L=0.28U W=0.42U AS=0.2822P AD=0.2822P
-+ PS=2.18U PD=2.18U
-M$5 vdd rst_latch out_n vdd pfet_03v3 L=0.28U W=0.42U AS=0.2822P AD=0.2822P
-+ PS=2.18U PD=2.18U
-M$6 vdd rst_latch \$6 vdd pfet_03v3 L=0.28U W=0.42U AS=0.2822P AD=0.2822P
-+ PS=2.18U PD=2.18U
-M$7 \$7 out_p out_n vss nfet_03v3 L=0.28U W=0.42U AS=0.2646P AD=0.2646P PS=2.1U
-+ PD=2.1U
-M$8 \$10 vin_n \$7 vss nfet_03v3 L=0.28U W=0.42U AS=0.2646P AD=0.2646P PS=2.1U
-+ PD=2.1U
-M$9 \$6 out_n out_p vss nfet_03v3 L=0.28U W=0.42U AS=0.2646P AD=0.2646P PS=2.1U
-+ PD=2.1U
-M$10 \$10 vin_p \$6 vss nfet_03v3 L=0.28U W=0.42U AS=0.2646P AD=0.2646P PS=2.1U
-+ PD=2.1U
-M$11 vss rst_latch \$10 vss nfet_03v3 L=0.28U W=0.5U AS=0.305P AD=0.305P
-+ PS=2.22U PD=2.22U
+.SUBCKT strongarm_comp_core out_n out_p rst_latch vdd vin_p vin_n vss
+M$1 vdd rst_latch \$10 vdd pfet_03v3 L=0.28U W=2U AS=1.3P AD=1.3P PS=5.3U
++ PD=5.3U
+M$2 vdd rst_latch out_p vdd pfet_03v3 L=0.28U W=2U AS=1.3P AD=1.3P PS=5.3U
++ PD=5.3U
+M$3 vdd rst_latch \$11 vdd pfet_03v3 L=0.28U W=2U AS=1.3P AD=1.3P PS=5.3U
++ PD=5.3U
+M$4 vdd rst_latch out_n vdd pfet_03v3 L=0.28U W=2U AS=1.3P AD=1.3P PS=5.3U
++ PD=5.3U
+M$5 \$9 vin_p \$10 vss nfet_03v3 L=0.28U W=6U AS=3.66P AD=3.66P PS=13.22U
++ PD=13.22U
+M$6 vdd out_p out_n vdd pfet_03v3 L=0.28U W=4.2U AS=2.73P AD=2.73P PS=9.7U
++ PD=9.7U
+M$7 vdd out_n out_p vdd pfet_03v3 L=0.28U W=4.2U AS=2.73P AD=2.73P PS=9.7U
++ PD=9.7U
+M$8 \$9 vin_n \$11 vss nfet_03v3 L=0.28U W=6U AS=3.66P AD=3.66P PS=13.22U
++ PD=13.22U
+M$9 vss rst_latch \$9 vss nfet_03v3 L=0.28U W=8U AS=4.88P AD=4.88P PS=17.22U
++ PD=17.22U
+M$10 \$10 out_n out_p vss nfet_03v3 L=0.28U W=3.5U AS=2.135P AD=2.135P PS=8.22U
++ PD=8.22U
+M$11 \$11 out_p out_n vss nfet_03v3 L=0.28U W=3.5U AS=2.135P AD=2.135P PS=8.22U
++ PD=8.22U
 .ENDS strongarm_comp_core

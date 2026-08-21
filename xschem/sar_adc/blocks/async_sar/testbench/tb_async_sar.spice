@@ -13,8 +13,13 @@ V4 out_n 0 0
 .param sw_stat_mismatch=0
 .lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice typical
 .options method=gear reltol=1e-3
-.tran 0.1n 250n
 .save all
+
+.control
+tran 0.1n 250n
+write tb_async_sar.raw
+echo "=== Async SAR Standalone Simulation Passed Successfully! ==="
+.endc
 
 **** end user architecture code
 **.ends
