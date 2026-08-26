@@ -41,3 +41,11 @@ layout/backups/
 *.lvsdb
 *_extracted.cir
 backups/
+magic_ext_archive/
+archive_old_layouts/
+archive_old_spices/
+scratch_scripts/
+pex/
+netlist/sim_outputs/
+netlist/*_pex*.spice
+layout/**/backups/

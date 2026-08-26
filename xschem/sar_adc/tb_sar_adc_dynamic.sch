@@ -11,18 +11,14 @@ C {lab_wire.sym} -400 130 0 0 {name=l_gnd1 lab=VSS}
 C {vsource.sym} -400 200 0 0 {name=V2 value=3.3}
 C {lab_wire.sym} -400 170 0 0 {name=l_vref lab=vref}
 C {lab_wire.sym} -400 230 0 0 {name=l_gnd2 lab=VSS}
-C {vsource.sym} -400 300 0 0 {name=V3 value="SIN(1.85 0.95 1.09375Meg 0 0)"}
-C {lab_wire.sym} -400 270 0 0 {name=l_vp lab=vin_p}
+C {vsource.sym} -400 300 0 0 {name=V3 value="SIN(1.65 1.20 1.09375Meg 0 0)"}
+C {lab_wire.sym} -400 270 0 0 {name=l_vi lab=vin}
 C {lab_wire.sym} -400 330 0 0 {name=l_gnd3 lab=VSS}
-C {vsource.sym} -400 400 0 0 {name=V3n value="SIN(1.45 -0.95 1.09375Meg 0 0)"}
-C {lab_wire.sym} -400 370 0 0 {name=l_vn lab=vin_n}
-C {lab_wire.sym} -400 430 0 0 {name=l_gnd3n lab=VSS}
 C {vsource.sym} -400 500 0 0 {name=V4 value="PULSE(3.3 0 5n 0.1n 0.1n 95n 100n)"}
 C {lab_wire.sym} -400 470 0 0 {name=l_start lab=start}
 C {lab_wire.sym} -400 530 0 0 {name=l_gnd4 lab=VSS}
 C {sar_adc/sar_adc_top.sym} 100 300 0 0 {name=x1}
-C {lab_wire.sym} -50 230 0 0 {name=l_p_vp lab=vin_p}
-C {lab_wire.sym} -50 250 0 0 {name=l_p_vn lab=vin_n}
+C {lab_wire.sym} -50 230 0 0 {name=l_p_vi lab=vin}
 C {lab_wire.sym} -50 280 0 0 {name=l_p_vref lab=vref}
 C {lab_wire.sym} -50 310 0 0 {name=l_p_start lab=start}
 C {lab_wire.sym} 100 180 0 0 {name=l_p_vdd lab=vdd}
@@ -57,7 +53,7 @@ V_VSS vss 0 0
 .control
 save all
 tran 0.1n 1.0u
-plot v(vin_p) v(vin_n) v(start) v(done)
+plot v(vin) v(start) v(done)
 plot v(dout7)+28 v(dout6)+24 v(dout5)+20 v(dout4)+16 v(dout3)+12 v(dout2)+8 v(dout1)+4 v(dout0)
 .endc"}
 C {title.sym} 100 600 0 0 {name=l_title author="Berkah Saluyu"}

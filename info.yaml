@@ -6,46 +6,50 @@
 
 # data will be pulled from main branch of the repo.
 # please be sure that the main branch contains the data you want to submit.
-# This file will be updated with more information later.
+# This file will be updated with more information later
 
 # ======================================================
 # Project metadata (used for documentation / review)
 # ======================================================
 project:
-  title: "8-bit Asynchronous SAR ADC for Power Efficiency"
+  title: "8-bit Asynchronous SAR ADC"
   team: "A49 Berkah Saluyu"
   discord: ""
-  description: "Monolithic 8-bit 10 MS/s Asynchronous SAR ADC with self-timed comparator completion detection, high-speed StrongARM comparator, capacitive DAC (CDAC), and optimized TSPC logic controller."
+  description: "8-bit Asynchronous SAR ADC, 10 MS/s, GF180MCU (gf180mcuD variant D)"
   lvs_config: "lvs_config.json"
 
+# Pin names match top-level layout text (layer 81/10) exactly.
+# Ground pin first (down-bonded quadrant ground), VDD paired next to it.
+# Order = clockwise pad placement, bottom-left -> upper-right; VIN kept
+# at the far end, away from CLK / START.
 pins:
-  - name: vin_p
-    io_type: analog
-  - name: vin_n
-    io_type: analog
-  - name: vref
-    io_type: analog
-  - name: start
-    io_type: input_cmos
-  - name: done
-    io_type: output_cmos
-  - name: dout[7]
-    io_type: output_cmos
-  - name: dout[6]
-    io_type: output_cmos
-  - name: dout[5]
-    io_type: output_cmos
-  - name: dout[4]
-    io_type: output_cmos
-  - name: dout[3]
-    io_type: output_cmos
-  - name: dout[2]
-    io_type: output_cmos
-  - name: dout[1]
-    io_type: output_cmos
-  - name: dout[0]
-    io_type: output_cmos
-  - name: vdd
-    io_type: power
   - name: vss
     io_type: ground
+  - name: vdd
+    io_type: power
+  - name: start
+    io_type: input_schmitt
+  - name: done
+    io_type: bidirectional
+  - name: dout[0]
+    io_type: bidirectional
+  - name: dout[1]
+    io_type: bidirectional
+  - name: dout[2]
+    io_type: bidirectional
+  - name: dout[3]
+    io_type: bidirectional
+  - name: dout[4]
+    io_type: bidirectional
+  - name: dout[5]
+    io_type: bidirectional
+  - name: dout[6]
+    io_type: bidirectional
+  - name: dout[7]
+    io_type: bidirectional
+  - name: vref
+    io_type: analog
+    secondary_esd: true
+  - name: vin
+    io_type: analog
+    secondary_esd: true

@@ -1,48 +1,108 @@
 * ==============================================================================
-* Golden CDL Netlist: Dynamic StrongARM Comparator with Handshake Completion
+* Golden CDL Netlist: Dynamic StrongARM Comparator with Completion XOR
 * PDK: GF180MCU (3.3V)
 * ==============================================================================
 
-.subckt strongarm_comp rst_latch out_p out_n vdd comp_done vin_p vin_n vss
-* StrongARM Core Pre-charge / Reset PMOS
-M1 out_p rst_latch vdd vdd pfet_03v3 L=0.28u W=0.42u
-M2 out_n rst_latch vdd vdd pfet_03v3 L=0.28u W=0.42u
-M3 net_p rst_latch vdd vdd pfet_03v3 L=0.28u W=0.42u
-M4 net_n rst_latch vdd vdd pfet_03v3 L=0.28u W=0.42u
+.subckt pfet$1$1 a_28_n136# a_n92_0# w_n230_n138#
+X0 w_n230_n138# a_28_n136# a_n92_0# w_n230_n138# pfet_03v3 ad=1.38p pd=4.76u as=0.65p ps=3.3u w=1u l=0.28u
+.ends
 
-* Cross-coupled PMOS regeneration latch
-M5 out_p out_n vdd vdd pfet_03v3 L=0.28u W=0.42u
-M6 out_n out_p vdd vdd pfet_03v3 L=0.28u W=0.42u
+.subckt nfet$3 a_n84_0# a_94_0# a_30_160#
+X0 a_94_0# a_30_160# a_n84_0# a_94_0# nfet_03v3 ad=0.66p pd=3.64u as=0.305p ps=2.22u w=0.5u l=0.28u
+.ends
 
-* Cross-coupled NMOS latch
-M7 out_p out_n net_p vss nfet_03v3 L=0.28u W=0.42u
-M8 out_n out_p net_n vss nfet_03v3 L=0.28u W=0.42u
+.subckt pfet$5 a_n92_0# a_28_260# w_n230_n138#
+X0 w_n230_n138# a_28_260# a_n92_0# w_n230_n138# pfet_03v3 ad=1.38p pd=4.76u as=0.65p ps=3.3u w=1u l=0.28u
+.ends
 
-* Differential Input Pair
-M9 net_p vin_p net_tail vss nfet_03v3 L=0.28u W=0.42u
-M10 net_n vin_n net_tail vss nfet_03v3 L=0.28u W=0.42u
+.subckt nfet$8 a_30_n132# a_n84_0# a_94_0#
+X0 a_94_0# a_30_n132# a_n84_0# a_94_0# nfet_03v3 ad=0.66p pd=3.64u as=0.305p ps=2.22u w=0.5u l=0.28u
+.ends
 
-* Tail NMOS current source / enable switch
-M11 net_tail rst_latch vss vss nfet_03v3 L=0.28u W=0.5u
+.subckt async_nand2 input_A input_B output vdd vss
+Xpfet$1$1_0 input_B output vdd pfet$1$1
+Xnfet$3_0 vss vss input_B nfet$3
+Xpfet$5_0 output input_A vdd pfet$5
+Xnfet$8_0 input_A output vss nfet$8
+.ends
 
-* Handshake Completion Logic: Inverter on rst_latch -> n_rst_b
-M12 n_rst_b rst_latch vdd vdd pfet_03v3 L=0.28u W=0.8u
-M13 n_rst_b rst_latch vss vss nfet_03v3 L=0.28u W=0.42u
+.subckt comp_nand_3v3 a b vdd y vss
+Xasync_nand2_0 a b y vdd vss async_nand2
+.ends
 
-* Handshake Completion Logic: NAND2 on (out_n, out_p) -> n_done_raw
-M14 n_done_raw out_n vdd vdd pfet_03v3 L=0.28u W=1.0u
-M15 n_done_raw out_p vdd vdd pfet_03v3 L=0.28u W=1.0u
-M16 n_done_raw out_n net_nand vss nfet_03v3 L=0.28u W=0.5u
-M17 net_nand out_p vss vss nfet_03v3 L=0.28u W=0.5u
+.subckt comp_xor_fast a b vdd y vss
+Xcomp_nand_3v3_0 a comp_nand_3v3_2/b vdd comp_nand_3v3_3/a vss comp_nand_3v3
+Xcomp_nand_3v3_1 a b vdd comp_nand_3v3_2/b vss comp_nand_3v3
+Xcomp_nand_3v3_2 b comp_nand_3v3_2/b vdd comp_nand_3v3_3/b vss comp_nand_3v3
+Xcomp_nand_3v3_3 comp_nand_3v3_3/a comp_nand_3v3_3/b vdd y vss comp_nand_3v3
+.ends
 
-* Pull-down NMOS on n_done_raw during reset
-M18 n_done_raw n_rst_b vss vss nfet_03v3 L=0.28u W=0.5u
+.subckt pfet a_28_n136# a_n92_0# w_n230_n138#
+X0 w_n230_n138# a_28_n136# a_n92_0# w_n230_n138# pfet_03v3 ad=2.76p pd=6.76u as=1.3p ps=5.3u w=2u l=0.28u
+.ends
 
-* Output Buffer Inverter 1 -> n_done_d1
-M19 n_done_d1 n_done_raw vdd vdd pfet_03v3 L=0.28u W=0.8u
-M20 n_done_d1 n_done_raw vss vss nfet_03v3 L=0.28u W=0.42u
+.subckt pfet$2 a_28_460# a_n92_0# w_n230_n138#
+X0 w_n230_n138# a_28_460# a_n92_0# w_n230_n138# pfet_03v3 ad=2.76p pd=6.76u as=1.3p ps=5.3u w=2u l=0.28u
+.ends
 
-* Output Buffer Inverter 2 -> comp_done
-M21 comp_done n_done_d1 vdd vdd pfet_03v3 L=0.28u W=0.8u
-M22 comp_done n_done_d1 vss vss nfet_03v3 L=0.28u W=0.42u
+.subckt nfet$5 a_30_n132# a_n84_0# a_94_0#
+X0 a_94_0# a_30_n132# a_n84_0# a_94_0# nfet_03v3 ad=7.92p pd=14.64u as=3.66p ps=13.22u w=6u l=0.28u
+.ends
+
+.subckt nfet a_n84_0# a_94_0# a_30_760#
+X0 a_94_0# a_30_760# a_n84_0# a_94_0# nfet_03v3 ad=4.62p pd=9.64u as=2.135p ps=8.22u w=3.5u l=0.28u
+.ends
+
+.subckt pfet$3 a_28_n136# a_n92_0# w_n230_n138#
+X0 w_n230_n138# a_28_n136# a_n92_0# w_n230_n138# pfet_03v3 ad=5.796p pd=11.16u as=2.73p ps=9.7u w=4.2u l=0.28u
+.ends
+
+.subckt nfet$6 a_n84_0# a_94_0# a_30_1660#
+X0 a_94_0# a_30_1660# a_n84_0# a_94_0# nfet_03v3 ad=10.56p pd=18.64u as=4.88p ps=17.22u w=8u l=0.28u
+.ends
+
+.subckt pfet$1 a_28_900# a_n92_0# w_n230_n138#
+X0 w_n230_n138# a_28_900# a_n92_0# w_n230_n138# pfet_03v3 ad=5.796p pd=11.16u as=2.73p ps=9.7u w=4.2u l=0.28u
+.ends
+
+.subckt nfet$4 a_30_1260# a_n84_0# a_94_0#
+X0 a_94_0# a_30_1260# a_n84_0# a_94_0# nfet_03v3 ad=7.92p pd=14.64u as=3.66p ps=13.22u w=6u l=0.28u
+.ends
+
+.subckt nfet$2 a_30_n132# a_n84_0# a_94_0#
+X0 a_94_0# a_30_n132# a_n84_0# a_94_0# nfet_03v3 ad=4.62p pd=9.64u as=2.135p ps=8.22u w=3.5u l=0.28u
+.ends
+
+.subckt strongarm_comp_core out_n out_p vin_p vin_n rst_latch vdd vss
+Xpfet_0 rst_latch out_p vdd pfet
+Xpfet_1 rst_latch vss vdd pfet
+Xpfet$2_0 rst_latch out_n vdd pfet$2
+Xpfet$2_1 rst_latch vss vdd pfet$2
+Xnfet$5_0 vin_n vss vss nfet$5
+Xnfet_0 out_n vss out_p nfet
+Xpfet$3_0 out_n out_p vdd pfet$3
+Xnfet$6_0 vss vss rst_latch nfet$6
+Xpfet$1_0 out_p out_n vdd pfet$1
+Xnfet$4_0 vin_p vss vss nfet$4
+Xnfet$2_0 out_n out_p vss nfet$2
+.ends
+
+.subckt nfet$9 a_30_380# a_n84_0# a_94_0#
+X0 a_94_0# a_30_380# a_n84_0# a_94_0# nfet_03v3 ad=2.112p pd=5.84u as=0.976p ps=4.42u w=1.6u l=0.28u
+.ends
+
+.subckt pfet$4 a_28_n136# a_n92_0# w_n230_n138#
+X0 w_n230_n138# a_28_n136# a_n92_0# w_n230_n138# pfet_03v3 ad=5.52p pd=10.76u as=2.6p ps=9.3u w=4u l=0.28u
+.ends
+
+.subckt comp_inv_3v3 vo vi vss vdd
+Xnfet$9_0 vi vo vss nfet$9
+Xpfet$4_0 vi vo vdd pfet$4
+.ends
+
+.subckt strongarm_comp vdd vss comp_done out_p out_n vin_p vin_n rst_latch
+Xcomp_xor_fast_0 out_p out_n vdd comp_done vss comp_xor_fast
+Xstrongarm_comp_core_0 comp_inv_3v3_1/vi comp_inv_3v3_0/vi vin_p vin_n rst_latch vdd vss strongarm_comp_core
+Xcomp_inv_3v3_0 out_p comp_inv_3v3_0/vi vss vdd comp_inv_3v3
+Xcomp_inv_3v3_1 out_n comp_inv_3v3_1/vi vss vdd comp_inv_3v3
 .ends

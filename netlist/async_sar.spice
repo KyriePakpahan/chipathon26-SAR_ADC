@@ -30,28 +30,28 @@ x_sr8 vdd vss Q0 Q1 Q2 Q3 Q4 Q5 Q6 Q7 sr_done vss comp_done_b rst_n_int shift_re
 x_inv_se1 vdd start start_inv vss async_inverter
 x_inv_se2 vdd start_inv sample_en vss async_inverter
 x_inv_rst_n_int vdd start rst_n_int vss async_inverter
-x_bit0 vdd vss dout[0] comp_out_p Q7 comp_done rst_n_int bit_reg
+x_bit0 vdd vss dout[0] comp_out_p Q7 rst_n_int bit_reg
 x_nor_dq0 dout[0] Q7 dac_n0 vdd vss async_nor2
 x_nor_st0 dac_n0 start dac_in[0] vdd vss async_nor2
-x_bit1 vdd vss dout[1] comp_out_p Q6 comp_done rst_n_int bit_reg
+x_bit1 vdd vss dout[1] comp_out_p Q6 rst_n_int bit_reg
 x_nor_dq1 dout[1] Q6 dac_n1 vdd vss async_nor2
 x_nor_st1 dac_n1 start dac_in[1] vdd vss async_nor2
-x_bit2 vdd vss dout[2] comp_out_p Q5 comp_done rst_n_int bit_reg
+x_bit2 vdd vss dout[2] comp_out_p Q5 rst_n_int bit_reg
 x_nor_dq2 dout[2] Q5 dac_n2 vdd vss async_nor2
 x_nor_st2 dac_n2 start dac_in[2] vdd vss async_nor2
-x_bit3 vdd vss dout[3] comp_out_p Q4 comp_done rst_n_int bit_reg
+x_bit3 vdd vss dout[3] comp_out_p Q4 rst_n_int bit_reg
 x_nor_dq3 dout[3] Q4 dac_n3 vdd vss async_nor2
 x_nor_st3 dac_n3 start dac_in[3] vdd vss async_nor2
-x_bit4 vdd vss dout[4] comp_out_p Q3 comp_done rst_n_int bit_reg
+x_bit4 vdd vss dout[4] comp_out_p Q3 rst_n_int bit_reg
 x_nor_dq4 dout[4] Q3 dac_n4 vdd vss async_nor2
 x_nor_st4 dac_n4 start dac_in[4] vdd vss async_nor2
-x_bit5 vdd vss dout[5] comp_out_p Q2 comp_done rst_n_int bit_reg
+x_bit5 vdd vss dout[5] comp_out_p Q2 rst_n_int bit_reg
 x_nor_dq5 dout[5] Q2 dac_n5 vdd vss async_nor2
 x_nor_st5 dac_n5 start dac_in[5] vdd vss async_nor2
-x_bit6 vdd vss dout[6] comp_out_p Q1 comp_done rst_n_int bit_reg
+x_bit6 vdd vss dout[6] comp_out_p Q1 rst_n_int bit_reg
 x_nor_dq6 dout[6] Q1 dac_n6 vdd vss async_nor2
 x_nor_st6 dac_n6 start dac_in[6] vdd vss async_nor2
-x_bit7 vdd vss dout[7] comp_out_p Q0 comp_done rst_n_int bit_reg
+x_bit7 vdd vss dout[7] comp_out_p Q0 rst_n_int bit_reg
 x_nor_dq7 dout[7] Q0 dac_n7 vdd vss async_nor2
 x_nor_st7 dac_n7 start dac_in[7] vdd vss async_nor2
 x_psettle vdd vss comp_done gate_settle async_pulse_settle
@@ -111,7 +111,7 @@ x9 Q7 clk vdd vss rst_n done dff_cell
 * expanding   symbol:  sar_adc/blocks/async_sar/bit_reg.sym # of pins=7
 ** sym_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/bit_reg.sym
 ** sch_path: /foss/designs/chipathon26-SAR_ADC/xschem/sar_adc/blocks/async_sar/bit_reg.sch
-.subckt bit_reg vdd vss bit_out comp_out en clk rst_n
+.subckt bit_reg vdd vss bit_out comp_out en rst_n
 *.ipin comp_out
 *.ipin en
 *.ipin clk

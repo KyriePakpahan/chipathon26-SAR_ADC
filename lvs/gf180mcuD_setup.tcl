@@ -509,3 +509,13 @@ if {[model blackbox]} {
 }
 
 #---------------------------------------------------------------
+
+# Flatten sub-blocks for monolithic full-chip comparison
+flatten class "-circuit1 async_sar"
+flatten class "-circuit2 async_sar"
+flatten class "-circuit1 strongarm_comp"
+flatten class "-circuit2 strongarm_comp"
+flatten class "-circuit1 cdac_8bit"
+flatten class "-circuit2 cdac_8bit"
+flatten class "-circuit1 sample_hold"
+flatten class "-circuit2 sample_hold"
