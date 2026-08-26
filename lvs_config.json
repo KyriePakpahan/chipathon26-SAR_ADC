@@ -21,10 +21,10 @@
 		""
 	],
 	"LVS_SPICE_FILES": [
-		""
+		"$UPRJ_ROOT/cdl/sar_adc_top.spice"
 	],
 	"LVS_VERILOG_FILES": [
 		""
 	],
-	"LAYOUT_FILE": "$UPRJ_ROOT/layout/$TOP_LAYOUT.gds"
+	"LAYOUT_FILE": "$UPRJ_ROOT/layout/sar_adc/sar_adc_top.gds"
 }

@@ -1,28 +1,36 @@
 * ==============================================================================
-* Golden CDL Netlist: Bootstrap Sample & Hold Circuit
+* Golden CDL Netlist: CMOS Transmission Gate Sample & Hold Circuit
 * PDK: GF180MCU (3.3V)
 * ==============================================================================
 
-.subckt inv_sh vo vi vdd vss
-M1 vo vi vdd vdd pfet_03v3 L=0.28u W=2.0u
-M2 vo vi vss vss nfet_03v3 L=0.28u W=1.0u
+.subckt pfet a_28_n136# a_n92_0# w_n230_n138#
+X0 w_n230_n138# a_28_n136# a_n92_0# w_n230_n138# pfet_03v3 ad=2.76p pd=6.76u as=1.3p ps=5.3u w=2u l=0.28u
+.ends
+
+.subckt nfet a_30_260# a_n84_0# a_94_0#
+X0 a_94_0# a_30_260# a_n84_0# a_94_0# nfet_03v3 ad=1.32p pd=4.64u as=0.61p ps=3.22u w=1u l=0.28u
+.ends
+
+.subckt inv_sh vdd vo vi vss
+Xpfet_0 vi vo vdd pfet
+Xnfet_0 vi vo vss nfet
+.ends
+
+.subckt pfet$2 a_28_n136# a_n92_0# w_n230_n138#
+X0 w_n230_n138# a_28_n136# a_n92_0# w_n230_n138# pfet_03v3 ad=11.04p pd=18.76u as=5.2p ps=17.3u w=8u l=0.28u
+.ends
+
+.subckt nfet$2 a_n84_0# a_94_0#
+X0 a_94_0# a_30_n132# a_n84_0# a_94_0# nfet_03v3 ad=5.28p pd=10.64u as=2.44p ps=9.22u w=4u l=0.28u
+.ends
+
+.subckt cap_mim m3_3140_940# m4_0_0#
+X0 m4_0_0# m3_3140_940# cap_mim_2f0_m4m5_noshield c_width=15u c_length=10u
 .ends
 
 .subckt sample_hold vin sample_en vhold vdd vss
-Xinv vo sample_en vdd vss inv_sh
-
-* Bootstrap and Main Sampling Switches
-M1 vin vg vhold vss nfet_03v3 L=0.28u W=5.0u
-M2 vin vo vhold vdd pfet_03v3 L=0.28u W=5.0u
-
-M3 net1 vo vss vss nfet_03v3 L=0.28u W=2.0u
-M4 net1 sample_en vin vss nfet_03v3 L=0.28u W=2.0u
-
-M5 vg vg vdd vdd pfet_03v3 L=0.28u W=2.0u
-M6 vg vo vg vdd pfet_03v3 L=0.28u W=2.0u
-M7 vg vdd net2 vss nfet_03v3 L=0.28u W=2.0u
-M8 net2 vo vss vss nfet_03v3 L=0.28u W=2.0u
-
-* Sampling Capacitor (P1=bottom_plate=vss, P2=top_plate=vhold)
-C1 vss vhold 4e-13 cap_mim_2f0fF
+Xcap_mim_0 vhold vss cap_mim
+Xpfet$2_0 clkb vin vdd pfet$2
+Xinv_sh_0 vdd clkb sample_en vss inv_sh
+Xnfet$2_0 vin vss nfet$2
 .ends
