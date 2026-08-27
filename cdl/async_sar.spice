@@ -1,290 +1,46 @@
+* ==============================================================================
+* Golden Full-Hierarchy Netlist: async_sar (Asynchronous SAR Logic Controller)
+* PDK: GlobalFoundries GF180MCU (gf180mcuD, 3.3V)
+* ==============================================================================
 
-.subckt async_inverter VDD VSS INPUT OUT
-XM1 OUT INPUT VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM2 OUT INPUT VSS VSS nfet_03v3 L=0.28u W=0.50u
-.ends
-
-.subckt async_nand2 VDD VSS input_A input_B output
-XM1 output input_A VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM2 output input_B VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM3 output input_A net1 VSS nfet_03v3 L=0.28u W=0.50u
-XM4 net1 input_B VSS VSS nfet_03v3 L=0.28u W=0.50u
-.ends
-
-.subckt async_nor2 vdd vss A B Y
-XM1 x_A_b A vdd vdd pfet_03v3 L=0.28u W=0.80u
-XM2 x_A_b A vss vss nfet_03v3 L=0.28u W=0.42u
-XM3 x_B_b B vdd vdd pfet_03v3 L=0.28u W=0.80u
-XM4 x_B_b B vss vss nfet_03v3 L=0.28u W=0.42u
-XM5 x_net1 x_A_b vdd vdd pfet_03v3 L=0.28u W=1.0u
-XM6 x_net1 x_B_b vdd vdd pfet_03v3 L=0.28u W=1.0u
-XM7 x_net1 x_A_b x_x3_net1 vss nfet_03v3 L=0.28u W=0.50u
-XM8 x_x3_net1 x_B_b vss vss nfet_03v3 L=0.28u W=0.50u
-XM9 Y x_net1 vdd vdd pfet_03v3 L=0.28u W=0.80u
-XM10 Y x_net1 vss vss nfet_03v3 L=0.28u W=0.42u
-.ends
-
-.subckt dff_cell VDD VSS clk D rst_n Q
-XM1 clk_n clk VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM2 clk_n clk VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM3 D_int D VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM4 D_int D VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM5 M clk_n D_int VDD pfet_03v3 L=0.28u W=1.0u
-XM6 D_int clk M VSS nfet_03v3 L=0.28u W=0.50u
-XM7 M_bar M VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM8 M_bar M VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM9 M M_bar VDD VDD pfet_03v3 L=2.0u W=0.42u
-XM10 M M_bar VSS VSS nfet_03v3 L=2.4u W=0.42u
-XM11 S clk M_bar VDD pfet_03v3 L=0.28u W=1.0u
-XM12 M_bar clk_n S VSS nfet_03v3 L=0.28u W=0.50u
-XM13 Q_bar S VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM14 Q_bar rst_n VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM15 Q_bar S net1 VSS nfet_03v3 L=0.28u W=0.50u
-XM16 net1 rst_n VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM17 Q Q_bar VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM18 Q Q_bar VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM19 S Q_bar VDD VDD pfet_03v3 L=2.0u W=0.42u
-XM20 S Q_bar VSS VSS nfet_03v3 L=2.4u W=0.42u
-.ends
-
-.subckt dff_cell_set VDD VSS D clk rst_n Q
-XM1 D_b D VDD VDD pfet_03v3 L=0.28u W=0.80u
-XM2 D_b D VSS VSS nfet_03v3 L=0.28u W=0.42u
-XM3 clk_n clk VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM4 clk_n clk VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM5 D_int D_b VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM6 D_int D_b VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM7 M clk_n D_int VDD pfet_03v3 L=0.28u W=1.0u
-XM8 D_int clk M VSS nfet_03v3 L=0.28u W=0.50u
-XM9 M_bar M VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM10 M_bar M VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM11 M M_bar VDD VDD pfet_03v3 L=2.0u W=0.42u
-XM12 M M_bar VSS VSS nfet_03v3 L=2.4u W=0.42u
-XM13 S clk M_bar VDD pfet_03v3 L=0.28u W=1.0u
-XM14 M_bar clk_n S VSS nfet_03v3 L=0.28u W=0.50u
-XM15 Q_bar S VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM16 Q_bar rst_n VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM17 Q_bar S net1 VSS nfet_03v3 L=0.28u W=0.50u
-XM18 net1 rst_n VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM19 net_q Q_bar VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM20 net_q Q_bar VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM21 S Q_bar VDD VDD pfet_03v3 L=2.0u W=0.42u
-XM22 S Q_bar VSS VSS nfet_03v3 L=2.4u W=0.42u
-XM23 Q net_q VDD VDD pfet_03v3 L=0.28u W=0.80u
-XM24 Q net_q VSS VSS nfet_03v3 L=0.28u W=0.42u
-.ends
-
-.subckt shift_reg_8bit serial_in Q1 Q2 Q3 Q4 Q5 Q6 Q7 done clk rst_n VDD VSS Q0
-Xdff_cell_6 VDD VSS clk Q1 rst_n Q2 dff_cell
-Xdff_cell_7 VDD VSS clk Q0 rst_n Q1 dff_cell
-Xdff_cell_0 VDD VSS clk Q7 rst_n done dff_cell
-Xdff_cell_1 VDD VSS clk Q6 rst_n Q7 dff_cell
-Xdff_cell_set_0 VDD VSS serial_in clk rst_n Q0 dff_cell_set
-Xdff_cell_2 VDD VSS clk Q5 rst_n Q6 dff_cell
-Xdff_cell_3 VDD VSS clk Q4 rst_n Q5 dff_cell
-Xdff_cell_5 VDD VSS clk Q2 rst_n Q3 dff_cell
-Xdff_cell_4 VDD VSS clk Q3 rst_n Q4 dff_cell
-.ends
-
-.subckt bit_reg VDD VSS rst_n comp_out en bit_out
-XM1 rst rst_n VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM2 rst rst_n VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM3 set_n comp_out VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM4 set_n en VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM5 set_n comp_out nand_net1 VSS nfet_03v3 L=0.28u W=0.50u
-XM6 nand_net1 en VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM7 set set_n VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM8 set set_n VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM9 nor_q_A_b rst VDD VDD pfet_03v3 L=0.28u W=0.80u
-XM10 nor_q_A_b rst VSS VSS nfet_03v3 L=0.28u W=0.42u
-XM11 nor_q_B_b bit_out_bar VDD VDD pfet_03v3 L=0.28u W=0.80u
-XM12 nor_q_B_b bit_out_bar VSS VSS nfet_03v3 L=0.28u W=0.42u
-XM13 nor_q_net1 nor_q_A_b VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM14 nor_q_net1 nor_q_B_b VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM15 nor_q_net1 nor_q_A_b nor_q_x3_net1 VSS nfet_03v3 L=0.28u W=0.50u
-XM16 nor_q_x3_net1 nor_q_B_b VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM17 bit_out nor_q_net1 VDD VDD pfet_03v3 L=0.28u W=0.80u
-XM18 bit_out nor_q_net1 VSS VSS nfet_03v3 L=0.28u W=0.42u
-XM19 nor_qb_A_b set VDD VDD pfet_03v3 L=0.28u W=0.80u
-XM20 nor_qb_A_b set VSS VSS nfet_03v3 L=0.28u W=0.42u
-XM21 nor_qb_B_b bit_out VDD VDD pfet_03v3 L=0.28u W=0.80u
-XM22 nor_qb_B_b bit_out VSS VSS nfet_03v3 L=0.28u W=0.42u
-XM23 nor_qb_net1 nor_qb_A_b VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM24 nor_qb_net1 nor_qb_B_b VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM25 nor_qb_net1 nor_qb_A_b nor_qb_x3_net1 VSS nfet_03v3 L=0.28u W=0.50u
-XM26 nor_qb_x3_net1 nor_qb_B_b VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM27 bit_out_bar nor_qb_net1 VDD VDD pfet_03v3 L=0.28u W=0.80u
-XM28 bit_out_bar nor_qb_net1 VSS VSS nfet_03v3 L=0.28u W=0.42u
-.ends
-
-.subckt async_delay_chain VDD VSS in out
-XM1_p net1 in VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM1_n net1 in VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM2_p net2 net1 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM2_n net2 net1 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM3_p net3 net2 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM3_n net3 net2 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM4_p net4 net3 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM4_n net4 net3 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM5_p net5 net4 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM5_n net5 net4 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM6_p net6 net5 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM6_n net6 net5 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM7_p net7 net6 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM7_n net7 net6 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM8_p net8 net7 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM8_n net8 net7 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM9_p net9 net8 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM9_n net9 net8 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM10_p net10 net9 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM10_n net10 net9 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM11_p net11 net10 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM11_n net11 net10 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM12_p net12 net11 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM12_n net12 net11 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM13_p net13 net12 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM13_n net13 net12 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM14_p net14 net13 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM14_n net14 net13 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM15_p net15 net14 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM15_n net15 net14 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM16_p net16 net15 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM16_n net16 net15 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM17_p net17 net16 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM17_n net17 net16 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM18_p net18 net17 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM18_n net18 net17 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM19_p net19 net18 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM19_n net19 net18 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM20_p net20 net19 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM20_n net20 net19 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM21_p out net20 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM21_n out net20 VSS VSS nfet_03v3 L=0.28u W=0.50u
-.ends
-
-.subckt async_start_delay VDD VSS in out
-XM1_p net1 in VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM1_n net1 in VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM2_p net2 net1 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM2_n net2 net1 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM3_p net3 net2 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM3_n net3 net2 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM4_p net4 net3 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM4_n net4 net3 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM5_p net5 net4 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM5_n net5 net4 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM6_p net6 net5 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM6_n net6 net5 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM7_p net7 net6 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM7_n net7 net6 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM8_p net8 net7 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM8_n net8 net7 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM9_p net9 net8 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM9_n net9 net8 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM10_p net10 net9 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM10_n net10 net9 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM11_p net11 net10 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM11_n net11 net10 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM12_p net12 net11 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM12_n net12 net11 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM13_p net13 net12 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM13_n net13 net12 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM14_p net14 net13 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM14_n net14 net13 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM15_p net15 net14 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM15_n net15 net14 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM16_p net16 net15 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM16_n net16 net15 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM17_p net17 net16 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM17_n net17 net16 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM18_p net18 net17 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM18_n net18 net17 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM19_p net19 net18 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM19_n net19 net18 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM20_p net20 net19 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM20_n net20 net19 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM21_p net21 net20 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM21_n net21 net20 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM22_p net22 net21 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM22_n net22 net21 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM23_p net23 net22 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM23_n net23 net22 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM24_p net24 net23 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM24_n net24 net23 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM25_p net25 net24 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM25_n net25 net24 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM26_p net26 net25 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM26_n net26 net25 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM27_p net27 net26 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM27_n net27 net26 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM28_p net28 net27 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM28_n net28 net27 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM29_p net29 net28 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM29_n net29 net28 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM30_p net30 net29 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM30_n net30 net29 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM31_p net31 net30 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM31_n net31 net30 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM32_p net32 net31 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM32_n net32 net31 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM33_p net33 net32 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM33_n net33 net32 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM34_p net34 net33 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM34_n net34 net33 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM35_p net35 net34 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM35_n net35 net34 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM36_p net36 net35 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM36_n net36 net35 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM37_p net37 net36 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM37_n net37 net36 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM38_p net38 net37 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM38_n net38 net37 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM39_p net39 net38 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM39_n net39 net38 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM40_p net40 net39 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM40_n net40 net39 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM41_p net41 net40 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM41_n net41 net40 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM42_p net42 net41 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM42_n net42 net41 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM43_p net43 net42 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM43_n net43 net42 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM44_p net44 net43 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM44_n net44 net43 VSS VSS nfet_03v3 L=0.28u W=0.50u
-XM45_p out net44 VDD VDD pfet_03v3 L=0.28u W=1.0u
-XM45_n out net44 VSS VSS nfet_03v3 L=0.28u W=0.50u
-.ends
-
+.include async_inverter.spice
+.include async_nand2.spice
+.include async_nor2.spice
+.include dff_cell.spice
+.include dff_cell_set.spice
+.include shift_reg_8bit.spice
+.include bit_reg.spice
+.include async_delay_chain.spice
+.include async_start_delay.spice
+.include async_pulse_settle.spice
 
 .subckt async_sar comp_out_p dout[0] dac_in[0] dout[1] dac_in[1] dout[2] dac_in[2] dout[3] dac_in[3] dout[4] dac_in[4] dout[5] dac_in[5] dout[6] dac_in[6] dout[7] dac_in[7] start comp_done done sample_en rst_latch vdd vss
 
-* Control & Handshake
+* Control & Handshake Logic
 X_isrc  vdd vss comp_done comp_done_b async_inverter
 X_irst  vdd vss start rst_n_int async_inverter
 X_ise1  vdd vss start se_n async_inverter
 X_ise2  vdd vss se_n sample_en async_inverter
 X_idn   vdd vss done_n_int done async_inverter
-X_icd   vdd vss comp_done comp_done_inv async_inverter
 X_idnv  vdd vss done done_n async_inverter
-X_del   vdd vss comp_done comp_done_delayed_n async_delay_chain
+X_psettle vdd vss comp_done gate_settle async_pulse_settle
 X_stdel vdd vss start start_n async_start_delay
 X_ndn   vdd vss Q7 comp_done done_n_int async_nand2
-X_nset  vdd vss comp_done_inv comp_done_delayed_n gate_settle async_nand2
 X_nctl  vdd vss start_n done_n gate_ctrl async_nand2
 X_nrst  vdd vss gate_settle gate_ctrl rst_latch async_nor2
 
-* Shift Register
+* 8-Bit Shift Register Ring Counter
 X_sr8 vss Q1 Q2 Q3 Q4 Q5 Q6 Q7 open_done comp_done_b rst_n_int vdd vss Q0 shift_reg_8bit
 
-* 8x Bit Registers
-X_bit0 vdd vss rst_n_int comp_out_p Q7 dout[0] bit_reg
-X_bit1 vdd vss rst_n_int comp_out_p Q6 dout[1] bit_reg
-X_bit2 vdd vss rst_n_int comp_out_p Q5 dout[2] bit_reg
-X_bit3 vdd vss rst_n_int comp_out_p Q4 dout[3] bit_reg
-X_bit4 vdd vss rst_n_int comp_out_p Q3 dout[4] bit_reg
-X_bit5 vdd vss rst_n_int comp_out_p Q2 dout[5] bit_reg
-X_bit6 vdd vss rst_n_int comp_out_p Q1 dout[6] bit_reg
-X_bit7 vdd vss rst_n_int comp_out_p Q0 dout[7] bit_reg
+* 8x Bit Registers (SR-Latch SAR Data Registers)
+X_bit0 vdd vss comp_out_p Q7 rst_n_int dout[0] bit_reg
+X_bit1 vdd vss comp_out_p Q6 rst_n_int dout[1] bit_reg
+X_bit2 vdd vss comp_out_p Q5 rst_n_int dout[2] bit_reg
+X_bit3 vdd vss comp_out_p Q4 rst_n_int dout[3] bit_reg
+X_bit4 vdd vss comp_out_p Q3 rst_n_int dout[4] bit_reg
+X_bit5 vdd vss comp_out_p Q2 rst_n_int dout[5] bit_reg
+X_bit6 vdd vss comp_out_p Q1 rst_n_int dout[6] bit_reg
+X_bit7 vdd vss comp_out_p Q0 rst_n_int dout[7] bit_reg
 
 * First Stage DAC NORs (nor_dq)
 X_nor_dq0 vdd vss dout[0] Q7 dac_n0 async_nor2

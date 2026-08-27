@@ -519,3 +519,16 @@ flatten class "-circuit1 cdac_8bit"
 flatten class "-circuit2 cdac_8bit"
 flatten class "-circuit1 sample_hold"
 flatten class "-circuit2 sample_hold"
+
+
+# Flatten transistor wrapper subcells from extracted layout
+foreach cell $cells1 {
+    if {[regexp {^(sh_|comp_|cdac_)?(pfet|nfet|cap_mim)(\$.*)?$} $cell match]} {
+        flatten class "-circuit1 $cell"
+    }
+}
+foreach cell $cells2 {
+    if {[regexp {^(sh_|comp_|cdac_)?(pfet|nfet|cap_mim)(\$.*)?$} $cell match]} {
+        flatten class "-circuit2 $cell"
+    }
+}

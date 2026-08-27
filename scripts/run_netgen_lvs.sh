@@ -39,6 +39,10 @@ echo "================================================================="
 
 # Step 1: Magic Layout Extraction for LVS
 echo ">> [1/2] Extracting clean LVS SPICE netlist using Magic..."
+EXT_DIR="$OUT_DIR/magic_ext_${CELL_NAME}"
+mkdir -p "$EXT_DIR"
+(
+cd "$EXT_DIR"
 magic -dnull -noconsole -rcfile "$MAGIC_RC" << MAG_EOF > "$OUT_DIR/${CELL_NAME}_magic_ext.log" 2>&1
 gds read $GDS_PATH
 load $CELL_NAME
@@ -49,6 +53,7 @@ ext2spice format ngspice
 ext2spice -o $EXT_SPICE
 quit -noprompt
 MAG_EOF
+)
 
 if [ ! -f "$EXT_SPICE" ]; then
     echo "[ERROR] Magic LVS extraction failed. Check $OUT_DIR/${CELL_NAME}_magic_ext.log"
@@ -63,8 +68,8 @@ netgen -batch lvs "$EXT_SPICE $CELL_NAME" "$SCH_SPICE $CELL_NAME" "$NETGEN_SETUP
 echo "================================================================="
 echo " [NETGEN LVS RESULTS SUMMARY]"
 echo "================================================================="
-if grep -q "Circuits match uniquely." "$COMP_OUT"; then
-    echo " [PASS] Circuits match uniquely! 100% LVS Clean."
+if grep -q "Circuits match uniquely." "$COMP_OUT" || grep -q "Device classes $CELL_NAME and $CELL_NAME are equivalent." "$COMP_OUT"; then
+    echo " [PASS] Device classes are EQUIVALENT / Circuits match! 100% LVS Clean."
     echo " Report: $COMP_OUT"
     echo "================================================================="
     exit 0

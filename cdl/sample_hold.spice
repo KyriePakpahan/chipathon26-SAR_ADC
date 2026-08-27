@@ -3,34 +3,15 @@
 * PDK: GF180MCU (3.3V)
 * ==============================================================================
 
-.subckt pfet a_28_n136# a_n92_0# w_n230_n138#
-X0 w_n230_n138# a_28_n136# a_n92_0# w_n230_n138# pfet_03v3 ad=2.76p pd=6.76u as=1.3p ps=5.3u w=2u l=0.28u
-.ends
-
-.subckt nfet a_30_260# a_n84_0# a_94_0#
-X0 a_94_0# a_30_260# a_n84_0# a_94_0# nfet_03v3 ad=1.32p pd=4.64u as=0.61p ps=3.22u w=1u l=0.28u
-.ends
-
-.subckt inv_sh vdd vo vi vss
-Xpfet_0 vi vo vdd pfet
-Xnfet_0 vi vo vss nfet
-.ends
-
-.subckt pfet$2 a_28_n136# a_n92_0# w_n230_n138#
-X0 w_n230_n138# a_28_n136# a_n92_0# w_n230_n138# pfet_03v3 ad=11.04p pd=18.76u as=5.2p ps=17.3u w=8u l=0.28u
-.ends
-
-.subckt nfet$2 a_n84_0# a_94_0#
-X0 a_94_0# a_30_n132# a_n84_0# a_94_0# nfet_03v3 ad=5.28p pd=10.64u as=2.44p ps=9.22u w=4u l=0.28u
-.ends
-
-.subckt cap_mim m3_3140_940# m4_0_0#
-X0 m4_0_0# m3_3140_940# cap_mim_2f0_m4m5_noshield c_width=15u c_length=10u
-.ends
-
 .subckt sample_hold vin sample_en vhold vdd vss
-Xcap_mim_0 vhold vss cap_mim
-Xpfet$2_0 clkb vin vdd pfet$2
-Xinv_sh_0 vdd clkb sample_en vss inv_sh
-Xnfet$2_0 vin vss nfet$2
+* Sampling Switch PMOS (W=8u, L=0.28u)
+X_tg_p vin clkb vhold vdd pfet_03v3 w=8.0u l=0.28u
+* Sampling Switch NMOS (W=4u, L=0.28u)
+X_tg_n vin sample_en vhold vss nfet_03v3 w=4.0u l=0.28u
+* Clock Inverter PMOS (W=2u, L=0.28u)
+X_inv_p clkb sample_en vdd vdd pfet_03v3 w=2.0u l=0.28u
+* Clock Inverter NMOS (W=1u, L=0.28u)
+X_inv_n clkb sample_en vss vss nfet_03v3 w=1.0u l=0.28u
+* Hold Capacitor (15u x 10u MIM Cap)
+X_cap vhold vss cap_mim_2f0_m4m5_noshield c_width=15u c_length=10u
 .ends

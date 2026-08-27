@@ -1,0 +1,9 @@
+.include async_inverter.spice
+.include async_delay_chain.spice
+.include async_nand2.spice
+
+.subckt async_pulse_settle VDD VSS in out
+x_inv VDD VSS in in_inv async_inverter
+x_del VDD VSS in in_del_n async_delay_chain
+x_nand VDD VSS in_inv in_del_n out async_nand2
+.ends
