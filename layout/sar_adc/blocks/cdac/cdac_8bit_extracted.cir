@@ -1,33 +1,31 @@
-* Extracted by KLayout with GF180MCU LVS runset on : 19/08/2026 23:48
+* Extracted by KLayout with GF180MCU LVS runset on : 26/08/2026 18:34
 
-.SUBCKT cdac_8bit dac_in[3] dac_in[2] vref dac_in[1] bot4 dac_in[4] bot3 bot2
-+ bot1 vdac bot0 dac_in[1]$1 bot5 dac_in[5] bot6 dac_in[6] bot7 dac_in[7] vss
-X$1 \$5 bot3 dac_in[3] vref vss cdac_switch_1b
-X$2 \$5 bot2 dac_in[2] vref vss cdac_switch_1b
-X$3 \$5 bot0 dac_in[1]$1 vref vss cdac_switch_1b
-X$4 \$5 bot1 dac_in[1] vref vss cdac_switch_1b
-X$5 \$5 bot5 dac_in[5] vref vss cdac_switch_1b
-X$6 \$5 bot4 dac_in[4] vref vss cdac_switch_1b
-X$7 \$5 bot6 dac_in[6] vref vss cdac_switch_1b
-X$8 \$5 bot7 dac_in[7] vref vss cdac_switch_1b
-C$1 vdac bot4 8e-13 cap_mim_2f0fF A=400P P=320U
-C$17 vdac bot3 4e-13 cap_mim_2f0fF A=200P P=160U
-C$25 vdac bot2 2e-13 cap_mim_2f0fF A=100P P=80U
-C$29 vdac bot1 1e-13 cap_mim_2f0fF A=50P P=40U
-C$31 vdac bot7 6.4e-12 cap_mim_2f0fF A=3200P P=2560U
-C$32 vdac bot0 5e-14 cap_mim_2f0fF A=25P P=20U
-C$33 vdac vss 5e-14 cap_mim_2f0fF A=25P P=20U
-C$34 vdac bot5 1.6e-12 cap_mim_2f0fF A=800P P=640U
-C$66 vdac bot6 3.2e-12 cap_mim_2f0fF A=1600P P=1280U
+.SUBCKT cdac_8bit SUB
+X$1 \$2 \$22 \$24 \$1 SUB cdac_switch_1b
+X$2 \$2 \$20 \$6 \$1 SUB cdac_switch_1b
+X$3 \$2 \$17 \$5 \$1 SUB cdac_switch_1b
+X$4 \$2 \$14 \$4 \$1 SUB cdac_switch_1b
+X$5 \$2 \$28 \$32 \$1 SUB cdac_switch_1b
+X$6 \$2 \$7 \$21 \$1 SUB cdac_switch_1b
+X$7 \$2 \$31 \$36 \$1 SUB cdac_switch_1b
+X$8 \$2 \$35 \$38 \$1 SUB cdac_switch_1b
+C$1 \$11 \$7 8e-13 cap_mim_2f0fF A=400P P=320U
+C$17 \$11 \$35 6.4e-12 cap_mim_2f0fF A=3200P P=2560U
+C$18 \$11 \$22 5e-14 cap_mim_2f0fF A=25P P=20U
+C$19 \$11 SUB 5e-14 cap_mim_2f0fF A=25P P=20U
+C$20 \$11 \$20 1e-13 cap_mim_2f0fF A=50P P=40U
+C$22 \$11 \$17 2e-13 cap_mim_2f0fF A=100P P=80U
+C$26 \$11 \$14 4e-13 cap_mim_2f0fF A=200P P=160U
+C$34 \$11 \$28 1.6e-12 cap_mim_2f0fF A=800P P=640U
+C$66 \$11 \$31 3.2e-12 cap_mim_2f0fF A=1600P P=1280U
 .ENDS cdac_8bit
 
-.SUBCKT cdac_switch_1b vdd bot bit vref vss
-M$1 bot bit_b vref vdd pfet_03v3 L=0.28U W=32U AS=9.88P AD=9.88P PS=40.94U
-+ PD=40.94U
-M$9 bot bit_b vss vss nfet_03v3 L=0.28U W=24U AS=7.64P AD=7.64P PS=31.82U
-+ PD=31.82U
-M$15 bit_b bit vss vss nfet_03v3 L=0.28U W=8U AS=3.48P AD=3.48P PS=13.74U
-+ PD=13.74U
-M$17 bit_b bit vdd vdd pfet_03v3 L=0.28U W=16U AS=5.72P AD=5.72P PS=22.86U
+.SUBCKT cdac_switch_1b \$1 \$2 \$3 \$6 SUB
+M$1 \$5 \$3 \$1 \$1 pfet_03v3 L=0.28U W=16U AS=5.72P AD=5.72P PS=22.86U
 + PD=22.86U
+M$5 \$5 \$3 SUB SUB nfet_03v3 L=0.28U W=8U AS=3.48P AD=3.48P PS=13.74U PD=13.74U
+M$7 \$2 \$5 \$6 \$1 pfet_03v3 L=0.28U W=32U AS=9.88P AD=9.88P PS=40.94U
++ PD=40.94U
+M$15 \$2 \$5 SUB SUB nfet_03v3 L=0.28U W=24U AS=7.64P AD=7.64P PS=31.82U
++ PD=31.82U
 .ENDS cdac_switch_1b
