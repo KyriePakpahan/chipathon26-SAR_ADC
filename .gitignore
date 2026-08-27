@@ -13,7 +13,10 @@ gf180mcu/
 lvs/reports/
 
 # Temporary and scratch directories
-scripts/
+scripts/*
+!scripts/run_netgen_lvs.sh
+!scripts/run_drc.py
+!scripts/run_docker_iic.sh
 
 # Temporary, image, and log files
 *.raw
