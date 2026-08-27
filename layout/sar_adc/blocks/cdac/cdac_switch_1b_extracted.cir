@@ -1,4 +1,4 @@
-* Extracted by KLayout with GF180MCU LVS runset on : 19/08/2026 22:16
+* Extracted by KLayout with GF180MCU LVS runset on : 26/08/2026 18:34
 
 .SUBCKT cdac_switch_1b bit_b vdd bot bit vref vss
 M$1 bot bit_b vref vdd pfet_03v3 L=0.28U W=32U AS=9.88P AD=9.88P PS=40.94U
