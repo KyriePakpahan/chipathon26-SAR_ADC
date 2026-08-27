@@ -13,17 +13,7 @@ gf180mcu/
 lvs/reports/
 
 # Temporary and scratch directories
-scripts/scratch/
-scripts/suite*
-scripts/lvs_*
-scripts/drc_*
-scripts/test_lvs*
-scripts/test_xschem*
-
-# Python physical layout generators and local verification scripts (excluded per design policy)
-scripts/build_*.py
-scripts/verify_prd_metrics.py
-scripts/analyze_dynamic_raw.py
+scripts/
 
 # Temporary, image, and log files
 *.raw
