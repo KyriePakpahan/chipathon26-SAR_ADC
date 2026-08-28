@@ -19,12 +19,12 @@ C {opin.sym} 1800 -120 0 0 {name=p_do3 lab=dout[3]}
 C {opin.sym} 1800 -100 0 0 {name=p_do2 lab=dout[2]}
 C {opin.sym} 1800 -80 0 0 {name=p_do1 lab=dout[1]}
 C {opin.sym} 1800 -60 0 0 {name=p_do0 lab=dout[0]}
-C {sar_adc/blocks/sample_hold/sample_hold.sym} -1300 -200 0 0 {name=x_sh}
-C {lab_wire.sym} -1320 -250 0 0 {name=l_sh_vi lab=vin}
-C {lab_wire.sym} -1320 -220 0 0 {name=l_sh_se lab=sample_en}
-C {lab_wire.sym} -1200 -230 2 0 {name=l_sh_vh lab=vhold}
-C {lab_wire.sym} -1200 -250 2 0 {name=l_sh_vd lab=vdd}
-C {lab_wire.sym} -1200 -210 2 0 {name=l_sh_vs lab=vss}
+C {sar_adc/blocks/sample_hold/sample_hold.sym} -1250 -150 0 0 {name=x_sh}
+C {lab_wire.sym} -1400 -170 0 0 {name=l_sh_vi lab=vin}
+C {lab_wire.sym} -1400 -150 0 0 {name=l_sh_se lab=sample_en}
+C {lab_wire.sym} -1100 -170 2 0 {name=l_sh_vh lab=vhold}
+C {lab_wire.sym} -1100 -130 2 0 {name=l_sh_vd lab=vdd}
+C {lab_wire.sym} -1100 -150 2 0 {name=l_sh_vs lab=vss}
 C {sar_adc/blocks/cdac/cdac_8bit.sym} -750 -200 0 0 {name=x_cdac}
 C {lab_wire.sym} -900 -300 0 0 {name=l_cdp_vr lab=vref}
 C {lab_wire.sym} -900 -140 0 0 {name=l_cdp_d0 lab=dac_in[0]}

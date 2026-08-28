@@ -21,7 +21,7 @@ C {lab_wire.sym} -300 60 2 0 {name=l_del_out lab=in_del_n}
 C {lab_wire.sym} -300 80 2 0 {name=l_del_vss lab=vss}
 C {sar_adc/blocks/async_sar/async_nand2.sym} 150 0 0 0 {name=x_nand}
 C {lab_wire.sym} 0 -20 0 0 {name=l_nd_a lab=in_inv}
-C {lab_wire.sym} 0 20 0 0 {name=l_nd_b lab=in_del_n}
+C {lab_wire.sym} 0 0 0 0 {name=l_nd_b lab=in_del_n}
 C {lab_wire.sym} 300 -20 2 0 {name=l_nd_vdd lab=vdd}
 C {lab_wire.sym} 300 0 2 0 {name=l_nd_out lab=out}
 C {lab_wire.sym} 300 20 2 0 {name=l_nd_vss lab=vss}
