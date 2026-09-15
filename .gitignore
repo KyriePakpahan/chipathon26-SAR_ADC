@@ -1,6 +1,7 @@
 # Temporary simulation data and intermediate runs
 agent_runs/
-reports/
+reports/*
+!reports/def_alignment.json
 runs/
 sim_build/
 final/
@@ -8,11 +9,17 @@ img/
 __pycache__/
 .ipynb_checkpoints/
 gf180mcu/
+simulations/
+
+# User-requested sandbox and scratch environments
+sandbox/
+scratch/
+scratch_scripts/
 
 # LVS extracted and temporary report files
 lvs/reports/
 
-# Temporary and scratch directories
+# Temporary and scratch script directories
 scripts/*
 !scripts/run_netgen_lvs.sh
 !scripts/run_drc.py
@@ -22,11 +29,12 @@ scripts/*
 *.raw
 *.log
 *.val
-*.bak
+*.bak*
 *~
 *.lyrdb
 *.ext
 *.png
+*.npz
 gf180_drc.lyrdb
 layout/backups/
 
@@ -37,8 +45,19 @@ backups/
 magic_ext_archive/
 archive_old_layouts/
 archive_old_spices/
-scratch_scripts/
 pex/
 netlist/sim_outputs/
 netlist/*_pex*.spice
 layout/**/backups/
+
+# Temporary layout verification dumps & archive files
+layout/sar_adc/pex_verify/
+layout/sar_adc/drc_verified/
+layout/sar_adc/*.spice
+layout/sar_adc/*.tgz.gz
+
+# Intermediate netlists & golden dumps
+cdl/async_sar_*.spice
+netlist/tb_*.spice
+netlist/*_tune_delay.spice
+xschem/extracted_golden/

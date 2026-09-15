@@ -17,12 +17,12 @@ C {lab_wire.sym} -300 -100 2 0 {name=l_inv_vss lab=vss}
 C {sar_adc/blocks/async_sar/async_delay_chain.sym} -450 60 0 0 {name=x_del}
 C {lab_wire.sym} -600 40 0 0 {name=l_del_in lab=in}
 C {lab_wire.sym} -300 40 2 0 {name=l_del_vdd lab=vdd}
-C {lab_wire.sym} -300 60 2 0 {name=l_del_out lab=in_del_n}
-C {lab_wire.sym} -300 80 2 0 {name=l_del_vss lab=vss}
+C {lab_wire.sym} -300 60 2 0 {name=l_del_vss lab=vss}
+C {lab_wire.sym} -300 80 2 0 {name=l_del_out lab=in_del_n}
 C {sar_adc/blocks/async_sar/async_nand2.sym} 150 0 0 0 {name=x_nand}
 C {lab_wire.sym} 0 -20 0 0 {name=l_nd_a lab=in_inv}
 C {lab_wire.sym} 0 0 0 0 {name=l_nd_b lab=in_del_n}
 C {lab_wire.sym} 300 -20 2 0 {name=l_nd_vdd lab=vdd}
-C {lab_wire.sym} 300 0 2 0 {name=l_nd_out lab=out}
-C {lab_wire.sym} 300 20 2 0 {name=l_nd_vss lab=vss}
+C {lab_wire.sym} 300 0 2 0 {name=l_nd_vss lab=vss}
+C {lab_wire.sym} 300 20 2 0 {name=l_nd_out lab=out}
 C {title.sym} 0 250 0 0 {name=l_title author="Berkah Saluyu"}

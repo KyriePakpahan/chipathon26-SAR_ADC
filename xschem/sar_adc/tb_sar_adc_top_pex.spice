@@ -1,4 +1,6 @@
-* Testbench for Post-Layout PEX SAR ADC (tb_sar_adc_top_pex.spice)
+* Post-Layout PEX Transient Simulation Testbench for sar_adc_top
+* Target: GF180MCU 8-bit Asynchronous SAR ADC
+* PDK: GF180MCU 3.3V, 5LM, MIM-B (2.0 fF/um2)
 
 .param fnoicor=0
 .param sw_stat_mismatch=0
@@ -6,23 +8,30 @@
 .lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice mimcap_typical
 .lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice cap_mim
 
-.include ../../netlist/sar_adc_top_pex.spice
+.include "../../netlist/sar_adc_top_pex.spice"
 
-V_avdd avdd 0 3.3
-V_avss avss 0 0.0
-V_dvdd dvdd 0 3.3
-V_dvss dvss 0 0.0
-V_vref vref 0 3.3
-V_vin  vin_p 0 1.65
-V_start start 0 PULSE(3.3 0 5n 0.1n 0.1n 95n 100n)
+V1 vdd 0 3.3
+V2 vref 0 3.3
+V3 vin 0 1.65
+V4 start 0 PULSE(3.3 0 5n 0.1n 0.1n 95n 100n)
+V5 vss 0 0
 
-X1 start done d0 d1 d2 d3 d4 d5 d6 d7 vin_p vref avdd avss dvdd dvss sar_adc_top
+x1 vin vref start vdd vss done dout[7] dout[6] dout[5] dout[4] dout[3] dout[2] dout[1] dout[0] sar_adc_top
 
 .options method=gear reltol=1e-3 vntol=1e-4 abstol=1e-12
 .control
-set filetype=ascii
-tran 0.1n 30n
-print v(start) v(x1.xasync_sar_0.sample_en) v(x1.xasync_sar_0.comp_done) v(x1.xasync_sar_0.rst_latch) v(done) at 0n 4n 5.5n 6n 8n 10n 15n 20n 25n
+tran 0.2n 100n
+wrdata tb_sar_adc_top_pex.txt v(start) v(done) v("dout[7]") v("dout[6]") v("dout[5]") v("dout[4]") v("dout[3]") v("dout[2]") v("dout[1]") v("dout[0]")
+meas tran vdone_max MAX v(done) from=5n to=50n
+meas tran dout7_val FIND v("dout[7]") at=90n
+meas tran dout6_val FIND v("dout[6]") at=90n
+meas tran dout5_val FIND v("dout[5]") at=90n
+meas tran dout4_val FIND v("dout[4]") at=90n
+meas tran dout3_val FIND v("dout[3]") at=90n
+meas tran dout2_val FIND v("dout[2]") at=90n
+meas tran dout1_val FIND v("dout[1]") at=90n
+meas tran dout0_val FIND v("dout[0]") at=90n
+meas tran idd_avg AVG i(V1) from=0n to=100n
 quit
 .endc
 .end

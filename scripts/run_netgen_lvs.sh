@@ -12,9 +12,9 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PRJ_DIR="$(dirname "$SCRIPT_DIR")"
 
-GDS_PATH="${1:-$PRJ_DIR/layout/sar_adc/sar_adc_top.gds}"
+GDS_PATH="$(realpath "${1:-$PRJ_DIR/layout/sar_adc/sar_adc_top.gds}")"
 CELL_NAME="${2:-sar_adc_top}"
-SCH_SPICE="${3:-$PRJ_DIR/xschem/sar_adc/sar_adc_top.spice}"
+SCH_SPICE="$(realpath "${3:-$PRJ_DIR/netlist/sar_adc_top_golden.spice}")"
 
 OUT_DIR="$PRJ_DIR/lvs/reports"
 mkdir -p "$OUT_DIR"
@@ -68,15 +68,31 @@ netgen -batch lvs "$EXT_SPICE $CELL_NAME" "$SCH_SPICE $CELL_NAME" "$NETGEN_SETUP
 echo "================================================================="
 echo " [NETGEN LVS RESULTS SUMMARY]"
 echo "================================================================="
-if grep -q "Circuits match uniquely." "$COMP_OUT" || grep -q "Device classes $CELL_NAME and $CELL_NAME are equivalent." "$COMP_OUT"; then
-    echo " [PASS] Device classes are EQUIVALENT / Circuits match! 100% LVS Clean."
+
+# Strict Anti-False-Positive Verification Check
+IS_MATCH=0
+if grep -q "Circuits match uniquely\." "$COMP_OUT"; then
+    IS_MATCH=1
+fi
+
+if grep -qi "failed pin matching" "$COMP_OUT" || \
+   grep -qi "Netlists do not match" "$COMP_OUT" || \
+   grep -qi "NET mismatches" "$COMP_OUT" || \
+   grep -qi "DEVICE mismatches" "$COMP_OUT" || \
+   grep -qi "Property errors were found" "$COMP_OUT"; then
+    IS_MATCH=0
+fi
+
+if [ $IS_MATCH -eq 1 ]; then
+    echo " [PASS] Circuits match uniquely! 100% LVS Clean (Zero False Positives)."
     echo " Report: $COMP_OUT"
     echo "================================================================="
     exit 0
 else
-    echo " [RESULT] Netgen comparison completed. Check details below:"
-    tail -n 25 "$COMP_OUT"
+    echo " [FAIL] LVS Verification FAILED! Mismatch or Pin Failure Detected."
+    echo " Details from $COMP_OUT:"
+    echo "-----------------------------------------------------------------"
+    tail -n 35 "$COMP_OUT"
     echo "================================================================="
-    echo " Full report saved at: $COMP_OUT"
-    exit 0
+    exit 1
 fi

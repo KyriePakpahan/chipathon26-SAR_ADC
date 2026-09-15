@@ -18,12 +18,12 @@ C {lab_wire.sym} -550 0 0 0 {name=l_inv_vi lab=sample_en}
 C {lab_wire.sym} -510 -70 2 0 {name=l_inv_vd lab=vdd}
 C {lab_wire.sym} -510 0 2 0 {name=l_inv_vo lab=clkb}
 C {lab_wire.sym} -510 70 2 0 {name=l_inv_vs lab=vss}
-C {symbols/nfet_03v3.sym} 0 -100 0 0 {name=M1 L=0.28u W=4.00u nf=2 m=1 model=nfet_03v3 spiceprefix=X}
+C {symbols/nfet_03v3.sym} 0 -100 0 0 {name=M1 L=0.28u W=8.00u nf=4 m=1 model=nfet_03v3 spiceprefix=X}
 C {lab_wire.sym} -20 -100 0 0 {name=l_m1_g lab=sample_en}
 C {lab_wire.sym} 20 -130 2 0 {name=l_m1_d lab=vhold}
 C {lab_wire.sym} 20 -100 2 0 {name=l_m1_b lab=vss}
 C {lab_wire.sym} 20 -70 0 0 {name=l_m1_s lab=vin}
-C {symbols/pfet_03v3.sym} 0 -250 0 0 {name=M2 L=0.28u W=8.00u nf=2 m=1 model=pfet_03v3 spiceprefix=X}
+C {symbols/pfet_03v3.sym} 0 -250 0 0 {name=M2 L=0.28u W=16.00u nf=4 m=1 model=pfet_03v3 spiceprefix=X}
 C {lab_wire.sym} -20 -250 0 0 {name=l_m2_g lab=clkb}
 C {lab_wire.sym} 20 -280 0 0 {name=l_m2_s lab=vhold}
 C {lab_wire.sym} 20 -250 2 0 {name=l_m2_b lab=vdd}
@@ -34,8 +34,8 @@ C {lab_wire.sym} 250 130 0 0 {name=l_c2_bot lab=vss}
 C {title.sym} -430 400 0 0 {name=l_title author="Berkah Saluyu"}
 C {symbols/pfet_03v3.sym} -530 -40 0 0 {name=M3
 L=0.28u
-W=2u
-nf=1
+W=4.00u
+nf=2
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
 pd="'2*int((nf+1)/2) * (W/nf + 0.18u)'"
@@ -48,7 +48,7 @@ spiceprefix=X
 }
 C {symbols/nfet_03v3.sym} -530 40 0 0 {name=M4
 L=0.28u
-W=1u
+W=2.00u
 nf=1
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"

@@ -234,3 +234,6 @@ C {lab_wire.sym} 1250 140 0 0 {name=l_x45_in lab=net44}
 C {lab_wire.sym} 1550 160 2 0 {name=l_x45_out lab=out}
 C {lab_wire.sym} 1550 140 2 0 {name=l_x45_vdd lab=vdd}
 C {lab_wire.sym} 1550 180 2 0 {name=l_x45_vss lab=vss}
+C {symbols/cap_mim_2f0fF.sym} 1750 160 0 0 {name=C_start_tune W=8.66e-6 L=8.66e-6 model=cap_mim_2f0fF spiceprefix=X m=1}
+C {lab_wire.sym} 1750 130 2 0 {name=l_ctune_top lab=out}
+C {lab_wire.sym} 1750 190 0 0 {name=l_ctune_bot lab=vss}

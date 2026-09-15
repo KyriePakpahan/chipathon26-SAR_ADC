@@ -30,6 +30,7 @@ def main():
     parser.add_argument("--gds", default=None, help="Explicit GDS path (optional)")
     parser.add_argument("--config", default="lvs_config.json", help="Path to lvs_config.json")
     parser.add_argument("--run_dir", default=None, help="Directory to store DRC run outputs")
+    parser.add_argument("--dbu", type=float, default=0.001, help="DBU precision for DRC evaluation (default: 0.001 um / 1 nm, Mitch Bailey rule)")
     args = parser.parse_args()
 
     script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -51,6 +52,21 @@ def main():
         except OSError:
             pass
 
+    # Mitch Bailey Rule: Convert GDS to 0.001 um (1 nm) on the fly for false-negative prevention
+    eval_gds = gds_path
+    if args.dbu is not None and args.dbu < 0.005:
+        eval_gds = os.path.join(run_dir, f"{args.cell}_eval_1nm.gds")
+        print(f">> [Mitch Bailey Rule] Converting layout to DBU {args.dbu} um (1 nm) for strict evaluation...")
+        conv_script = (
+            f"import klayout.db as pya\n"
+            f"ly = pya.Layout()\n"
+            f"ly.read('{gds_path}')\n"
+            f"opt = pya.SaveLayoutOptions()\n"
+            f"opt.dbu = {args.dbu}\n"
+            f"ly.write('{eval_gds}', opt)\n"
+        )
+        subprocess.run(["python3", "-c", conv_script], check=True)
+
     drc_deck = "/foss/pdks/gf180mcuD/libs.tech/klayout/tech/drc/run_drc.py"
     variant = "D"
 
@@ -58,15 +74,17 @@ def main():
     print(f"CHIPATHON 2026 DRC RUNNER: {args.cell}")
     print("=" * 80)
     print(f"Layout Path  : {gds_path}")
+    print(f"Eval Path    : {eval_gds} (DBU: {args.dbu} um)")
     print(f"Run Output   : {run_dir}")
     print(f"PDK Variant  : {variant}")
     print("-" * 80)
 
     drc_cmd = [
         "python3", drc_deck,
-        f"--path={gds_path}",
+        f"--path={eval_gds}",
         f"--variant={variant}",
-        f"--run_dir={run_dir}"
+        f"--run_dir={run_dir}",
+        f"--topcell={args.cell}"
     ]
     res_drc = subprocess.run(" ".join(drc_cmd), shell=True, capture_output=True, text=True)
 

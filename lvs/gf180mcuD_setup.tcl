@@ -325,12 +325,14 @@ lappend devices cap_mim_2f0_m4m5_noshield
 
 foreach dev $devices {
     if {[lsearch $cells1 $dev] >= 0} {
+	permute "-circuit1 $dev" 1 2
 	property "-circuit1 $dev" parallel enable
 	property "-circuit1 $dev" tolerance {c_width 0.01} {c_length 0.01}
 	# Ignore these properties
 	property "-circuit1 $dev" delete par1
     }
     if {[lsearch $cells2 $dev] >= 0} {
+	permute "-circuit2 $dev" 1 2
 	property "-circuit2 $dev" parallel enable
 	property "-circuit2 $dev" tolerance {c_width 0.01} {c_length 0.01}
 	# Ignore these properties
@@ -523,12 +525,35 @@ flatten class "-circuit2 sample_hold"
 
 # Flatten transistor wrapper subcells from extracted layout
 foreach cell $cells1 {
-    if {[regexp {^(sh_|comp_|cdac_)?(pfet|nfet|cap_mim)(\$.*)?$} $cell match]} {
+    if {[regexp {(pfet|nfet|cap_mim)} $cell match]} {
         flatten class "-circuit1 $cell"
     }
 }
 foreach cell $cells2 {
-    if {[regexp {^(sh_|comp_|cdac_)?(pfet|nfet|cap_mim)(\$.*)?$} $cell match]} {
+    if {[regexp {(pfet|nfet|cap_mim)} $cell match]} {
         flatten class "-circuit2 $cell"
+    }
+}
+
+# Flatten intermediate digital gates for robust transistor-level matching
+set digital_cells {
+    async_inverter
+    async_nand2
+    async_nor2
+    async_delay_chain
+    async_start_delay
+    async_pulse_settle
+    bit_reg
+    dff_cell
+    dff_cell_set
+    shift_reg_8bit
+    async_sar_logic
+}
+foreach c $digital_cells {
+    if {[lsearch $cells1 $c] >= 0} {
+        flatten class "-circuit1 $c"
+    }
+    if {[lsearch $cells2 $c] >= 0} {
+        flatten class "-circuit2 $c"
     }
 }

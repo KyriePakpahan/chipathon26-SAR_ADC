@@ -1,0 +1,35 @@
+{
+  "schema": "chipathon-2026-def-alignment-v1",
+  "status": "PASS_DEF_ALIGNED",
+  "pass": true,
+  "top": {
+    "cell": "sar_adc_top",
+    "bbox_um": [
+      0.0,
+      0.0,
+      550.0,
+      1110.0
+    ],
+    "width_um": 550.0,
+    "height_um": 1110.0
+  },
+  "pins": {
+    "total_logical_count": 97,
+    "total_def_shapes": 121,
+    "total_matched_shapes": 121,
+    "functional_pins_verified": 14,
+    "side_counts": {
+      "NORTH": 12,
+      "WEST": 85
+    }
+  },
+  "checks": {
+    "design_matches_def_spec": true,
+    "units_exact_200": true,
+    "diearea_exact_550x1110": true,
+    "logical_pin_count_97": true,
+    "gds_top_bbox_exact": true,
+    "all_97_pin_shapes_attached": true,
+    "all_14_functional_labels_present": true
+  }
+}

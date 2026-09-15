@@ -23,8 +23,8 @@ C {sar_adc/blocks/sample_hold/sample_hold.sym} -1250 -150 0 0 {name=x_sh}
 C {lab_wire.sym} -1400 -170 0 0 {name=l_sh_vi lab=vin}
 C {lab_wire.sym} -1400 -150 0 0 {name=l_sh_se lab=sample_en}
 C {lab_wire.sym} -1100 -170 2 0 {name=l_sh_vh lab=vhold}
-C {lab_wire.sym} -1100 -130 2 0 {name=l_sh_vd lab=vdd}
-C {lab_wire.sym} -1100 -150 2 0 {name=l_sh_vs lab=vss}
+C {lab_wire.sym} -1100 -130 2 0 {name=l_sh_vs lab=vss}
+C {lab_wire.sym} -1100 -150 2 0 {name=l_sh_vd lab=vdd}
 C {sar_adc/blocks/cdac/cdac_8bit.sym} -750 -200 0 0 {name=x_cdac}
 C {lab_wire.sym} -900 -300 0 0 {name=l_cdp_vr lab=vref}
 C {lab_wire.sym} -900 -140 0 0 {name=l_cdp_d0 lab=dac_in[0]}
@@ -72,12 +72,11 @@ C {lab_wire.sym} 650 50 2 0 {name=l_sar_di4 lab=dac_in[4]}
 C {lab_wire.sym} 650 30 2 0 {name=l_sar_di5 lab=dac_in[5]}
 C {lab_wire.sym} 650 10 2 0 {name=l_sar_di6 lab=dac_in[6]}
 C {lab_wire.sym} 650 -10 2 0 {name=l_sar_di7 lab=dac_in[7]}
-C {symbols/nfet_03v3.sym} -450 -350 0 0 {name=M_dac_rst L=0.28u W=16.00u nf=4 m=1 model=nfet_03v3 spiceprefix=X}
-C {lab_wire.sym} -470 -350 0 0 {name=l_dr_g lab=sample_en}
-C {lab_wire.sym} -430 -380 2 0 {name=l_dr_d lab=vdac}
-C {lab_wire.sym} -430 -350 2 0 {name=l_dr_b lab=vss}
-C {lab_wire.sym} -430 -320 0 0 {name=l_dr_s lab=vss}
-C {symbols/cap_mim_2f0fF.sym} -950 -450 0 0 {name=C_dec_vref W=10e-6 L=10e-6 model=cap_mim_2f0fF spiceprefix=X m=20}
-C {lab_wire.sym} -950 -480 2 0 {name=l_dvr_top lab=vref}
-C {lab_wire.sym} -950 -420 0 0 {name=l_dvr_bot lab=vss}
+C {sar_adc/blocks/dac_rst/dac_rst.sym} -450 -360 0 0 {name=x_dac_rst}
+C {lab_wire.sym} -570 -360 0 0 {name=l_dr_se lab=sample_en}
+C {lab_wire.sym} -330 -380 2 0 {name=l_dr_vd lab=vdac}
+C {lab_wire.sym} -330 -340 2 0 {name=l_dr_vs lab=vss}
+C {sar_adc/blocks/dec_vref/dec_vref.sym} -950 -460 0 0 {name=x_dec_vref}
+C {lab_wire.sym} -1070 -460 0 0 {name=l_dvr_vr lab=vref}
+C {lab_wire.sym} -830 -460 2 0 {name=l_dvr_vs lab=vss}
 C {title.sym} -300 800 0 0 {name=l_title author="Berkah Saluyu"}
