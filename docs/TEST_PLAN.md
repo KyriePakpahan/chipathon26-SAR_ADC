@@ -11,7 +11,7 @@
 | Project Tile Area | `550 µm × 1110 µm` (`PR_bndry` layer `0/0` rectangle at `(0, 0)` to `(550, 1110)`) |
 | Final Handoff GDS | [`layout/sar_adc/sar_adc_top.gds`](../layout/sar_adc/sar_adc_top.gds) (top cell `sar_adc_top`) |
 | Final GDS SHA-256 | `7efe98ffebdbc31aa459ef9e9e21614b0f16f9c45d8e8711ee649c1336b70299` |
-| CDL Netlist | [`lvs/sar_adc_top.cdl`](../lvs/sar_adc_top.cdl) |
+| CDL Netlist | [`cdl/sar_adc_top.spice`](../cdl/sar_adc_top.spice) |
 
 ### Pin Plan (`info.yaml` Order)
 

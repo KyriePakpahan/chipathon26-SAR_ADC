@@ -1,21 +1,21 @@
-# Panduan Verifikasi DRC & LVS (Chipathon 2026)
+# Panduan Verifikasi DRC dan LVS (Chipathon 2026)
 
-Dokumen ini berisi panduan bagi anggota tim untuk menjalankan verifikasi **Design Rule Checking (DRC)** dan **Layout Versus Schematic (LVS)** pada modul **8-Bit Asynchronous SAR ADC Logic** (`async_sar`) dan seluruh subcell-nya.
+Dokumen ini menjelaskan cara menjalankan verifikasi Design Rule Checking (DRC) dan Layout Versus Schematic (LVS) pada desain 8-Bit Asynchronous SAR ADC (`sar_adc_top`) beserta seluruh sub-bloknya.
 
 ---
 
-## 1. Lingkungan Kerja (Prerequisites)
+## 1. Lingkungan Kerja
 
-Verifikasi menggunakan container standar **IIC-OSIC-Tools**:
+Verifikasi fisik menggunakan container IIC-OSIC-Tools:
 - Docker image: `hpretl/iic-osic-tools:chipathon26`
-- PDK: **GlobalFoundries GF180MCU (Variant D, 3.3V)**
-- Tools: **KLayout 0.29+** (Layout & Extraction), **Netgen 1.5+** (LVS Comparator)
+- PDK: GlobalFoundries GF180MCU Variant D (3.3 V, 5LM, MIM-B)
+- Perangkat lunak: KLayout (DRC), Magic VLSI (ekstraksi netlist layout), dan Netgen (LVS)
 
 ---
 
-## 2. Cara Menjalankan Verifikasi Cepat (Quick Start)
+## 2. Cara Menjalankan Verifikasi
 
-### A. Masuk ke Lingkungan Docker (Interactive Shell)
+### A. Masuk ke Shell Container
 ```bash
 docker run --rm -it \
   -v $(pwd):/foss/designs/chipathon26-SAR_ADC \
@@ -23,71 +23,62 @@ docker run --rm -it \
   hpretl/iic-osic-tools:chipathon26 --skip bash
 ```
 
-### B. Menjalankan Verifikasi via `make`
+### B. Menjalankan DRC dan LVS Top-Level (`sar_adc_top`)
 Di dalam container, jalankan:
 
-1. **Jalankan DRC pada Top-Level (`async_sar.gds`):**
+1. KLayout DRC pada top-level (`layout/sar_adc/sar_adc_top.gds`):
+   ```bash
+   python3 /foss/pdks/gf180mcuD/libs.tech/klayout/tech/drc/run_drc.py \
+     --path=layout/sar_adc/sar_adc_top.gds \
+     --variant=D \
+     --thr=8 \
+     --run_dir=reports/drc_sar_adc_top
+   ```
+
+2. Magic + Netgen LVS pada top-level (`sar_adc_top`):
+   ```bash
+   ./scripts/run_netgen_lvs.sh \
+     layout/sar_adc/sar_adc_top.gds \
+     sar_adc_top \
+     cdl/sar_adc_top.spice
+   ```
+
+3. Verifikasi sub-blok logika via `Makefile`:
    ```bash
    make drc
-   ```
-   *Output yang diharapkan: `RESULT: [PASS] - Cell 'async_sar' HAS 0 DRC VIOLATIONS (CLEAN)!`*
-
-2. **Jalankan Netgen LVS pada Top-Level (`async_sar`):**
-   ```bash
    make lvs
-   ```
-   *Output yang diharapkan: `RESULT: [PASS] - Cell 'async_sar' MATCHES UNIQUELY!`*
-
-3. **Jalankan Test Suite Lengkap (DRC & LVS seluruh 10 blok):**
-   ```bash
    make verify
    ```
 
 ---
 
-### C. Menjalankan Langsung via Perintah Satu Baris (Host / Non-Interactive)
+## 3. Struktur File Konfigurasi dan Netlist
 
-Jika Anda ingin menjalankan langsung dari terminal host tanpa masuk ke dalam Docker:
-
-```bash
-# 1. DRC Top-Level
-docker run --rm -v $(pwd):/foss/designs/chipathon26-SAR_ADC -w /foss/designs/chipathon26-SAR_ADC \
-  hpretl/iic-osic-tools:chipathon26 --skip python3 scripts/run_drc.py
-
-# 2. LVS Top-Level
-docker run --rm -v $(pwd):/foss/designs/chipathon26-SAR_ADC -w /foss/designs/chipathon26-SAR_ADC \
-  hpretl/iic-osic-tools:chipathon26 --skip python3 scripts/run_lvs.py
-
-# 3. Full Suite (10 Cell)
-docker run --rm -v $(pwd):/foss/designs/chipathon26-SAR_ADC -w /foss/designs/chipathon26-SAR_ADC \
-  hpretl/iic-osic-tools:chipathon26 --skip python3 scripts/verify_all.py
-```
-
----
-
-## 3. Struktur File Konfigurasi & Netlist
-
-| File / Folder | Keterangan |
+| File / Direktori | Fungsi |
 | :--- | :--- |
-| **[`info.yaml`](file:///home/kyrie/eda/designs/chipathon26-SAR_ADC/info.yaml)** | Manifest proyek resmi Chipathon 2026 (spesifikasi, pinout I/O, deskripsi arsitektur). |
-| **[`lvs_config.json`](file:///home/kyrie/eda/designs/chipathon26-SAR_ADC/lvs_config.json)** | Konfigurasi LVS terpusat (path GDS, golden netlist CDL, setup rule GF180MCU). |
-| **[`cdl/`](file:///home/kyrie/eda/designs/chipathon26-SAR_ADC/cdl)** | Folder penyimpan seluruh golden SPICE/CDL netlist standar LVS. |
-| **[`layout/`](file:///home/kyrie/eda/designs/chipathon26-SAR_ADC/layout)** | Folder penyimpan seluruh file fisik layout `.gds`. |
-| **`reports/`** | Folder penyimpan log hasil ekstraksi `.cir` dan perbandingan `comp.out`. |
+| [`info.yaml`](../info.yaml) | Manifest proyek Chipathon 2026 dan pemetaan 14 pin padframe `A49_BV` |
+| [`lvs_config.json`](../lvs_config.json) | Konfigurasi LVS otomatis (`layout/sar_adc/sar_adc_top.gds` terhadap `cdl/sar_adc_top.spice`) |
+| [`cdl/`](../cdl) | Direktori golden SPICE/CDL netlist untuk sign-off LVS |
+| [`layout/sar_adc/`](../layout/sar_adc) | Direktori file layout fisik `.gds` (`sar_adc_top.gds` dan `blocks/`) |
+| `lvs/reports/` | Direktori output ekstraksi `.spice` dan laporan perbandingan Netgen `*_comp.out` |
 
 ---
 
-## 4. Matriks Blok & Spesifikasi Perangkat
+## 4. Matriks Sign-Off Blok
 
-| Nama Cell / Blok | Lokasi GDS | Golden Netlist | Jumlah Transistor | DRC Status | LVS Status |
-| :--- | :--- | :--- | :---: | :---: | :---: |
-| **`async_sar` (TOP)** | `layout/async_sar.gds` | `cdl/async_sar.spice` | 736 MOSFETs | **0 Errors** | **Match** |
-| `shift_reg_8bit` | `layout/shift_reg_8bit.gds` | `cdl/shift_reg_8bit.spice` | 184 MOSFETs | **0 Errors** | **Match** |
-| `bit_reg` | `layout/bit_reg.gds` | `cdl/bit_reg.spice` | 28 MOSFETs | **0 Errors** | **Match** |
-| `async_delay_chain`| `layout/async_delay_chain.gds`| `cdl/async_delay_chain.spice`| 42 MOSFETs | **0 Errors** | **Match** |
-| `async_start_delay`| `layout/async_start_delay.gds`| `cdl/async_start_delay.spice`| 90 MOSFETs | **0 Errors** | **Match** |
-| `dff_cell` | `layout/dff_cell.gds` | `cdl/dff_cell.spice` | 20 MOSFETs | **0 Errors** | **Match** |
-| `dff_cell_set` | `layout/dff_cell_set.gds` | `cdl/dff_cell_set.spice` | 24 MOSFETs | **0 Errors** | **Match** |
-| `async_nor2` | `layout/async_nor2.gds` | `cdl/async_nor2.spice` | 10 MOSFETs | **0 Errors** | **Match** |
-| `async_nand2` | `layout/async_nand2.gds` | `cdl/async_nand2.spice` | 4 MOSFETs | **0 Errors** | **Match** |
-| `async_inverter` | `layout/async_inverter.gds` | `cdl/async_inverter.spice` | 2 MOSFETs | **0 Errors** | **Match** |
+| Nama Cell / Blok | Lokasi GDS | Golden Netlist | Status DRC | Status LVS |
+| :--- | :--- | :--- | :---: | :---: |
+| `sar_adc_top` (TOP) | `layout/sar_adc/sar_adc_top.gds` | `cdl/sar_adc_top.spice` | 0 Errors | Match |
+| `async_sar` | `layout/sar_adc/blocks/async_sar/async_sar.gds` | `cdl/async_sar.spice` | 0 Errors | Match |
+| `cdac_8bit` | `layout/sar_adc/blocks/cdac/cdac_8bit.gds` | `cdl/cdac_8bit.spice` | 0 Errors | Match |
+| `strongarm_comp` | `layout/sar_adc/blocks/comparator/strongarm_comp.gds` | `cdl/strongarm_comp.spice` | 0 Errors | Match |
+| `sample_hold` | `layout/sar_adc/blocks/sample_hold/sample_hold.gds` | `cdl/sample_hold.spice` | 0 Errors | Match |
+| `shift_reg_8bit` | `layout/sar_adc/blocks/async_sar/shift_reg_8bit.gds` | `cdl/shift_reg_8bit.spice` | 0 Errors | Match |
+| `bit_reg` | `layout/sar_adc/blocks/async_sar/bit_reg.gds` | `cdl/bit_reg.spice` | 0 Errors | Match |
+| `async_delay_chain` | `layout/sar_adc/blocks/async_sar/async_delay_chain.gds` | `cdl/async_delay_chain.spice` | 0 Errors | Match |
+| `async_start_delay` | `layout/sar_adc/blocks/async_sar/async_start_delay.gds` | `cdl/async_start_delay.spice` | 0 Errors | Match |
+| `dff_cell` | `layout/sar_adc/blocks/async_sar/dff_cell.gds` | `cdl/dff_cell.spice` | 0 Errors | Match |
+| `dff_cell_set` | `layout/sar_adc/blocks/async_sar/dff_cell_set.gds` | `cdl/dff_cell_set.spice` | 0 Errors | Match |
+| `async_nor2` | `layout/sar_adc/blocks/async_sar/async_nor2.gds` | `cdl/async_nor2.spice` | 0 Errors | Match |
+| `async_nand2` | `layout/sar_adc/blocks/async_sar/async_nand2.gds` | `cdl/async_nand2.spice` | 0 Errors | Match |
+| `async_inverter` | `layout/sar_adc/blocks/async_sar/async_inverter.gds` | `cdl/async_inverter.spice` | 0 Errors | Match |

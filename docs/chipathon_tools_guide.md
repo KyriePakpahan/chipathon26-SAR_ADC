@@ -1,167 +1,115 @@
-# 🛠️ Panduan Lengkap Akses & Penggunaan EDA Tools Chipathon 2026
-**Target PDK:** GlobalFoundries 180nm MCU (GF180MCU 3.3V)  
-**Container Environment:** `hpretl/iic-osic-tools:latest`
+# Panduan Penggunaan EDA Tools (`iic-osic-tools`)
 
-Dokumen ini berisi aturan lengkap, konfigurasi sistem, serta tata cara penggunaan EDA tools untuk merancang IC Analog/Mixed-Signal (seperti SAR ADC 8-bit asinkron) dalam ajang Chipathon 2026.
+Target PDK: GlobalFoundries 180 nm MCU (GF180MCU Variant D, 3.3 V, 5LM)  
+Container Image: `hpretl/iic-osic-tools:chipathon26`
 
----
-
-## 📋 Daftar Isi
-1. [Struktur Alur Kerja (EDA Toolchain)](#1-struktur-alur-kerja-eda-toolchain)
-2. [Prasyarat & Konfigurasi Host Linux](#2-prasyarat--konfigurasi-host-linux)
-3. [Panduan Akses Kontainer Docker (`iic-osic-tools`)](#3-panduan-akses-kontainer-docker-iic-osic-tools)
-4. [Perintah Utama & Workflow Desain](#4-perintah-utama--workflow-desain)
-5. [Rules & Best Practices Penggunaan Agent / Manual](#5-rules--best-practices-penggunaan-agent--manual)
-6. [Troubleshooting Umum](#6-troubleshooting-umum)
+Dokumen ini merangkum konfigurasi host Linux dan perintah kerja untuk skematik, simulasi SPICE, layout, serta verifikasi fisik pada repositori `chipathon26-SAR_ADC`.
 
 ---
 
-## 1. Struktur Alur Kerja (EDA Toolchain)
-
-Alur perancangan IC Analog & Mixed-Signal pada PDK GF180MCU memanfaatkan kombinasi perangkat lunak open-source berikut:
+## 1. Alur Perancangan dan Verifikasi
 
 ```mermaid
 graph TD
-    A[Schematic Capture: Xschem] --> B[Netlisting: SPICE Netlist]
-    B --> C[Simulation: Ngspice]
-    C --> D[Analysis: Python FFT/INL/DNL]
-    A --> E[Layout Design: Magic / KLayout]
-    E --> F[DRC: Design Rule Check]
-    B --> G[LVS: Netgen]
+    A["Schematic Capture (Xschem)"] --> B["SPICE Netlist (cdl/ & xschem/)"]
+    B --> C["Transient & PEX Simulation (Ngspice)"]
+    C --> D["Post-Processing (Python FFT / DNL / INL)"]
+    A --> E["Physical Layout (KLayout / Magic)"]
+    E --> F["Design Rule Check (KLayout DRC)"]
+    B --> G["Layout vs. Schematic (Magic + Netgen)"]
     E --> G
-    E --> H[GDSII Export & Signoff]
+    E --> H["Final GDSII Sign-Off (sar_adc_top.gds)"]
 ```
 
-* **Schematic Entry**: **Xschem** (dengan simbol GF180MCU).
-* **Circuit Simulation**: **Ngspice** (transient, AC, Monte Carlo, corner analysis).
-* **Layout & DRC**: **Magic VLSI** & **KLayout**.
-* **LVS (Layout vs Schematic)**: **Netgen**.
-* **RTL-to-GDS (Digital Logic)**: **OpenROAD** / **Yosys**.
+- Schematic entry: Xschem (`xschem/sar_adc/sar_adc_top.sch`)
+- Simulasi sirkuit: Ngspice (`ngspice-42`)
+- Layout dan DRC: KLayout dan Magic VLSI (`layout/sar_adc/sar_adc_top.gds`)
+- LVS: Magic (`ext2spice lvs`) dan Netgen (`lvs/gf180mcuD_setup.tcl`)
 
 ---
 
-## 2. Prasyarat & Konfigurasi Host Linux
+## 2. Konfigurasi Host Linux
 
-Sebelum mengakses tools di dalam kontainer Docker, pastikan host Linux sudah terkonfigurasi dengan benar.
-
-### A. Izin User Docker
-Agar pengguna dan Agent AI dapat menjalankan Docker tanpa permintaan kata sandi `sudo`:
+### A. Grup Docker
+Agar perintah Docker dapat dijalankan tanpa `sudo`:
 ```bash
 sudo usermod -aG docker $USER
-# Terapkan perubahan grup:
 newgrp docker
 ```
 
-### B. Konfigurasi GUI (X11 Forwarding)
-Aplikasi berbasis GUI (Xschem, Magic, KLayout, plot Ngspice) membutuhkan izin akses ke Display Server host:
+### B. Akses GUI (X11 Forwarding)
+Untuk membuka GUI Xschem atau KLayout dari dalam container:
 ```bash
-# Berikan izin ke semua koneksi lokal di host:
 xhost +local:
+export DISPLAY=:0
 ```
-*Pastikan variabel environment `DISPLAY` diset ke `:0` atau pasangannya (contoh: `export DISPLAY=:0`).*
 
 ---
 
-## 3. Panduan Akses Kontainer Docker (`iic-osic-tools`)
+## 3. Menjalankan Container `iic-osic-tools`
 
-Kontainer `hpretl/iic-osic-tools:latest` berisi seluruh PDK GF180MCU dan EDA tools yang sudah terkonfigurasi pada direktori `/foss/tools` dan `/foss/pdks`.
-
-### Cara 1: Menggunakan Script Launcher (`run_docker_iic.sh`) - Rekomendasi
-Skrip ini sudah tersedia di direktori `scripts/run_docker_iic.sh` repositori ini.
-
-1. **Masuk ke Mode Shell Interaktif (Bash Container):**
-   ```bash
-   cd ~/eda/designs/chipathon26-SAR_ADC
-   ./scripts/run_docker_iic.sh
-   ```
-2. **Eksekusi Perintah Satu Baris (One-Shot Command / Batch Mode):**
-   ```bash
-   # Simulasi SPICE tanpa GUI (Batch Mode):
-   ./scripts/run_docker_iic.sh ngspice -b xschem/sar_adc/tb_sar_adc_dynamic.spice
-
-   # Membuka skematik di Xschem:
-   ./scripts/run_docker_iic.sh xschem xschem/sar_adc/sar_adc_top.sch
-   ```
-
-### Cara 2: Menjalankan Perintah Manual `docker run`
-Jika dijalankan secara manual dari direktori host:
+### Cara 1: Menggunakan Script Wrapper (`scripts/run_docker_iic.sh`)
 ```bash
-docker run --rm -it \
-    --name chipathon-2026-iic \
-    --user "$(id -u):$(id -g)" \
-    -e DISPLAY=$DISPLAY \
-    -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
-    -v "$HOME/eda:/foss/designs" \
-    -w /foss/designs/chipathon26-SAR_ADC \
-    hpretl/iic-osic-tools:latest \
-    bash
+cd ~/eda/designs/chipathon26-SAR_ADC
+./scripts/run_docker_iic.sh
+```
+Untuk menjalankan perintah satu baris tanpa membuka sesi interaktif:
+```bash
+./scripts/run_docker_iic.sh ngspice -b xschem/sar_adc/tb_sar_adc_dynamic.spice
+./scripts/run_docker_iic.sh xschem xschem/sar_adc/sar_adc_top.sch
+```
+
+### Cara 2: Menggunakan `docker exec` atau `docker run`
+Jika container `iic-osic-tools_chipathon_xserver_uid_1000` sudah aktif:
+```bash
+docker exec -it iic-osic-tools_chipathon_xserver_uid_1000 bash
 ```
 
 ---
 
-## 4. Perintah Utama & Workflow Desain
+## 4. Perintah Utama
 
-### 📊 A. Skematik & Simulasi (Xschem + Ngspice)
-* **Membuka Skematik Utama SAR ADC:**
+### A. Skematik dan Simulasi (Xschem + Ngspice)
+- Membuka skematik top-level:
   ```bash
   xschem xschem/sar_adc/sar_adc_top.sch
   ```
-* **Menjalankan Simulasi SPICE:**
+- Menjalankan simulasi transien batch:
   ```bash
-  # Mode Batch (Cepat, untuk ekstraksi Python)
   ngspice -b xschem/sar_adc/tb_sar_adc_dynamic.spice
   ```
-* **Ekstraksi Performa ADC via Python:**
-  ```bash
-  python3 xschem/sar_adc/calc_dynamic.py
-  python3 xschem/sar_adc/calc_static.py
-  ```
 
-### 📐 B. Layout & Verifikasi Physical (Magic + Netgen + KLayout)
-* **Membuka Magic dengan PDK GF180MCU:**
+### B. Layout dan Verifikasi Fisik (KLayout + Magic + Netgen)
+- Membuka layout top-level (`550 µm × 1110 µm`):
   ```bash
-  magic -T gf180mcuD
+  klayout layout/sar_adc/sar_adc_top.gds
   ```
-* **Menjalankan Netgen LVS:**
+- Menjalankan DRC top-level:
   ```bash
-  netgen -b
+  python3 /foss/pdks/gf180mcuD/libs.tech/klayout/tech/drc/run_drc.py \
+    --path=layout/sar_adc/sar_adc_top.gds --variant=D --thr=8 --run_dir=reports/drc_sar_adc_top
   ```
-* **Membuka Layout Viewer KLayout:**
+- Menjalankan LVS top-level:
   ```bash
-  klayout final/gds/sar_adc.gds
+  ./scripts/run_netgen_lvs.sh layout/sar_adc/sar_adc_top.gds sar_adc_top cdl/sar_adc_top.spice
   ```
 
 ---
 
-## 5. Rules & Best Practices Penggunaan Agent / Manual
+## 5. Catatan Praktis Simulasi Ngspice
 
-> [!IMPORTANT]
-> **RULE 1: Penggunaan User ID Host (`--user $(id -u):$(id -g)`)**  
-> Selalu jalankan kontainer dengan UID/GID lokal. Hal ini mencegah file hasil simulasi (`.raw`), log, dan skematik berubah kepemilikannya menjadi `root`.
-
-> [!WARNING]
-> **RULE 2: Efisiensi Memori Ngspice (Mencegah Crash Out of Memory)**  
-> * Dilarang menggunakan `.save all` untuk simulasi transien yang panjang.
-> * Deklarasikan secara spesifik node yang diukur, contoh:  
->   `.save v(vin) v(done) v(dout[7]) v(dout[6]) v(dout[5]) v(dout[4]) v(dout[3]) v(dout[2]) v(dout[1]) v(dout[0])`
-> * Gunakan toleransi numerik yang sesuai untuk rangkaian digital/mixed-signal:  
->   `.options method=gear reltol=1e-2 vntol=1m abstol=1n`
-
-> [!TIP]
-> **RULE 3: Pengeditan File Skematik (.sch) vs SPICE Netlist**  
-> * Selalu edit sirkuit melalui file skematik Xschem (`.sch`).
-> * Netlist `.spice` yang digunakan oleh testbench di-generate dari `.sch` untuk memastikan konsistensi sirkuit.
+- Selalu jalankan container dengan UID/GID user lokal (`--user $(id -u):$(id -g)`) agar file output tidak dimiliki oleh `root`.
+- Hindari penggunaan `.save all` pada simulasi transien panjang agar ukuran file `.raw` tidak membengkak. Simpan hanya node yang dianalisis:
+  ```spice
+  .save v(vin) v(vref) v(start) v(done) v(dout[7]) v(dout[6]) v(dout[5]) v(dout[4]) v(dout[3]) v(dout[2]) v(dout[1]) v(dout[0])
+  ```
 
 ---
 
-## 6. Troubleshooting Umum
+## 6. Pemecahan Masalah Umum
 
-| Masalah | Penyebab | Solusi |
+| Gejala | Penyebab | Solusi |
 | :--- | :--- | :--- |
-| `Cannot open display :0` | Izin X11 belum diaktifkan di host | Jalankan `xhost +local:` di terminal host sebelum membuka kontainer. |
-| `Permission denied` pada file | File terbuat oleh root dalam kontainer | Jalankan `sudo chown -R $USER:$USER .` di host. Pastikan selalu memakai `--user $(id -u):$(id -g)`. |
-| `fatal error in ngspice: Out of Memory` | `.save all` terlalu banyak menyimpan data point | Ganti `.save all` dengan `.save v(...)` node spesifik pada file `.spice`. |
-| `docker command not found` | User belum masuk ke grup `docker` | Jalankan `sudo usermod -aG docker $USER` lalu restart session terminal. |
-
----
-*Dokumen ini dibuat secara otomatis sebagai panduan resmi pengembangan SAR ADC Chipathon 2026.*
+| `Cannot open display :0` | Akses X11 di host belum dibuka | Jalankan `xhost +local:` di terminal host sebelum membuka GUI. |
+| `Permission denied` saat menulis file | File dibuat oleh `root` di dalam container | Jalankan `sudo chown -R $USER:$USER .` di host dan gunakan `--user $(id -u):$(id -g)`. |
+| `Out of Memory` pada Ngspice | Penggunaan `.save all` pada simulasi panjang | Ganti `.save all` dengan `.save` pada node spesifik yang dibutuhkan. |
