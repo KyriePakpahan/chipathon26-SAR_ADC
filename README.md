@@ -49,6 +49,17 @@ The circuit implements an **8-bit Single-Ended Input**, self-timed asynchronous 
 
 ---
 
+## Tapeout & Silicon Test Documentation
+
+| Document / Artifact | Path | Description |
+| :--- | :--- | :--- |
+| **Project Configuration** | [`info.yaml`](info.yaml) | Official Chipathon 2026 project metadata, 14-pin padframe mapping, and sign-off readiness flags |
+| **Export Control Certification** | [`documents/Export_Control_GF_Rev2.docx`](documents/Export_Control_GF_Rev2.docx) | Completed & signed GlobalFoundries Export Control form (`EAR99`, HTS `8542.39.0030`) |
+| **Silicon Bring-Up & Test Plan** | [`docs/TEST_PLAN.md`](docs/TEST_PLAN.md) | Hardware bring-up procedure, stimulus/load setup, carrier PCB guidelines, and pass/fail criteria |
+| **Final Handoff GDSII** | [`layout/sar_adc/sar_adc_top.gds`](layout/sar_adc/sar_adc_top.gds) | Final top-level layout (`550 µm × 1110 µm`, SHA-256: `7efe98ffebdbc31aa459ef9e9e21614b0f16f9c45d8e8711ee649c1336b70299`) |
+
+---
+
 ## Physical Verification Guide (DRC & LVS)
 
 Physical verification follows the **GF180MCU Design Reference Manual (DRM)**, **IEEE SSCS Chipathon 2026 guidelines**, and the [`klayout-ic-layout`](https://github.com/wafer-space/gf180mcu) flow.
