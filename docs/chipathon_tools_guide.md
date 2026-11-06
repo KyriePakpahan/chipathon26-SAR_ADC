@@ -1,13 +1,13 @@
-# Panduan Penggunaan EDA Tools (`iic-osic-tools`)
+# EDA Tools Guide: IIC-OSIC-Tools
 
 Target PDK: GlobalFoundries 180 nm MCU (GF180MCU Variant D, 3.3 V, 5LM)  
 Container Image: `hpretl/iic-osic-tools:chipathon26`
 
-Dokumen ini merangkum konfigurasi host Linux dan perintah kerja untuk skematik, simulasi SPICE, layout, serta verifikasi fisik pada repositori `chipathon26-SAR_ADC`.
+This document summarizes host configuration and tool commands for schematics, SPICE simulation, layout, and physical verification in the `chipathon26-SAR_ADC` repository.
 
 ---
 
-## 1. Alur Perancangan dan Verifikasi
+## 1. Design and Verification Flow
 
 ```mermaid
 graph TD
@@ -21,24 +21,24 @@ graph TD
     E --> H["Final GDSII Sign-Off (sar_adc_top.gds)"]
 ```
 
-- Schematic entry: Xschem (`xschem/sar_adc/sar_adc_top.sch`)
-- Simulasi sirkuit: Ngspice (`ngspice-42`)
-- Layout dan DRC: KLayout dan Magic VLSI (`layout/sar_adc/sar_adc_top.gds`)
-- LVS: Magic (`ext2spice lvs`) dan Netgen (`lvs/gf180mcuD_setup.tcl`)
+- Schematic capture: Xschem (`xschem/sar_adc/sar_adc_top.sch`)
+- Circuit simulation: Ngspice (`ngspice-42`)
+- Layout and DRC: KLayout and Magic VLSI (`layout/sar_adc/sar_adc_top.gds`)
+- LVS: Magic (`ext2spice lvs`) and Netgen (`lvs/gf180mcuD_setup.tcl`)
 
 ---
 
-## 2. Konfigurasi Host Linux
+## 2. Linux Host Configuration
 
-### A. Grup Docker
-Agar perintah Docker dapat dijalankan tanpa `sudo`:
+### A. Docker Group Membership
+To run Docker without `sudo`:
 ```bash
 sudo usermod -aG docker $USER
 newgrp docker
 ```
 
-### B. Akses GUI (X11 Forwarding)
-Untuk membuka GUI Xschem atau KLayout dari dalam container:
+### B. GUI Access (X11 Forwarding)
+To enable GUI windows for Xschem or KLayout from the container:
 ```bash
 xhost +local:
 export DISPLAY=:0
@@ -46,70 +46,70 @@ export DISPLAY=:0
 
 ---
 
-## 3. Menjalankan Container `iic-osic-tools`
+## 3. Running the `iic-osic-tools` Container
 
-### Cara 1: Menggunakan Script Wrapper (`scripts/run_docker_iic.sh`)
+### Method 1: Using the Wrapper Script (`scripts/run_docker_iic.sh`)
 ```bash
 cd ~/eda/designs/chipathon26-SAR_ADC
 ./scripts/run_docker_iic.sh
 ```
-Untuk menjalankan perintah satu baris tanpa membuka sesi interaktif:
+To run batch commands non-interactively:
 ```bash
 ./scripts/run_docker_iic.sh ngspice -b xschem/sar_adc/tb_sar_adc_dynamic.spice
 ./scripts/run_docker_iic.sh xschem xschem/sar_adc/sar_adc_top.sch
 ```
 
-### Cara 2: Menggunakan `docker exec` atau `docker run`
-Jika container `iic-osic-tools_chipathon_xserver_uid_1000` sudah aktif:
+### Method 2: Using `docker exec`
+If the container `iic-osic-tools_chipathon_xserver_uid_1000` is already running:
 ```bash
 docker exec -it iic-osic-tools_chipathon_xserver_uid_1000 bash
 ```
 
 ---
 
-## 4. Perintah Utama
+## 4. Primary Tool Commands
 
-### A. Skematik dan Simulasi (Xschem + Ngspice)
-- Membuka skematik top-level:
+### A. Schematics and Simulation (Xschem + Ngspice)
+- Open top-level schematic:
   ```bash
   xschem xschem/sar_adc/sar_adc_top.sch
   ```
-- Menjalankan simulasi transien batch:
+- Run batch transient simulation:
   ```bash
   ngspice -b xschem/sar_adc/tb_sar_adc_dynamic.spice
   ```
 
-### B. Layout dan Verifikasi Fisik (KLayout + Magic + Netgen)
-- Membuka layout top-level (`550 µm × 1110 µm`):
+### B. Layout and Physical Verification (KLayout + Magic + Netgen)
+- Open top-level layout (`605 µm × 1110 µm`):
   ```bash
   klayout layout/sar_adc/sar_adc_top.gds
   ```
-- Menjalankan DRC top-level:
+- Run top-level DRC:
   ```bash
   python3 /foss/pdks/gf180mcuD/libs.tech/klayout/tech/drc/run_drc.py \
     --path=layout/sar_adc/sar_adc_top.gds --variant=D --thr=8 --run_dir=reports/drc_sar_adc_top
   ```
-- Menjalankan LVS top-level:
+- Run top-level LVS:
   ```bash
   ./scripts/run_netgen_lvs.sh layout/sar_adc/sar_adc_top.gds sar_adc_top cdl/sar_adc_top.spice
   ```
 
 ---
 
-## 5. Catatan Praktis Simulasi Ngspice
+## 5. Practical Ngspice Simulation Notes
 
-- Selalu jalankan container dengan UID/GID user lokal (`--user $(id -u):$(id -g)`) agar file output tidak dimiliki oleh `root`.
-- Hindari penggunaan `.save all` pada simulasi transien panjang agar ukuran file `.raw` tidak membengkak. Simpan hanya node yang dianalisis:
+- Run the container with the local user UID/GID (`--user $(id -u):$(id -g)`) to ensure output files have local write permissions.
+- Avoid using `.save all` in long transient simulations to keep `.raw` file sizes manageable. Save only analyzed nodes:
   ```spice
   .save v(vin) v(vref) v(start) v(done) v(dout[7]) v(dout[6]) v(dout[5]) v(dout[4]) v(dout[3]) v(dout[2]) v(dout[1]) v(dout[0])
   ```
 
 ---
 
-## 6. Pemecahan Masalah Umum
+## 6. Common Troubleshooting
 
-| Gejala | Penyebab | Solusi |
+| Symptom | Cause | Solution |
 | :--- | :--- | :--- |
-| `Cannot open display :0` | Akses X11 di host belum dibuka | Jalankan `xhost +local:` di terminal host sebelum membuka GUI. |
-| `Permission denied` saat menulis file | File dibuat oleh `root` di dalam container | Jalankan `sudo chown -R $USER:$USER .` di host dan gunakan `--user $(id -u):$(id -g)`. |
-| `Out of Memory` pada Ngspice | Penggunaan `.save all` pada simulasi panjang | Ganti `.save all` dengan `.save` pada node spesifik yang dibutuhkan. |
+| `Cannot open display :0` | Host X11 access not granted | Run `xhost +local:` in the host terminal before opening GUI tools. |
+| `Permission denied` on writing files | Files created as `root` inside the container | Run `sudo chown -R $USER:$USER .` on the host and use `--user $(id -u):$(id -g)`. |
+| Out of memory during Ngspice simulation | Excessive node saving with `.save all` | Replace `.save all` with explicit `.save` directives for needed nodes. |

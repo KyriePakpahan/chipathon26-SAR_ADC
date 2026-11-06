@@ -14,7 +14,7 @@ This repository contains the schematics, physical layout, golden netlists, and v
 
 ## Project Overview
 
-The converter (`sar_adc_top`) is a single-ended, self-timed 8-bit charge-redistribution SAR ADC inside the 550 µm × 1110 µm `A49_BV` project slot:
+The converter (`sar_adc_top`) is a single-ended, self-timed 8-bit charge-redistribution SAR ADC inside the 605 µm × 1110 µm `A49_BV` project slot:
 - Top-level integration (`sar_adc_top`): Combines all sub-blocks inside a P+ substrate guard ring with 5-layer staggered dummy metal fill (`dummy_metal_fill`) and 14 perimeter pins (`W12–W22`, `N01–N03`).
 - Asynchronous SAR controller (`async_sar`): Self-timed domino loop, TSPC flip-flops (`dff_cell`, `dff_cell_set`), 8-bit shift register (`shift_reg_8bit`), bit registers (`bit_reg`), and delay chains (`async_start_delay`, `async_delay_chain`).
 - Dynamic StrongARM comparator (`strongarm_comp`): Regenerative latch (`strongarm_comp_core`) with output buffers and completion detection (`comp_xor_fast`, `comp_nand2`).
@@ -28,7 +28,7 @@ The converter (`sar_adc_top`) is a single-ended, self-timed 8-bit charge-redistr
 | Parameter | Post-Layout PEX Value | Unit |
 | :--- | :--- | :---: |
 | Process technology | GlobalFoundries GF180MCU Variant D (5LM, MIM-B) | 180 nm |
-| Project slot area (`PR_bndry` `0/0`) | 550 × 1110 | µm² |
+| Project slot area (`PR_bndry` `0/0`) | 605 × 1110 | µm² |
 | Supply voltage ($V_{\text{DD}}$) / Reference ($V_{\text{REF}}$) | 3.30 / 3.30 | V |
 | Resolution | 8 | bits |
 | Sampling rate ($f_s$) | 10 | MS/s |
@@ -55,7 +55,7 @@ The converter (`sar_adc_top`) is a single-ended, self-timed 8-bit charge-redistr
 | Project configuration | [`info.yaml`](info.yaml) | Chipathon 2026 metadata, 14-pin `A49_BV` pad mapping, and sign-off flags |
 | Export control certification | [`documents/Export_Control_GF_Rev2.docx`](documents/Export_Control_GF_Rev2.docx) | Completed GlobalFoundries Export Control form (`EAR99`, HTS `8542.39.0030`) |
 | Silicon bring-up and test plan | [`docs/TEST_PLAN.md`](docs/TEST_PLAN.md) | Pinout, timing protocol, PCB filtering, lab instruments, and pass criteria |
-| Final handoff GDSII | [`layout/sar_adc/sar_adc_top.gds`](layout/sar_adc/sar_adc_top.gds) | Top-level layout (`550 µm × 1110 µm`, SHA-256 `7efe98ffebdbc31aa459ef9e9e21614b0f16f9c45d8e8711ee649c1336b70299`) |
+| Final handoff GDSII | [`layout/sar_adc/sar_adc_top.gds`](layout/sar_adc/sar_adc_top.gds) | Top-level layout (`605 µm × 1110 µm`, SHA-256 `65a3fc540f6d61cff200960ef1d2098b872fb05319da3ef66eb130f4c018491e`) |
 
 ---
 
@@ -189,7 +189,7 @@ chipathon26-SAR_ADC/
 │   └── sample_hold.spice
 ├── layout/                    # Physical GDSII layouts
 │   └── sar_adc/
-│       ├── sar_adc_top.gds    # Final handoff GDSII (550 µm × 1110 µm)
+│       ├── sar_adc_top.gds    # Final handoff GDSII (605 µm × 1110 µm)
 │       └── blocks/            # Hierarchical sub-block GDSII cells
 ├── lvs/
 │   └── gf180mcuD_setup.tcl    # Netgen setup deck for GF180MCU Variant D

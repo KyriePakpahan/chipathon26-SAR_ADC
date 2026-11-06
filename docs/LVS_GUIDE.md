@@ -1,39 +1,39 @@
-# Panduan Netgen LVS (Layout vs. Schematic) — GF180MCU Variant D
+# Netgen LVS Guide: Layout Versus Schematic (GF180MCU Variant D)
 
-Dokumen ini menjelaskan prosedur verifikasi Layout Versus Schematic (LVS) untuk proyek 8-Bit Asynchronous SAR ADC (`sar_adc_top`) pada teknologi GF180MCU Variant D (5LM, MIM-B).
-
----
-
-## 1. Alur LVS
-
-Verifikasi LVS membandingkan dua netlist:
-1. Golden schematic netlist: `cdl/sar_adc_top.spice` (atau sub-blok terkait di `cdl/`).
-2. Layout-extracted netlist: Diekstrak dari `layout/sar_adc/sar_adc_top.gds` menggunakan Magic VLSI (`ext2spice lvs`).
-
-File konfigurasi yang digunakan:
-- Setup deck Netgen: [`lvs/gf180mcuD_setup.tcl`](../lvs/gf180mcuD_setup.tcl)
-- Script runner: [`scripts/run_netgen_lvs.sh`](../scripts/run_netgen_lvs.sh)
-- Konfigurasi otomatis Chipathon: [`lvs_config.json`](../lvs_config.json)
+This document describes the Layout Versus Schematic (LVS) verification procedure for the 8-bit asynchronous SAR ADC (`sar_adc_top`) in GlobalFoundries GF180MCU Variant D (5LM, MIM-B).
 
 ---
 
-## 2. Menjalankan Netgen LVS
+## 1. Verification Flow
 
-### A. Menggunakan Script Runner
+LVS verification compares two netlists:
+1. Golden schematic netlist: `cdl/sar_adc_top.spice` (or respective sub-block netlists in `cdl/`).
+2. Layout-extracted netlist: Extracted from `layout/sar_adc/sar_adc_top.gds` using Magic VLSI (`ext2spice lvs`).
+
+Configuration files:
+- Netgen setup deck: [`lvs/gf180mcuD_setup.tcl`](../lvs/gf180mcuD_setup.tcl)
+- Runner script: [`scripts/run_netgen_lvs.sh`](../scripts/run_netgen_lvs.sh)
+- Chipathon automated LVS configuration: [`lvs_config.json`](../lvs_config.json)
+
+---
+
+## 2. Running Netgen LVS
+
+### A. Using the Runner Script
 
 ```bash
 # 1. Top-level SAR ADC macro (sar_adc_top)
 ./scripts/run_netgen_lvs.sh layout/sar_adc/sar_adc_top.gds sar_adc_top cdl/sar_adc_top.spice
 
-# 2. Sub-blok individual (contoh: sample_hold dan cdac_8bit)
+# 2. Individual sub-blocks (e.g., sample_hold and cdac_8bit)
 ./scripts/run_netgen_lvs.sh layout/sar_adc/blocks/sample_hold/sample_hold.gds sample_hold cdl/sample_hold.spice
 ./scripts/run_netgen_lvs.sh layout/sar_adc/blocks/cdac/cdac_8bit.gds cdac_8bit cdl/cdac_8bit.spice
 ```
 
-### B. Langkah Manual di Dalam Container IIC-OSIC-Tools
+### B. Manual Steps Inside the IIC-OSIC-Tools Container
 
 ```bash
-# Langkah 1: Ekstraksi netlist LVS dari GDS menggunakan Magic
+# Step 1: Extract the LVS netlist from GDS using Magic
 magic -dnull -noconsole -rcfile /foss/pdks/gf180mcuD/libs.tech/magic/gf180mcuD.magicrc << 'MAG_EOF'
 gds read layout/sar_adc/sar_adc_top.gds
 load sar_adc_top
@@ -45,7 +45,7 @@ ext2spice -o lvs/reports/sar_adc_top_extracted.spice
 quit -noprompt
 MAG_EOF
 
-# Langkah 2: Perbandingan netlist dengan Netgen
+# Step 2: Compare netlists using Netgen
 netgen -batch lvs \
   "lvs/reports/sar_adc_top_extracted.spice sar_adc_top" \
   "cdl/sar_adc_top.spice sar_adc_top" \
@@ -55,12 +55,12 @@ netgen -batch lvs \
 
 ---
 
-## 3. Membaca Laporan Hasil LVS (`*_comp.out`)
+## 3. Interpreting LVS Output (`*_comp.out`)
 
-Buka file laporan di `lvs/reports/sar_adc_top_comp.out`.
+Open the comparison report at `lvs/reports/sar_adc_top_comp.out`.
 
-### Hasil LVS Bersih (Match)
-Bagian akhir laporan menampilkan:
+### Clean Result (Circuits Match)
+The final section of the report states:
 ```text
 Device classes sar_adc_top and sar_adc_top are equivalent.
 Circuits match uniquely.
@@ -68,20 +68,20 @@ Result: Netlist elements match completely.
 Logging to comp.out finished with 0 errors.
 ```
 
-### Jika Terjadi Pin Mismatch
-Jika seluruh perangkat internal cocok tetapi nama port top-level berbeda, Netgen menampilkan:
+### Handling Pin Mismatch
+If all internal devices and nets match but top-level port names differ, Netgen reports:
 ```text
 Device classes sar_adc_top and sar_adc_top are equivalent.
 Final result: Top level cell failed pin matching.
 ```
-Pastikan label teks pada layer metal di GDS sesuai dengan daftar 14 pin pada [`info.yaml`](../info.yaml) dan [`cdl/sar_adc_top.spice`](../cdl/sar_adc_top.spice).
+Ensure text labels on metal layers in the GDS match the 14 pins specified in [`info.yaml`](../info.yaml) and [`cdl/sar_adc_top.spice`](../cdl/sar_adc_top.spice).
 
 ---
 
-## 4. Lokasi File Output
+## 4. Output Files
 
-| File | Deskripsi |
+| File | Description |
 | :--- | :--- |
-| `lvs/reports/<cell>_extracted.spice` | Netlist SPICE hasil ekstraksi Magic dari GDS |
-| `lvs/reports/<cell>_comp.out` | Laporan perbandingan perangkat, net, dan pin dari Netgen |
-| `lvs/reports/<cell>_lvs.log` | Log eksekusi Netgen |
+| `lvs/reports/<cell>_extracted.spice` | SPICE netlist extracted from GDS by Magic |
+| `lvs/reports/<cell>_comp.out` | Device, net, and pin comparison report from Netgen |
+| `lvs/reports/<cell>_lvs.log` | Netgen execution log |

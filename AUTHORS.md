@@ -6,6 +6,10 @@ All categories arranged alphabetically.
 > holders for significant portions of the code. See the contributors
 > graph for a full list of human authors.
 
+## SAR ADC Architecture and Layout Design
+
+* Team A49: Berkah Saluyu (Institut Teknologi Bandung)
+
 ## Upstream (gf180mcu-project-template)
 
 * Leo Moser \<leo.moser@pm.me\>

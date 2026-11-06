@@ -7,10 +7,10 @@
     "bbox_um": [
       0.0,
       0.0,
-      550.0,
+      605.0,
       1110.0
     ],
-    "width_um": 550.0,
+    "width_um": 605.0,
     "height_um": 1110.0
   },
   "pins": {
@@ -26,7 +26,7 @@
   "checks": {
     "design_matches_def_spec": true,
     "units_exact_200": true,
-    "diearea_exact_550x1110": true,
+    "diearea_matches_def": true,
     "logical_pin_count_97": true,
     "gds_top_bbox_exact": true,
     "all_97_pin_shapes_attached": true,

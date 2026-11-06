@@ -8,9 +8,9 @@
 | Team | A49 Berkah Saluyu (Institut Teknologi Bandung) |
 | Slot / Variant | `A49 / BV` (`A49_BV` padframe segment) |
 | Technology | GlobalFoundries GF180MCU Variant D (180 nm, 3.3 V CMOS, 5LM, MIM-B 2.0 fF/µm²) |
-| Project Tile Area | `550 µm × 1110 µm` (`PR_bndry` layer `0/0` rectangle at `(0, 0)` to `(550, 1110)`) |
+| Project Tile Area | `605 µm × 1110 µm` (`PR_bndry` layer `0/0` rectangle at `(0, 0)` to `(605, 1110)`) |
 | Final Handoff GDS | [`layout/sar_adc/sar_adc_top.gds`](../layout/sar_adc/sar_adc_top.gds) (top cell `sar_adc_top`) |
-| Final GDS SHA-256 | `7efe98ffebdbc31aa459ef9e9e21614b0f16f9c45d8e8711ee649c1336b70299` |
+| Final GDS SHA-256 | `65a3fc540f6d61cff200960ef1d2098b872fb05319da3ef66eb130f4c018491e` |
 | CDL Netlist | [`cdl/sar_adc_top.spice`](../cdl/sar_adc_top.spice) |
 
 ### Pin Plan (`info.yaml` Order)
@@ -47,7 +47,7 @@ The converter uses an internal self-timed domino loop and does not require an ex
 2. Asynchronous Conversion Phase (`start = 0 V`, triggered on the `start` falling edge):
    - The falling edge of `start` opens the S/H switch, releases internal reset, and starts the StrongARM comparator (`strongarm_comp`) for MSB (`dout[7]`) evaluation.
    - Each comparator completion pulse (`comp_done`) advances the shift register from `dout[7]` down to `dout[0]`.
-   - Post-layout PEX conversion time ($t_{\text{conv}}$, measured from the 50% falling edge of `start` to the 50% rising edge of `done` on the final `550 µm × 1110 µm` layout): 53.63 ns to 58.30 ns (55.06 ns mean across 32 continuous cycles at 3.3 V).
+   - Post-layout PEX conversion time ($t_{\text{conv}}$, measured from the 50% falling edge of `start` to the 50% rising edge of `done` on the `605 µm × 1110 µm` layout): 53.63 ns to 58.30 ns (55.06 ns mean across 32 continuous cycles at 3.3 V).
 3. Data Readout Phase (`done = 3.3 V`):
    - When the LSB (`Q7`) latches, the internal gate `NAND(Q7, comp_done) -> INV` drives `done` to 3.3 V.
    - Output bus `dout[7:0]` is valid on the rising edge of `done` and remains latched until the next rising edge of `start`.
@@ -96,7 +96,7 @@ All measurements use standard benchtop instruments at the Institut Teknologi Ban
 
 ## 5. Measurement Procedure and Pass Criteria
 
-The reference values below come from post-layout parasitic-extracted (PEX) SPICE simulations in `ngspice-42` on the final `550 µm × 1110 µm` layout (`layout/sar_adc/sar_adc_top.gds` and `lvs/reports/magic_ext_sar_adc_top/sar_adc_top.ext`).
+The reference values below come from post-layout parasitic-extracted (PEX) SPICE simulations in `ngspice-42` on the `605 µm × 1110 µm` layout (`layout/sar_adc/sar_adc_top.gds` and `lvs/reports/magic_ext_sar_adc_top/sar_adc_top.ext`).
 
 | Step | Test | Stimulus and Condition | Measurement Method | Post-Layout PEX Reference | Silicon Pass Criterion |
 | :---: | :--- | :--- | :--- | :---: | :---: |
